@@ -15,21 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandTable\core.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SandTable\Application.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SandTable.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SandTable\EntryPoint.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\SandTable\Application.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
