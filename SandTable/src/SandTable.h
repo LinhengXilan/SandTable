@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "SandTable/Application.h"
+#include "SandTable/Log.h"
 #include "SandTable/EntryPoint.h"
 
 #endif

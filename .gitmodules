@@ -1,0 +1,3 @@
+[submodule "SandTable/library/spdlog"]
+	path = SandTable/library/spdlog
+	url = https://github.com/gabime/spdlog
