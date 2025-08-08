@@ -8,8 +8,6 @@
 #ifndef EVENTS_MOUSE_H
 #define EVENTS_MOUSE_H
 
-#include <sstream>
-
 #include <SandTable/Events/Event.h>
 
 namespace SandTable

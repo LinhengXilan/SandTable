@@ -8,8 +8,6 @@
 #ifndef EVENTS_KEYBOARD_H
 #define EVENTS_KEYBOARD_H
 
-#include <sstream>
-
 #include <SandTable/Events/Event.h>
 
 namespace SandTable

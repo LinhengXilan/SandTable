@@ -8,9 +8,6 @@
 #ifndef EVENTS_EVENT_H
 #define EVENTS_EVENT_H
 
-#include <string>
-#include <functional>
-
 #include <spdlog/fmt/ostr.h>
 
 #include <SandTable/Core.h>

@@ -5,6 +5,8 @@
  * @version build5
  */
 
+#include <pch.h>
+
 #include <SandTable/Application.h>
 #include <SandTable/Events/Application.h>
 #include <SandTable/Log.h>

@@ -8,8 +8,6 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <memory>
-
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 

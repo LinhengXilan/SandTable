@@ -354,12 +354,18 @@
     <ClInclude Include="src\SandTable\Events\Application.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandTable\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\SandTable\Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

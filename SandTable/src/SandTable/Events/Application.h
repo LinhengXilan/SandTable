@@ -8,8 +8,6 @@
 #ifndef EVENTS_APPLICATION_H
 #define EVENTS_APPLICATION_H
 
-#include <sstream>
-
 #include <SandTable/Events/Event.h>
 
 namespace SandTable

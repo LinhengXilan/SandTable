@@ -5,9 +5,11 @@
  * @version build5
  */
 
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <pch.h>
 
-#include "SandTable/Log.h"
+#include <spdlog/sinks/stdout_color_sinks.h>
+
+#include <SandTable/Log.h>
 
 namespace SandTable
 {
