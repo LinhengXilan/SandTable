@@ -1,7 +1,14 @@
+﻿/**
+ * @file Application.h
+ * @author LinhengXilan
+ * @date 2025-8-8
+ * @version build5
+ */
+
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "core.h"
+#include <SandTable/core.h>
 
 namespace SandTable
 {

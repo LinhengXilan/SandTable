@@ -1,11 +1,19 @@
+/**
+ * @file Log.h
+ * @author LinhengXilan
+ * @date 2025-8-8
+ * @version build5
+ */
+
 #ifndef LOG_H
 #define LOG_H
 
 #include <memory>
 
 #include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 
-#include "core.h"
+#include <SandTable/core.h>
 
 namespace SandTable
 {

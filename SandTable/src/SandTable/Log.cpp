@@ -1,6 +1,13 @@
+/**
+ * @file Log.cpp
+ * @author LinhengXilan
+ * @date 2025-8-7
+ * @version build5
+ */
+
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-#include "Log.h"
+#include "SandTable/Log.h"
 
 namespace SandTable
 {

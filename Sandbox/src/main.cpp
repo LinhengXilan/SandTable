@@ -1,17 +1,10 @@
-#include <SandTable.h>
+﻿#include <SandTable.h>
 
 class Sandbox : public SandTable::Application
 {
 public:
-	Sandbox()
-	{
-		
-	}
-
-	~Sandbox()
-	{
-		
-	}
+	Sandbox() = default;
+	~Sandbox() = default;
 };
 
 SandTable::Application* SandTable::CreateApplication()

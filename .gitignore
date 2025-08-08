@@ -2,6 +2,10 @@
 .vs/
 bin/
 obj/
+.vscode/
+cmake-build/
+cmake-bin/
 
 # Files
 *.user
+*.xlsx

@@ -1,9 +1,16 @@
+/**
+ * @file EntryPoint.h
+ * @author LinhengXilan
+ * @date 2025-8-8
+ * @version build5
+ */
+
 #ifndef ENTRYPOINT_H
 #define ENTRYPOINT_H
 
 #ifdef SANDTABLE_PLATFORM_WINDOWS
 
-#include "SandTable.h"
+#include <SandTable.h>
 
 extern SandTable::Application* SandTable::CreateApplication();
 

@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.31)
+
+project(SandTable LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE "DEBUG")
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/cmake-bin/)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/cmake-bin/)
+add_compile_options(/utf-8)
+add_compile_definitions(_UNICODE)
+add_compile_definitions(UNICODE)
+add_compile_definitions(_CONSOLE)
+
+if (${CMAKE_BUILD_TYPE} MATCHES "DEBUG")
+    add_compile_definitions(_DEBUG)
+else ()
+    add_compile_definitions(_NDEBUG)
+endif ()
+
+if (MSVC)
+add_compile_definitions(SANDTABLE_PLATFORM_WINDOWS)
+endif ()
+
+set(SandTableSource ${PROJECT_SOURCE_DIR}/SandTable/src)
+set(SandTableLibrary ${PROJECT_SOURCE_DIR}/SandTable/library/)
+file(GLOB_RECURSE SandTableSourceFlie ${SandTableSource}/*.cpp)
+add_library(SandTable SHARED ${SandTableSourceFlie})
+target_compile_definitions(SandTable PRIVATE SANDTABLE_BUILD_DLL)
+target_include_directories(SandTable PRIVATE ${SandTableSource})
+target_include_directories(SandTable PRIVATE ${SandTableLibrary}spdlog/include)
+
+set(SandboxSource ./Sandbox/src/)
+add_executable(Sandbox ${SandboxSource}main.cpp)
+target_include_directories(Sandbox PRIVATE ${SandTableSource})
+target_include_directories(Sandbox PRIVATE ${SandTableLibrary}spdlog/include)
+target_link_directories(Sandbox PRIVATE ${LIBRARY_OUTPUT_PATH})
+target_link_libraries(Sandbox PRIVATE SandTable)

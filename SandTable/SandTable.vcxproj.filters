@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\SandTable\core.h">
+    <ClInclude Include="src\SandTable\Core.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\SandTable\Application.h">
@@ -342,6 +342,18 @@
     <ClInclude Include="library\spdlog\include\spdlog\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\SandTable\Events\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SandTable\Events\Keyboard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SandTable\Events\Mouse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SandTable\Events\Application.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandTable\Application.cpp">
@@ -350,5 +362,8 @@
     <ClCompile Include="src\SandTable\Log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\CmakeLists.txt" />
   </ItemGroup>
 </Project>

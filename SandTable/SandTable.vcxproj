@@ -125,13 +125,20 @@
     <ClInclude Include="library\spdlog\include\spdlog\version.h" />
     <ClInclude Include="src\SandTable.h" />
     <ClInclude Include="src\SandTable\Application.h" />
-    <ClInclude Include="src\SandTable\core.h" />
+    <ClInclude Include="src\SandTable\Core.h" />
     <ClInclude Include="src\SandTable\EntryPoint.h" />
+    <ClInclude Include="src\SandTable\Events\Application.h" />
+    <ClInclude Include="src\SandTable\Events\Event.h" />
+    <ClInclude Include="src\SandTable\Events\Keyboard.h" />
+    <ClInclude Include="src\SandTable\Events\Mouse.h" />
     <ClInclude Include="src\SandTable\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandTable\Application.cpp" />
     <ClCompile Include="src\SandTable\Log.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\CmakeLists.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -245,7 +252,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)SandTable\library\spdlog\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SandTable\src;$(SolutionDir)SandTable\library\spdlog\include\</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
