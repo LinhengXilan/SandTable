@@ -1,3 +1,10 @@
+/**
+ * @file pch.h
+ * @author LinhengXilan
+ * @date 2025-8-8
+ * @version build7
+ */
+
 #ifndef PCH_H
 #define PCH_H
 

@@ -1,12 +1,12 @@
 /**
- * @file Events/Application.h
+ * @file SandTable/Events/Application.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef EVENTS_APPLICATION_H
-#define EVENTS_APPLICATION_H
+#ifndef SANDTABLE_EVENTS_APPLICATION_H
+#define SANDTABLE_EVENTS_APPLICATION_H
 
 #include <SandTable/Events/Event.h>
 
@@ -34,7 +34,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::WindowResize; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "WindowResize"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual int GetCategoryFlags() const override { return (int)EventCategory::E_Application; }
 
 	private:
 		unsigned int m_Width_;
@@ -49,7 +49,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::WindowClose; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "WindowClose"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Application; }
 	};
 
 	class SANDTABLE_DLL AppTick : public Event
@@ -60,7 +60,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::AppTick; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "AppTick"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Application; }
 	};
 
 	class SANDTABLE_DLL AppUpdate : public Event
@@ -71,7 +71,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::AppUpdate; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "AppUpdate"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Application; }
 	};
 
 	class SANDTABLE_DLL AppRender : public Event
@@ -82,7 +82,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::AppRender; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "AppRender"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Application; }
 	};
 }
 

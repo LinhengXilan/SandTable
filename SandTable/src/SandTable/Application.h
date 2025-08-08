@@ -1,14 +1,16 @@
 ﻿/**
- * @file Application.h
+ * @file SandTable/Application.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef SANDTABLE_APPLICATION_H
+#define SANDTABLE_APPLICATION_H
 
 #include <SandTable/core.h>
+#include <SandTable/Events/Event.h>
+#include <SandTable/Window.h>
 
 namespace SandTable
 {
@@ -19,9 +21,13 @@ namespace SandTable
 		virtual ~Application();
 
 		void Run();
+
+	private:
+		std::unique_ptr<Window> m_Window;
+		bool m_Running = true;
 	};
 
-	Application* CreateApplication();
+	class Application* CreateApplication();
 
 }
 

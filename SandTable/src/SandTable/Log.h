@@ -1,12 +1,12 @@
 /**
- * @file Log.h
+ * @file SandTable/Log.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef LOG_H
-#define LOG_H
+#ifndef SANDTABLE_LOG_H
+#define SANDTABLE_LOG_H
 
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>

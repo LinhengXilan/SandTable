@@ -1,12 +1,12 @@
 /**
- * @file Events/Keyboard.h
+ * @file SandTable/Events/Keyboard.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef EVENTS_KEYBOARD_H
-#define EVENTS_KEYBOARD_H
+#ifndef SANDTABLE_EVENTS_KEYBOARD_H
+#define SANDTABLE_EVENTS_KEYBOARD_H
 
 #include <SandTable/Events/Event.h>
 
@@ -48,7 +48,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::KeyPressed; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "KeyPressed"; }
-        virtual int GetCategoryFlags() const override { return EventCategory::Keyboard | EventCategory::Input; }
+        virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
 
 	private:
 		int m_RepeatCount_;

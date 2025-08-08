@@ -1,12 +1,12 @@
 /**
- * @file Events/Mouse.h
+ * @file SandTable/Events/Mouse.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef EVENTS_MOUSE_H
-#define EVENTS_MOUSE_H
+#ifndef SANDTABLE_EVENTS_MOUSE_H
+#define SANDTABLE_EVENTS_MOUSE_H
 
 #include <SandTable/Events/Event.h>
 
@@ -34,7 +34,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::MouseMove; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "MouseMove"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	private:
 		float m_MouseX_;
@@ -63,7 +63,7 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::MouseScrolled; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "MouseScrolled"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	private:
 		float m_OffsetX_;
@@ -74,7 +74,7 @@ namespace SandTable
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button_; }
-		virtual int GetCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	protected:
 		MouseButton(int button)

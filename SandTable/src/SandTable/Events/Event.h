@@ -1,14 +1,14 @@
 /**
- * @file Events/Event.h
+ * @file SandTable/Events/Event.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef EVENTS_EVENT_H
-#define EVENTS_EVENT_H
+#ifndef SANDTABLE_EVENTS_EVENT_H
+#define SANDTABLE_EVENTS_EVENT_H
 
-#include <spdlog/fmt/ostr.h>
+#include <pch.h>
 
 #include <SandTable/Core.h>
 
@@ -25,12 +25,12 @@ namespace SandTable
 
 	enum EventCategory
 	{
-		None,
-		Application = BIT(0),
-		Input       = BIT(1),
-		Keyboard    = BIT(2),
-		Mouse		= BIT(3),
-		MouseButton = BIT(4)
+		E_None,
+		E_Application = BIT(0),
+		E_Input       = BIT(1),
+		E_Keyboard    = BIT(2),
+		E_Mouse		= BIT(3),
+		E_MouseButton = BIT(4)
 	};
 
 	class SANDTABLE_DLL Event

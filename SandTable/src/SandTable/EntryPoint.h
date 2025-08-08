@@ -1,12 +1,12 @@
 /**
- * @file EntryPoint.h
+ * @file SandTable/EntryPoint.h
  * @author LinhengXilan
  * @date 2025-8-8
- * @version build5
+ * @version build7
  */
 
-#ifndef ENTRYPOINT_H
-#define ENTRYPOINT_H
+#ifndef SANDTABLE_ENTRYPOINT_H
+#define SANDTABLE_ENTRYPOINT_H
 
 #ifdef SANDTABLE_PLATFORM_WINDOWS
 

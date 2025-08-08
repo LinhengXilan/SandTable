@@ -124,6 +124,7 @@
     <ClInclude Include="library\spdlog\include\spdlog\tweakme.h" />
     <ClInclude Include="library\spdlog\include\spdlog\version.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\SandTable.h" />
     <ClInclude Include="src\SandTable\Application.h" />
     <ClInclude Include="src\SandTable\Core.h" />
@@ -133,11 +134,13 @@
     <ClInclude Include="src\SandTable\Events\Keyboard.h" />
     <ClInclude Include="src\SandTable\Events\Mouse.h" />
     <ClInclude Include="src\SandTable\Log.h" />
+    <ClInclude Include="src\SandTable\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\SandTable\Application.cpp" />
     <ClCompile Include="src\SandTable\Log.cpp" />
   </ItemGroup>
@@ -252,11 +255,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SANDTABLE_PLATFORM_WINDOWS;SANDTABLE_BUILD_DLL;_DEBUG;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SANDTABLE_PLATFORM_WINDOWS;SANDTABLE_BUILD_DLL;SANDTABLE_ENABLE_ASSERTS;_DEBUG;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)SandTable\src;$(SolutionDir)SandTable\library\spdlog\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SandTable\src;$(SolutionDir)SandTable\library\glfw\include\;$(SolutionDir)SandTable\library\spdlog\include\</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -264,6 +267,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3-debug.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -283,7 +287,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
