@@ -1,47 +1,48 @@
 Language : Cpp
+UseTab : Always
 TabWidth : 4
 UseCRLF : true
-UseTab : Always
-AlignConsecutiveMacros : AcrossEmptyLinesAndComments
-AlignTrailingComments : true
-AlignArrayOfStructures : None
+# AlignConsecutiveMacros : AcrossEmptyLinesAndComments
+# AlignTrailingComments : true
+# AlignArrayOfStructures : None
 AllowShortFunctionsOnASingleLine : InlineOnly
-AllowShortLambdasOnASingleLine : All
-AllowShortIfStatementsOnASingleLine : Never
-AllowShortLoopsOnASingleLine : false
-AlwaysBreakBeforeMultilineStrings : false
-AlwaysBreakTemplateDeclarations : No
+# AllowShortLambdasOnASingleLine : true
+# AllowShortIfStatementsOnASingleLine : Never
+# AllowShortLoopsOnASingleLine : false
+# AlwaysBreakBeforeMultilineStrings : false
+# AlwaysBreakTemplateDeclarations : No
 BinPackArguments : false
 BinPackParameters : false
-BreakBeforeBinaryOperators : None
-BreakBeforeConceptDeclarations : Always
-BreakBeforeBraces : Custom
-BreakBeforeInheritanceComma : false
-BreakBeforeTernaryOperators : true
-ColumnLimit : 120
-Cpp11BracedListStyle : true
-FixNamespaceComments : true
-SortIncludes : Never
+# BreakBeforeBinaryOperators : None
+# BreakBeforeConceptDeclarations : Always
+# BreakBeforeBraces : Custom
+# BreakBeforeInheritanceComma : false
+# BreakBeforeTernaryOperators : true
+ColumnLimit : 0
+# Cpp11BracedListStyle : true
+# FixNamespaceComments : true
+# SortIncludes : Never
 IndentCaseLabels : false
 IndentCaseBlocks : true
-IndentGotoLabels : false
-IndentPPDirectives : None
+# IndentGotoLabels : false
+# IndentPPDirectives : None
 IndentWidth : 4
-IndentWrappedFunctionNames : false
-InsertBraces : true
-InsertTrailingCommas : None
-NamespaceIndentation : None
+# IndentWrappedFunctionNames : false
+# InsertBraces : true
+# InsertTrailingCommas : None
+# NamespaceIndentation : None
 PointerAlignment : Left
 ReferenceAlignment : Pointer
-ReflowComments :  false
-SortUsingDeclarations : false
-SpaceAfterCStyleCast : false
-SpaceAfterLogicalNot : false
-SpaceAfterTemplateKeyword : false
-SpaceBeforeCpp11BracedList : false
-SpaceBeforeCtorInitializerColon : false
-SpaceBeforeInheritanceColon : true
+# ReflowComments :  false
+# SortUsingDeclarations : false
+# SpaceAfterCStyleCast : false
+# SpaceAfterLogicalNot : false
+# SpaceAfterTemplateKeyword : false
+# SpaceBeforeCpp11BracedList : false
+# SpaceBeforeCtorInitializerColon : false
+# SpaceBeforeInheritanceColon : true
 SpaceBeforeParens : ControlStatements
-SpaceInEmptyBlock : true
-SpacesInContainerLiterals : false
-SpacesInCStyleCastParentheses : false
+# SpaceInEmptyBlock : true
+# SpacesInContainerLiterals : false
+# SpacesInCStyleCastParentheses : false
+ContinuationIndentWidth : 4

@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @date 2025-8-8
- * @version build7
+ * @date 2025-8-9
+ * @version build8
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -26,15 +26,16 @@ namespace SandTable
 	enum EventCategory
 	{
 		E_None,
-		E_Application = BIT(0),
-		E_Input       = BIT(1),
-		E_Keyboard    = BIT(2),
-		E_Mouse		= BIT(3),
-		E_MouseButton = BIT(4)
+		E_Application	= BIT(0),
+		E_Input			= BIT(1),
+		E_Keyboard		= BIT(2),
+		E_Mouse			= BIT(3),
+		E_MouseButton	= BIT(4)
 	};
 
 	class SANDTABLE_DLL Event
 	{
+		friend class EventDispatcher;
 	public:
 		Event() = default;
 		~Event() = default;
@@ -51,7 +52,7 @@ namespace SandTable
 	class EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<bool(T&)>;
+		using EventFunc = std::function<bool(T&)>;
 
 	public:
 		EventDispatcher(Event& event)
@@ -61,7 +62,7 @@ namespace SandTable
 		}
 
 		template<typename T>
-		bool Dispatch(EventFn<T> func)
+		bool Dispatch(EventFunc<T> func)
 		{
 			if (m_Event_.GetEventType() == T::GetStaticType())
 			{

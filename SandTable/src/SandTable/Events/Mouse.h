@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Events/Mouse.h
  * @author LinhengXilan
- * @date 2025-8-8
- * @version build7
+ * @date 2025-8-9
+ * @version build8
  */
 
 #ifndef SANDTABLE_EVENTS_MOUSE_H
@@ -74,7 +74,7 @@ namespace SandTable
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button_; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input | EventCategory::E_MouseButton; }
 
 	protected:
 		MouseButton(int button)

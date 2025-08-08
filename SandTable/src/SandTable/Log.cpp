@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Log.cpp
  * @author LinhengXilan
- * @date 2025-8-8
- * @version build7
+ * @date 2025-8-9
+ * @version build8
  */
 
 #include <pch.h>
@@ -19,7 +19,7 @@ namespace SandTable
 	void Log::Init()
 	{
 		spdlog::set_pattern("%^[%T] %n %v%$");
-		CoreLogger_ = spdlog::stdout_color_mt("SandTable");
+		CoreLogger_ = spdlog::stdout_color_mt("[SandTable]");
 		CoreLogger_->set_level(spdlog::level::trace);
 		ClientLogger_ = spdlog::stdout_color_mt("App");
 		ClientLogger_->set_level(spdlog::level::trace);
