@@ -2,7 +2,7 @@
  * @file SandTable/Application.cpp
  * @author LinhengXilan
  * @date 2025-8-9
- * @version build8
+ * @version build9
  */
 
 #include <pch.h>
@@ -29,7 +29,15 @@ namespace SandTable
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowClose>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
-		SANDTABLE_CORE_TRACE("{0}", event.ToString());
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(event);
+			if (event.m_Handled)
+			{
+				break;
+			}
+		}
 	}
 
 	bool Application::OnWindowClose(WindowClose& event)
@@ -38,12 +46,26 @@ namespace SandTable
 		return true;
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+	}
+
 	void Application::Run()
 	{
 		while (m_Running)
 		{
 			glClearColor(1, 0.8, 0.8, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->Update();
+			}
 			m_Window->Update();
 		}
 	}

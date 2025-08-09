@@ -1,0 +1,34 @@
+/**
+ * @file SandTable/Layer.h
+ * @author LinhengXilan
+ * @date 2025-8-9
+ * @version build9
+ */
+
+#ifndef SANDTABLE_LAYER_H
+#define SANDTABLE_LAYER_H
+
+#include <SandTable/Core.h>
+#include <SandTable/Events/Event.h>
+
+namespace SandTable
+{
+	class SANDTABLE_DLL Layer
+	{
+	public :
+		Layer(const std::string& name = "Layer");
+		virtual ~Layer();
+
+		virtual void Attach();
+		virtual void Detach();
+		virtual void Update();
+		virtual void OnEvent(Event& event);
+		
+		inline const std::string& GetName() const { return m_DebugName; }
+
+	protected:
+		std::string m_DebugName;
+	};
+}
+
+#endif

@@ -2,7 +2,7 @@
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
  * @date 2025-8-9
- * @version build8
+ * @version build9
  */
 
 #include <pch.h>
@@ -37,12 +37,14 @@ namespace SandTable
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowProperty& property) {
+	void WindowsWindow::Init(const WindowProperty& property)
+	{
 		m_WindowData.Title = property.Title;
 		m_WindowData.Width = property.Width;
 		m_WindowData.Height = property.Height;
 		SANDTABLE_CORE_INFO("Creating window {0} ({1}, {2})", property.Title, property.Width, property.Height);
-		if (!Is_GlfwInitialized) {
+		if (!Is_GlfwInitialized)
+		{
 			int success = glfwInit();
 			SANDTABLE_CORE_ASSERT(success, "Failed to intialize glfw!");
 			glfwSetErrorCallback(GLFWErrorCallback);
@@ -140,7 +142,6 @@ namespace SandTable
 				data.EventCallback(event);
 			}
 		);
-		
 	}
 
 	void WindowsWindow::Shutdown()

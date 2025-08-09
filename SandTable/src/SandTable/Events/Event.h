@@ -2,7 +2,7 @@
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
  * @date 2025-8-9
- * @version build8
+ * @version build9
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -45,8 +45,8 @@ namespace SandTable
 		virtual int GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-	protected:
-		bool m_Handled_ = false;
+	
+		bool m_Handled = false;
 	};
 
 	class EventDispatcher
@@ -66,7 +66,7 @@ namespace SandTable
 		{
 			if (m_Event_.GetEventType() == T::GetStaticType())
 			{
-				m_Event_.m_Handled_ = func(*(T*)&m_Event_);
+				m_Event_.m_Handled = func(*(T*)&m_Event_);
 				return true;
 			}
 			return false;

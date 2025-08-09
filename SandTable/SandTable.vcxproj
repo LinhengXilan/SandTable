@@ -133,6 +133,8 @@
     <ClInclude Include="src\SandTable\Events\Event.h" />
     <ClInclude Include="src\SandTable\Events\Keyboard.h" />
     <ClInclude Include="src\SandTable\Events\Mouse.h" />
+    <ClInclude Include="src\SandTable\Layer.h" />
+    <ClInclude Include="src\SandTable\LayerStack.h" />
     <ClInclude Include="src\SandTable\Log.h" />
     <ClInclude Include="src\SandTable\Window.h" />
   </ItemGroup>
@@ -142,6 +144,8 @@
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\SandTable\Application.cpp" />
+    <ClCompile Include="src\SandTable\Layer.cpp" />
+    <ClCompile Include="src\SandTable\LayerStack.cpp" />
     <ClCompile Include="src\SandTable\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -289,7 +293,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)library\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

@@ -2,7 +2,7 @@
  * @file SandTable/Application.h
  * @author LinhengXilan
  * @date 2025-8-9
- * @version build8
+ * @version build9
  */
 
 #ifndef SANDTABLE_APPLICATION_H
@@ -12,6 +12,7 @@
 #include <SandTable/Events/Event.h>
 #include <SandTable/Events/Application.h>
 #include <SandTable/Window.h>
+#include <SandTable/LayerStack.h>
 
 namespace SandTable
 {
@@ -23,15 +24,18 @@ namespace SandTable
 
 		void Run();
 		void OnEvent(Event& event);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 
 	private:
 		bool OnWindowClose(WindowClose& event);
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		LayerStack m_LayerStack;
 	};
 
-	class Application* CreateApplication();
+	Application* CreateApplication();
 
 }
 
