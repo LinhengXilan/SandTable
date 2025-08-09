@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.31)
-project(SandTable LANGUAGES CXX)
+project(SandTable LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_BUILD_TYPE "Debug")
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/cmake-bin/)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/cmake-bin/)
@@ -63,7 +64,11 @@ if (MSVC)
     add_compile_definitions(SANDTABLE_PLATFORM_WINDOWS)
 endif ()
 
+#glad
+add_library(glad STATIC SandTable/library/glad/src/gl.c)
+target_include_directories(glad PRIVATE SandTable/library/glad/include/)
 
+# SandTable
 set(SandTableSource ${PROJECT_SOURCE_DIR}/SandTable/src/)
 set(SandTableLibrary ${PROJECT_SOURCE_DIR}/SandTable/library/)
 file(GLOB_RECURSE SandTableSourceFlie ${SandTableSource}*.cpp)
@@ -74,6 +79,8 @@ target_compile_definitions(SandTable PRIVATE _WINDLL)
 target_include_directories(SandTable PRIVATE ${SandTableSource})
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}spdlog/include)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}glfw/include)
+target_include_directories(SandTable PRIVATE ${SandTableLibrary}glad/include)
+target_link_libraries(SandTable PRIVATE glad)
 target_link_libraries(SandTable PRIVATE opengl32.lib)
 if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
     target_link_libraries(SandTable PRIVATE ${SandTableLibrary}glfw/lib/glfw3-debug.lib)
@@ -82,7 +89,7 @@ else (${CMAKE_BUILD_TYPE} MATCHES "Release")
     target_link_libraries(SandTable PRIVATE ${SandTableLibrary}glfw/lib/glfw3.lib)
 endif()
 
-
+# Sandbox
 set(SandboxSource ./Sandbox/src/)
 add_executable(Sandbox ${SandboxSource}main.cpp)
 target_include_directories(Sandbox PRIVATE ${SandTableSource})

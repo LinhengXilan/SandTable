@@ -2,10 +2,12 @@
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
  * @date 2025-8-9
- * @version build9
+ * @version build10
  */
 
 #include <pch.h>
+
+#include <glad/gl.h>
 
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Log.h>
@@ -52,6 +54,10 @@ namespace SandTable
 		}
 		m_Window = glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
+		SANDTABLE_CORE_ASSERT(status, "Failed to initialize glad!");
+
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);
 		SetSync(true);
 
