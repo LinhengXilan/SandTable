@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build9
+ * @date 2025-8-14
+ * @version build12
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -19,8 +19,8 @@ namespace SandTable
 		None,
 		WindowClose, WindowResize, WindowFocus, WindowFocusLost, WindowMove,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
-		MousePressed, MouseReleased, MouseMove, MouseScrolled
+		KeyPressed, KeyReleased, KeyTyped,
+		MousePressed, MouseReleased, MouseMoved, MouseScrolled
 	};
 
 	enum EventCategory

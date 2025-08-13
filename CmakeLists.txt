@@ -1,21 +1,20 @@
+#   @author LinhengXilan
+#   @date 2025-8-14
+#   @version build12
+
 cmake_minimum_required(VERSION 4.0)
 project(SandTable LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 17)
 
-set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/cmake-bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/cmake-bin")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/cmake-bin")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/cmake-bin/debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/cmake-bin/release)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/cmake-bin/debug)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/cmake-bin/release)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/cmake-bin/debug)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/cmake-bin/release)
-
-message("\nExecutable file output path: " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG})
-message("Dynamic library file output path: " ${CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG})
-message("Static Library file output path: " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG})
+message("\nExecutable file output path: " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+message("Dynamic library file output path: " ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+message("Static Library file output path: " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 message(" ")
 
 include(cmake/PrintCompilerInfo.cmake)

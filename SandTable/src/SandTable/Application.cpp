@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-8-12
- * @version build11
+ * @date 2025-8-14
+ * @version build12
  */
 
 #include <pch.h>
@@ -18,9 +18,6 @@ namespace SandTable
 
 	Application::Application()
 	{
-		#ifdef _debug
-		qweaeqweqwe
-		#endif
 		SANDTABLE_CORE_ASSERT(!s_Instance, "Application already has an instance!");
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());

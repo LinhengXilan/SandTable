@@ -1,8 +1,8 @@
 /**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build10
+ * @date 2025-8-14
+ * @version build12
  */
 
 #include <pch.h>
@@ -106,6 +106,15 @@ namespace SandTable
 						break;
 					}
 				}
+			}
+		);
+
+		glfwSetCharCallback(
+			m_Window,
+			[](GLFWwindow* window, unsigned int keycode) {
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				KeyTyped event(keycode);
+				data.EventCallback(event);
 			}
 		);
 

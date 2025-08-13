@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Events/Keyboard.h
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build8
+ * @date 2025-8-14
+ * @version build12
  */
 
 #ifndef SANDTABLE_EVENTS_KEYBOARD_H
@@ -73,6 +73,28 @@ namespace SandTable
 		static EventType GetStaticType() { return EventType::KeyReleased; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char *GetName() const override { return "KeyReleased"; }
+		virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+	};
+
+	class SANDTABLE_DLL KeyTyped : public Keyboard
+	{
+	public:
+		KeyTyped(int keycode)
+			: Keyboard(keycode)
+		{
+
+		}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTyped: " << m_KeyCode_;
+			return ss.str();
+		}
+
+		static EventType GetStaticType() { return EventType::KeyTyped; }
+		virtual EventType GetEventType() const override { return GetStaticType(); }
+		virtual const char* GetName() const override { return "KeyTyped"; }
 		virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
 	};
 }

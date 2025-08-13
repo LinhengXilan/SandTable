@@ -12,3 +12,4 @@ cmake-bin/
 *.vcxproj
 *.vcxproj.user
 *.vcxproj.filters
+*.backup

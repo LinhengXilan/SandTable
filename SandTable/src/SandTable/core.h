@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @date 2025-8-8
- * @version build7
+ * @date 2025-8-14
+ * @version build12
  */
 
 #ifndef SANDTABLE_CORE_H
@@ -27,5 +27,6 @@
 #endif
 
 #define BIT(x) (1 << x)
+#define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
 
 #endif

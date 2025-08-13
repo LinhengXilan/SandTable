@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Events/Mouse.h
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build8
+ * @date 2025-8-14
+ * @version build12
  */
 
 #ifndef SANDTABLE_EVENTS_MOUSE_H
@@ -12,10 +12,10 @@
 
 namespace SandTable
 {
-	class SANDTABLE_DLL MouseMove : public Event
+	class SANDTABLE_DLL MouseMoved : public Event
 	{
 	public:
-		MouseMove(float x, float y)
+		MouseMoved(float x, float y)
 			: m_MouseX_(x), m_MouseY_(y)
 		{
 
@@ -31,9 +31,9 @@ namespace SandTable
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::MouseMove; }
+		static EventType GetStaticType() { return EventType::MouseMoved; }
 		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "MouseMove"; }
+		virtual const char* GetName() const override { return "MouseMoved"; }
 		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	private:
@@ -125,7 +125,6 @@ namespace SandTable
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "MouseReleased"; }
 	};
-
 }
 
 #endif

@@ -1,5 +1,3 @@
-add_compile_definitions(CONSOLE)
-
 if(MSVC)
     add_compile_options(/utf-8)
     add_link_options(/MACHINE:X64)

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-8-12
- * @version build11
+ * @date 2025-8-14
+ * @version build12
  */
 
 #ifndef SANDTABLE_APPLICATION_H
@@ -11,7 +11,7 @@
 #include <SandTable/core.h>
 #include <SandTable/Events/Event.h>
 #include <SandTable/Events/Application.h>
-#include <SandTable/Window.h>
+#include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/LayerStack.h>
 
 namespace SandTable
