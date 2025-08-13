@@ -4,3 +4,6 @@
 [submodule "SandTable/library/glfw"]
 	path = SandTable/library/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "SandTable/library/imgui"]
+	path = SandTable/library/imgui
+	url = https://github.com/ocornut/imgui.git
