@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-9-20
+ * @version build13
  */
 
 #include <pch.h>
@@ -11,6 +11,7 @@
 
 #include <SandTable/Application.h>
 #include <SandTable/Log.h>
+#include <SandTable/Input.h>
 
 namespace SandTable
 {
@@ -72,6 +73,8 @@ namespace SandTable
 			{
 				layer->Update();
 			}
+			auto [posX, posY] = Input::GetMousePos();
+			SANDTABLE_CORE_TRACE("{0}, {1}", posX, posY);
 			m_Window->Update();
 		}
 	}

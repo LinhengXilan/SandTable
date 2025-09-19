@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-9-20
+ * @version build13
  */
 
 #ifndef SANDTABLE_CORE_H
@@ -16,6 +16,10 @@
 	#endif
 #else
 	#error SandTable only supports Windows
+#endif
+
+#ifdef SANDTABLE_DEBUG
+	#define SANDTABLE_ENABLE_ASSERTS
 #endif
 
 #ifdef SANDTABLE_ENABLE_ASSERTS

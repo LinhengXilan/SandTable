@@ -1,8 +1,8 @@
 /**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-9-20
+ * @version build13
  */
 
 #include <pch.h>
@@ -153,7 +153,7 @@ namespace SandTable
 			m_Window,
 			[](GLFWwindow* window, double posX, double posY) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				MouseScrolled event((float)posX, (float)posY);
+				MouseMoved event((float)posX, (float)posY);
 				data.EventCallback(event);
 			}
 		);
@@ -187,5 +187,4 @@ namespace SandTable
 	{
 		return m_WindowData.Sync;
 	}
-
 }

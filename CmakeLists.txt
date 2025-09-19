@@ -1,8 +1,8 @@
 #   @author LinhengXilan
-#   @date 2025-8-14
-#   @version build12
+#   @date 2025-9-20
+#   @version build13
 
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.31)
 project(SandTable LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -36,12 +36,10 @@ set(SandTableLibrary ${PROJECT_SOURCE_DIR}/SandTable/library/)
 file(GLOB_RECURSE SandTableSourceFlie ${SandTableSource}*.cpp)
 
 add_library(SandTable SHARED ${SandTableSourceFlie})
-
 target_precompile_headers(SandTable PRIVATE ${SandTableSource}pch.h)
 
 target_compile_definitions(SandTable PRIVATE SANDTABLE_BUILD_DLL)
 target_compile_definitions(SandTable PRIVATE _CRT_SECURE_NO_WARNINGS)
-
 target_include_directories(SandTable PRIVATE ${SandTableSource})
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}spdlog/include)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}glfw/include)
@@ -54,9 +52,10 @@ target_link_libraries(SandTable PRIVATE opengl32.lib)
 
 if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
     target_link_libraries(SandTable PRIVATE ${SandTableLibrary}glfw/lib/glfw3-debug.lib)
-    target_compile_definitions(SandTable PRIVATE SANDTABLE_ENABLE_ASSERTS)
+    #target_compile_options(SandTable PRIVATE /MDd)
 else (${CMAKE_BUILD_TYPE} MATCHES "Release")
     target_link_libraries(SandTable PRIVATE ${SandTableLibrary}glfw/lib/glfw3.lib)
+    #target_compile_options(SandTable PRIVATE /MD)
 endif()
 
 # Sandbox

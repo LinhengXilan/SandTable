@@ -1,8 +1,8 @@
 /**
  * @file SandTable/ImGui/ImGuiLayer.cpp
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-9-20
+ * @version build13
  */
 
 #include <pch.h>
@@ -71,7 +71,7 @@ namespace SandTable
 		ImGui_ImplOpenGL3_Init("#version 430");
 		Application& app = Application::GetInstance();
 		Window* window = &app.GetWindow();
-		ImGui_ImplGlfw_InitForOpenGL(dynamic_cast<WindowsWindow*>(window)->GetGLFWWindow(), true);
+		ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow()), true);
 	}
 
 	void ImGuiLayer::Detach()

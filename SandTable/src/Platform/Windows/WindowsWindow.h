@@ -1,8 +1,8 @@
 /**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-9-20
+ * @version build13
  */
 
 #ifndef PLATFORM_WINDOWS_WINDOWSWINDOW_H
@@ -26,7 +26,7 @@ namespace SandTable
 		inline void SetEventCallbackFunc(const EventCallbackFunc& callback) override { m_WindowData.EventCallback = callback; }
 		void SetSync(bool enabled) override;
 		bool IsSync() const override;
-		inline GLFWwindow* GetGLFWWindow() { return m_Window; }
+		inline virtual void* GetNativeWindow() const override { return m_Window; }
 
 	private:
 		virtual void Init(const WindowProperty& property);

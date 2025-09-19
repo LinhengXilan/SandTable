@@ -1,8 +1,8 @@
 /**
  * @file SandTable/Windows.h
  * @author LinhengXilan
- * @date 2025-8-8
- * @version build7
+ * @date 2025-9-20
+ * @version build13
  */
 
 #ifndef SANDTABLE_WINDOW_H
@@ -42,6 +42,7 @@ namespace SandTable
 		virtual void SetEventCallbackFunc(const EventCallbackFunc& callback) = 0;
 		virtual void SetSync(bool enabled) = 0;
 		virtual bool IsSync() const = 0;
+		virtual void* GetNativeWindow() const = 0;
 		static Window* Create(const WindowProperty& property = WindowProperty());
 	};
 }
