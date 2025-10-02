@@ -1,11 +1,16 @@
 if(MSVC)
+    set(CMAKE_CL_64 TRUE)
     add_compile_options(/utf-8)
-    add_link_options(/MACHINE:X64)
     add_compile_definitions(SANDTABLE_PLATFORM_WINDOWS)
+    add_compile_options(/sdl-)
+    add_compile_options(/sdl-)
+    add_link_options(/MACHINE:X64)
+
     if (CMAKE_BUILD_TYPE MATCHES "Debug")
         add_compile_definitions(SANDTABLE_DEBUG)
     endif()
     if (CMAKE_BUILD_TYPE MATCHES "Release")
         add_compile_definitions(SANDTABLE_RELEASE)
     endif()
+
 endif ()

@@ -1,14 +1,14 @@
 /**
  * @file Platform/OpenGL/ImGuiOpenGLRenderer.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-10-2
+ * @version build14
  */
 
 #ifndef PLATFORM_OPENGL_IMGUIOPENGLRENDERER_H
 #define PLATFORM_OPENGL_IMGUIOPENGLRENDERER_H
 
-#include <imgui.h>
+#include <imgui/imgui.h>
 
 #ifndef IMGUI_DISABLE
 

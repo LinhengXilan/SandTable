@@ -1,13 +1,13 @@
 /**
  * @file Platform/Windows/WindowsInput.cpp
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-2
+ * @version build14
  */
 
 #include <pch.h>
 
-#include <GLFW/glfw3.h>
+#include <glfw/glfw.h>
 
 #include <Platform/Windows/WindowsInput.h>
 #include <SandTable/Application.h>

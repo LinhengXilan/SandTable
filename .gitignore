@@ -8,7 +8,6 @@ cmake-bin/
 
 # Files
 *.xlsx
-*.sln
 *.vcxproj
 *.vcxproj.user
 *.vcxproj.filters

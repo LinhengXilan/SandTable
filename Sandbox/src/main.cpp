@@ -11,12 +11,20 @@ public:
 
 	void Update() override
 	{
-		SANDTABLE_CLIENT_INFO("ExampleLayer::Update()");
+		//SANDTABLE_CLIENT_INFO("ExampleLayer::Update()");
+		if (SandTable::Input::IsKeyPressed(KEY_TAB))
+		{
+			SANDTABLE_CLIENT_INFO("Tab is pressed");
+		}
 	}
 
 	void OnEvent(SandTable::Event& event) override
 	{
-		SANDTABLE_CLIENT_TRACE("{0}", event.ToString());
+		if (event.GetEventType() == SandTable::EventType::KeyPressed)
+		{
+			SandTable::KeyPressed& e = (SandTable::KeyPressed&)event;
+			SANDTABLE_CLIENT_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 

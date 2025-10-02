@@ -1,22 +1,20 @@
 /**
  * @file SandTable/ImGui/ImGuiLayer.cpp
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-2
+ * @version build14
  */
 
 #include <pch.h>
 
-#include <imgui.h>
-#include <GLFW/glfw3.h>
+#include <imgui/imgui.h>
+#include <glfw/glfw.h>
 
 #include <SandTable/ImGui/ImGuiLayer.h>
 #include <Platform/OpenGL/ImGuiOpenGLRenderer.h>
 #include <Platform/OpenGL/ImGuiGlfwRenderer.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Application.h>
-
-// ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int keycode, int scancode);
 
 namespace SandTable
 {

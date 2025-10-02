@@ -1,14 +1,14 @@
 /**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-2
+ * @version build14
  */
 
 #ifndef PLATFORM_WINDOWS_WINDOWSWINDOW_H
 #define PLATFORM_WINDOWS_WINDOWSWINDOW_H
 
-#include <GLFW/glfw3.h>
+#include <glfw/glfw.h>
 
 #include <SandTable/Window.h>
 

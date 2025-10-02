@@ -1,14 +1,14 @@
 /**
  * @file Platform/OpenGL/ImGuiGlfwRenderer.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-10-2
+ * @version build14
  */
 
 #ifndef PLATFORM_OPENGL_IMGUIGLFWRENDERER_H
 	#define PLATFORM_OPENGL_IMGUIGLFWRENDERER_H
 
-#include <imgui.h>      // IMGUI_IMPL_API
+#include <imgui/imgui.h>      // IMGUI_IMPL_API
 #ifndef IMGUI_DISABLE
 
 struct GLFWwindow;

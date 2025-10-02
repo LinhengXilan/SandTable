@@ -1,13 +1,13 @@
 /**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-2
+ * @version build14
  */
 
 #include <pch.h>
 
-#include <GLFW/glfw3.h>
+#include <glfw/glfw.h>
 
 #include <SandTable/Application.h>
 #include <SandTable/Log.h>
@@ -73,8 +73,8 @@ namespace SandTable
 			{
 				layer->Update();
 			}
-			auto [posX, posY] = Input::GetMousePos();
-			SANDTABLE_CORE_TRACE("{0}, {1}", posX, posY);
+			//auto [posX, posY] = Input::GetMousePos();
+			//SANDTABLE_CORE_TRACE("{0}, {1}", posX, posY);
 			m_Window->Update();
 		}
 	}
