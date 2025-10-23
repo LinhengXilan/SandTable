@@ -3,7 +3,6 @@ if(MSVC)
     add_compile_options(/utf-8)
     add_compile_definitions(SANDTABLE_PLATFORM_WINDOWS)
     add_compile_options(/sdl-)
-    add_compile_options(/sdl-)
     add_link_options(/MACHINE:X64)
 
     if (CMAKE_BUILD_TYPE MATCHES "Debug")

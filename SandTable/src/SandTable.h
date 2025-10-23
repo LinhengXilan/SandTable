@@ -1,8 +1,10 @@
 /**
  * @file SandTable.h
  * @author LinhengXilan
- * @date 2025-10-2
- * @version build14
+ * @date 2025-10-23
+ * @version build15
+ * 
+ * @breif SandTable主头文件
  */
 
 #ifndef SANDTABLE_H
@@ -15,7 +17,7 @@
 #include <SandTable/Log.h>
 #include <SandTable/Layer.h>
 #include <SandTable/Input.h>
-#include <SandTable/ImGui/ImGuiLayer.h>
+#include <SandTable/ImGui/ImguiLayer.h>
 
 #include <SandTable/EntryPoint.h>
 

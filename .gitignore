@@ -5,6 +5,10 @@ obj/
 .vscode/
 cmake-build/
 cmake-bin/
+build/
+library/imgui/backends/
+library/imgui/examples/
+library/imgui/misc/
 
 # Files
 *.xlsx

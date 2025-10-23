@@ -1,12 +1,14 @@
 /**
- * @file SandTable/ImGui/ImGuiLayer.h
+ * @file SandTable/ImGui/ImguiLayer.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-10-23
+ * @version build15
+ * 
+ * @brief Imgui²ã
  */
 
-#ifndef SANDTABLE_IMGUI_IMGUILAYER_H
-#define SANDTABLE_IMGUI_IMGUILAYER_H
+#ifndef SANDTABLE_IMGUI_ImguiLayer_H
+#define SANDTABLE_IMGUI_ImguiLayer_H
 
 #include <SandTable/Layer.h>
 #include <SandTable/Events/Keyboard.h>
@@ -15,11 +17,11 @@
 
 namespace SandTable
 {
-	class SANDTABLE_DLL ImGuiLayer : public Layer
+	class SANDTABLE_DLL ImguiLayer : public Layer
 	{
 	public:
-		ImGuiLayer();
-		~ImGuiLayer();
+		ImguiLayer();
+		~ImguiLayer();
 
 		void Update() override;
 		void OnEvent(Event& event) override;

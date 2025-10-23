@@ -1,8 +1,10 @@
 /**
- * @file SandTable/ImGui/ImGuiLayer.cpp
+ * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @date 2025-10-2
- * @version build14
+ * @date 2025-10-23
+ * @version build15
+ * 
+ * @brief Imgui≤„ µœ÷
  */
 
 #include <pch.h>
@@ -10,24 +12,26 @@
 #include <imgui/imgui.h>
 #include <glfw/glfw.h>
 
-#include <SandTable/ImGui/ImGuiLayer.h>
-#include <Platform/OpenGL/ImGuiOpenGLRenderer.h>
-#include <Platform/OpenGL/ImGuiGlfwRenderer.h>
+#include <SandTable/ImGui/ImguiLayer.h>
+#include <Platform/OpenGL/ImguiOpengl.h>
+#include <Platform/OpenGL/ImguiGlfw.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Application.h>
 
 namespace SandTable
 {
-	ImGuiLayer::ImGuiLayer()
-		: Layer("ImGuiLayer")
+	ImguiLayer::ImguiLayer()
+		: Layer("ImguiLayer")
 	{
+
 	}
 
-	ImGuiLayer::~ImGuiLayer()
+	ImguiLayer::~ImguiLayer()
 	{
+
 	}
 
-	void ImGuiLayer::Update()
+	void ImguiLayer::Update()
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Application& application = Application::GetInstance();
@@ -46,20 +50,20 @@ namespace SandTable
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	void ImGuiLayer::OnEvent(Event& event)
+	void ImguiLayer::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<MousePressed>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnMousePressed));
-		dispatcher.Dispatch<MouseReleased>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnMouseReleased));
-		dispatcher.Dispatch<MouseMoved>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnMouseMoved));
-		dispatcher.Dispatch<MouseScrolled>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnMouseScrolled));
-		dispatcher.Dispatch<KeyPressed>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnKeyPressed));
-		dispatcher.Dispatch<KeyReleased>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnKeyReleased));
-		dispatcher.Dispatch<KeyTyped>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnKeyTyped));
-		dispatcher.Dispatch<WindowResize>(SANDTABLE_BIND_EVENT_FUNC(ImGuiLayer::OnWindowResize));
+		dispatcher.Dispatch<MousePressed>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnMousePressed));
+		dispatcher.Dispatch<MouseReleased>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnMouseReleased));
+		dispatcher.Dispatch<MouseMoved>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnMouseMoved));
+		dispatcher.Dispatch<MouseScrolled>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnMouseScrolled));
+		dispatcher.Dispatch<KeyPressed>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnKeyPressed));
+		dispatcher.Dispatch<KeyReleased>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnKeyReleased));
+		dispatcher.Dispatch<KeyTyped>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnKeyTyped));
+		dispatcher.Dispatch<WindowResize>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnWindowResize));
 	}
 
-	void ImGuiLayer::Attach()
+	void ImguiLayer::Attach()
 	{
 		ImGui::CreateContext();
 		ImGui::StyleColorsDark();
@@ -72,33 +76,33 @@ namespace SandTable
 		ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow()), true);
 	}
 
-	void ImGuiLayer::Detach()
+	void ImguiLayer::Detach()
 	{
 
 	}
 
-	bool ImGuiLayer::OnMousePressed(MousePressed& event)
+	bool ImguiLayer::OnMousePressed(MousePressed& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[event.GetMouseButton()] = true;
 		return false;
 	}
 
-	bool ImGuiLayer::OnMouseReleased(MouseReleased& event)
+	bool ImguiLayer::OnMouseReleased(MouseReleased& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[event.GetMouseButton()] = false;
 		return false;
 	}
 
-	bool ImGuiLayer::OnMouseMoved(MouseMoved& event)
+	bool ImguiLayer::OnMouseMoved(MouseMoved& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePos = ImVec2(event.GetX(), event.GetY());
 		return false;
 	}
 
-	bool ImGuiLayer::OnMouseScrolled(MouseScrolled& event)
+	bool ImguiLayer::OnMouseScrolled(MouseScrolled& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseWheelH += event.GetXOffset();
@@ -106,7 +110,7 @@ namespace SandTable
 		return false;
 	}
 
-	bool ImGuiLayer::OnWindowResize(WindowResize& event)
+	bool ImguiLayer::OnWindowResize(WindowResize& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize = ImVec2(event.GetWidth(), event.GetHeight());
@@ -115,25 +119,21 @@ namespace SandTable
 		return false;
 	}
 
-	bool ImGuiLayer::OnKeyPressed(KeyPressed& event)
+	bool ImguiLayer::OnKeyPressed(KeyPressed& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.KeysData[event.GetKeyCode()].Down = true;
-		// io.KeyCtrl = io.KeysData[GLFW_KEY_LEFT_CONTROL].Down || io.KeysData[GLFW_KEY_RIGHT_CONTROL].Down;
-		// io.KeyShift = io.KeysData[GLFW_KEY_LEFT_SHIFT].Down || io.KeysData[GLFW_KEY_RIGHT_SHIFT].Down;
-		// io.KeyAlt = io.KeysData[GLFW_KEY_LEFT_ALT].Down || io.KeysData[GLFW_KEY_RIGHT_ALT].Down;
-		// io.KeySuper = io.KeysData[GLFW_KEY_LEFT_SUPER].Down || io.KeysData[GLFW_KEY_RIGHT_SUPER].Down;
 		return false;
 	}
 
-	bool ImGuiLayer::OnKeyReleased(KeyReleased& event)
+	bool ImguiLayer::OnKeyReleased(KeyReleased& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.KeysData[event.GetKeyCode()].Down = false;
 		return false;
 	}
 
-	bool ImGuiLayer::OnKeyTyped(KeyTyped& event)
+	bool ImguiLayer::OnKeyTyped(KeyTyped& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		int keycode = event.GetKeyCode();
