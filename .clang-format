@@ -71,7 +71,7 @@ BreakConstructorInitializers : BeforeComma
 BreakStringLiterals : false
 ColumnLimit : 0
 QualifierAlignment : Leave
-ConstructorInitializerIndentWidth : 0
+ConstructorInitializerIndentWidth : 4
 ContinuationIndentWidth : 4
 Cpp11BracedListStyle : true
 DeriveLineEnding : false

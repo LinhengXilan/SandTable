@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief SandTable核心头文件
  */
 
 #ifndef SANDTABLE_CORE_H
@@ -10,11 +12,11 @@
 
 #ifdef SANDTABLE_PLATFORM_WINDOWS
 	#ifdef SANDTABLE_BUILD_DLL
-		#define SANDTABLE_DLL __declspec(dllexport)
+		#define SANDTABLE_DLL //__declspec(dllexport)
 	#else
-		#define SANDTABLE_DLL __declspec(dllimport)
+		#define SANDTABLE_DLL //__declspec(dllimport)
 	#endif
-#else
+#else	
 	#error SandTable only supports Windows
 #endif
 
@@ -22,6 +24,9 @@
 	#define SANDTABLE_ENABLE_ASSERTS
 #endif
 
+
+
+// 
 #ifdef SANDTABLE_ENABLE_ASSERTS
 	#define SANDTABLE_ASSERT(x, ...) { if (!(x)) { SANDTABLE_CLIENT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define SANDTABLE_CORE_ASSERT(x, ...) { if(!(x)) { SANDTABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
@@ -30,6 +35,7 @@
 	#define SANDTABLE_CORE_ASSERT(x, ...)
 #endif
 
+// 
 #define BIT(x) (1 << x)
 #define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
 

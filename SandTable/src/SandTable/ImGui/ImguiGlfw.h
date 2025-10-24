@@ -1,11 +1,11 @@
-/**
+ï»¿/**
  * @file Platform/OpenGL/ImguiGlfw.h
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-23
- * @version build15
+ * @date 2025-10-24
+ * @version build16
  * 
- * @brief ImguiµÄGlfwÍ·ÎÄ¼þ
+ * @brief Imguiçš„Glfwå¤´æ–‡ä»¶
  */
 
 #pragma once
@@ -21,12 +21,6 @@ IMGUI_IMPL_API bool     ImGui_ImplGlfw_InitForVulkan(GLFWwindow* window, bool in
 IMGUI_IMPL_API bool     ImGui_ImplGlfw_InitForOther(GLFWwindow* window, bool install_callbacks);
 IMGUI_IMPL_API void     ImGui_ImplGlfw_Shutdown();
 IMGUI_IMPL_API void     ImGui_ImplGlfw_NewFrame();
-
-// Emscripten related initialization phase methods (call after ImGui_ImplGlfw_InitForOpenGL)
-#ifdef __EMSCRIPTEN__
-IMGUI_IMPL_API void     ImGui_ImplGlfw_InstallEmscriptenCallbacks(GLFWwindow* window, const char* canvas_selector);
-//static inline void    ImGui_ImplGlfw_InstallEmscriptenCanvasResizeCallback(const char* canvas_selector) { ImGui_ImplGlfw_InstallEmscriptenCallbacks(nullptr, canvas_selector); } } // Renamed in 1.91.0
-#endif
 
 // GLFW callbacks install
 // - When calling Init with 'install_callbacks=true': ImGui_ImplGlfw_InstallCallbacks() is called. GLFW callbacks will be installed for you. They will chain-call user's previously installed callbacks, if any.

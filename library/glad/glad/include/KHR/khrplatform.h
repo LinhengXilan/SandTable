@@ -1,4 +1,4 @@
-#ifndef __khrplatform_h_
+﻿#ifndef __khrplatform_h_
 #define __khrplatform_h_
 
 /*
@@ -105,12 +105,6 @@
 #   define KHRONOS_APICALL
 #elif defined(_WIN32)
 #   define KHRONOS_APICALL __declspec(dllimport)
-#elif defined (__SYMBIAN32__)
-#   define KHRONOS_APICALL IMPORT_C
-#elif defined(__ANDROID__)
-#   define KHRONOS_APICALL __attribute__((visibility("default")))
-#else
-#   define KHRONOS_APICALL
 #endif
 
 /*-------------------------------------------------------------------------
@@ -119,7 +113,7 @@
  * This follows the return type of the function  and precedes the function
  * name in the function prototype.
  */
-#if defined(_WIN32) && !defined(_WIN32_WCE) && !defined(__SCITECH_SNAP__)
+#if !defined(_WIN32_WCE) && !defined(__SCITECH_SNAP__)
     /* Win32 but not WinCE */
 #   define KHRONOS_APIENTRY __stdcall
 #else
@@ -131,11 +125,7 @@
  *-------------------------------------------------------------------------
  * This follows the closing parenthesis of the function prototype arguments.
  */
-#if defined (__ARMCC_2__)
-#define KHRONOS_APIATTRIBUTES __softfp
-#else
 #define KHRONOS_APIATTRIBUTES
-#endif
 
 /*-------------------------------------------------------------------------
  * basic type definitions
@@ -181,7 +171,7 @@ typedef uint64_t                khronos_uint64_t;
 #define KHRONOS_SUPPORT_INT64   1
 #define KHRONOS_SUPPORT_FLOAT   1
 
-#elif defined(_WIN32) && !defined(__SCITECH_SNAP__)
+#elif !defined(__SCITECH_SNAP__)
 
 /*
  * Win32
@@ -255,17 +245,11 @@ typedef uintptr_t              khronos_uintptr_t;
 #elif defined(_WIN64)
 typedef signed   long long int khronos_intptr_t;
 typedef unsigned long long int khronos_uintptr_t;
-#else
-typedef signed   long  int     khronos_intptr_t;
-typedef unsigned long  int     khronos_uintptr_t;
 #endif
 
 #if defined(_WIN64)
 typedef signed   long long int khronos_ssize_t;
 typedef unsigned long long int khronos_usize_t;
-#else
-typedef signed   long  int     khronos_ssize_t;
-typedef unsigned long  int     khronos_usize_t;
 #endif
 
 #if KHRONOS_SUPPORT_FLOAT

@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-10-2
- * @version build14
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief Windows平台窗口头文件
  */
 
 #ifndef PLATFORM_WINDOWS_WINDOWSWINDOW_H
@@ -11,6 +13,7 @@
 #include <glfw/glfw.h>
 
 #include <SandTable/Window.h>
+#include <SandTable/Renderer/GraphicsContext.h>
 
 namespace SandTable
 {
@@ -43,6 +46,7 @@ namespace SandTable
 			EventCallbackFunc EventCallback;
 		};
 		WindowData m_WindowData;
+		GraphicsContext* m_Context;
 	};
 }
 

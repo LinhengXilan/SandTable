@@ -1,11 +1,11 @@
-/**
+ï»¿/**
  * @file Platform/OpenGL/ImguiOpenglLoader.h
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-23
- * @version build15
+ * @date 2025-10-24
+ * @version build16
  * 
- * @brief ImguiµÄOpenGL¼ÓÔØÆ÷Ó¦ÓÃ
+ * @brief Imguiçš„OpenGLåŠ è½½å™¨åº”ç”¨
  */
 
 #ifndef __gl3w_h_
@@ -400,72 +400,72 @@ GL3W_API GL3WglProc imgl3wGetProcAddress(const char *proc);
 
 /* gl3w internal state */
 union ImGL3WProcs {
-    GL3WglProc ptr[63];
-    struct {
-        PFNGLACTIVETEXTUREPROC            ActiveTexture;
-        PFNGLATTACHSHADERPROC             AttachShader;
-        PFNGLBINDBUFFERPROC               BindBuffer;
-        PFNGLBINDSAMPLERPROC              BindSampler;
-        PFNGLBINDTEXTUREPROC              BindTexture;
-        PFNGLBINDVERTEXARRAYPROC          BindVertexArray;
-        PFNGLBLENDEQUATIONPROC            BlendEquation;
-        PFNGLBLENDEQUATIONSEPARATEPROC    BlendEquationSeparate;
-        PFNGLBLENDFUNCSEPARATEPROC        BlendFuncSeparate;
-        PFNGLBUFFERDATAPROC               BufferData;
-        PFNGLBUFFERSUBDATAPROC            BufferSubData;
-        PFNGLCLEARPROC                    Clear;
-        PFNGLCLEARCOLORPROC               ClearColor;
-        PFNGLCOMPILESHADERPROC            CompileShader;
-        PFNGLCREATEPROGRAMPROC            CreateProgram;
-        PFNGLCREATESHADERPROC             CreateShader;
-        PFNGLDELETEBUFFERSPROC            DeleteBuffers;
-        PFNGLDELETEPROGRAMPROC            DeleteProgram;
-        PFNGLDELETESAMPLERSPROC           DeleteSamplers;
-        PFNGLDELETESHADERPROC             DeleteShader;
-        PFNGLDELETETEXTURESPROC           DeleteTextures;
-        PFNGLDELETEVERTEXARRAYSPROC       DeleteVertexArrays;
-        PFNGLDETACHSHADERPROC             DetachShader;
-        PFNGLDISABLEPROC                  Disable;
-        PFNGLDISABLEVERTEXATTRIBARRAYPROC DisableVertexAttribArray;
-        PFNGLDRAWELEMENTSPROC             DrawElements;
-        PFNGLDRAWELEMENTSBASEVERTEXPROC   DrawElementsBaseVertex;
-        PFNGLENABLEPROC                   Enable;
-        PFNGLENABLEVERTEXATTRIBARRAYPROC  EnableVertexAttribArray;
-        PFNGLFLUSHPROC                    Flush;
-        PFNGLGENBUFFERSPROC               GenBuffers;
-        PFNGLGENSAMPLERSPROC              GenSamplers;
-        PFNGLGENTEXTURESPROC              GenTextures;
-        PFNGLGENVERTEXARRAYSPROC          GenVertexArrays;
-        PFNGLGETATTRIBLOCATIONPROC        GetAttribLocation;
-        PFNGLGETERRORPROC                 GetError;
-        PFNGLGETINTEGERVPROC              GetIntegerv;
-        PFNGLGETPROGRAMINFOLOGPROC        GetProgramInfoLog;
-        PFNGLGETPROGRAMIVPROC             GetProgramiv;
-        PFNGLGETSHADERINFOLOGPROC         GetShaderInfoLog;
-        PFNGLGETSHADERIVPROC              GetShaderiv;
-        PFNGLGETSTRINGPROC                GetString;
-        PFNGLGETSTRINGIPROC               GetStringi;
-        PFNGLGETUNIFORMLOCATIONPROC       GetUniformLocation;
-        PFNGLGETVERTEXATTRIBPOINTERVPROC  GetVertexAttribPointerv;
-        PFNGLGETVERTEXATTRIBIVPROC        GetVertexAttribiv;
-        PFNGLISENABLEDPROC                IsEnabled;
-        PFNGLISPROGRAMPROC                IsProgram;
-        PFNGLLINKPROGRAMPROC              LinkProgram;
-        PFNGLPIXELSTOREIPROC              PixelStorei;
-        PFNGLPOLYGONMODEPROC              PolygonMode;
-        PFNGLREADPIXELSPROC               ReadPixels;
-        PFNGLSAMPLERPARAMETERIPROC        SamplerParameteri;
-        PFNGLSCISSORPROC                  Scissor;
-        PFNGLSHADERSOURCEPROC             ShaderSource;
-        PFNGLTEXIMAGE2DPROC               TexImage2D;
-        PFNGLTEXPARAMETERIPROC            TexParameteri;
-        PFNGLTEXSUBIMAGE2DPROC            TexSubImage2D;
-        PFNGLUNIFORM1IPROC                Uniform1i;
-        PFNGLUNIFORMMATRIX4FVPROC         UniformMatrix4fv;
-        PFNGLUSEPROGRAMPROC               UseProgram;
-        PFNGLVERTEXATTRIBPOINTERPROC      VertexAttribPointer;
-        PFNGLVIEWPORTPROC                 Viewport;
-    } gl;
+	GL3WglProc ptr[63];
+	struct {
+		PFNGLACTIVETEXTUREPROC            ActiveTexture;
+		PFNGLATTACHSHADERPROC             AttachShader;
+		PFNGLBINDBUFFERPROC               BindBuffer;
+		PFNGLBINDSAMPLERPROC              BindSampler;
+		PFNGLBINDTEXTUREPROC              BindTexture;
+		PFNGLBINDVERTEXARRAYPROC          BindVertexArray;
+		PFNGLBLENDEQUATIONPROC            BlendEquation;
+		PFNGLBLENDEQUATIONSEPARATEPROC    BlendEquationSeparate;
+		PFNGLBLENDFUNCSEPARATEPROC        BlendFuncSeparate;
+		PFNGLBUFFERDATAPROC               BufferData;
+		PFNGLBUFFERSUBDATAPROC            BufferSubData;
+		PFNGLCLEARPROC                    Clear;
+		PFNGLCLEARCOLORPROC               ClearColor;
+		PFNGLCOMPILESHADERPROC            CompileShader;
+		PFNGLCREATEPROGRAMPROC            CreateProgram;
+		PFNGLCREATESHADERPROC             CreateShader;
+		PFNGLDELETEBUFFERSPROC            DeleteBuffers;
+		PFNGLDELETEPROGRAMPROC            DeleteProgram;
+		PFNGLDELETESAMPLERSPROC           DeleteSamplers;
+		PFNGLDELETESHADERPROC             DeleteShader;
+		PFNGLDELETETEXTURESPROC           DeleteTextures;
+		PFNGLDELETEVERTEXARRAYSPROC       DeleteVertexArrays;
+		PFNGLDETACHSHADERPROC             DetachShader;
+		PFNGLDISABLEPROC                  Disable;
+		PFNGLDISABLEVERTEXATTRIBARRAYPROC DisableVertexAttribArray;
+		PFNGLDRAWELEMENTSPROC             DrawElements;
+		PFNGLDRAWELEMENTSBASEVERTEXPROC   DrawElementsBaseVertex;
+		PFNGLENABLEPROC                   Enable;
+		PFNGLENABLEVERTEXATTRIBARRAYPROC  EnableVertexAttribArray;
+		PFNGLFLUSHPROC                    Flush;
+		PFNGLGENBUFFERSPROC               GenBuffers;
+		PFNGLGENSAMPLERSPROC              GenSamplers;
+		PFNGLGENTEXTURESPROC              GenTextures;
+		PFNGLGENVERTEXARRAYSPROC          GenVertexArrays;
+		PFNGLGETATTRIBLOCATIONPROC        GetAttribLocation;
+		PFNGLGETERRORPROC                 GetError;
+		PFNGLGETINTEGERVPROC              GetIntegerv;
+		PFNGLGETPROGRAMINFOLOGPROC        GetProgramInfoLog;
+		PFNGLGETPROGRAMIVPROC             GetProgramiv;
+		PFNGLGETSHADERINFOLOGPROC         GetShaderInfoLog;
+		PFNGLGETSHADERIVPROC              GetShaderiv;
+		PFNGLGETSTRINGPROC                GetString;
+		PFNGLGETSTRINGIPROC               GetStringi;
+		PFNGLGETUNIFORMLOCATIONPROC       GetUniformLocation;
+		PFNGLGETVERTEXATTRIBPOINTERVPROC  GetVertexAttribPointerv;
+		PFNGLGETVERTEXATTRIBIVPROC        GetVertexAttribiv;
+		PFNGLISENABLEDPROC                IsEnabled;
+		PFNGLISPROGRAMPROC                IsProgram;
+		PFNGLLINKPROGRAMPROC              LinkProgram;
+		PFNGLPIXELSTOREIPROC              PixelStorei;
+		PFNGLPOLYGONMODEPROC              PolygonMode;
+		PFNGLREADPIXELSPROC               ReadPixels;
+		PFNGLSAMPLERPARAMETERIPROC        SamplerParameteri;
+		PFNGLSCISSORPROC                  Scissor;
+		PFNGLSHADERSOURCEPROC             ShaderSource;
+		PFNGLTEXIMAGE2DPROC               TexImage2D;
+		PFNGLTEXPARAMETERIPROC            TexParameteri;
+		PFNGLTEXSUBIMAGE2DPROC            TexSubImage2D;
+		PFNGLUNIFORM1IPROC                Uniform1i;
+		PFNGLUNIFORMMATRIX4FVPROC         UniformMatrix4fv;
+		PFNGLUSEPROGRAMPROC               UseProgram;
+		PFNGLVERTEXATTRIBPOINTERPROC      VertexAttribPointer;
+		PFNGLVIEWPORTPROC                 Viewport;
+	} gl;
 };
 
 GL3W_API extern union ImGL3WProcs imgl3wProcs;
@@ -559,21 +559,21 @@ static GL3WglGetProcAddr wgl_get_proc_address;
 
 static int open_libgl(void)
 {
-    libgl = LoadLibraryA("opengl32.dll");
-    if (!libgl)
-        return GL3W_ERROR_LIBRARY_OPEN;
-    wgl_get_proc_address = (GL3WglGetProcAddr)GetProcAddress(libgl, "wglGetProcAddress");
-    return GL3W_OK;
+	libgl = LoadLibraryA("opengl32.dll");
+	if (!libgl)
+		return GL3W_ERROR_LIBRARY_OPEN;
+	wgl_get_proc_address = (GL3WglGetProcAddr)GetProcAddress(libgl, "wglGetProcAddress");
+	return GL3W_OK;
 }
 
 static void close_libgl(void) { FreeLibrary(libgl); libgl = NULL; }
 static GL3WglProc get_proc(const char *proc)
 {
-    GL3WglProc res;
-    res = (GL3WglProc)wgl_get_proc_address(proc);
-    if (!res)
-        res = (GL3WglProc)GetProcAddress(libgl, proc);
-    return res;
+	GL3WglProc res;
+	res = (GL3WglProc)wgl_get_proc_address(proc);
+	if (!res)
+		res = (GL3WglProc)GetProcAddress(libgl, proc);
+	return res;
 }
 
 
@@ -581,127 +581,127 @@ static struct { int major, minor; } version;
 
 static int parse_version(void)
 {
-    if (!glGetIntegerv)
-        return GL3W_ERROR_INIT;
-    glGetIntegerv(GL_MAJOR_VERSION, &version.major);
-    glGetIntegerv(GL_MINOR_VERSION, &version.minor);
-    if (version.major == 0 && version.minor == 0)
-    {
-        // Query GL_VERSION in desktop GL 2.x, the string will start with "<major>.<minor>"
-        if (const char* gl_version = (const char*)glGetString(GL_VERSION))
-            sscanf(gl_version, "%d.%d", &version.major, &version.minor);
-    }
-    if (version.major < 2)
-        return GL3W_ERROR_OPENGL_VERSION;
-    return GL3W_OK;
+	if (!glGetIntegerv)
+		return GL3W_ERROR_INIT;
+	glGetIntegerv(GL_MAJOR_VERSION, &version.major);
+	glGetIntegerv(GL_MINOR_VERSION, &version.minor);
+	if (version.major == 0 && version.minor == 0)
+	{
+		// Query GL_VERSION in desktop GL 2.x, the string will start with "<major>.<minor>"
+		if (const char* gl_version = (const char*)glGetString(GL_VERSION))
+			sscanf(gl_version, "%d.%d", &version.major, &version.minor);
+	}
+	if (version.major < 2)
+		return GL3W_ERROR_OPENGL_VERSION;
+	return GL3W_OK;
 }
 
 static void load_procs(GL3WGetProcAddressProc proc);
 
 int imgl3wInit(void)
 {
-    int res = open_libgl();
-    if (res)
-        return res;
-    atexit(close_libgl);
-    return imgl3wInit2(get_proc);
+	int res = open_libgl();
+	if (res)
+		return res;
+	atexit(close_libgl);
+	return imgl3wInit2(get_proc);
 }
 
 int imgl3wInit2(GL3WGetProcAddressProc proc)
 {
-    load_procs(proc);
-    return parse_version();
+	load_procs(proc);
+	return parse_version();
 }
 
 void imgl3wShutdown(void)
 {
-    close_libgl();
+	close_libgl();
 }
 
 int imgl3wIsSupported(int major, int minor)
 {
-    if (major < 2)
-        return 0;
-    if (version.major == major)
-        return version.minor >= minor;
-    return version.major >= major;
+	if (major < 2)
+		return 0;
+	if (version.major == major)
+		return version.minor >= minor;
+	return version.major >= major;
 }
 
 GL3WglProc imgl3wGetProcAddress(const char *proc) { return get_proc(proc); }
 
 static const char *proc_names[] = {
-    "glActiveTexture",
-    "glAttachShader",
-    "glBindBuffer",
-    "glBindSampler",
-    "glBindTexture",
-    "glBindVertexArray",
-    "glBlendEquation",
-    "glBlendEquationSeparate",
-    "glBlendFuncSeparate",
-    "glBufferData",
-    "glBufferSubData",
-    "glClear",
-    "glClearColor",
-    "glCompileShader",
-    "glCreateProgram",
-    "glCreateShader",
-    "glDeleteBuffers",
-    "glDeleteProgram",
-    "glDeleteSamplers",
-    "glDeleteShader",
-    "glDeleteTextures",
-    "glDeleteVertexArrays",
-    "glDetachShader",
-    "glDisable",
-    "glDisableVertexAttribArray",
-    "glDrawElements",
-    "glDrawElementsBaseVertex",
-    "glEnable",
-    "glEnableVertexAttribArray",
-    "glFlush",
-    "glGenBuffers",
-    "glGenSamplers",
-    "glGenTextures",
-    "glGenVertexArrays",
-    "glGetAttribLocation",
-    "glGetError",
-    "glGetIntegerv",
-    "glGetProgramInfoLog",
-    "glGetProgramiv",
-    "glGetShaderInfoLog",
-    "glGetShaderiv",
-    "glGetString",
-    "glGetStringi",
-    "glGetUniformLocation",
-    "glGetVertexAttribPointerv",
-    "glGetVertexAttribiv",
-    "glIsEnabled",
-    "glIsProgram",
-    "glLinkProgram",
-    "glPixelStorei",
-    "glPolygonMode",
-    "glReadPixels",
-    "glSamplerParameteri",
-    "glScissor",
-    "glShaderSource",
-    "glTexImage2D",
-    "glTexParameteri",
-    "glTexSubImage2D",
-    "glUniform1i",
-    "glUniformMatrix4fv",
-    "glUseProgram",
-    "glVertexAttribPointer",
-    "glViewport",
+	"glActiveTexture",
+	"glAttachShader",
+	"glBindBuffer",
+	"glBindSampler",
+	"glBindTexture",
+	"glBindVertexArray",
+	"glBlendEquation",
+	"glBlendEquationSeparate",
+	"glBlendFuncSeparate",
+	"glBufferData",
+	"glBufferSubData",
+	"glClear",
+	"glClearColor",
+	"glCompileShader",
+	"glCreateProgram",
+	"glCreateShader",
+	"glDeleteBuffers",
+	"glDeleteProgram",
+	"glDeleteSamplers",
+	"glDeleteShader",
+	"glDeleteTextures",
+	"glDeleteVertexArrays",
+	"glDetachShader",
+	"glDisable",
+	"glDisableVertexAttribArray",
+	"glDrawElements",
+	"glDrawElementsBaseVertex",
+	"glEnable",
+	"glEnableVertexAttribArray",
+	"glFlush",
+	"glGenBuffers",
+	"glGenSamplers",
+	"glGenTextures",
+	"glGenVertexArrays",
+	"glGetAttribLocation",
+	"glGetError",
+	"glGetIntegerv",
+	"glGetProgramInfoLog",
+	"glGetProgramiv",
+	"glGetShaderInfoLog",
+	"glGetShaderiv",
+	"glGetString",
+	"glGetStringi",
+	"glGetUniformLocation",
+	"glGetVertexAttribPointerv",
+	"glGetVertexAttribiv",
+	"glIsEnabled",
+	"glIsProgram",
+	"glLinkProgram",
+	"glPixelStorei",
+	"glPolygonMode",
+	"glReadPixels",
+	"glSamplerParameteri",
+	"glScissor",
+	"glShaderSource",
+	"glTexImage2D",
+	"glTexParameteri",
+	"glTexSubImage2D",
+	"glUniform1i",
+	"glUniformMatrix4fv",
+	"glUseProgram",
+	"glVertexAttribPointer",
+	"glViewport",
 };
 
 GL3W_API union ImGL3WProcs imgl3wProcs;
 
 static void load_procs(GL3WGetProcAddressProc proc)
 {
-    size_t i;
-    for (i = 0; i < GL3W_ARRAY_SIZE(proc_names); i++)
-        imgl3wProcs.ptr[i] = proc(proc_names[i]);
+	size_t i;
+	for (i = 0; i < GL3W_ARRAY_SIZE(proc_names); i++)
+		imgl3wProcs.ptr[i] = proc(proc_names[i]);
 }
 
 #ifdef __cplusplus

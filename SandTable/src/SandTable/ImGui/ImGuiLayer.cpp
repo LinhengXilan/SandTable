@@ -1,10 +1,10 @@
-/**
+ï»¿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @date 2025-10-23
- * @version build15
+ * @date 2025-10-24
+ * @version build16
  * 
- * @brief Imgui²ãÊµÏÖ
+ * @brief Imguiå±‚å®žçŽ°
  */
 
 #include <pch.h>
@@ -13,8 +13,8 @@
 #include <glfw/glfw.h>
 
 #include <SandTable/ImGui/ImguiLayer.h>
-#include <Platform/OpenGL/ImguiOpengl.h>
-#include <Platform/OpenGL/ImguiGlfw.h>
+#include <SandTable/Imgui/ImguiOpengl.h>
+#include <SandTable/Imgui/ImguiGlfw.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Application.h>
 
@@ -31,15 +31,9 @@ namespace SandTable
 
 	}
 
-	void ImguiLayer::Update()
+	void ImguiLayer::Begin()
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		Application& application = Application::GetInstance();
-		io.DisplaySize = ImVec2(application.GetWindow().GetWidth(), application.GetWindow().GetHeight());
 		
-		float time = (float)glfwGetTime();
-		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time = time;
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -50,7 +44,59 @@ namespace SandTable
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	void ImguiLayer::OnEvent(Event& event)
+	void ImguiLayer::End()
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::GetInstance();
+		WindowsWindow& window = (WindowsWindow&)app.GetWindow();
+		io.DisplaySize = ImVec2((float)window.GetWidth(), (float)window.GetHeight());
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
+	}
+
+	void ImguiLayer::Detach()
+	{
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
+	}
+
+	void ImguiLayer::ImguiRender()
+	{
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
+	}
+
+	void ImguiLayer::Attach()
+	{
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		ImGui::StyleColorsDark();
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+		Application& app = Application::GetInstance();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
+		ImGui_ImplOpenGL3_Init("#version 430");
+	}
+
+	/*void ImguiLayer::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<MousePressed>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnMousePressed));
@@ -61,24 +107,6 @@ namespace SandTable
 		dispatcher.Dispatch<KeyReleased>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnKeyReleased));
 		dispatcher.Dispatch<KeyTyped>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnKeyTyped));
 		dispatcher.Dispatch<WindowResize>(SANDTABLE_BIND_EVENT_FUNC(ImguiLayer::OnWindowResize));
-	}
-
-	void ImguiLayer::Attach()
-	{
-		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
-		ImGuiIO& io = ImGui::GetIO();
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
-		ImGui_ImplOpenGL3_Init("#version 430");
-		Application& app = Application::GetInstance();
-		Window* window = &app.GetWindow();
-		ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow()), true);
-	}
-
-	void ImguiLayer::Detach()
-	{
-
 	}
 
 	bool ImguiLayer::OnMousePressed(MousePressed& event)
@@ -113,7 +141,7 @@ namespace SandTable
 	bool ImguiLayer::OnWindowResize(WindowResize& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2(event.GetWidth(), event.GetHeight());
+		io.DisplaySize = ImVec2((float)event.GetWidth(), (float)event.GetHeight());
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 		glViewport(0, 0, event.GetWidth(), event.GetHeight());
 		return false;
@@ -142,6 +170,6 @@ namespace SandTable
 			io.AddInputCharacter((unsigned short)keycode);
 		}
 		return false;
-	}
+	}*/
 
 } // namespace SandTable

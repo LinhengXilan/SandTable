@@ -1,4 +1,4 @@
-//-------------------------------------------------------------------------
+﻿//-------------------------------------------------------------------------
 // [SECTION] INCLUDES
 //-------------------------------------------------------------------------
 
@@ -6,35 +6,26 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #endif
 
-#include <imgui.h>
+#include <imgui/imgui.h>
 #ifndef IMGUI_DISABLE
-#include <imgui_internal.h>
+#include <imgui/imgui_internal.h>
 
 // System includes
 #include <stdio.h>      // vsnprintf, sscanf, printf
 #include <stdint.h>     // intptr_t
 
-// [Windows] On non-Visual Studio compilers, we default to IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS unless explicitly enabled
-#if defined(_WIN32) && !defined(_MSC_VER) && !defined(IMGUI_ENABLE_WIN32_DEFAULT_IME_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS)
-#define IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS
-#endif
-
 // [Windows] OS specific includes (optional)
-#if defined(_WIN32) && defined(IMGUI_DISABLE_DEFAULT_FILE_FUNCTIONS) && defined(IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS) && defined(IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS) && defined(IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#if defined(IMGUI_DISABLE_DEFAULT_FILE_FUNCTIONS) && defined(IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS) && defined(IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS) && defined(IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #define IMGUI_DISABLE_WIN32_FUNCTIONS
 #endif
-#if defined(_WIN32) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#if !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
-#ifndef __MINGW32__
 #include <Windows.h>        // _wfopen, OpenClipboard
-#else
-#include <windows.h>
-#endif
 #if defined(WINAPI_FAMILY) && ((defined(WINAPI_FAMILY_APP) && WINAPI_FAMILY == WINAPI_FAMILY_APP) || (defined(WINAPI_FAMILY_GAMES) && WINAPI_FAMILY == WINAPI_FAMILY_GAMES))
 // The UWP and GDK Win32 API subsets don't support clipboard nor IME functions
 #define IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS
@@ -44,16 +35,12 @@
 #endif
 
 // Visual Studio warnings
-#ifdef _MSC_VER
 #pragma warning (disable: 4127)             // condition expression is constant
 #pragma warning (disable: 4996)             // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
-#if defined(_MSC_VER) && _MSC_VER >= 1922   // MSVC 2019 16.2 or later
 #pragma warning (disable: 5054)             // operator '|': deprecated between enumerations of different types
-#endif
 #pragma warning (disable: 26451)            // [Static Analyzer] Arithmetic overflow : Using operator 'xxx' on a 4 byte value and then casting the result to an 8 byte value. Cast the value to the wider type before calling operator 'xxx' to avoid overflow(io.2).
 #pragma warning (disable: 26495)            // [Static Analyzer] Variable 'XXX' is uninitialized. Always initialize a member variable (type.6).
 #pragma warning (disable: 26812)            // [Static Analyzer] The enum type 'xxx' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-#endif
 
 // Debug options
 #define IMGUI_DEBUG_NAV_SCORING     0   // Display navigation scoring preview when hovering items. Hold CTRL to display for all candidates. CTRL+Arrow to change last direction.
@@ -393,11 +380,7 @@ ImGuiIO::ImGuiIO()
 
     // Miscellaneous options
     MouseDrawCursor = false;
-#ifdef __APPLE__
-    ConfigMacOSXBehaviors = true;  // Set Mac OS X style defaults based on __APPLE__ compile time flag
-#else
     ConfigMacOSXBehaviors = false;
-#endif
     ConfigInputTrickleEventQueue = true;
     ConfigInputTextCursorBlink = true;
     ConfigInputTextEnterKeepActive = false;
@@ -1069,7 +1052,7 @@ const char* ImStrSkipBlank(const char* str)
 #endif
 #endif // #ifdef IMGUI_USE_STB_SPRINTF
 
-#if defined(_MSC_VER) && !defined(vsnprintf)
+#if !defined(vsnprintf)
 #define vsnprintf _vsnprintf
 #endif
 
@@ -1890,11 +1873,7 @@ bool ImGuiTextFilter::PassFilter(const char* text, const char* text_end) const
 // On some platform vsnprintf() takes va_list by reference and modifies it.
 // va_copy is the 'correct' way to copy a va_list but Visual Studio prior to 2013 doesn't have it.
 #ifndef va_copy
-#if defined(__GNUC__) || defined(__clang__)
-#define va_copy(dest, src) __builtin_va_copy(dest, src)
-#else
 #define va_copy(dest, src) (dest = src)
-#endif
 #endif
 
 char ImGuiTextBuffer::EmptyString[1] = { 0 };
@@ -10140,13 +10119,6 @@ static void ImGui::ErrorCheckNewFrameSanityChecks()
     // #define IM_ASSERT(EXPR)   if (SomeCode(EXPR)) SomeMoreCode();                    // Wrong!
     // #define IM_ASSERT(EXPR)   do { if (SomeCode(EXPR)) SomeMoreCode(); } while (0)   // Correct!
     if (true) IM_ASSERT(1); else IM_ASSERT(0);
-
-    // Emscripten backends are often imprecise in their submission of DeltaTime. (#6114, #3644)
-    // Ideally the Emscripten app/backend should aim to fix or smooth this value and avoid feeding zero, but we tolerate it.
-#ifdef __EMSCRIPTEN__
-    if (g.IO.DeltaTime <= 0.0f && g.FrameCount > 0)
-        g.IO.DeltaTime = 0.00001f;
-#endif
 
     // Check user data
     // (We pass an error message in the assert expression to make it visible to programmers who are not using a debugger, as most assert handlers display their argument)
@@ -20122,12 +20094,10 @@ static void ImGui::DockSettingsHandler_WriteAll(ImGuiContext* ctx, ImGuiSettings
 // - Default IME handlers
 //-----------------------------------------------------------------------------
 
-#if defined(_WIN32) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS)
+#if !defined(IMGUI_DISABLE_WIN32_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS)
 
-#ifdef _MSC_VER
 #pragma comment(lib, "user32")
 #pragma comment(lib, "kernel32")
-#endif
 
 // Win32 clipboard implementation
 // We use g.ClipboardHandlerData for temporary storage to ensure it is freed on Shutdown()
@@ -20174,59 +20144,6 @@ static void Platform_SetClipboardTextFn_DefaultImpl(ImGuiContext*, const char* t
     ::CloseClipboard();
 }
 
-#elif defined(__APPLE__) && TARGET_OS_OSX && defined(IMGUI_ENABLE_OSX_DEFAULT_CLIPBOARD_FUNCTIONS)
-
-#include <Carbon/Carbon.h>  // Use old API to avoid need for separate .mm file
-static PasteboardRef main_clipboard = 0;
-
-// OSX clipboard implementation
-// If you enable this you will need to add '-framework ApplicationServices' to your linker command-line!
-static void Platform_SetClipboardTextFn_DefaultImpl(ImGuiContext*, const char* text)
-{
-    if (!main_clipboard)
-        PasteboardCreate(kPasteboardClipboard, &main_clipboard);
-    PasteboardClear(main_clipboard);
-    CFDataRef cf_data = CFDataCreate(kCFAllocatorDefault, (const UInt8*)text, ImStrlen(text));
-    if (cf_data)
-    {
-        PasteboardPutItemFlavor(main_clipboard, (PasteboardItemID)1, CFSTR("public.utf8-plain-text"), cf_data, 0);
-        CFRelease(cf_data);
-    }
-}
-
-static const char* Platform_GetClipboardTextFn_DefaultImpl(ImGuiContext* ctx)
-{
-    ImGuiContext& g = *ctx;
-    if (!main_clipboard)
-        PasteboardCreate(kPasteboardClipboard, &main_clipboard);
-    PasteboardSynchronize(main_clipboard);
-
-    ItemCount item_count = 0;
-    PasteboardGetItemCount(main_clipboard, &item_count);
-    for (ItemCount i = 0; i < item_count; i++)
-    {
-        PasteboardItemID item_id = 0;
-        PasteboardGetItemIdentifier(main_clipboard, i + 1, &item_id);
-        CFArrayRef flavor_type_array = 0;
-        PasteboardCopyItemFlavors(main_clipboard, item_id, &flavor_type_array);
-        for (CFIndex j = 0, nj = CFArrayGetCount(flavor_type_array); j < nj; j++)
-        {
-            CFDataRef cf_data;
-            if (PasteboardCopyItemFlavorData(main_clipboard, item_id, CFSTR("public.utf8-plain-text"), &cf_data) == noErr)
-            {
-                g.ClipboardHandlerData.clear();
-                int length = (int)CFDataGetLength(cf_data);
-                g.ClipboardHandlerData.resize(length + 1);
-                CFDataGetBytes(cf_data, CFRangeMake(0, length), (UInt8*)g.ClipboardHandlerData.Data);
-                g.ClipboardHandlerData[length] = 0;
-                CFRelease(cf_data);
-                return g.ClipboardHandlerData.Data;
-            }
-        }
-    }
-    return NULL;
-}
-
 #else
 
 // Local Dear ImGui-only clipboard implementation, if user hasn't defined better clipboard handlers.
@@ -20251,23 +20168,14 @@ static void Platform_SetClipboardTextFn_DefaultImpl(ImGuiContext* ctx, const cha
 //-----------------------------------------------------------------------------
 
 #ifndef IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
-#if defined(__APPLE__) && TARGET_OS_IPHONE
-#define IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
-#endif
-#if defined(__3DS__)
-#define IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
-#endif
-#if defined(_WIN32) && defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#if defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #define IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
 #endif
 #endif // #ifndef IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
 
 #ifndef IMGUI_DISABLE_DEFAULT_SHELL_FUNCTIONS
-#ifdef _WIN32
 #include <shellapi.h>   // ShellExecuteA()
-#ifdef _MSC_VER
 #pragma comment(lib, "shell32")
-#endif
 static bool Platform_OpenInShellFn_DefaultImpl(ImGuiContext*, const char* path)
 {
     const int path_wsize = ::MultiByteToWideChar(CP_UTF8, 0, path, -1, NULL, 0);
@@ -20277,44 +20185,16 @@ static bool Platform_OpenInShellFn_DefaultImpl(ImGuiContext*, const char* path)
     return (INT_PTR)::ShellExecuteW(NULL, L"open", path_wbuf.Data, NULL, NULL, SW_SHOWDEFAULT) > 32;
 }
 #else
-#include <sys/wait.h>
-#include <unistd.h>
-static bool Platform_OpenInShellFn_DefaultImpl(ImGuiContext*, const char* path)
-{
-#if defined(__APPLE__)
-    const char* args[] { "open", "--", path, NULL };
-#else
-    const char* args[] { "xdg-open", path, NULL };
-#endif
-    pid_t pid = fork();
-    if (pid < 0)
-        return false;
-    if (!pid)
-    {
-        execvp(args[0], const_cast<char **>(args));
-        exit(-1);
-    }
-    else
-    {
-        int status;
-        waitpid(pid, &status, 0);
-        return WEXITSTATUS(status) == 0;
-    }
-}
-#endif
-#else
 static bool Platform_OpenInShellFn_DefaultImpl(ImGuiContext*, const char*) { return false; }
 #endif // Default shell handlers
 
 //-----------------------------------------------------------------------------
 
 // Win32 API IME support (for Asian languages, etc.)
-#if defined(_WIN32) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS)
+#if !defined(IMGUI_DISABLE_WIN32_FUNCTIONS) && !defined(IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS)
 
 #include <imm.h>
-#ifdef _MSC_VER
 #pragma comment(lib, "imm32")
-#endif
 
 static void Platform_SetImeDataFn_DefaultImpl(ImGuiContext*, ImGuiViewport* viewport, ImGuiPlatformImeData* data)
 {

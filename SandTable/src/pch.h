@@ -1,15 +1,16 @@
-/**
+ï»¿/**
  * @file pch.h
  * @author LinhengXilan
  * @date 2025-10-23
  * @version build15
  * 
- * @breif Ô¤±àÒëÍ·ÎÄ¼þ
+ * @breif é¢„ç¼–è¯‘å¤´æ–‡ä»¶
  */
 
 #ifndef PCH_H
 #define PCH_H
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <memory>
 #include <functional>

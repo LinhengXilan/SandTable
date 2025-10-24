@@ -1,4 +1,4 @@
-#include <imgui.h>
+﻿#include <imgui/imgui.h>
 #ifndef IMGUI_DISABLE
 
 // System includes
@@ -8,19 +8,12 @@
 #include <stdio.h>          // vsnprintf, sscanf, printf
 #include <stdlib.h>         // NULL, malloc, free, atoi
 #include <stdint.h>         // intptr_t
-#if !defined(_MSC_VER) || _MSC_VER >= 1800
 #include <inttypes.h>       // PRId64/PRIu64, not avail in some MinGW headers.
-#endif
-#ifdef __EMSCRIPTEN__
-#include <emscripten/version.h>     // __EMSCRIPTEN_major__ etc.
-#endif
 
 // Visual Studio warnings
-#ifdef _MSC_VER
 #pragma warning (disable: 4127)     // condition expression is constant
 #pragma warning (disable: 4996)     // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
 #pragma warning (disable: 26451)    // [Static Analyzer] Arithmetic overflow : Using operator 'xxx' on a 4 byte value and then casting the result to an 8 byte value. Cast the value to the wider type before calling operator 'xxx' to avoid overflow(io.2).
-#endif
 
 // Play it nice with Windows users (Update: May 2018, Notepad now supports Unix-style carriage returns!)
 #define IM_NEWLINE  "\r\n"
@@ -53,11 +46,7 @@
 // Enforce cdecl calling convention for functions called by the standard library,
 // in case compilation settings changed the default to e.g. __vectorcall
 #ifndef IMGUI_CDECL
-#ifdef _MSC_VER
 #define IMGUI_CDECL __cdecl
-#else
-#define IMGUI_CDECL
-#endif
 #endif
 
 //-----------------------------------------------------------------------------
@@ -8061,40 +8050,11 @@ void ImGui::ShowAboutWindow(bool* p_open)
 #ifdef IMGUI_USE_BGRA_PACKED_COLOR
         ImGui::Text("define: IMGUI_USE_BGRA_PACKED_COLOR");
 #endif
-#ifdef _WIN32
         ImGui::Text("define: _WIN32");
-#endif
-#ifdef _WIN64
         ImGui::Text("define: _WIN64");
-#endif
-#ifdef __linux__
-        ImGui::Text("define: __linux__");
-#endif
-#ifdef __APPLE__
-        ImGui::Text("define: __APPLE__");
-#endif
-#ifdef _MSC_VER
         ImGui::Text("define: _MSC_VER=%d", _MSC_VER);
-#endif
-#ifdef _MSVC_LANG
         ImGui::Text("define: _MSVC_LANG=%d", (int)_MSVC_LANG);
-#endif
-#ifdef __MINGW32__
-        ImGui::Text("define: __MINGW32__");
-#endif
-#ifdef __MINGW64__
-        ImGui::Text("define: __MINGW64__");
-#endif
-#ifdef __GNUC__
-        ImGui::Text("define: __GNUC__=%d", (int)__GNUC__);
-#endif
-#ifdef __clang_version__
-        ImGui::Text("define: __clang_version__=%s", __clang_version__);
-#endif
-#ifdef __EMSCRIPTEN__
-        ImGui::Text("define: __EMSCRIPTEN__");
-        ImGui::Text("Emscripten: %d.%d.%d", __EMSCRIPTEN_major__, __EMSCRIPTEN_minor__, __EMSCRIPTEN_tiny__);
-#endif
+
 #ifdef IMGUI_HAS_VIEWPORT
         ImGui::Text("define: IMGUI_HAS_VIEWPORT");
 #endif

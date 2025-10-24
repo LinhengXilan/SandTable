@@ -1,10 +1,10 @@
-/**
+ï»¿/**
  * @file SandTable.h
  * @author LinhengXilan
  * @date 2025-10-23
  * @version build15
  * 
- * @breif SandTableÖ÷Í·ÎÄ¼þ
+ * @breif SandTableä¸»å¤´æ–‡ä»¶
  */
 
 #ifndef SANDTABLE_H

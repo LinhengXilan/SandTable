@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/Layer.h
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build9
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 图层头文件
  */
 
 #ifndef SANDTABLE_LAYER_H
@@ -22,6 +24,8 @@ namespace SandTable
 		virtual void Attach();
 		virtual void Detach();
 		virtual void Update();
+
+		virtual void ImguiRender();
 		virtual void OnEvent(Event& event);
 		
 		inline const std::string& GetName() const { return m_DebugName; }

@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief Windows平台窗口实现
  */
 
 #include <pch.h>
@@ -14,6 +16,7 @@
 #include <SandTable/Events/Application.h>
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/Mouse.h>
+#include <Platform/OpenGL/OpenglContext.h>
 
 namespace SandTable
 {
@@ -53,6 +56,10 @@ namespace SandTable
 			Is_GlfwInitialized = true;
 		}
 		m_Window = glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
+
+		m_Context = new OpenglContext(m_Window);
+		m_Context->Init();
+
 		glfwMakeContextCurrent(m_Window);
 
 		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
@@ -167,7 +174,7 @@ namespace SandTable
 	void WindowsWindow::Update()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers(); 
 	}
 
 	void WindowsWindow::SetSync(bool enabled)

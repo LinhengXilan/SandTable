@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/Layer.cpp
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build9
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 图层实现
  */
 
 #include <pch.h>
@@ -33,6 +35,11 @@ namespace SandTable
 	}
 
 	void Layer::Update()
+	{
+
+	}
+
+	void Layer::ImguiRender()
 	{
 
 	}

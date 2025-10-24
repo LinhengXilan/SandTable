@@ -1,49 +1,4 @@
-// dear imgui, v1.92.5 WIP
-// (internal structures/api)
-
-// You may use this file to debug, understand or extend Dear ImGui features but we don't provide any guarantee of forward compatibility.
-
-/*
-
-Index of this file:
-
-// [SECTION] Header mess
-// [SECTION] Forward declarations
-// [SECTION] Context pointer
-// [SECTION] STB libraries includes
-// [SECTION] Macros
-// [SECTION] Generic helpers
-// [SECTION] ImDrawList support
-// [SECTION] Style support
-// [SECTION] Data types support
-// [SECTION] Widgets support: flags, enums, data structures
-// [SECTION] Popup support
-// [SECTION] Inputs support
-// [SECTION] Clipper support
-// [SECTION] Navigation support
-// [SECTION] Typing-select support
-// [SECTION] Columns support
-// [SECTION] Box-select support
-// [SECTION] Multi-select support
-// [SECTION] Docking support
-// [SECTION] Viewport support
-// [SECTION] Settings support
-// [SECTION] Localization support
-// [SECTION] Error handling, State recovery support
-// [SECTION] Metrics, Debug tools
-// [SECTION] Generic context hooks
-// [SECTION] ImGuiContext (main imgui context)
-// [SECTION] ImGuiWindowTempData, ImGuiWindow
-// [SECTION] Tab bar, Tab item support
-// [SECTION] Table support
-// [SECTION] ImGui internal API
-// [SECTION] ImFontLoader
-// [SECTION] ImFontAtlas internal API
-// [SECTION] Test Engine specific hooks (imgui_test_engine)
-
-*/
-
-#pragma once
+﻿#pragma once
 #ifndef IMGUI_DISABLE
 
 //-----------------------------------------------------------------------------
@@ -51,7 +6,7 @@ Index of this file:
 //-----------------------------------------------------------------------------
 
 #ifndef IMGUI_VERSION
-#include "imgui.h"
+#include <imgui/imgui.h>
 #endif
 
 #include <stdio.h>      // FILE*, sscanf
@@ -69,44 +24,16 @@ Index of this file:
 #endif
 #endif
 // Emscripten has partial SSE 4.2 support where _mm_crc32_u32 is not available. See https://emscripten.org/docs/porting/simd.html#id11 and #8213
-#if defined(IMGUI_ENABLE_SSE4_2) && !defined(IMGUI_USE_LEGACY_CRC32_ADLER) && !defined(__EMSCRIPTEN__)
+#if defined(IMGUI_ENABLE_SSE4_2) && !defined(IMGUI_USE_LEGACY_CRC32_ADLER)
 #define IMGUI_ENABLE_SSE4_2_CRC
 #endif
 
 // Visual Studio warnings
-#ifdef _MSC_VER
 #pragma warning (push)
 #pragma warning (disable: 4251)     // class 'xxx' needs to have dll-interface to be used by clients of struct 'xxx' // when IMGUI_API is set to__declspec(dllexport)
 #pragma warning (disable: 26495)    // [Static Analyzer] Variable 'XXX' is uninitialized. Always initialize a member variable (type.6).
 #pragma warning (disable: 26812)    // [Static Analyzer] The enum type 'xxx' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
-#if defined(_MSC_VER) && _MSC_VER >= 1922 // MSVC 2019 16.2 or later
 #pragma warning (disable: 5054)     // operator '|': deprecated between enumerations of different types
-#endif
-#endif
-
-// Clang/GCC warnings with -Weverything
-#if defined(__clang__)
-#pragma clang diagnostic push
-#if __has_warning("-Wunknown-warning-option")
-#pragma clang diagnostic ignored "-Wunknown-warning-option"         // warning: unknown warning group 'xxx'
-#endif
-#pragma clang diagnostic ignored "-Wunknown-pragmas"                // warning: unknown warning group 'xxx'
-#pragma clang diagnostic ignored "-Wfloat-equal"                    // warning: comparing floating point with == or != is unsafe // storing and comparing against same constants ok, for ImFloor()
-#pragma clang diagnostic ignored "-Wold-style-cast"                 // warning: use of old-style cast
-#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"  // warning: zero as null pointer constant
-#pragma clang diagnostic ignored "-Wdouble-promotion"               // warning: implicit conversion from 'float' to 'double' when passing argument to function
-#pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"  // warning: implicit conversion from 'xxx' to 'float' may lose precision
-#pragma clang diagnostic ignored "-Wmissing-noreturn"               // warning: function 'xxx' could be declared with attribute 'noreturn'
-#pragma clang diagnostic ignored "-Wdeprecated-enum-enum-conversion"// warning: bitwise operation between different enumeration types ('XXXFlags_' and 'XXXFlagsPrivate_') is deprecated
-#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"            // warning: 'xxx' is an unsafe pointer used for buffer access
-#pragma clang diagnostic ignored "-Wnontrivial-memaccess"           // warning: first argument in call to 'memset' is a pointer to non-trivially copyable type
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"                          // warning: unknown option after '#pragma GCC diagnostic' kind
-#pragma GCC diagnostic ignored "-Wfloat-equal"                      // warning: comparing floating-point with '==' or '!=' is unsafe
-#pragma GCC diagnostic ignored "-Wclass-memaccess"                  // [__GNUC__ >= 8] warning: 'memset/memcpy' clearing/writing an object of type 'xxxx' with no trivial copy-assignment; use assignment or value-initialization instead
-#pragma GCC diagnostic ignored "-Wdeprecated-enum-enum-conversion"  // warning: bitwise operation between different enumeration types ('XXXFlags_' and 'XXXFlagsPrivate_') is deprecated
-#endif
 
 // In 1.89.4, we moved the implementation of "courtesy maths operators" from imgui_internal.h in imgui.h
 // As they are frequently requested, we do not want to encourage to many people using imgui_internal.h
@@ -275,11 +202,7 @@ extern IMGUI_API ImGuiContext* GImGui;  // Current implicit context pointer
 
 // Misc Macros
 #define IM_PI                           3.14159265358979323846f
-#ifdef _WIN32
 #define IM_NEWLINE                      "\r\n"   // Play it nice with Windows users (Update: since 2018-05, Notepad finally appears to support Unix-style carriage returns!)
-#else
-#define IM_NEWLINE                      "\n"
-#endif
 #ifndef IM_TABSIZE                      // Until we move this to runtime and/or add proper tab support, at least allow users to compile-time override
 #define IM_TABSIZE                      (4)
 #endif
@@ -304,49 +227,23 @@ extern IMGUI_API ImGuiContext* GImGui;  // Current implicit context pointer
 #endif
 
 // Enforce cdecl calling convention for functions called by the standard library, in case compilation settings changed the default to e.g. __vectorcall
-#ifdef _MSC_VER
 #define IMGUI_CDECL __cdecl
-#else
-#define IMGUI_CDECL
-#endif
 
 // Warnings
-#if defined(_MSC_VER) && !defined(__clang__)
 #define IM_MSVC_WARNING_SUPPRESS(XXXX)  __pragma(warning(suppress: XXXX))
-#else
-#define IM_MSVC_WARNING_SUPPRESS(XXXX)
-#endif
 
 // Debug Tools
 // Use 'Metrics/Debugger->Tools->Item Picker' to break into the call-stack of a specific item.
 // This will call IM_DEBUG_BREAK() which you may redefine yourself. See https://github.com/scottt/debugbreak for more reference.
 #ifndef IM_DEBUG_BREAK
-#if defined (_MSC_VER)
 #define IM_DEBUG_BREAK()    __debugbreak()
-#elif defined(__clang__)
-#define IM_DEBUG_BREAK()    __builtin_debugtrap()
-#elif defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
-#define IM_DEBUG_BREAK()    __asm__ volatile("int3;nop")
-#elif defined(__GNUC__) && defined(__thumb__)
-#define IM_DEBUG_BREAK()    __asm__ volatile(".inst 0xde01")
-#elif defined(__GNUC__) && defined(__arm__) && !defined(__thumb__)
-#define IM_DEBUG_BREAK()    __asm__ volatile(".inst 0xe7f001f0")
-#else
-#define IM_DEBUG_BREAK()    IM_ASSERT(0)    // It is expected that you define IM_DEBUG_BREAK() into something that will break nicely in a debugger!
-#endif
 #endif // #ifndef IM_DEBUG_BREAK
 
 // Format specifiers, printing 64-bit hasn't been decently standardized...
 // In a real application you should be using PRId64 and PRIu64 from <inttypes.h> (non-windows) and on Windows define them yourself.
-#if defined(_MSC_VER) && !defined(__clang__)
 #define IM_PRId64   "I64d"
 #define IM_PRIu64   "I64u"
 #define IM_PRIX64   "I64X"
-#else
-#define IM_PRId64   "lld"
-#define IM_PRIu64   "llu"
-#define IM_PRIX64   "llX"
-#endif
 #define IM_TEXTUREID_TO_U64(_TEXID) ((ImU64)(intptr_t)(_TEXID))
 
 //-----------------------------------------------------------------------------
@@ -4226,14 +4123,6 @@ extern const char*  ImGuiTestEngine_FindItemDebugLabel(ImGuiContext* ctx, ImGuiI
 
 //-----------------------------------------------------------------------------
 
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
-#ifdef _MSC_VER
 #pragma warning (pop)
-#endif
 
 #endif // #ifndef IMGUI_DISABLE

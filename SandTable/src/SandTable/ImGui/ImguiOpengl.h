@@ -1,11 +1,11 @@
-/**
+ï»¿/**
  * @file Platform/OpenGL/ImguiOpengl.h
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-23
- * @version build15
+ * @date 2025-10-24
+ * @version build16
  * 
- * @brief ImguiµÄOpenGLÍ·ÎÄ¼þ
+ * @brief Imguiçš„OpenGLå¤´æ–‡ä»¶
  */
 
 #pragma once

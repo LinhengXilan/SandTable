@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/LayerStack.h
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build9
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 图层栈头文件
  */
 
 #ifndef SANDTABLE_LAYERSTACK_H
@@ -29,7 +31,7 @@ namespace SandTable
 
 	private:
 		std::vector<Layer*> m_Layers;
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 	};
 }
 

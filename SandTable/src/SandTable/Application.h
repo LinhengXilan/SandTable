@@ -1,8 +1,10 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 应用程序头文件
  */
 
 #ifndef SANDTABLE_APPLICATION_H
@@ -13,6 +15,7 @@
 #include <SandTable/Events/Application.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/LayerStack.h>
+#include <SandTable/ImGui/ImguiLayer.h>
 
 namespace SandTable
 {
@@ -35,6 +38,7 @@ namespace SandTable
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		ImguiLayer* m_ImguiLayer;
 		static Application* s_Instance;
 	};
 

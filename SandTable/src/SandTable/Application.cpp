@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-2
- * @version build14
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 应用程序实现
  */
 
 #include <pch.h>
@@ -67,12 +69,18 @@ namespace SandTable
 	{
 		while (m_Running)
 		{
-			glClearColor(1, 0.8, 0.8, 1);
+			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->Update();
 			}
+			m_ImguiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->Update();
+			}
+			m_ImguiLayer->End();
 			//auto [posX, posY] = Input::GetMousePos();
 			//SANDTABLE_CORE_TRACE("{0}, {1}", posX, posY);
 			m_Window->Update();

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SPDX-License-Identifier: (WTFPL OR CC0-1.0) AND Apache-2.0
  */
 #include <stdio.h>
@@ -1609,10 +1609,6 @@ int gladLoadGLUserPtr( GLADuserptrloadfunc load, void *userptr) {
 int gladLoadGL( GLADloadfunc load) {
     return gladLoadGLUserPtr( glad_gl_get_proc_from_userptr, GLAD_GNUC_EXTENSION (void*) load);
 }
-
-
-
- 
 
 
 #ifdef __cplusplus

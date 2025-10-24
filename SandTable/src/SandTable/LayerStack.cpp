@@ -1,8 +1,10 @@
-/**
+﻿/**
  * @file SandTable/LayerStack.cpp
  * @author LinhengXilan
- * @date 2025-8-9
- * @version build9
+ * @date 2025-10-24
+ * @version build16
+ * 
+ * @brief 图层栈实现
  */
 
 #include <pch.h>
@@ -13,7 +15,7 @@ namespace SandTable
 {
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_Layers.begin();
+
 	}
 
 	LayerStack::~LayerStack()
@@ -26,7 +28,8 @@ namespace SandTable
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_LayerInsertIndex++;
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay)
@@ -40,7 +43,7 @@ namespace SandTable
 		if (it != m_Layers.end())
 		{
 			m_Layers.erase(it);
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 
