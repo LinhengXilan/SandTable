@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief Imgui层实现
  */
@@ -33,15 +33,9 @@ namespace SandTable
 
 	void ImguiLayer::Begin()
 	{
-		
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
-
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
 	void ImguiLayer::End()
@@ -63,8 +57,8 @@ namespace SandTable
 
 	void ImguiLayer::Detach()
 	{
-		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
+		ImGui_ImplOpenGL3_Shutdown();
 		ImGui::DestroyContext();
 	}
 
@@ -84,6 +78,7 @@ namespace SandTable
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		ImGui::StyleColorsDark();
+
 		ImGuiStyle& style = ImGui::GetStyle();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{

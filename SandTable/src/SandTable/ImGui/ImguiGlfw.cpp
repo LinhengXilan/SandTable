@@ -2,14 +2,14 @@
  * @file Platform/Opengl/ImguiGlfw.cpp
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief Imgui的Glfw实现
  */
 
 #include <pch.h>
-
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #include <imgui/imgui.h>
 #ifndef IMGUI_DISABLE
 #include <SandTable/Imgui/ImguiGlfw.h>

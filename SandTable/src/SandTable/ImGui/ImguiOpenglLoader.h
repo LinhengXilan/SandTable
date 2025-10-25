@@ -2,8 +2,8 @@
  * @file Platform/OpenGL/ImguiOpenglLoader.h
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief Imgui的OpenGL加载器应用
  */
@@ -29,7 +29,7 @@ typedef unsigned __int64       khronos_uint64_t;
 extern "C" {
 #endif
 
-#if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
+#if defined(_WIN32) && !defined(APIENTRY) && !defined(__SCITECH_SNAP__)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
 #endif

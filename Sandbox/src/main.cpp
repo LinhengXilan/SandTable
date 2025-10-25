@@ -1,4 +1,14 @@
-﻿#include <SandTable.h>
+﻿/**
+ * @file main.cpp
+ * @author LinhengXilan
+ * @date 2025-10-25
+ * @version build17
+ * 
+ * @brief SandTable示例程序
+ */
+
+#include <SandTable.h>
+#include <imgui/imgui.h>
 
 class ExampleLayer : public SandTable::Layer
 {
@@ -11,20 +21,19 @@ public:
 
 	void Update() override
 	{
-		//SANDTABLE_CLIENT_INFO("ExampleLayer::Update()");
-		if (SandTable::Input::IsKeyPressed(KEY_TAB))
-		{
-			SANDTABLE_CLIENT_INFO("Tab is pressed");
-		}
+
 	}
 
 	void OnEvent(SandTable::Event& event) override
 	{
-		if (event.GetEventType() == SandTable::EventType::KeyPressed)
-		{
-			SandTable::KeyPressed& e = (SandTable::KeyPressed&)event;
-			SANDTABLE_CLIENT_TRACE("{0}", (char)e.GetKeyCode());
-		}
+	
+	}
+
+	void ImguiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 };
 
@@ -34,10 +43,8 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new SandTable::ImguiLayer());
 	}
-
-	~Sandbox() = default;
+	~Sandbox() override = default;
 };
 
 SandTable::Application* SandTable::CreateApplication()

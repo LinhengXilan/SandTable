@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief 应用程序头文件
  */
@@ -23,7 +23,7 @@ namespace SandTable
 	{
 	public:
 		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
 
 		void Run();
 		void OnEvent(Event& event);
@@ -40,6 +40,10 @@ namespace SandTable
 		LayerStack m_LayerStack;
 		ImguiLayer* m_ImguiLayer;
 		static Application* s_Instance;
+
+		unsigned int m_VertexArrray;
+		unsigned int m_VertexBuffer;
+		unsigned int m_IndexBuffer;
 	};
 
 	Application* CreateApplication();

@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenglContext.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief OpenGL图形上下文头文件
  */
@@ -10,9 +10,9 @@
 #ifndef PLATFORM_OPENGL_OPENGLCONTEXT_H
 	#define PLATFORM_OPENGL_OPENGLCONTEXT_H
 
-#include <glfw/glfw.h>
-
 #include <SandTable/Renderer/GraphicsContext.h>
+
+struct GLFWwindow;
 
 namespace SandTable
 {

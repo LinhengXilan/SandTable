@@ -1,4 +1,4 @@
-#ifndef _glfw3_h_
+﻿#ifndef _glfw3_h_
 #define _glfw3_h_
 
 #ifdef __cplusplus
@@ -20,14 +20,14 @@ extern "C" {
 
 /* Some Windows OpenGL headers need this.
  */
-#if !defined(WINGDIAPI) && defined(_WIN32)
+#if !defined(WINGDIAPI)
  #define WINGDIAPI __declspec(dllimport)
  #define GLFW_WINGDIAPI_DEFINED
 #endif /* WINGDIAPI */
 
 /* Some Windows GLU headers need this.
  */
-#if !defined(CALLBACK) && defined(_WIN32)
+#if !defined(CALLBACK)
  #define CALLBACK __stdcall
  #define GLFW_CALLBACK_DEFINED
 #endif /* CALLBACK */
@@ -118,10 +118,10 @@ extern "C" {
 /* GLFWAPI is used to declare public API functions for export
  * from the DLL / shared library / dynamic library.
  */
-#if defined(_WIN32) && defined(_GLFW_BUILD_DLL)
+#if defined(_GLFW_BUILD_DLL)
  /* We are building GLFW as a Win32 DLL */
  #define GLFWAPI __declspec(dllexport)
-#elif defined(_WIN32) && defined(GLFW_DLL)
+#elif defined(GLFW_DLL)
  /* We are calling a GLFW Win32 DLL */
  #define GLFWAPI __declspec(dllimport)
 #else

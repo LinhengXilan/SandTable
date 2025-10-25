@@ -56,37 +56,37 @@ extern "C" {
 #define GLAD_PLATFORM_H_
 
 #ifndef GLAD_PLATFORM_WIN32
-    #define GLAD_PLATFORM_WIN32 1
+	#define GLAD_PLATFORM_WIN32 1
 #endif
 
 #ifndef GLAD_PLATFORM_APPLE
-    #define GLAD_PLATFORM_APPLE 0
+	#define GLAD_PLATFORM_APPLE 0
 #endif
 
 #ifndef GLAD_PLATFORM_EMSCRIPTEN
-    #define GLAD_PLATFORM_EMSCRIPTEN 0
+	#define GLAD_PLATFORM_EMSCRIPTEN 0
 #endif
 
 #ifndef GLAD_PLATFORM_UWP
   #if !defined(GLAD_INTERNAL_HAVE_WINAPIFAMILY)
-    #ifdef __has_include
-      #if __has_include(<winapifamily.h>)
-        #define GLAD_INTERNAL_HAVE_WINAPIFAMILY 1
-      #endif
-    #elif !_USING_V110_SDK71_
-      #define GLAD_INTERNAL_HAVE_WINAPIFAMILY 1
-    #endif
+	#ifdef __has_include
+	  #if __has_include(<winapifamily.h>)
+		#define GLAD_INTERNAL_HAVE_WINAPIFAMILY 1
+	  #endif
+	#elif !_USING_V110_SDK71_
+	  #define GLAD_INTERNAL_HAVE_WINAPIFAMILY 1
+	#endif
   #endif
 
   #ifdef GLAD_INTERNAL_HAVE_WINAPIFAMILY
-    #include <winapifamily.h>
-    #if !WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) && WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
-      #define GLAD_PLATFORM_UWP 1
-    #endif
+	#include <winapifamily.h>
+	#if !WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) && WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+	  #define GLAD_PLATFORM_UWP 1
+	#endif
   #endif
 
   #ifndef GLAD_PLATFORM_UWP
-    #define GLAD_PLATFORM_UWP 0
+	#define GLAD_PLATFORM_UWP 0
   #endif
 #endif
 
@@ -96,17 +96,17 @@ extern "C" {
 
 #ifndef GLAD_API_CALL
   #if defined(GLAD_API_CALL_EXPORT)
-    #if GLAD_PLATFORM_WIN32
-      #if defined(GLAD_API_CALL_EXPORT_BUILD)
-          #define GLAD_API_CALL __declspec(dllexport) extern
-      #else
-          #define GLAD_API_CALL __declspec(dllimport) extern
-      #endif
-    #else
-      #define GLAD_API_CALL extern
-    #endif
+	#if GLAD_PLATFORM_WIN32
+	  #if defined(GLAD_API_CALL_EXPORT_BUILD)
+		  #define GLAD_API_CALL __declspec(dllexport) extern
+	  #else
+		  #define GLAD_API_CALL __declspec(dllimport) extern
+	  #endif
+	#else
+	  #define GLAD_API_CALL extern
+	#endif
   #else
-    #define GLAD_API_CALL extern
+	#define GLAD_API_CALL extern
   #endif
 #endif
 

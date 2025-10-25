@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief Windows平台窗口头文件
  */
@@ -10,10 +10,9 @@
 #ifndef PLATFORM_WINDOWS_WINDOWSWINDOW_H
 #define PLATFORM_WINDOWS_WINDOWSWINDOW_H
 
-#include <glfw/glfw.h>
-
-#include <SandTable/Window.h>
 #include <SandTable/Renderer/GraphicsContext.h>
+#include <SandTable/Window.h>
+#include <glfw/glfw.h>
 
 namespace SandTable
 {

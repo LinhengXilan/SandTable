@@ -1,15 +1,13 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-10-25
+ * @version build17
  * 
  * @brief Windows平台窗口实现
  */
 
 #include <pch.h>
-
-#include <glad/gl.h>
 
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Log.h>
@@ -59,11 +57,6 @@ namespace SandTable
 
 		m_Context = new OpenglContext(m_Window);
 		m_Context->Init();
-
-		glfwMakeContextCurrent(m_Window);
-
-		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
-		SANDTABLE_CORE_ASSERT(status, "Failed to initialize glad!");
 
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);
 		SetSync(true);
