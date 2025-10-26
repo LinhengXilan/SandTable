@@ -1,17 +1,15 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build18
  * 
  * @brief 应用程序实现
  */
 
 #include <pch.h>
-
 #include <glad/gl.h>
 #include <glfw/glfw.h>
-
 #include <SandTable/Application.h>
 #include <SandTable/Log.h>
 #include <SandTable/Input.h>
@@ -53,6 +51,33 @@ namespace SandTable
 		};
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+		std::string vertex = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 position;
+			out vec3 f_Position;
+
+			void main()
+			{
+				f_Position = position;
+				gl_Position = vec4(position, 1.0f);
+			}
+		)";
+		std::string fragment = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+			in vec3 f_Position;
+
+			void main()
+			{
+				color = vec4(1.0f, 0.87f, 0.93f, 1.0f) * 0.8f + vec4(f_Position, 1.0f) * 0.2f ;
+			}
+		)";
+
+		// 着色器
+		m_Shader = std::make_unique<Shader>(vertex, fragment);
+
 	}
 
 	void Application::OnEvent(Event& event)
@@ -92,6 +117,8 @@ namespace SandTable
 		{
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			m_Shader->Bind();
 			glBindVertexArray(m_VertexArrray);
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, nullptr);
 

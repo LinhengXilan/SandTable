@@ -1532,34 +1532,14 @@ typedef void *GLeglClientBufferEXT;
 typedef void *GLeglImageOES;
 typedef char GLchar;
 typedef char GLcharARB;
-#ifdef __APPLE__
-typedef void *GLhandleARB;
-#else
 typedef unsigned int GLhandleARB;
-#endif
 typedef khronos_uint16_t GLhalf;
 typedef khronos_uint16_t GLhalfARB;
 typedef khronos_int32_t GLfixed;
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > 1060)
 typedef khronos_intptr_t GLintptr;
-#else
-typedef khronos_intptr_t GLintptr;
-#endif
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > 1060)
 typedef khronos_intptr_t GLintptrARB;
-#else
-typedef khronos_intptr_t GLintptrARB;
-#endif
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > 1060)
 typedef khronos_ssize_t GLsizeiptr;
-#else
-typedef khronos_ssize_t GLsizeiptr;
-#endif
-#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > 1060)
 typedef khronos_ssize_t GLsizeiptrARB;
-#else
-typedef khronos_ssize_t GLsizeiptrARB;
-#endif
 typedef khronos_int64_t GLint64;
 typedef khronos_int64_t GLint64EXT;
 typedef khronos_uint64_t GLuint64;

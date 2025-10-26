@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build18
  * 
  * @brief 应用程序头文件
  */
@@ -16,6 +16,7 @@
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/LayerStack.h>
 #include <SandTable/ImGui/ImguiLayer.h>
+#include <SandTable/Renderer/Shader.h>
 
 namespace SandTable
 {
@@ -41,9 +42,11 @@ namespace SandTable
 		ImguiLayer* m_ImguiLayer;
 		static Application* s_Instance;
 
+		// 图形渲染
 		unsigned int m_VertexArrray;
 		unsigned int m_VertexBuffer;
 		unsigned int m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 	};
 
 	Application* CreateApplication();

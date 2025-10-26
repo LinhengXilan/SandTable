@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build18
  * 
  * @brief SandTable示例程序
  */
@@ -31,9 +31,7 @@ public:
 
 	void ImguiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World!");
-		ImGui::End();
+
 	}
 };
 
