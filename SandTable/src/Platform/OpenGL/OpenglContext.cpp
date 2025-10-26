@@ -1,30 +1,28 @@
 ﻿/**
- * @file Platform/OpenGL/OpenglContext.cpp
+ * @file Platform/OpenGL/OpenGLContext.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build19
  * 
  * @brief OpenGL图形上下文实现
  */
 
 #include <pch.h>
-
-#include <Platform/OpenGL/OpenglContext.h>
+#include <Platform/OpenGL/OpenGLContext.h>
 #include <glad/gl.h>
 #include <glfw/glfw.h>
-
 #include <SandTable/Core.h>
 #include <SandTable/Log.h>
 
 namespace SandTable
 {
-	OpenglContext::OpenglContext(GLFWwindow* windowHandle)
+	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
 		SANDTABLE_CORE_ASSERT(windowHandle, "WindowHandle is null!");
 	}
 
-	void OpenglContext::Init()
+	void OpenGLContext::Init()
 	{
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
@@ -36,7 +34,7 @@ namespace SandTable
 		SANDTABLE_CORE_INFO(" - Version: {0}", (char*)glGetString(GL_VERSION));
 	}
 
-	void OpenglContext::SwapBuffers()
+	void OpenGLContext::SwapBuffers()
 	{
 		glfwSwapBuffers(m_WindowHandle);
 	}

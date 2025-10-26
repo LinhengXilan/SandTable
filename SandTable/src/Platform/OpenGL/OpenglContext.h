@@ -1,8 +1,8 @@
 ﻿/**
- * @file Platform/OpenGL/OpenglContext.h
+ * @file Platform/OpenGL/OpenGLContext.h
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build19
  * 
  * @brief OpenGL图形上下文头文件
  */
@@ -16,10 +16,10 @@ struct GLFWwindow;
 
 namespace SandTable
 {
-	class OpenglContext : public GraphicsContext
+	class OpenGLContext : public GraphicsContext
 	{
 	public:
-		OpenglContext(GLFWwindow* window);
+		OpenGLContext(GLFWwindow* window);
 
 		void Init() override;
 		void SwapBuffers() override;

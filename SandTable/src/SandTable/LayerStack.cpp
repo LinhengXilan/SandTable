@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build19
  * 
  * @brief 图层栈实现
  */
@@ -59,5 +59,4 @@ namespace SandTable
 			overlay->Detach();
 		}
 	}
-
-} // namespace SandTable
+}

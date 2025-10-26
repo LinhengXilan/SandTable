@@ -97,7 +97,7 @@ InsertBraces : true
 InsertTrailingCommas : None
 KeepEmptyLinesAtTheStartOfBlocks : false
 MaxEmptyLinesToKeep : 1
-NamespaceIndentation : None
+NamespaceIndentation : All
 PointerAlignment : Left
 ReferenceAlignment : Pointer
 PPIndentWidth : -1

@@ -1,20 +1,19 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-10-26
+ * @version build19
  * 
  * @brief Windows平台窗口实现
  */
 
 #include <pch.h>
-
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Log.h>
 #include <SandTable/Events/Application.h>
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/Mouse.h>
-#include <Platform/OpenGL/OpenglContext.h>
+#include <Platform/OpenGL/OpenGLContext.h>
 
 namespace SandTable
 {
@@ -55,7 +54,7 @@ namespace SandTable
 		}
 		m_Window = glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
 
-		m_Context = new OpenglContext(m_Window);
+		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);

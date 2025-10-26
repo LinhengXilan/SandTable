@@ -8,6 +8,6 @@ build19
 
 3. 在 SandTable/Renderer/Buffer.cpp 中实现根据不同图形API创建渲染元素。
 
-4. 在 Platform/OpenGL/OpenGLBuffer.h|cpp 中实现了OpenGL的顶点缓冲类和索引缓冲类。
+4. 在 Platform/OpenGL/OpenGLBuffer.h|cpp 中实现了OpenGL的顶点缓冲对象和索引缓冲对象。
 
 5. 在 SandTable/Application.h|cpp 中使用了最新的OpenGLBuffer类来创建图形。
