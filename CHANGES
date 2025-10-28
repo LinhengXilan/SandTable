@@ -1,13 +1,29 @@
-build19
-2025-10-26
+build20
+2025-10-28
 
-1. 将命名中的 “Opengl” 改为 “OpenGL”。
+/* SandTable/Renderer/Buffer.h */
 
-2. 新的 class Renderer 中枚举并存储了支持的图形API。
-	- 位于 SandTable/Renderer/Renderer.h|cpp
+1. class VertexBuffer 中新增接口，用于保存和读取顶点布局。
+	- virtual void SetLayout(const BufferLayout& layout) = 0;
+	- virtual const BufferLayout& GetLayout() const = 0;
 
-3. 在 SandTable/Renderer/Buffer.cpp 中实现根据不同图形API创建渲染元素。
+2. 添加着色器数据类型枚举。
 
-4. 在 Platform/OpenGL/OpenGLBuffer.h|cpp 中实现了OpenGL的顶点缓冲类和索引缓冲类。
+3. 缓冲元素结构体 BufferElement，用于保存一个顶点数组及其属性。
+	- static unsigned int GetShaderDataTypeSize(ShaderDataType type); 获取着色器数据类型大小函。
+	- unsigned int BufferElement::GetComponentCount() const; 获取组件数量。
 
-5. 在 SandTable/Application.h|cpp 中使用了最新的OpenGLBuffer类来创建图形。
+4. class BufferLayout 用std::vector<BufferElement>存储一组顶点数组。
+	- void CalculateOffsetAndStride(); 计算偏移和步长
+
+
+/* Platform/OpenGL/OpenGLBuffer.h */
+
+5. 将顶点布局存储在顶点缓冲类中。
+
+
+/* SandTable/Application.cpp */
+
+6. static GLenum GetGLBaseTypeFromShaderDataType(ShaderDataType type); 通过ShaderDataType获取OpenGL基础类型
+
+7. 使用以上新组件重写顶点数组的绑定。

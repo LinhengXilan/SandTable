@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-10-28
+ * @version build20
  * 
  * @brief 应用程序实现
  */
@@ -19,6 +19,32 @@ namespace SandTable
 {
 	Application* Application::s_Instance = nullptr;
 
+	/**
+	 * @brief 通过ShaderDataType获取OpenGL基础类型
+	 * @param type 着色器数据类型
+	 * @return GLenum OpenGL基础类型 
+	 */
+	static GLenum GetGLBaseTypeFromShaderDataType(ShaderDataType type)
+	{
+		switch (type)
+		{
+		case ShaderDataType::Float:    return GL_FLOAT;
+		case ShaderDataType::Float2:   return GL_FLOAT;
+		case ShaderDataType::Float3:   return GL_FLOAT;
+		case ShaderDataType::Float4:   return GL_FLOAT;
+		case ShaderDataType::Matrix3:  return GL_FLOAT;
+		case ShaderDataType::Matrix4:  return GL_FLOAT;
+		case ShaderDataType::Int:      return GL_INT;
+		case ShaderDataType::Int2:     return GL_INT;
+		case ShaderDataType::Int3:     return GL_INT;
+		case ShaderDataType::Int4:     return GL_INT;
+		case ShaderDataType::Bool:     return GL_BOOL;
+		default:
+			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+		}
+		return 0;
+	}
+
 	Application::Application()
 	{
 		SANDTABLE_CORE_ASSERT(!s_Instance, "Application already has an instance!");
@@ -34,13 +60,33 @@ namespace SandTable
 
 		// 顶点缓冲对象
 		float vertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f
 		};
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "position", false},
+			{ShaderDataType::Float4, "color", false}
+		};
+		m_VertexBuffer->SetLayout(layout);
+
+		unsigned int index = 0;
+		for (const auto& element : m_VertexBuffer->GetLayout())
+		{
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(
+				index,
+				element.GetComponentCount(),
+				GetGLBaseTypeFromShaderDataType(element.Type),
+				element.Normalized ? GL_TRUE : GL_FALSE,
+				layout.GetStride(),
+				(const void*)element.Offset
+			);
+			index++;
+		}
+
 
 		// 索引缓冲对象
 		unsigned int indices[] = {
@@ -51,11 +97,12 @@ namespace SandTable
 			#version 330 core
 
 			layout(location = 0) in vec3 position;
-			out vec3 f_Position;
+			layout(location = 1) in vec4 color;
+			out vec4 f_Position;
 
 			void main()
 			{
-				f_Position = position;
+				f_Position = color;
 				gl_Position = vec4(position, 1.0f);
 			}
 		)";
@@ -63,11 +110,11 @@ namespace SandTable
 			#version 330 core
 
 			layout(location = 0) out vec4 color;
-			in vec3 f_Position;
+			in vec4 f_Position;
 
 			void main()
 			{
-				color = vec4(1.0f, 0.87f, 0.93f, 1.0f) * 0.8f + vec4(f_Position, 1.0f) * 0.2f ;
+				color = f_Position;
 			}
 		)";
 

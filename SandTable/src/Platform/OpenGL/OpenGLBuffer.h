@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLBuffer.h
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-10-28
+ * @version build20
  * 
  * @brief OpenGL图形缓冲头文件
  */
@@ -22,8 +22,12 @@ namespace SandTable
 		void Bind() const override;
 		void Unbind() const override;
 
+		void SetLayout(const BufferLayout& layout) override { m_Layout = layout; };
+		inline const BufferLayout& GetLayout() const override { return m_Layout; };
+
 	private:
 		unsigned int m_RendererID;
+		BufferLayout m_Layout;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer
