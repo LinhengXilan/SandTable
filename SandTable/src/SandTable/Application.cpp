@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-28
- * @version build20
+ * @date 2025-10-29
+ * @version build21
  * 
  * @brief 应用程序实现
  */
@@ -19,32 +19,6 @@ namespace SandTable
 {
 	Application* Application::s_Instance = nullptr;
 
-	/**
-	 * @brief 通过ShaderDataType获取OpenGL基础类型
-	 * @param type 着色器数据类型
-	 * @return GLenum OpenGL基础类型 
-	 */
-	static GLenum GetGLBaseTypeFromShaderDataType(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::Float:    return GL_FLOAT;
-		case ShaderDataType::Float2:   return GL_FLOAT;
-		case ShaderDataType::Float3:   return GL_FLOAT;
-		case ShaderDataType::Float4:   return GL_FLOAT;
-		case ShaderDataType::Matrix3:  return GL_FLOAT;
-		case ShaderDataType::Matrix4:  return GL_FLOAT;
-		case ShaderDataType::Int:      return GL_INT;
-		case ShaderDataType::Int2:     return GL_INT;
-		case ShaderDataType::Int3:     return GL_INT;
-		case ShaderDataType::Int4:     return GL_INT;
-		case ShaderDataType::Bool:     return GL_BOOL;
-		default:
-			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		}
-		return 0;
-	}
-
 	Application::Application()
 	{
 		SANDTABLE_CORE_ASSERT(!s_Instance, "Application already has an instance!");
@@ -54,45 +28,34 @@ namespace SandTable
 		m_ImguiLayer = new ImguiLayer();
 		PushOverlay(m_ImguiLayer);
 
-		// 顶点数组对象
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-
+		// Griphics Render
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		// triangle
 		// 顶点缓冲对象
+		m_VertexArray.reset(VertexArray::Create());
 		float vertices[] = {
 			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f
 		};
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		BufferLayout layout = {
 			{ShaderDataType::Float3, "position", false},
 			{ShaderDataType::Float4, "color", false}
 		};
-		m_VertexBuffer->SetLayout(layout);
-
-		unsigned int index = 0;
-		for (const auto& element : m_VertexBuffer->GetLayout())
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(
-				index,
-				element.GetComponentCount(),
-				GetGLBaseTypeFromShaderDataType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.Offset
-			);
-			index++;
-		}
-
+		vertexBuffer->SetLayout(layout);
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		// 索引缓冲对象
 		unsigned int indices[] = {
 			0, 1, 2
 		};
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, 3));
+		indexBuffer.reset(IndexBuffer::Create(indices, 3));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
+
+		// 着色器
 		std::string vertex = R"(
 			#version 330 core
 
@@ -117,10 +80,54 @@ namespace SandTable
 				color = f_Position;
 			}
 		)";
+		m_Shader = std::make_shared<Shader>(vertex, fragment);
 
-		// 着色器
-		m_Shader = std::make_unique<Shader>(vertex, fragment);
 
+		// for square
+		m_SquareVertexArray.reset(VertexArray::Create());
+		float squareVertices[3 * 4] = {
+			-0.5f, -0.5f,  0.0f,
+			 0.5f, -0.5f,  0.0f,
+			 0.5f,  0.5f,  0.0f,
+			-0.5f,  0.5f,  0.0f
+		};
+		vertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		
+		BufferLayout squareLayout = {
+			{ShaderDataType::Float3, "position", false},
+		};
+		vertexBuffer->SetLayout(squareLayout);
+		m_SquareVertexArray->AddVertexBuffer(vertexBuffer);
+		
+		// 索引缓冲对象
+		unsigned int squareIndices[3 * 2] = {
+			0, 1, 2,
+			2, 3, 0
+		};
+		indexBuffer.reset(IndexBuffer::Create(squareIndices, 6));
+		m_SquareVertexArray->SetIndexBuffer(indexBuffer);
+		std::string squareVertex = R"(
+			#version 330 core
+		
+			layout(location = 0) in vec3 position;
+		
+			void main()
+			{
+				gl_Position = vec4(position, 1.0f);
+			}
+		)";
+		std::string squareFragment = R"(
+			#version 330 core
+		
+			layout(location = 0) out vec4 color;
+		
+			void main()
+			{
+				color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
+			}
+		)";
+		
+		m_SquareShader = std::make_shared<Shader>(squareVertex, squareFragment);
 	}
 
 	void Application::OnEvent(Event& event)
@@ -161,9 +168,13 @@ namespace SandTable
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			m_SquareShader->Bind();
+			m_SquareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			// 层更新
 			for (Layer* layer : m_LayerStack)

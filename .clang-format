@@ -81,7 +81,7 @@ EmptyLineAfterAccessModifier : Never
 EmptyLineBeforeAccessModifier : LogicalBlock
 ExperimentalAutoDetectBinPacking : false
 PackConstructorInitializers : CurrentLine
-FixNamespaceComments : true
+FixNamespaceComments : false
 ShortNamespaceLines : 0
 SortIncludes : Never
 IndentAccessModifiers : false

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build18
+ * @date 2025-10-29
+ * @version build21
  * 
  * @brief 着色器类实现
  */
@@ -44,6 +44,7 @@ namespace SandTable
 		source = fragmentSource.c_str();
 		glShaderSource(fragmentShader, 1, &source, nullptr);
 		glCompileShader(fragmentShader);
+
 #ifdef SANDTABLE_DEBUG
 		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
 		if (isCompiled == GL_FALSE)
@@ -59,6 +60,7 @@ namespace SandTable
 			return;
 		}
 #endif
+
 		glAttachShader(m_RendererID, fragmentShader);
 		glLinkProgram(m_RendererID);
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-10-29
+ * @version build21
  * 
  * @brief 渲染缓冲实现
  */
@@ -19,6 +19,9 @@ namespace SandTable
 	{
 		switch (Renderer::GetRendererAPI())
 		{
+		case RendererAPI::None:
+			SANDTABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+			return nullptr;
 		case RendererAPI::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
 		default:
