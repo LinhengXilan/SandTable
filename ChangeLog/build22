@@ -18,4 +18,4 @@ build22
 
 /* SandTable/Renderer/Renderer.cpp */
 	
-	4.将渲染命令封装为API无关的函数
+	4. 将渲染命令封装为API无关的函数

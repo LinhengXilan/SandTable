@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @date 2025-10-30
+ * @version build22
  * 
  * @brief 应用程序实现
  */
@@ -11,9 +11,7 @@
 #include <glad/gl.h>
 #include <glfw/glfw.h>
 #include <SandTable/Application.h>
-#include <SandTable/Log.h>
-#include <SandTable/Input.h>
-#include <Platform/OpenGL/OpenGLBuffer.h>
+#include <SandTable/Renderer/Renderer.h>
 
 namespace SandTable
 {
@@ -165,16 +163,17 @@ namespace SandTable
 	{
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_SquareShader->Bind();
-			m_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-
+			Renderer::Submit(m_SquareVertexArray);
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+
+			Renderer::EndScene();
 
 			// 层更新
 			for (Layer* layer : m_LayerStack)

@@ -1,32 +1,29 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.h
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-10-30
+ * @version build22
  * 
- * @brief 着色器类
+ * @brief 渲染器头文件
  */
 
 #ifndef SANDTABLE_RENDERER_RENDERER_H
 	#define SANDTABLE_RENDERER_RENDERER_H
 
+#include <SandTable/Renderer/RenderCommand.h>
+
 namespace SandTable
 {
-	enum class RendererAPI
-	{
-		None = 0,
-		OpenGL = 1
-	};
-
 	class Renderer
 	{
 	public:
-		Renderer() = default;
-		~Renderer() = default;
+		static void BeginScene();
+		static void EndScene();
 
-		inline static RendererAPI GetRendererAPI() { return s_RendererAPI; }
-	private:
-		static RendererAPI s_RendererAPI;
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+
+		inline static RendererAPI::API GetRendererAPI() { return RendererAPI::GetAPI(); }
 	};
 }
 

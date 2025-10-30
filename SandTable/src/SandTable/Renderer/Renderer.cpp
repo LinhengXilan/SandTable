@@ -1,10 +1,10 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-10-30
+ * @version build22
  * 
- * @brief 着色器类
+ * @brief 渲染器实现
  */
 
 #include <pch.h>
@@ -12,5 +12,19 @@
 
 namespace SandTable
 {
-	RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
+	void Renderer::BeginScene()
+	{
+
+	}
+
+	void Renderer::EndScene()
+	{
+
+	}
+
+	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+	{
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
 }

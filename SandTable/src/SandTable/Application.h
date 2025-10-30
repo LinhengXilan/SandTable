@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @date 2025-10-30
+ * @version build22
  * 
  * @brief 应用程序头文件
  */
@@ -10,14 +10,10 @@
 #ifndef SANDTABLE_APPLICATION_H
 #define SANDTABLE_APPLICATION_H
 
-#include <SandTable/core.h>
-#include <SandTable/Events/Event.h>
-#include <SandTable/Events/Application.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/LayerStack.h>
 #include <SandTable/ImGui/ImguiLayer.h>
 #include <SandTable/Renderer/Shader.h>
-#include <SandTable/Renderer/Buffer.h>
 #include <SandTable/Renderer/VertexArray.h>
 
 namespace SandTable
