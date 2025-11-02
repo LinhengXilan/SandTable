@@ -2,8 +2,8 @@
  * @file Platform/Opengl/ImguiGlfw.cpp
  * @author Imgui
  * @modifier LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief Imgui的Glfw实现
  */
@@ -23,8 +23,6 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #endif
 #include <GLFW/glfw3native.h>
-
-#include <stdio.h>              // for snprintf()
 
 // We gather version tests as define in order to easily see which features are version-dependent.
 #define GLFW_VERSION_COMBINED           (GLFW_VERSION_MAJOR * 1000 + GLFW_VERSION_MINOR * 100 + GLFW_VERSION_REVISION)

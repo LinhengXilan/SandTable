@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/GraphicsContext.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 图形上下文接口
  */
@@ -17,8 +17,6 @@ namespace SandTable
 	public:
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
-	private:
-
 	};
 }
 

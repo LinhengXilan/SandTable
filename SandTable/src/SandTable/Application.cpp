@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 应用程序实现
  */
@@ -12,6 +12,7 @@
 #include <glfw/glfw.h>
 #include <SandTable/Application.h>
 #include <SandTable/Renderer/Renderer.h>
+#include <SandTable/Input.h>
 
 namespace SandTable
 {
@@ -25,6 +26,9 @@ namespace SandTable
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 		m_ImguiLayer = new ImguiLayer();
 		PushOverlay(m_ImguiLayer);
+
+		// Camera
+		m_Camera.reset(OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
 
 		// Griphics Render
 		std::shared_ptr<VertexBuffer> vertexBuffer;
@@ -57,25 +61,29 @@ namespace SandTable
 		std::string vertex = R"(
 			#version 330 core
 
-			layout(location = 0) in vec3 position;
-			layout(location = 1) in vec4 color;
-			out vec4 f_Position;
+			layout(location = 0) in vec3 a_position;
+			layout(location = 1) in vec4 a_color;
+
+			uniform mat4 u_ViewProjection;
+
+			out vec4 v_Position;
 
 			void main()
 			{
-				f_Position = color;
-				gl_Position = vec4(position, 1.0f);
+				v_Position = a_color;
+				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
 			}
 		)";
 		std::string fragment = R"(
 			#version 330 core
 
 			layout(location = 0) out vec4 color;
-			in vec4 f_Position;
+
+			in vec4 v_Position;
 
 			void main()
 			{
-				color = f_Position;
+				color = v_Position;
 			}
 		)";
 		m_Shader = std::make_shared<Shader>(vertex, fragment);
@@ -107,11 +115,13 @@ namespace SandTable
 		std::string squareVertex = R"(
 			#version 330 core
 		
-			layout(location = 0) in vec3 position;
+			layout(location = 0) in vec3 a_position;
+
+			uniform mat4 u_ViewProjection;
 		
 			void main()
 			{
-				gl_Position = vec4(position, 1.0f);
+				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
 			}
 		)";
 		std::string squareFragment = R"(
@@ -159,19 +169,18 @@ namespace SandTable
 		m_LayerStack.PushOverlay(overlay);
 	}
 
-	void Application::Run()
+	void Application::Run() 
 	{
 		while (m_Running)
 		{
 			RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
 			RenderCommand::Clear();
 
-			Renderer::BeginScene();
+			Renderer::BeginScene(m_Camera);
+			m_Camera->OnUpdate();
 
-			m_SquareShader->Bind();
-			Renderer::Submit(m_SquareVertexArray);
-			m_Shader->Bind();
-			Renderer::Submit(m_VertexArray);
+			Renderer::Submit(m_SquareVertexArray, m_SquareShader);
+			Renderer::Submit(m_VertexArray, m_Shader);
 
 			Renderer::EndScene();
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 应用程序头文件
  */
@@ -15,6 +15,7 @@
 #include <SandTable/ImGui/ImguiLayer.h>
 #include <SandTable/Renderer/Shader.h>
 #include <SandTable/Renderer/VertexArray.h>
+#include <SandTable/Renderer/Camera.h>
 
 namespace SandTable
 {
@@ -38,7 +39,6 @@ namespace SandTable
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		ImguiLayer* m_ImguiLayer;
-		static Application* s_Instance;
 
 		// 图形渲染
 		std::shared_ptr<VertexArray> m_VertexArray;
@@ -46,6 +46,11 @@ namespace SandTable
 
 		std::shared_ptr<VertexArray> m_SquareVertexArray;
 		std::shared_ptr<Shader> m_SquareShader;
+
+		std::shared_ptr<OrthographicCamera> m_Camera;
+
+	private:
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();

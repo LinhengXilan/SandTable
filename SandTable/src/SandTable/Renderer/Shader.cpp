@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.cpp
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 着色器类实现
  */
@@ -11,6 +11,7 @@
 #include <SandTable/Renderer/Shader.h>
 #include <glad/gl.h>
 #include <SandTable/Log.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace SandTable
 {
@@ -99,5 +100,10 @@ namespace SandTable
 	void Shader::Unbind() const
 	{
 		glUseProgram(0);
+	}
+
+	void Shader::SetUniform(const std::string& name, const glm::mat4& value)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 	}
 }

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.h
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 渲染器API头文件
  */
@@ -18,10 +18,10 @@ namespace SandTable
 	class RendererAPI
 	{
 	public:
-		enum class API
+		enum class API : unsigned char
 		{
 			None = 0,
-			OpenGL = 1
+			OpenGL, DirectX
 		};
 
 	public:
@@ -29,7 +29,7 @@ namespace SandTable
 		virtual void Clear() = 0; 
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 
-		static API GetAPI() { return s_API; }
+		static API GetAPI();
 
 	private:
 		static API s_API;

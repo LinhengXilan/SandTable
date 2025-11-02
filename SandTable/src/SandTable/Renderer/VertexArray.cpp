@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/VertexArray.cpp
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @date 2025-11-2
+ * @version build23
  * 
  * @brief 着色器类
  */
@@ -19,12 +19,10 @@ namespace SandTable
 		switch (Renderer::GetRendererAPI())
 		{
 		case RendererAPI::API::None:
-			SANDTABLE_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexArray();
 		default:
-			SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 			return nullptr;
 		}
 	}
