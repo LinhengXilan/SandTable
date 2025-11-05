@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
  * @date 2025-8-14
@@ -56,7 +56,7 @@ namespace SandTable
 
 	public:
 		EventDispatcher(Event& event)
-			: m_Event_(event)
+			: m_Event(event)
 		{
 
 		}
@@ -64,23 +64,22 @@ namespace SandTable
 		template<typename T>
 		bool Dispatch(EventFunc<T> func)
 		{
-			if (m_Event_.GetEventType() == T::GetStaticType())
+			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event_.m_Handled = func(*(T*)&m_Event_);
+				m_Event.m_Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;
 		}
 
 	private:
-		Event& m_Event_;
+		Event& m_Event;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& event)
 	{
 		return os << event.ToString();
 	}
-	
 }
 
 #endif

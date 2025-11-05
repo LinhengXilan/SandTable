@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief Windows平台窗口实现
  */
@@ -163,7 +163,7 @@ namespace SandTable
 		glfwDestroyWindow(m_Window);
 	}
 
-	void WindowsWindow::Update()
+	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
 		m_Context->SwapBuffers(); 

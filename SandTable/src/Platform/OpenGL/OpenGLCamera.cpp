@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.cpp
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief OpenGL相机实现
  */
@@ -10,14 +10,13 @@
 #include <pch.h>
 #include <Platform/OpenGL/OpenGLCamera.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include <SandTable/Input.h>
-#include <SandTable/KeyCode.h>
-#include <SandTable/Log.h>
 
 namespace SandTable
 {
 	OpenGLOrthographicCamera::OpenGLOrthographicCamera(float left, float right, float bottom, float top)
-		: m_Position(0.0f), m_ProjectionMatrix(glm::ortho(left, right, bottom, top)), m_ViewMatrix(1.0f)
+		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top)), m_ViewMatrix(1.0f),
+		  m_Position(0.0f), m_Rotation(0.0f),
+		  m_MoveSpeed(1.0f), m_RotateSpeed(1.0f)
 	{
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
@@ -42,27 +41,88 @@ namespace SandTable
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void OpenGLOrthographicCamera::OnUpdate()
+	void OpenGLOrthographicCamera::SetMoveSpeed(const float& speed)
 	{
-		if (Input::IsKeyPressed(KEY_W))
+		m_MoveSpeed = speed;
+	}
+
+	void OpenGLOrthographicCamera::SetRotateSpeed(const float& speed)
+	{
+		m_RotateSpeed = speed;
+	}
+
+	void OpenGLOrthographicCamera::Move(Direction direction)
+	{
+		switch (direction)
 		{
-			m_Position.y += 0.01f;
-			SANDTABLE_CORE_INFO("KEY_W");
+		case Direction::Left:
+			m_Position.x += m_MoveSpeed;
+			break;
+		case Direction::Right:
+			m_Position.x -= m_MoveSpeed;
+			break;
+		case Direction::Up:
+			m_Position.y -= m_MoveSpeed;
+			break;
+		case Direction::Down:
+			m_Position.y += m_MoveSpeed;
+			break;
+		default:
+			break;
 		}
-		if (Input::IsKeyPressed(KEY_S))
+		RecalculateViewMatrix();
+	}
+
+	void OpenGLOrthographicCamera::Move(Direction direction, float speed)
+	{
+		switch (direction)
 		{
-			m_Position.y -= 0.01f;
-			SANDTABLE_CORE_INFO("KEY_S");
+		case Direction::Left:
+			m_Position.x += speed;
+			break;
+		case Direction::Right:
+			m_Position.x -= speed;
+			break;
+		case Direction::Up:
+			m_Position.y -= speed;
+			break;
+		case Direction::Down:
+			m_Position.y += speed;
+			break;
+		default:
+			break;
 		}
-		if (Input::IsKeyPressed(KEY_A))
+		RecalculateViewMatrix();
+	}
+
+	void OpenGLOrthographicCamera::Rotate(Direction direction)
+	{
+		switch (direction)
 		{
-			m_Position.x -= 0.01f;
-			SANDTABLE_CORE_INFO("KEY_A");
+		case Direction::clockwise:
+			m_Rotation += m_RotateSpeed;
+			break;
+		case Direction::counterclockwise:
+			m_Rotation -= m_RotateSpeed;
+			break;
+		default:
+			break;
 		}
-		if (Input::IsKeyPressed(KEY_D))
+		RecalculateViewMatrix();
+	}
+
+	void OpenGLOrthographicCamera::Rotate(Direction direction, float speed)
+	{
+		switch (direction)
 		{
-			m_Position.x += 0.01f;
-			SANDTABLE_CORE_INFO("KEY_D");
+		case Direction::clockwise:
+			m_Rotation += speed;
+			break;
+		case Direction::counterclockwise:
+			m_Rotation -= speed;
+			break;
+		default:
+			break;
 		}
 		RecalculateViewMatrix();
 	}

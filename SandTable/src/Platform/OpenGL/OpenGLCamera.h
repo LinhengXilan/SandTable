@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.h
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief OpenGL相机实现头文件
  */
@@ -23,6 +23,8 @@ namespace SandTable
 
 		void SetPosition(const glm::vec3& position) override;
 		void SetRotation(const float& rotation) override;
+		void SetMoveSpeed(const float& speed) override;
+		void SetRotateSpeed(const float& speed) override;
 
 		inline const glm::vec3& GetPosition() const override { return m_Position; };
 		inline const float& GetRotation() const override { return m_Rotation; };
@@ -31,14 +33,19 @@ namespace SandTable
 		inline const glm::mat4& GetViewProjectionMatrix() const override { return m_ViewProjectionMatrix; };
 
 		void RecalculateViewMatrix() override;
-		void OnUpdate() override;
+		virtual void Move(Direction direction) override;
+		virtual void Move(Direction direction, float speed) override;
+		virtual void Rotate(Direction direction) override;
+		virtual void Rotate(Direction direction, float speed) override;
 
 	private:
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewProjectionMatrix;
 		glm::vec3 m_Position;
-		float m_Rotation = 0;
+		float m_Rotation;
+		float m_MoveSpeed;
+		float m_RotateSpeed;
 	};
 }
 

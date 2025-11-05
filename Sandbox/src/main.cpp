@@ -1,10 +1,10 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build18
+ * @date 2025-11-5
+ * @version build24
  * 
- * @brief SandTable示例程序
+ * @brief Sandbox示例程序
  */
 
 #include <SandTable.h>
@@ -16,23 +16,160 @@ public:
 	ExampleLayer()
 		: Layer("Example")
 	{
+		// Camera
+		m_Camera.reset(SandTable::OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
+		m_Camera->SetMoveSpeed(0.01f);
+		m_Camera->SetRotateSpeed(0.1f);
 
+		// Griphics Render
+		std::shared_ptr<SandTable::VertexBuffer> vertexBuffer;
+		std::shared_ptr<SandTable::IndexBuffer> indexBuffer;
+		// triangle
+		// 顶点缓冲对象
+		m_VertexArray.reset(SandTable::VertexArray::Create());
+		float vertices[] = {
+			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f, 0.0f, 0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f};
+		vertexBuffer.reset(SandTable::VertexBuffer::Create(vertices, sizeof(vertices)));
+
+		SandTable::BufferLayout layout = {
+			{ SandTable::ShaderDataType::Float3, "position", false },
+			{ SandTable::ShaderDataType::Float4, "color",	 false }
+		};
+		vertexBuffer->SetLayout(layout);
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
+
+		// 索引缓冲对象
+		unsigned int indices[] = {
+			0, 1, 2};
+		indexBuffer.reset(SandTable::IndexBuffer::Create(indices, 3));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
+
+		// 着色器
+		std::string vertex = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 a_position;
+			layout(location = 1) in vec4 a_color;
+
+			uniform mat4 u_ViewProjection;
+
+			out vec4 v_Position;
+
+			void main()
+			{
+				v_Position = a_color;
+				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
+			}
+		)";
+		std::string fragment = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+
+			in vec4 v_Position;
+
+			void main()
+			{
+				color = v_Position;
+			}
+		)";
+		m_Shader = std::make_shared<SandTable::Shader>(vertex, fragment);
+
+		// for square
+		m_SquareVertexArray.reset(SandTable::VertexArray::Create());
+		float squareVertices[3 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f};
+		vertexBuffer.reset(SandTable::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+		SandTable::BufferLayout squareLayout = {
+			{ SandTable::ShaderDataType::Float3, "position", false },
+		};
+		vertexBuffer->SetLayout(squareLayout);
+		m_SquareVertexArray->AddVertexBuffer(vertexBuffer);
+
+		// 索引缓冲对象
+		unsigned int squareIndices[3 * 2] = {
+			0, 1, 2, 2, 3, 0};
+		indexBuffer.reset(SandTable::IndexBuffer::Create(squareIndices, 6));
+		m_SquareVertexArray->SetIndexBuffer(indexBuffer);
+		std::string squareVertex = R"(
+			#version 330 core
+		
+			layout(location = 0) in vec3 a_position;
+
+			uniform mat4 u_ViewProjection;
+		
+			void main()
+			{
+				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
+			}
+		)";
+		std::string squareFragment = R"(
+			#version 330 core
+		
+			layout(location = 0) out vec4 color;
+		
+			void main()
+			{
+				color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
+			}
+		)";
+
+		m_SquareShader = std::make_shared<SandTable::Shader>(squareVertex, squareFragment);
 	}
 
-	void Update() override
+	void OnUpdate() override
 	{
-		
+		if (SandTable::Input::IsKeyPressed(KEY_W))
+		{
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Up);
+		}
+		else if (SandTable::Input::IsKeyPressed(KEY_S))
+		{
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Down);
+		}
+		if (SandTable::Input::IsKeyPressed(KEY_A))
+		{
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Left);
+		}
+		else if (SandTable::Input::IsKeyPressed(KEY_D))
+		{
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Right);
+		}
+
+		if (SandTable::Input::IsKeyPressed(KEY_Q))
+		{
+			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::counterclockwise);
+		}
+		else if (SandTable::Input::IsKeyPressed(KEY_E))
+		{
+			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::clockwise);
+		}
+
+		SandTable::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+		SandTable::RenderCommand::Clear();
+		SandTable::Renderer::BeginScene(m_Camera);
+		SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader);
+		SandTable::Renderer::Submit(m_VertexArray, m_Shader);
+		SandTable::Renderer::EndScene();
 	}
 
 	void OnEvent(SandTable::Event& event) override
 	{
-	
+		
 	}
 
 	void ImguiRender() override
 	{
 
 	}
+
+private:
+	std::shared_ptr<SandTable::VertexArray> m_VertexArray;
+	std::shared_ptr<SandTable::Shader> m_Shader;
+	std::shared_ptr<SandTable::VertexArray> m_SquareVertexArray;
+	std::shared_ptr<SandTable::Shader> m_SquareShader;
+	std::shared_ptr<SandTable::OrthographicCamera> m_Camera;
 };
 
 class Sandbox : public SandTable::Application

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.cpp
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief 图层实现
  */
@@ -34,7 +34,7 @@ namespace SandTable
 
 	}
 
-	void Layer::Update()
+	void Layer::OnUpdate()
 	{
 
 	}

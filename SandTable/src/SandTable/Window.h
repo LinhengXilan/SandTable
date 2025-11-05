@@ -1,8 +1,8 @@
-/**
+﻿/**
  * @file SandTable/Windows.h
  * @author LinhengXilan
- * @date 2025-9-20
- * @version build13
+ * @date 2025-11-5
+ * @version build24
  */
 
 #ifndef SANDTABLE_WINDOW_H
@@ -36,7 +36,7 @@ namespace SandTable
 		Window() = default;
 		virtual ~Window() = default;
 
-		virtual void Update() = 0;
+		virtual void OnUpdate() = 0;
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 		virtual void SetEventCallbackFunc(const EventCallbackFunc& callback) = 0;

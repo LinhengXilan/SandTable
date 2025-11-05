@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.cpp
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief
  */
@@ -14,23 +14,43 @@
 namespace SandTable
 {
 	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
+	bool RendererAPI::s_IsAPIInitialized = false;
 
 	RendererAPI::API RendererAPI::GetAPI()
 	{
 		switch (s_API)
 		{
-			case API::None:
+		case API::None:
+			if (s_IsAPIInitialized == false)
+			{
 				SANDTABLE_CORE_ASSERT(false, "RendererAPI is currently not supported!");
-				return s_API;
-			case API::OpenGL:
+				s_IsAPIInitialized = true;
+			}
+			return s_API;
+		case API::OpenGL:
+			[[unlikely]]
+			if (s_IsAPIInitialized == false)
+			{
 				SANDTABLE_CORE_INFO("Current RendererAPI: OpenGL");
-				return s_API;
+				s_IsAPIInitialized = true;
+			}
+			return s_API;
 			case API::DirectX:
+			[[unlikely]]
+			if (s_IsAPIInitialized == false)
+			{
 				SANDTABLE_CORE_INFO("Current RendererAPI: DirectX");
-				return s_API;
-			default:
+				s_IsAPIInitialized = true;
+			}
+			return s_API;
+		default:
+			[[unlikely]]
+			if (s_IsAPIInitialized == false)
+			{
 				SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
-				return s_API;
+				s_IsAPIInitialized = true;
+			}
+			return s_API;
 		}
 	}
 }

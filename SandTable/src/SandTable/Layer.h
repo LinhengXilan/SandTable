@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief 图层头文件
  */
@@ -23,7 +23,7 @@ namespace SandTable
 
 		virtual void Attach();
 		virtual void Detach();
-		virtual void Update();
+		virtual void OnUpdate();
 
 		virtual void ImguiRender();
 		virtual void OnEvent(Event& event);

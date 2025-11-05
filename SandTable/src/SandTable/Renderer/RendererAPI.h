@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.h
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief 渲染器API头文件
  */
@@ -21,7 +21,8 @@ namespace SandTable
 		enum class API : unsigned char
 		{
 			None = 0,
-			OpenGL, DirectX
+			OpenGL = 0x10, OpenGL3 = 0x11,
+			DirectX = 0x20
 		};
 
 	public:
@@ -33,6 +34,7 @@ namespace SandTable
 
 	private:
 		static API s_API;
+		static bool s_IsAPIInitialized;
 	};
 }
 

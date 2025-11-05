@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief 应用程序头文件
  */
@@ -13,9 +13,6 @@
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/LayerStack.h>
 #include <SandTable/ImGui/ImguiLayer.h>
-#include <SandTable/Renderer/Shader.h>
-#include <SandTable/Renderer/VertexArray.h>
-#include <SandTable/Renderer/Camera.h>
 
 namespace SandTable
 {
@@ -35,19 +32,13 @@ namespace SandTable
 	private:
 		bool OnWindowClose(WindowClose& event);
 
-		std::unique_ptr<Window> m_Window;
+	private:
 		bool m_Running = true;
+
+	private:
+		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
 		ImguiLayer* m_ImguiLayer;
-
-		// 图形渲染
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<Shader> m_Shader;
-
-		std::shared_ptr<VertexArray> m_SquareVertexArray;
-		std::shared_ptr<Shader> m_SquareShader;
-
-		std::shared_ptr<OrthographicCamera> m_Camera;
 
 	private:
 		static Application* s_Instance;

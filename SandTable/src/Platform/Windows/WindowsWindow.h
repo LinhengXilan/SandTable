@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @date 2025-11-5
+ * @version build24
  * 
  * @brief Windows平台窗口头文件
  */
@@ -22,7 +22,7 @@ namespace SandTable
 		WindowsWindow(const WindowProperty& property);
 		virtual ~WindowsWindow();
 
-		void Update() override;
+		void OnUpdate() override;
 		inline unsigned int GetWidth() const override { return m_WindowData.Width; }
 		inline unsigned int GetHeight() const override { return m_WindowData.Height; }
 		inline void SetEventCallbackFunc(const EventCallbackFunc& callback) override { m_WindowData.EventCallback = callback; }
