@@ -2,19 +2,20 @@
  * @file main.cpp
  * @author LinhengXilan
  * @date 2025-11-7
- * @version build25
+ * @version build26
  * 
  * @brief Sandbox示例程序
  */
 
 #include <SandTable.h>
 #include <imgui/imgui.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public SandTable::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example")
+		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f)
 	{
 		// Camera
 		m_Camera.reset(SandTable::OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
@@ -28,7 +29,10 @@ public:
 		// 顶点缓冲对象
 		m_VertexArray.reset(SandTable::VertexArray::Create());
 		float vertices[] = {
-			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f, 0.0f, 0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f};
+			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f
+		};
 		vertexBuffer.reset(SandTable::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		SandTable::BufferLayout layout = {
@@ -78,7 +82,11 @@ public:
 		// for square
 		m_SquareVertexArray.reset(SandTable::VertexArray::Create());
 		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f};
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
+		};
 		vertexBuffer.reset(SandTable::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		SandTable::BufferLayout squareLayout = {
@@ -98,10 +106,11 @@ public:
 			layout(location = 0) in vec3 a_position;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_ModelTransform;
 		
 			void main()
 			{
-				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
+				gl_Position = u_ViewProjection *  u_ModelTransform * vec4(a_position, 1.0f);
 			}
 		)";
 		std::string squareFragment = R"(
@@ -154,11 +163,41 @@ public:
 			m_Camera->SetRotation(0.0f);
 		}
 
+		if (SandTable::Input::IsKeyPressed(KEY_UP))
+		{
+			m_SquarePosition.y += m_SquareSpeed * timeStep;
+		}
+		else if(SandTable::Input::IsKeyPressed(KEY_DOWN))
+		{
+			m_SquarePosition.y -= m_SquareSpeed* timeStep;
+		}
+
+		if(SandTable::Input::IsKeyPressed(KEY_LEFT))
+		{
+			m_SquarePosition.x -= m_SquareSpeed* timeStep;
+		}
+		else if (SandTable::Input::IsKeyPressed(KEY_RIGHT))
+		{
+			m_SquarePosition.x += m_SquareSpeed* timeStep;
+		}
+
+		glm::mat4 scale = glm::scale(glm::mat4{1.0f}, glm::vec3{0.1f});
+
 		SandTable::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
 		SandTable::RenderCommand::Clear();
 		SandTable::Renderer::BeginScene(m_Camera);
-		SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader);
-		SandTable::Renderer::Submit(m_VertexArray, m_Shader);
+
+		for (int i = 0; i < 10; i++)
+		{
+
+			for (int j = 0; j < 10; j++)
+			{
+				glm::vec3 pos{i * 0.11f, j * 0.11f, 0.0f};
+				glm::mat4 transform = glm::translate(glm::mat4{1.0f}, pos) * scale;
+				SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader, transform);
+			}
+		}
+		// SandTable::Renderer::Submit(m_VertexArray, m_Shader);
 		SandTable::Renderer::EndScene();
 	}
 
@@ -178,6 +217,9 @@ private:
 	std::shared_ptr<SandTable::VertexArray> m_SquareVertexArray;
 	std::shared_ptr<SandTable::Shader> m_SquareShader;
 	std::shared_ptr<SandTable::OrthographicCamera> m_Camera;
+
+	glm::vec3 m_SquarePosition;
+	float m_SquareSpeed;
 };
 
 class Sandbox : public SandTable::Application
