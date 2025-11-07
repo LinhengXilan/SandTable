@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.h
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @date 2025-11-7
+ * @version build25
  * 
  * @brief 图层头文件
  */
@@ -12,6 +12,7 @@
 
 #include <SandTable/Core.h>
 #include <SandTable/Events/Event.h>
+#include <SandTable/Core/Clock.h>
 
 namespace SandTable
 {
@@ -23,7 +24,7 @@ namespace SandTable
 
 		virtual void Attach();
 		virtual void Detach();
-		virtual void OnUpdate();
+		virtual void OnUpdate(TimeStep timeStep);
 
 		virtual void ImguiRender();
 		virtual void OnEvent(Event& event);

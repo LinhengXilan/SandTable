@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.cpp
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @date 2025-11-7
+ * @version build25
  * 
  * @brief OpenGL相机实现
  */
@@ -27,7 +27,7 @@ namespace SandTable
 		RecalculateViewMatrix();
 	}
 
-	void OpenGLOrthographicCamera::SetRotation(const float& rotation)
+	void OpenGLOrthographicCamera::SetRotation(const float rotation)
 	{
 		m_Rotation = rotation;
 		RecalculateViewMatrix();
@@ -41,12 +41,12 @@ namespace SandTable
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void OpenGLOrthographicCamera::SetMoveSpeed(const float& speed)
+	void OpenGLOrthographicCamera::SetMoveSpeed(const float speed)
 	{
 		m_MoveSpeed = speed;
 	}
 
-	void OpenGLOrthographicCamera::SetRotateSpeed(const float& speed)
+	void OpenGLOrthographicCamera::SetRotateSpeed(const float speed)
 	{
 		m_RotateSpeed = speed;
 	}
@@ -66,6 +66,28 @@ namespace SandTable
 			break;
 		case Direction::Down:
 			m_Position.y += m_MoveSpeed;
+			break;
+		default:
+			break;
+		}
+		RecalculateViewMatrix();
+	}
+
+	void OpenGLOrthographicCamera::Move(Direction direction, TimeStep timeStep)
+	{
+		switch (direction)
+		{
+		case Direction::Left:
+			m_Position.x += m_MoveSpeed * timeStep.duration;
+			break;
+		case Direction::Right:
+			m_Position.x -= m_MoveSpeed * timeStep.duration;
+			break;
+		case Direction::Up:
+			m_Position.y -= m_MoveSpeed * timeStep.duration;
+			break;
+		case Direction::Down:
+			m_Position.y += m_MoveSpeed * timeStep.duration;
 			break;
 		default:
 			break;
@@ -95,6 +117,28 @@ namespace SandTable
 		RecalculateViewMatrix();
 	}
 
+	void OpenGLOrthographicCamera::Move(Direction direction, float speed, TimeStep timeStep)
+	{
+		switch (direction)
+		{
+		case Direction::Left:
+			m_Position.x += speed * timeStep.duration;
+			break;
+		case Direction::Right:
+			m_Position.x -= speed * timeStep.duration;
+			break;
+		case Direction::Up:
+			m_Position.y -= speed * timeStep.duration;
+			break;
+		case Direction::Down:
+			m_Position.y += speed * timeStep.duration;
+			break;
+		default:
+			break;
+		}
+		RecalculateViewMatrix();
+	}
+
 	void OpenGLOrthographicCamera::Rotate(Direction direction)
 	{
 		switch (direction)
@@ -111,6 +155,22 @@ namespace SandTable
 		RecalculateViewMatrix();
 	}
 
+	void OpenGLOrthographicCamera::Rotate(Direction direction, TimeStep timeStep)
+	{
+		switch (direction)
+		{
+		case Direction::clockwise:
+			m_Rotation += m_RotateSpeed * timeStep.duration;
+			break;
+		case Direction::counterclockwise:
+			m_Rotation -= m_RotateSpeed * timeStep.duration;
+			break;
+		default:
+			break;
+		}
+		RecalculateViewMatrix();
+	}
+
 	void OpenGLOrthographicCamera::Rotate(Direction direction, float speed)
 	{
 		switch (direction)
@@ -120,6 +180,22 @@ namespace SandTable
 			break;
 		case Direction::counterclockwise:
 			m_Rotation -= speed;
+			break;
+		default:
+			break;
+		}
+		RecalculateViewMatrix();
+	}
+
+	void OpenGLOrthographicCamera::Rotate(Direction direction, float speed, TimeStep timeStep)
+	{
+		switch (direction)
+		{
+		case Direction::clockwise:
+			m_Rotation += speed * timeStep.duration;
+			break;
+		case Direction::counterclockwise:
+			m_Rotation -= speed * timeStep.duration;
 			break;
 		default:
 			break;

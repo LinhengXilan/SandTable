@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @date 2025-11-7
+ * @version build25
  * 
  * @brief Sandbox示例程序
  */
@@ -18,8 +18,8 @@ public:
 	{
 		// Camera
 		m_Camera.reset(SandTable::OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
-		m_Camera->SetMoveSpeed(0.01f);
-		m_Camera->SetRotateSpeed(0.1f);
+		m_Camera->SetMoveSpeed(1.0f);
+		m_Camera->SetRotateSpeed(100.0f);
 
 		// Griphics Render
 		std::shared_ptr<SandTable::VertexBuffer> vertexBuffer;
@@ -118,32 +118,40 @@ public:
 		m_SquareShader = std::make_shared<SandTable::Shader>(squareVertex, squareFragment);
 	}
 
-	void OnUpdate() override
+	void OnUpdate(SandTable::TimeStep timeStep) override
 	{
+		SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
+
 		if (SandTable::Input::IsKeyPressed(KEY_W))
 		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Up);
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Up, timeStep);
 		}
 		else if (SandTable::Input::IsKeyPressed(KEY_S))
 		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Down);
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Down, timeStep);
 		}
 		if (SandTable::Input::IsKeyPressed(KEY_A))
 		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Left);
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Left, timeStep);
 		}
 		else if (SandTable::Input::IsKeyPressed(KEY_D))
 		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Right);
+			m_Camera->Move(SandTable::OrthographicCamera::Direction::Right, timeStep);
 		}
 
 		if (SandTable::Input::IsKeyPressed(KEY_Q))
 		{
-			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::counterclockwise);
+			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::counterclockwise, timeStep);
 		}
 		else if (SandTable::Input::IsKeyPressed(KEY_E))
 		{
-			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::clockwise);
+			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::clockwise, timeStep);
+		}
+
+		if (SandTable::Input::IsKeyPressed(KEY_R))
+		{
+			m_Camera->SetPosition({0.0f, 0.0f, 0.0f});
+			m_Camera->SetRotation(0.0f);
 		}
 
 		SandTable::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});

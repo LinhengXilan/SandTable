@@ -25,10 +25,10 @@ AlignConsecutiveMacros :
   AcrossEmptyLines : false
   AcrossComments : false
 AlignEscapedNewlines : Right
+BreakBeforeBinaryOperators : All
 AlignOperands : Align
 AlignTrailingComments : true
 AllowAllArgumentsOnNextLine : true
-AllowAllParametersOfDeclarationOnNextLine : true
 AllowShortEnumsOnASingleLine : true
 AllowShortBlocksOnASingleLine : Never
 AllowShortCaseLabelsOnASingleLine : false
@@ -60,7 +60,6 @@ BraceWrapping :
   SplitEmptyFunction : true
   SplitEmptyRecord : true
   SplitEmptyNamespace : true
-BreakBeforeBinaryOperators : None
 BreakBeforeConceptDeclarations : Always
 BreakBeforeBraces : Custom
 BreakBeforeInheritanceComma : false
@@ -100,7 +99,6 @@ MaxEmptyLinesToKeep : 1
 NamespaceIndentation : All
 PointerAlignment : Left
 ReferenceAlignment : Pointer
-PPIndentWidth : -1
 ReflowComments : false
 RemoveBracesLLVM : false
 RequiresClausePosition : OwnLine
