@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.cpp
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief OpenGL渲染器API实现
  */
@@ -23,7 +23,7 @@ namespace SandTable
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+	void OpenGLRendererAPI::DrawIndexed(const ObjectRef<VertexArray>& vertexArray)
 	{
 		vertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);

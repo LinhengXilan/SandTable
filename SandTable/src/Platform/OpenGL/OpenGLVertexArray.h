@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLVertexArray.h
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief OpenGL顶点数组类
  */
@@ -21,13 +21,13 @@ namespace SandTable
 		~OpenGLVertexArray();
 		void Bind() const override;
 		void Unbind() const override;
-		void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
-		void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
-		const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const override;
-		const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override;
+		void AddVertexBuffer(const ObjectRef<VertexBuffer>& vertexBuffer) override;
+		void SetIndexBuffer(const ObjectRef<IndexBuffer>& indexBuffer) override;
+		const std::vector<ObjectRef<VertexBuffer>>& GetVertexBuffers() const override;
+		const ObjectRef<IndexBuffer>& GetIndexBuffer() const override;
 	private:
-		std::vector<std::shared_ptr<VertexBuffer>> m_VertexBuffers;
-		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::vector<ObjectRef<VertexBuffer>> m_VertexBuffers;
+		ObjectRef<IndexBuffer> m_IndexBuffer;
 		unsigned int m_RendererID;
 	};
 }

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build25
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief 应用程序实现
  */
@@ -20,7 +20,7 @@ namespace SandTable
 		SANDTABLE_CORE_ASSERT(!s_Instance, "Application already has an instance!");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Object<Window>(Window::Create());
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 		m_Window->SetSync(false);
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/VertexArray.h
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief 顶点数组接口
  */
@@ -22,11 +22,11 @@ namespace SandTable
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) = 0;
+		virtual void AddVertexBuffer(const ObjectRef<VertexBuffer>& vertexBuffer) = 0;
+		virtual void SetIndexBuffer(const ObjectRef<IndexBuffer>& indexBuffer) = 0;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const = 0;
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
+		virtual const std::vector<ObjectRef<VertexBuffer>>& GetVertexBuffers() const = 0;
+		virtual const ObjectRef<IndexBuffer>& GetIndexBuffer() const = 0;
 		static VertexArray* Create();
 	};
 }

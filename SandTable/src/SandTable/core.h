@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief SandTable核心头文件
  */
@@ -38,5 +38,14 @@
 // 
 #define BIT(x) (1 << x)
 #define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
+
+namespace SandTable
+{
+	template<typename T>
+	using ObjectRef = std::shared_ptr<T>;
+
+	template<typename T>
+	using Object = std::unique_ptr<T>;
+}
 
 #endif

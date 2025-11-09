@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.h
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief OpenGL渲染器API头文件
  */
@@ -19,7 +19,7 @@ namespace SandTable
 	public:
 		void SetClearColor(const glm::vec4& color) override;
 		void Clear() override;
-		void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
+		void DrawIndexed(const ObjectRef<VertexArray>& vertexArray) override;
 	};
 }
 

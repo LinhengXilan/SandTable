@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLVertexArray.cpp
  * @author LinhengXilan
- * @date 2025-10-29
- * @version build21
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief 顶点数组类
  */
@@ -71,7 +71,7 @@ namespace SandTable
 		glBindVertexArray(NULL);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const ObjectRef<VertexBuffer>& vertexBuffer)
 	{
 		SANDTABLE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -95,19 +95,19 @@ namespace SandTable
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::SetIndexBuffer(const ObjectRef<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 		m_IndexBuffer = indexBuffer;
 	}
 
-	const std::vector<std::shared_ptr<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers() const
+	const std::vector<ObjectRef<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers() const
 	{
 		return m_VertexBuffers;
 	}
 
-	const std::shared_ptr<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const
+	const ObjectRef<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const
 	{
 		return m_IndexBuffer;
 	}

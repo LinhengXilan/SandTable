@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build25
+ * @version build28
+ * @date 2025-11-9
  * 
  * @brief 应用程序头文件
  */
@@ -37,11 +37,11 @@ namespace SandTable
 		bool m_Running = true;
 
 	private:
-		std::unique_ptr<Window> m_Window;
+		Object<Window> m_Window;
 		LayerStack m_LayerStack;
 		ImguiLayer* m_ImguiLayer;
 
-		std::unique_ptr<Clock> m_Clock;
+		Object<Clock> m_Clock;
 
 	private:
 		static Application* s_Instance;

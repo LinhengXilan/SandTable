@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
+ * @version build28
  * @date 2025-11-9
- * @version build27
  * 
  * @brief Sandbox示例程序
  */
@@ -26,8 +26,8 @@ public:
 		m_Camera->SetRotateSpeed(100.0f);
 
 		// Griphics Render
-		std::shared_ptr<SandTable::VertexBuffer> vertexBuffer;
-		std::shared_ptr<SandTable::IndexBuffer> indexBuffer;
+		SandTable::ObjectRef<SandTable::VertexBuffer> vertexBuffer;
+		SandTable::ObjectRef<SandTable::IndexBuffer> indexBuffer;
 		// triangle
 		// 顶点缓冲对象
 		m_VertexArray.reset(SandTable::VertexArray::Create());
@@ -236,11 +236,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<SandTable::VertexArray> m_VertexArray;
-	std::shared_ptr<SandTable::Shader> m_Shader;
-	std::shared_ptr<SandTable::VertexArray> m_SquareVertexArray;
-	std::shared_ptr<SandTable::Shader> m_SquareShader;
-	std::shared_ptr<SandTable::OrthographicCamera> m_Camera;
+	SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
+	SandTable::ObjectRef<SandTable::Shader> m_Shader;
+	SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
+	SandTable::ObjectRef<SandTable::Shader> m_SquareShader;
+	SandTable::ObjectRef<SandTable::OrthographicCamera> m_Camera;
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareSpeed;

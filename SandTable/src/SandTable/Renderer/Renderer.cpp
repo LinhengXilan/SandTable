@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
+ * @version build28
  * @date 2025-11-9
- * @version build27
  * 
  * @brief 渲染器实现
  */
@@ -15,7 +15,7 @@ namespace SandTable
 {
 	Renderer::SceneData* Renderer::m_SceneData = new SceneData;
 
-	void Renderer::BeginScene(const std::shared_ptr<OrthographicCamera>& camera)
+	void Renderer::BeginScene(const ObjectRef<OrthographicCamera>& camera)
 	{
 		m_SceneData->ViewProjectionMatrix = camera->GetViewProjectionMatrix();
 	}
@@ -25,7 +25,7 @@ namespace SandTable
 
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4& transform)
+	void Renderer::Submit(const ObjectRef<VertexArray>& vertexArray, const ObjectRef<Shader>& shader, const glm::mat4& transform)
 	{
 		shader->Bind();
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniform("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
