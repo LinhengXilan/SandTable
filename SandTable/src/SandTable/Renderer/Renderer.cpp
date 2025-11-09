@@ -1,14 +1,15 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build26
+ * @date 2025-11-9
+ * @version build27
  * 
  * @brief 渲染器实现
  */
 
 #include <pch.h>
 #include <SandTable/Renderer/Renderer.h>
+#include <Platform/OpenGL/OpenGLShader.h>
 
 namespace SandTable
 {
@@ -27,8 +28,8 @@ namespace SandTable
 	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4& transform)
 	{
 		shader->Bind();
-		shader->SetUniform("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-		shader->SetUniform("u_ModelTransform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniform("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniform("u_ModelTransform", transform);
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}

@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build26
+ * @date 2025-11-9
+ * @version build27
  * 
  * @brief Sandbox示例程序
  */
@@ -10,12 +10,15 @@
 #include <SandTable.h>
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <Platform/OpenGL/OpenGLShader.h>
 
 class ExampleLayer : public SandTable::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f)
+		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f), m_SquareColor(1.0f, 0.83f, 0.66f)
 	{
 		// Camera
 		m_Camera.reset(SandTable::OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
@@ -77,7 +80,7 @@ public:
 				color = v_Position;
 			}
 		)";
-		m_Shader = std::make_shared<SandTable::Shader>(vertex, fragment);
+		m_Shader.reset(SandTable::Shader::Create(vertex, fragment));
 
 		// for square
 		m_SquareVertexArray.reset(SandTable::VertexArray::Create());
@@ -116,15 +119,17 @@ public:
 		std::string squareFragment = R"(
 			#version 330 core
 		
+			uniform vec3 u_Color;
+
 			layout(location = 0) out vec4 color;
-		
+
 			void main()
 			{
-				color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
+				color = vec4(u_Color, 1.0f);
+				//color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
 			}
 		)";
-
-		m_SquareShader = std::make_shared<SandTable::Shader>(squareVertex, squareFragment);
+		m_SquareShader.reset(SandTable::Shader::Create(squareVertex, squareFragment));
 	}
 
 	void OnUpdate(SandTable::TimeStep timeStep) override
@@ -187,13 +192,28 @@ public:
 		SandTable::RenderCommand::Clear();
 		SandTable::Renderer::BeginScene(m_Camera);
 
+		//glm::vec4 pink;
+		//glm::vec4 orange{1.0f, 0.66f, 0.83f, 1.0f};
+		//m_SquareColor = { 1.0f, 0.83f, 0.66f };
+
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->Bind();
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", m_SquareColor);
+
+
 		for (int i = 0; i < 10; i++)
 		{
-
 			for (int j = 0; j < 10; j++)
 			{
 				glm::vec3 pos{i * 0.11f, j * 0.11f, 0.0f};
 				glm::mat4 transform = glm::translate(glm::mat4{1.0f}, pos) * scale;
+				//if ((i + j) % 2 == 0)
+				//{
+				//	std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", pink);
+				//}
+				//else
+				//{
+				//	std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", orange);
+				//}
 				SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader, transform);
 			}
 		}
@@ -208,7 +228,11 @@ public:
 
 	void ImguiRender() override
 	{
+		ImGui::Begin("Settings");
 
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+
+		ImGui::End();
 	}
 
 private:
@@ -220,6 +244,7 @@ private:
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareSpeed;
+	glm::vec3 m_SquareColor;
 };
 
 class Sandbox : public SandTable::Application
