@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.h
  * @author LinhengXilan
- * @date 2025-10-28
- * @version build20
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 渲染缓冲头文件
  */
@@ -105,10 +105,11 @@ namespace SandTable
 		{
 			CalculateOffsetAndStride();
 		}
-
 		~BufferLayout() = default;
+
+	public:
 		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
-		inline unsigned int GetStride() const { return m_Stride; }
+		inline uint8_t GetStride() const { return m_Stride; }
 
 		std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
 		std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
@@ -116,51 +117,42 @@ namespace SandTable
 		std::vector<BufferElement>::const_iterator end() const { return m_Elements.cend(); }
 
 	private:
-		/**
-		 * @brief 计算偏移和步长
-		 */
-		void CalculateOffsetAndStride()
-		{
-			unsigned int offset = 0;
-			m_Stride = 0;
-			for (auto& element : m_Elements)
-			{
-				element.Offset = offset;
-				offset += element.Size;
-				m_Stride += element.Size;
-			}
-		}
+		void CalculateOffsetAndStride();
 
 	private:
 		std::vector<BufferElement> m_Elements;
-		unsigned int m_Stride = 0;
+		uint8_t m_Stride = 0;
 	};
 
 	class VertexBuffer
 	{
 	public:
+		VertexBuffer() = default;
 		virtual ~VertexBuffer() = default;
 
+	public:
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
+		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static VertexBuffer* Create(float* vertices, unsigned int size);
+		static ObjectRef<VertexBuffer> Create(float* vertices, unsigned int size);
 	};
 
 	class IndexBuffer
 	{
 	public:
+		IndexBuffer() = default;
 		virtual ~IndexBuffer() = default;
 
+	public:
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		
-		virtual unsigned int GetCount() const = 0;
+		virtual inline const uint32_t GetCount() const = 0;
 
-		static IndexBuffer* Create(unsigned int* indices, unsigned int count);
+		static ObjectRef<IndexBuffer> Create(unsigned int* indices, unsigned int count);
 	};
 
 

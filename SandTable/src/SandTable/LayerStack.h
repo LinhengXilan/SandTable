@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.h
  * @author LinhengXilan
- * @date 2025-10-24
- * @version build16
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 图层栈头文件
  */
@@ -21,6 +21,7 @@ namespace SandTable
 		LayerStack();
 		~LayerStack();
 
+	public:
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 		void PopLayer(Layer* layer);

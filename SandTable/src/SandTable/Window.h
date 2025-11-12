@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Windows.h
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @version build29
+ * @date 2025-11-12
  */
 
 #ifndef SANDTABLE_WINDOW_H
@@ -33,17 +33,22 @@ namespace SandTable
 	public:
 		using EventCallbackFunc = std::function<void(Event&)>;
 
+	public:
 		Window() = default;
 		virtual ~Window() = default;
 
-		virtual void OnUpdate() = 0;
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+	public:
+		virtual inline const uint16_t GetWidth() const = 0;
+		virtual inline const uint16_t GetHeight() const = 0;
+		virtual inline void* GetNativeWindow() const = 0;
+		virtual inline const bool IsSync() const = 0;
+
 		virtual void SetEventCallbackFunc(const EventCallbackFunc& callback) = 0;
 		virtual void SetSync(bool enabled) = 0;
-		virtual bool IsSync() const = 0;
-		virtual void* GetNativeWindow() const = 0;
-		static Window* Create(const WindowProperty& property = WindowProperty());
+
+		virtual void OnUpdate() = 0;
+
+		static Object<Window> Create(const WindowProperty& property = WindowProperty());
 	};
 }
 

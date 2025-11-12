@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief Windows平台窗口头文件
  */
@@ -23,29 +23,29 @@ namespace SandTable
 		virtual ~WindowsWindow();
 
 		void OnUpdate() override;
-		inline unsigned int GetWidth() const override { return m_WindowData.Width; }
-		inline unsigned int GetHeight() const override { return m_WindowData.Height; }
+		inline const uint16_t GetWidth() const override { return m_WindowData.Width; }
+		inline const uint16_t GetHeight() const override { return m_WindowData.Height; }
+		inline void* GetNativeWindow() const override { return m_Window.get(); }
+
 		inline void SetEventCallbackFunc(const EventCallbackFunc& callback) override { m_WindowData.EventCallback = callback; }
 		void SetSync(bool enabled) override;
-		bool IsSync() const override;
-		inline virtual void* GetNativeWindow() const override { return m_Window; }
+		inline const bool IsSync() const override { return m_WindowData.Sync; }
 
 	private:
 		virtual void Init(const WindowProperty& property);
 		virtual void Shutdown();
 
 	private:
-		GLFWwindow* m_Window;
+		ObjectRef<GLFWwindow> m_Window;
 		struct WindowData
 		{
 			std::string Title;
-			unsigned int Width;
-			unsigned int Height;
+			uint16_t Width;
+			uint16_t Height;
 			bool Sync;
 			EventCallbackFunc EventCallback;
-		};
-		WindowData m_WindowData;
-		GraphicsContext* m_Context;
+		} m_WindowData;
+		Object<GraphicsContext> m_Context;
 	};
 }
 

@@ -1,0 +1,41 @@
+﻿/**
+ * @file SandTable/Renderer/Texture.h
+ * @author LinhengXilan
+ * @version build29
+ * @date 2025-11-12
+ * 
+ * @brief 纹理
+ */
+
+#ifndef SANDTABLE_RENDERER_TEXTURE_H
+#define SANDTABLE_RENDERER_TEXTURE_H
+
+#include <SandTable/Core.h>
+
+namespace SandTable
+{
+	class Texture
+	{
+	public:
+		Texture() = default;
+		virtual ~Texture() = default;
+
+	public:
+		virtual const uint32_t GetWidth() const = 0;
+		virtual const uint32_t GetHeight() const = 0;
+
+		virtual void Bind(uint32_t slot = 0) const = 0;
+	};
+
+	class Texture2D : public Texture
+	{
+	public:
+		Texture2D() = default;
+		virtual ~Texture2D() = default;
+
+	public:
+		static ObjectRef<Texture2D> Create(const std::string& path);
+	};
+}
+
+#endif

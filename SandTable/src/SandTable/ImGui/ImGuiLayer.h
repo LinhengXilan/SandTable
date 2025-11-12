@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.h
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief Imgui层
  */
@@ -13,7 +13,7 @@
 #include <SandTable/Layer.h>
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/Mouse.h>
-#include <SandTable/Events/Application.h>
+#include <SandTable/Events/ApplicationEvent.h>
 
 namespace SandTable
 {
@@ -23,14 +23,12 @@ namespace SandTable
 		ImguiLayer();
 		~ImguiLayer();
 
+	public:
 		void Begin();
 		void End();
 		void Attach() override;
 		void Detach() override;
 		void ImguiRender() override;
-
-	private:
-		// float m_Time = 0.0f;
 	};
 }
 

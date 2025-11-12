@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.cpp
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 渲染缓冲实现
  */
@@ -15,7 +15,7 @@
 
 namespace SandTable
 {
-	VertexBuffer* VertexBuffer::Create(float* vertices, unsigned int size)
+	ObjectRef<VertexBuffer> VertexBuffer::Create(float* vertices, unsigned int size)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -23,25 +23,35 @@ namespace SandTable
 			SANDTABLE_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return new OpenGLVertexBuffer(vertices, size);
+			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		default:
 			SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 			return nullptr;
 		}
 	}
 
-	IndexBuffer* IndexBuffer::Create(unsigned int* indices, unsigned int count)
+	ObjectRef<IndexBuffer> IndexBuffer::Create(unsigned int* indices, unsigned int count)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
 		case RendererAPI::API::None:
-			SANDTABLE_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!");
+			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return new OpenGLIndexBuffer(indices, count);
+		case RendererAPI::API::OpenGL3:
+			return std::make_shared<OpenGLIndexBuffer>(indices, count);
 		default:
-			SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 			return nullptr;
 		}
 	}
-
+	void BufferLayout::CalculateOffsetAndStride()
+	{
+		unsigned int offset = 0;
+		m_Stride = 0;
+		for (auto& element : m_Elements)
+		{
+			element.Offset = offset;
+			offset += element.Size;
+			m_Stride += element.Size;
+		}
+	}
 }

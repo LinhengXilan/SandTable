@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/Clock.h
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build25
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 计时器头文件
  */
@@ -31,13 +31,13 @@ namespace SandTable
 		TimeStep Timestep;
 
 		Time()
-			: CurrentTime(0.0), LastTime(0.0), Timestep{0.0}
+			: CurrentTime(0.0), LastTime(0.0), Timestep(0.0)
 		{ 
 
 		}
 
 		Time(double currentTime)
-			: CurrentTime(currentTime), LastTime(currentTime), Timestep{0.0}
+			: CurrentTime(currentTime), LastTime(currentTime), Timestep(0.0)
 		{
 
 		}
@@ -52,18 +52,19 @@ namespace SandTable
 		Clock();
 		~Clock() = default;
 
-		inline double GetCurrentTime() const { return m_Time.CurrentTime; }
-		inline double GetLastTime() const { return m_Time.LastTime; }
-		inline TimeStep GetTimeStep() const { return m_Time.Timestep; }
-		inline unsigned long long GetFrameCount() const { return m_FrameCount; }
-		inline unsigned short GetFPS() const { return m_FPS; }
+	public:
+		inline const double GetCurrentTime() const { return m_Time.CurrentTime; }
+		inline const double GetLastTime() const { return m_Time.LastTime; }
+		inline const TimeStep GetTimeStep() const { return m_Time.Timestep; }
+		inline const uint64_t GetFrameCount() const { return m_FrameCount; }
+		inline const uint16_t GetFPS() const { return m_FPS; }
 
 		void Tick();
 
 	private:
 		Time m_Time;
-		unsigned long long m_FrameCount;
-		unsigned short m_FPS;
+		uint64_t m_FrameCount;
+		uint16_t m_FPS;
 	};
 }
 

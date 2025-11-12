@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief Windows平台窗口实现
  */
@@ -10,7 +10,7 @@
 #include <pch.h>
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Log.h>
-#include <SandTable/Events/Application.h>
+#include <SandTable/Events/ApplicationEvent.h>
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/Mouse.h>
 #include <Platform/OpenGL/OpenGLContext.h>
@@ -24,9 +24,9 @@ namespace SandTable
 		SANDTABLE_CORE_ERROR("GLFW Error {0}: {1}", error, description);
 	}
 
-	Window* Window::Create(const WindowProperty& property)
+	Object<Window> Window::Create(const WindowProperty& property)
 	{
-		return new WindowsWindow(property);
+		return std::make_unique<WindowsWindow>(property);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProperty& property)
@@ -52,16 +52,16 @@ namespace SandTable
 			glfwSetErrorCallback(GLFWErrorCallback);
 			Is_GlfwInitialized = true;
 		}
-		m_Window = glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
+		m_Window.reset(glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr));
 
-		m_Context = new OpenGLContext(m_Window);
+		m_Context = std::make_unique<OpenGLContext>(m_Window);
 		m_Context->Init();
 
-		glfwSetWindowUserPointer(m_Window, &m_WindowData);
+		glfwSetWindowUserPointer(m_Window.get(), &m_WindowData);
 		SetSync(true);
 
 		glfwSetWindowSizeCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, int width, int height) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
@@ -72,7 +72,7 @@ namespace SandTable
 		);
 
 		glfwSetWindowCloseCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				WindowClose event;
@@ -81,7 +81,7 @@ namespace SandTable
 		);
 
 		glfwSetKeyCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, int key, int scancode, int action, int mods) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				switch (action)
@@ -109,7 +109,7 @@ namespace SandTable
 		);
 
 		glfwSetCharCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, unsigned int keycode) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				KeyTyped event(keycode);
@@ -118,7 +118,7 @@ namespace SandTable
 		);
 
 		glfwSetMouseButtonCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, int button, int action, int mods) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				switch (action)
@@ -140,7 +140,7 @@ namespace SandTable
 		);
 
 		glfwSetScrollCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, double offsetX, double offsetY) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseScrolled event((float)offsetX, (float)offsetY);
@@ -149,7 +149,7 @@ namespace SandTable
 		);
 
 		glfwSetCursorPosCallback(
-			m_Window,
+			m_Window.get(),
 			[](GLFWwindow* window, double posX, double posY) {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseMoved event((float)posX, (float)posY);
@@ -160,7 +160,7 @@ namespace SandTable
 
 	void WindowsWindow::Shutdown()
 	{
-		glfwDestroyWindow(m_Window);
+		glfwDestroyWindow(m_Window.get());
 	}
 
 	void WindowsWindow::OnUpdate()
@@ -180,10 +180,5 @@ namespace SandTable
 			glfwSwapInterval(0);
 		}
 		m_WindowData.Sync = enabled;
-	}
-
-	bool WindowsWindow::IsSync() const
-	{
-		return m_WindowData.Sync;
 	}
 }

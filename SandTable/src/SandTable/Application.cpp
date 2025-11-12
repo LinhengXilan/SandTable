@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 应用程序实现
  */
@@ -20,12 +20,12 @@ namespace SandTable
 		SANDTABLE_CORE_ASSERT(!s_Instance, "Application already has an instance!");
 		s_Instance = this;
 
-		m_Window = Object<Window>(Window::Create());
+		m_Window = Window::Create();
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 		m_Window->SetSync(false);
 
-		m_ImguiLayer = new ImguiLayer();
-		PushOverlay(m_ImguiLayer);
+		m_ImguiLayer = std::make_unique<ImguiLayer>();
+		PushOverlay(m_ImguiLayer.get());
 
 		m_Clock = std::make_unique<Clock>();
 	}

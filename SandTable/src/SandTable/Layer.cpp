@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.cpp
  * @author LinhengXilan
- * @date 2025-11-7
- * @version build25
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 图层实现
  */
@@ -15,11 +15,6 @@ namespace SandTable
 {
 	Layer::Layer(const std::string& debugName)
 		: m_DebugName(debugName)
-	{
-
-	}
-
-	Layer::~Layer()
 	{
 
 	}

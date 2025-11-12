@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @version build29
+ * @date 2025-11-12
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -23,7 +23,7 @@ namespace SandTable
 		MousePressed, MouseReleased, MouseMoved, MouseScrolled
 	};
 
-	enum EventCategory
+	enum EventCategory : uint8_t
 	{
 		E_None,
 		E_Application	= BIT(0),
@@ -38,14 +38,15 @@ namespace SandTable
 		friend class EventDispatcher;
 	public:
 		Event() = default;
-		~Event() = default;
+		virtual ~Event() = default;
 	public:
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-		virtual std::string ToString() const { return GetName(); }
-		inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-	
+		virtual inline const EventType GetEventType() const = 0;
+		virtual inline const std::string GetName() const = 0;
+		virtual inline const uint8_t GetCategoryFlags() const = 0;
+		inline const bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+		virtual inline std::string ToString() const { return GetName(); }
+
+	public:
 		bool m_Handled = false;
 	};
 

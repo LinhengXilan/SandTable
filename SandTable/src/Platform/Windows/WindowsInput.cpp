@@ -1,8 +1,8 @@
-/**
+﻿/**
  * @file Platform/Windows/WindowsInput.cpp
  * @author LinhengXilan
- * @date 2025-10-2
- * @version build14
+ * @version build29
+ * @date 2025-11-12
  */
 
 #include <pch.h>
@@ -16,21 +16,21 @@ namespace SandTable
 {
 	Input* Input::s_Instance = new WindowsInput();
 
-	bool WindowsInput::IsKeyPressedImpl(int keycode)
+	const bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMousePressedImpl(int button)
+	const bool WindowsInput::IsMousePressedImpl(int button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<float, float> WindowsInput::GetMousePosImpl()
+	const std::pair<float, float> WindowsInput::GetMousePosImpl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
 		double posX, posY;
@@ -38,13 +38,13 @@ namespace SandTable
 		return {(float)posX, (float)posY};
 	}
 
-	float WindowsInput::GetMousePosXImpl()
+	const float WindowsInput::GetMousePosXImpl()
 	{
 		auto [posX, posY] = GetMousePosImpl();
 		return posX;
 	 }
 
-	float WindowsInput::GetMousePosYImpl()
+	const float WindowsInput::GetMousePosYImpl()
 	{
 		auto [posX, posY] = GetMousePosImpl();
 		return posY;

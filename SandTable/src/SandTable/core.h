@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief SandTable核心头文件
  */
@@ -25,19 +25,9 @@
 #endif
 
 
-
-// 
-#ifdef SANDTABLE_ENABLE_ASSERTS
-	#define SANDTABLE_ASSERT(x, ...) { if (!(x)) { SANDTABLE_CLIENT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define SANDTABLE_CORE_ASSERT(x, ...) { if(!(x)) { SANDTABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#else
-	#define SANDTABLE_ASSERT(x, ...)
-	#define SANDTABLE_CORE_ASSERT(x, ...)
-#endif
-
-// 
 #define BIT(x) (1 << x)
 #define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
+
 
 namespace SandTable
 {

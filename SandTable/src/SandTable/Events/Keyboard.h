@@ -1,8 +1,8 @@
-/**
+﻿/**
  * @file SandTable/Events/Keyboard.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @version build29
+ * @date 2025-11-12
  */
 
 #ifndef SANDTABLE_EVENTS_KEYBOARD_H
@@ -15,43 +15,45 @@ namespace SandTable
 	class SANDTABLE_DLL Keyboard : public Event
 	{
 	public:
-		inline int GetKeyCode() const { return m_KeyCode_; }
+		inline const int GetKeyCode() const { return m_KeyCode; }
 
 	protected:
 		Keyboard(int keycode)
-			: m_KeyCode_(keycode)
+			: m_KeyCode(keycode)
 		{
 			
 		}
-
-		int m_KeyCode_;
+		virtual ~Keyboard() = default;
+		int m_KeyCode;
 	};
 
 	class SANDTABLE_DLL KeyPressed : public Keyboard
 	{
 	public:
 		KeyPressed(int keycode, int repeatcount)
-		  : Keyboard(keycode), m_RepeatCount_(repeatcount)
+		  : Keyboard(keycode), m_RepeatCount(repeatcount)
 		{
 		  
 		}
+		~KeyPressed() = default;
 
-		inline int GetRepeatCount() const { return m_RepeatCount_; }
+	public:
+		inline const int GetRepeatCount() const { return m_RepeatCount; }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressed: " << m_KeyCode_ << "(" << m_RepeatCount_ << " repeats)";
+			ss << "KeyPressed: " << m_KeyCode << "(" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::KeyPressed; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "KeyPressed"; }
-        virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		inline static const EventType GetStaticType() { return EventType::KeyPressed; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "KeyPressed"; }
+        inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
 
 	private:
-		int m_RepeatCount_;
+		int m_RepeatCount;
 	};
 
 	class SANDTABLE_DLL KeyReleased : public Keyboard
@@ -62,18 +64,20 @@ namespace SandTable
 		{
 
 		}
+		~KeyReleased() = default;
 
+	public:
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleased: " << m_KeyCode_;
+			ss << "KeyReleased: " << m_KeyCode;
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::KeyReleased; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char *GetName() const override { return "KeyReleased"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		inline static const EventType GetStaticType() { return EventType::KeyReleased; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "KeyReleased"; }
+		inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
 	};
 
 	class SANDTABLE_DLL KeyTyped : public Keyboard
@@ -84,18 +88,20 @@ namespace SandTable
 		{
 
 		}
+		~KeyTyped() = default;
 
+	public:
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyTyped: " << m_KeyCode_;
+			ss << "KeyTyped: " << m_KeyCode;
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::KeyTyped; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "KeyTyped"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		inline static const EventType GetStaticType() { return EventType::KeyTyped; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "KeyTyped"; }
+		inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
 	};
 }
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 应用程序头文件
  */
@@ -23,31 +23,31 @@ namespace SandTable
 		Application();
 		virtual ~Application() = default;
 
-		void Run();
-		void OnEvent(Event& event);
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* overlay);
+	public:
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& GetInstance() { return *s_Instance; }
+
+		void Run();
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
+		void OnEvent(Event& event);
 
 	private:
 		bool OnWindowClose(WindowClose& event);
 
 	private:
+		static Application* s_Instance;
 		bool m_Running = true;
 
 	private:
 		Object<Window> m_Window;
 		LayerStack m_LayerStack;
-		ImguiLayer* m_ImguiLayer;
-
+		Object<ImguiLayer> m_ImguiLayer;
 		Object<Clock> m_Clock;
 
-	private:
-		static Application* s_Instance;
 	};
 
-	Application* CreateApplication();
+	Object<Application> CreateApplication();
 }
 
 #endif

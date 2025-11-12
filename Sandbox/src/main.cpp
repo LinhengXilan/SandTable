@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief Sandbox示例程序
  */
@@ -11,7 +11,6 @@
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include <Platform/OpenGL/OpenGLShader.h>
 
 class ExampleLayer : public SandTable::Layer
@@ -21,7 +20,9 @@ public:
 		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f), m_SquareColor(1.0f, 0.83f, 0.66f)
 	{
 		// Camera
-		m_Camera.reset(SandTable::OrthographicCamera::Create(-1.0f, 1.0f, -1.0f, 1.0f));
+		float width = SandTable::Application::GetInstance().GetWindow().GetWidth();
+		float height = SandTable::Application::GetInstance().GetWindow().GetHeight();
+		m_Camera = SandTable::OrthographicCamera::Create(-1.0f * width / height, 1.0f * width / height, -1.0f, 1.0f);
 		m_Camera->SetMoveSpeed(1.0f);
 		m_Camera->SetRotateSpeed(100.0f);
 
@@ -30,13 +31,13 @@ public:
 		SandTable::ObjectRef<SandTable::IndexBuffer> indexBuffer;
 		// triangle
 		// 顶点缓冲对象
-		m_VertexArray.reset(SandTable::VertexArray::Create());
+		m_VertexArray = SandTable::VertexArray::Create();
 		float vertices[] = {
 			-0.5f, -0.5f, 0.0f, 0.9f, 0.77f, 0.93f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.77f, 0.93f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 1.0f, 0.97f, 0.93f, 1.0f
 		};
-		vertexBuffer.reset(SandTable::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer = SandTable::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		SandTable::BufferLayout layout = {
 			{ SandTable::ShaderDataType::Float3, "position", false },
@@ -48,7 +49,7 @@ public:
 		// 索引缓冲对象
 		unsigned int indices[] = {
 			0, 1, 2};
-		indexBuffer.reset(SandTable::IndexBuffer::Create(indices, 3));
+		indexBuffer = SandTable::IndexBuffer::Create(indices, 3);
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// 着色器
@@ -80,40 +81,43 @@ public:
 				color = v_Position;
 			}
 		)";
-		m_Shader.reset(SandTable::Shader::Create(vertex, fragment));
+		m_Shader = SandTable::Shader::Create(vertex, fragment);
 
 		// for square
-		m_SquareVertexArray.reset(SandTable::VertexArray::Create());
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		m_SquareVertexArray = SandTable::VertexArray::Create();
+		float squareVertices[] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
-		vertexBuffer.reset(SandTable::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		vertexBuffer = SandTable::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 		SandTable::BufferLayout squareLayout = {
-			{ SandTable::ShaderDataType::Float3, "position", false },
+			{SandTable::ShaderDataType::Float3, "position", false},
+			{SandTable::ShaderDataType::Float2, "texCoord", false}
 		};
 		vertexBuffer->SetLayout(squareLayout);
 		m_SquareVertexArray->AddVertexBuffer(vertexBuffer);
 
 		// 索引缓冲对象
 		unsigned int squareIndices[3 * 2] = {
-			0, 1, 2, 2, 3, 0};
-		indexBuffer.reset(SandTable::IndexBuffer::Create(squareIndices, 6));
+			0, 1, 2, 2, 3, 0
+		};
+		indexBuffer = SandTable::IndexBuffer::Create(squareIndices, 6);
 		m_SquareVertexArray->SetIndexBuffer(indexBuffer);
+
 		std::string squareVertex = R"(
 			#version 330 core
 		
-			layout(location = 0) in vec3 a_position;
+			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_ModelTransform;
 		
 			void main()
 			{
-				gl_Position = u_ViewProjection *  u_ModelTransform * vec4(a_position, 1.0f);
+				gl_Position = u_ViewProjection * u_ModelTransform * vec4(a_Position, 1.0f);
 			}
 		)";
 		std::string squareFragment = R"(
@@ -129,7 +133,45 @@ public:
 				//color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
 			}
 		)";
-		m_SquareShader.reset(SandTable::Shader::Create(squareVertex, squareFragment));
+		m_SquareShader = SandTable::Shader::Create(squareVertex, squareFragment);
+
+		std::string textureVertex = R"(
+			#version 330 core
+		
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_ModelTransform;
+
+			out vec2 v_TexCoord;
+		
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection *  u_ModelTransform * vec4(a_Position, 1.0f);
+
+			}
+		)";
+		std::string textureFragment = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+		m_TextureShader = SandTable::Shader::Create(textureVertex, textureFragment);
+		m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
+
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->SetUniform("u_Texture", 0);
 	}
 
 	void OnUpdate(SandTable::TimeStep timeStep) override
@@ -217,6 +259,8 @@ public:
 				SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader, transform);
 			}
 		}
+		m_Texture->Bind();
+		SandTable::Renderer::Submit(m_SquareVertexArray, m_TextureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
 		// SandTable::Renderer::Submit(m_VertexArray, m_Shader);
 		SandTable::Renderer::EndScene();
 	}
@@ -240,7 +284,9 @@ private:
 	SandTable::ObjectRef<SandTable::Shader> m_Shader;
 	SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
 	SandTable::ObjectRef<SandTable::Shader> m_SquareShader;
+	SandTable::ObjectRef<SandTable::Shader> m_TextureShader;
 	SandTable::ObjectRef<SandTable::OrthographicCamera> m_Camera;
+	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareSpeed;
@@ -257,7 +303,7 @@ public:
 	~Sandbox() override = default;
 };
 
-SandTable::Application* SandTable::CreateApplication()
+SandTable::Object<SandTable::Application> SandTable::CreateApplication()
 {
-	return new Sandbox();
+	return std::make_unique<Sandbox>();
 }

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @date 2025-11-2
- * @version build23
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 照相机头文件
  */
@@ -14,7 +14,7 @@
 
 namespace SandTable
 {
-	Camera* Camera::Create()
+	ObjectRef<Camera> Camera::Create()
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -27,14 +27,14 @@ namespace SandTable
 		}
 	}
 
-	OrthographicCamera* OrthographicCamera::Create(float left, float right, float bottom, float top)
+	ObjectRef<OrthographicCamera> OrthographicCamera::Create(float left, float right, float bottom, float top)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return new OpenGLOrthographicCamera(left, right, bottom, top);
+			return std::make_shared<OpenGLOrthographicCamera>(left, right, bottom, top);
 		default:
 			return nullptr;
 		}

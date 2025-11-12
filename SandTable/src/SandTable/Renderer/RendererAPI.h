@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.h
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief 渲染器API头文件
  */
@@ -26,11 +26,15 @@ namespace SandTable
 		};
 
 	public:
+		RendererAPI() = default;
+		virtual ~RendererAPI() = default;
+
+	public:
+		static API GetAPI();
+
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0; 
 		virtual void DrawIndexed(const ObjectRef<VertexArray>& vertexArray) = 0;
-
-		static API GetAPI();
 
 	private:
 		static API s_API;

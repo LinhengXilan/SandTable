@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLContext.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief OpenGL图形上下文实现
  */
@@ -16,7 +16,7 @@
 
 namespace SandTable
 {
-	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
+	OpenGLContext::OpenGLContext(ObjectRef<GLFWwindow> windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
 		SANDTABLE_CORE_ASSERT(windowHandle, "WindowHandle is null!");
@@ -24,7 +24,7 @@ namespace SandTable
 
 	void OpenGLContext::Init()
 	{
-		glfwMakeContextCurrent(m_WindowHandle);
+		glfwMakeContextCurrent(m_WindowHandle.get());
 		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
 		SANDTABLE_CORE_ASSERT(status, "Failed to initialize glad!");
 
@@ -36,6 +36,6 @@ namespace SandTable
 
 	void OpenGLContext::SwapBuffers()
 	{
-		glfwSwapBuffers(m_WindowHandle);
+		glfwSwapBuffers(m_WindowHandle.get());
 	}
 }

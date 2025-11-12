@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.cpp
  * @author LinhengXilan
- * @date 2025-11-9
- * @version build27
+ * @version build29
+ * @date 2025-11-12
  * 
  * @brief OpenGL着色器
  */
@@ -105,11 +105,15 @@ namespace SandTable
 	/* vvv  SetUniform  vvv */
 
 	/* vvv  int  vvv */
-
-	void OpenGLShader::SetUniform(const std::string& name, const int value)
+	void OpenGLShader::SetUniform(const std::string& name, const int32_t value)
 	{
 		glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
+	void OpenGLShader::SetUniform(const std::string& name, const uint32_t value)
+	{
+		glUniform1ui(glGetUniformLocation(m_RendererID, name.c_str()), value);
+	}
+
 
 	/* vvv  vector(float)  vvv */
 

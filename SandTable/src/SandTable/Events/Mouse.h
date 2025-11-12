@@ -1,8 +1,8 @@
-/**
+﻿/**
  * @file SandTable/Events/Mouse.h
  * @author LinhengXilan
- * @date 2025-8-14
- * @version build12
+ * @version build29
+ * @date 2025-11-12
  */
 
 #ifndef SANDTABLE_EVENTS_MOUSE_H
@@ -16,42 +16,43 @@ namespace SandTable
 	{
 	public:
 		MouseMoved(float x, float y)
-			: m_MouseX_(x), m_MouseY_(y)
+			: m_MouseX(x), m_MouseY(y)
 		{
 
 		}
 
-		inline float GetX() const { return m_MouseX_; }
-		inline float GetY() const { return m_MouseY_; }
+	public:
+		inline const float GetX() const { return m_MouseX; }
+		inline const float GetY() const { return m_MouseY; }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouveMove: " << m_MouseX_ << ", " << m_MouseY_;
+			ss << "MouveMove: " << m_MouseX << ", " << m_MouseY;
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::MouseMoved; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "MouseMoved"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
+		static const EventType GetStaticType() { return EventType::MouseMoved; }
+		const EventType GetEventType() const override { return GetStaticType(); }
+		const std::string GetName() const override { return "MouseMoved"; }
+		const uint8_t GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	private:
-		float m_MouseX_;
-		float m_MouseY_;
+		float m_MouseX;
+		float m_MouseY;
 	};
 
 	class SANDTABLE_DLL MouseScrolled : public Event
 	{
 	public:
 		MouseScrolled(float x, float y)
-			: m_OffsetX_(x), m_OffsetY_(y)
+			: m_OffsetX(x), m_OffsetY(y)
 		{
 			
 		}
 
-		inline float GetXOffset() const { return m_OffsetX_; }
-		inline float GetYOffset() const { return m_OffsetY_; }
+		inline const float GetXOffset() const { return m_OffsetX; }
+		inline const float GetYOffset() const { return m_OffsetY; }
 
 		std::string ToString() const override
 		{
@@ -60,30 +61,31 @@ namespace SandTable
 			return ss.str();
 		}
 
-		static EventType GetStaticType() { return EventType::MouseScrolled; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "MouseScrolled"; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
+		inline static const EventType GetStaticType() { return EventType::MouseScrolled; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "MouseScrolled"; }
+		inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input; }
 
 	private:
-		float m_OffsetX_;
-		float m_OffsetY_;
+		float m_OffsetX;
+		float m_OffsetY;
 	};
 
 	class SANDTABLE_DLL MouseButton : public Event
 	{
 	public:
-		inline int GetMouseButton() const { return m_Button_; }
-		virtual int GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input | EventCategory::E_MouseButton; }
+		inline int GetMouseButton() const { return m_Button; }
+		inline virtual const uint8_t GetCategoryFlags() const override { return EventCategory::E_Mouse | EventCategory::E_Input | EventCategory::E_MouseButton; }
 
 	protected:
 		MouseButton(int button)
-			: m_Button_(button)
+			: m_Button(button)
 		{
 
 		}
+		virtual ~MouseButton() = default;
 
-		int m_Button_;
+		int m_Button;
 	};
 	
 	class SANDTABLE_DLL MousePressed : public MouseButton
@@ -95,15 +97,16 @@ namespace SandTable
 
 		}
 
+	public:
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressed: " << m_Button_;
+			ss << "MouseButtonPressed: " << m_Button;
 			return ss.str();
 		}
-		static EventType GetStaticType() { return EventType::MousePressed; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "MousePressed"; }
+		inline static const EventType GetStaticType() { return EventType::MousePressed; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "MousePressed"; }
 	};
 
 	class SANDTABLE_DLL MouseReleased : public MouseButton
@@ -115,15 +118,16 @@ namespace SandTable
 			
 		}
 
+	public:
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseReleased: " << m_Button_;
+			ss << "MouseReleased: " << m_Button;
 			return ss.str();
 		}
-		static EventType GetStaticType() { return EventType::MouseReleased; }
-		virtual EventType GetEventType() const override { return GetStaticType(); }
-		virtual const char* GetName() const override { return "MouseReleased"; }
+		inline static const EventType GetStaticType() { return EventType::MouseReleased; }
+		inline const EventType GetEventType() const override { return GetStaticType(); }
+		inline const std::string GetName() const override { return "MouseReleased"; }
 	};
 }
 
