@@ -1,7 +1,7 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build29
+ * @version build30
  * @date 2025-11-12
  * 
  * @brief 应用程序实现
@@ -10,6 +10,7 @@
 #include <pch.h>
 #include <SandTable/Application.h>
 #include <SandTable/Log.h>
+#include <SandTable/Renderer/Renderer.h>
 
 namespace SandTable
 {
@@ -23,6 +24,8 @@ namespace SandTable
 		m_Window = Window::Create();
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 		m_Window->SetSync(false);
+
+		Renderer::Init();
 
 		m_ImguiLayer = std::make_unique<ImguiLayer>();
 		PushOverlay(m_ImguiLayer.get());

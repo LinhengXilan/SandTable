@@ -54,6 +54,7 @@ target_include_directories(SandTable PRIVATE ${SandTableLibrary}glfw/)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}glad/glad/include/)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}imgui/)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}glm/)
+target_include_directories(SandTable PRIVATE ${SandTableLibrary}stb/)
 
 
 # Sandbox
@@ -64,6 +65,7 @@ target_include_directories(Sandbox PRIVATE ${SandTableLibrary}spdlog/include/)
 target_include_directories(Sandbox PRIVATE ${SandTableLibrary}glfw/)
 target_include_directories(Sandbox PRIVATE ${SandTableLibrary}glad/glad/include/)
 target_include_directories(Sandbox PRIVATE ${SandTableLibrary}imgui/)
+target_include_directories(Sandbox PRIVATE ${SandTableLibrary}stb/)
 target_link_directories(Sandbox PRIVATE ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 target_link_libraries(Sandbox PRIVATE SandTable)
 target_link_libraries(Sandbox PRIVATE glad)

@@ -1,7 +1,7 @@
 ﻿/**
  * @file SandTable/Renderer/RenderCommand.h
  * @author LinhengXilan
- * @version build29
+ * @version build30
  * @date 2025-11-12
  * 
  * @brief
@@ -21,12 +21,13 @@ namespace SandTable
 		~RenderCommand() = default;
 
 	public:
-		inline static void SetClearColor(glm::vec4 color) { s_RendererAPI->SetClearColor(color); }
-		inline static void Clear() { s_RendererAPI->Clear(); }
-		inline static void DrawIndexed(const ObjectRef<VertexArray>& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }
+		static void Init();
+		static void SetClearColor(glm::vec4 color);
+		static void Clear();
+		static void DrawIndexed(const ObjectRef<VertexArray>& vertexArray);
 	
 	private:
-		static RendererAPI* s_RendererAPI;
+		static Object<RendererAPI> s_RendererAPI;
 	};
 }
 

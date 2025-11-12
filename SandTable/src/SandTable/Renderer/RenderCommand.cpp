@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RenderCommand.cpp
  * @author LinhengXilan
- * @date 2025-10-30
- * @version build22
+ * @version build30
+ * @date 2025-11-12
  * 
  * @brief
  */
@@ -13,5 +13,23 @@
 
 namespace SandTable
 {
-	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI;
+	Object<RendererAPI> RenderCommand::s_RendererAPI = std::make_unique<OpenGLRendererAPI>();
+
+	void RenderCommand::Init()
+	{
+		s_RendererAPI->Init();
+	}
+
+	void RenderCommand::SetClearColor(glm::vec4 color)
+	{
+		s_RendererAPI->SetClearColor(color);
+	}
+	void RenderCommand::Clear()
+	{
+		s_RendererAPI->Clear();
+	}
+	void RenderCommand::DrawIndexed(const ObjectRef<VertexArray>& vertexArray)
+	{
+		s_RendererAPI->DrawIndexed(vertexArray);
+	}
 }

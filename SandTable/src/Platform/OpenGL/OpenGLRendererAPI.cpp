@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.cpp
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build30
+ * @date 2025-11-12
  * 
  * @brief OpenGL渲染器API实现
  */
@@ -13,6 +13,12 @@
 
 namespace SandTable
 {
+	void OpenGLRendererAPI::Init()
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);

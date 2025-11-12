@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build30
+ * @date 2025-11-12
  * 
  * @brief 渲染器实现
  */
@@ -14,6 +14,11 @@
 namespace SandTable
 {
 	Renderer::SceneData* Renderer::m_SceneData = new SceneData;
+
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
 
 	void Renderer::BeginScene(const ObjectRef<OrthographicCamera>& camera)
 	{

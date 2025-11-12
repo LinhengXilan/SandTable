@@ -1,7 +1,7 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build29
+ * @version build30
  * @date 2025-11-12
  * 
  * @brief Sandbox示例程序
@@ -169,6 +169,7 @@ public:
 		)";
 		m_TextureShader = SandTable::Shader::Create(textureVertex, textureFragment);
 		m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
+		m_IconTexture = SandTable::Texture2D::Create("assets/icons/icon.png");
 
 		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->SetUniform("u_Texture", 0);
@@ -261,6 +262,8 @@ public:
 		}
 		m_Texture->Bind();
 		SandTable::Renderer::Submit(m_SquareVertexArray, m_TextureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
+		m_IconTexture->Bind();
+		SandTable::Renderer::Submit(m_SquareVertexArray, m_TextureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
 		// SandTable::Renderer::Submit(m_VertexArray, m_Shader);
 		SandTable::Renderer::EndScene();
 	}
@@ -287,6 +290,7 @@ private:
 	SandTable::ObjectRef<SandTable::Shader> m_TextureShader;
 	SandTable::ObjectRef<SandTable::OrthographicCamera> m_Camera;
 	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
+	SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareSpeed;

@@ -1,6 +1,5 @@
 # Directories
 .vs/
-bin/
 obj/
 .vscode/
 cmake-build/
@@ -16,3 +15,9 @@ library/imgui/misc/
 *.vcxproj.user
 *.vcxproj.filters
 *.backup
+bin/Debug/*.idb
+bin/Debug/*.pdb
+bin/Debug/*.lib
+bin/Release/*.idb
+bin/Release/*.pdb
+bin/Release/*.lib

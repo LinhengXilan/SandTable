@@ -1,7 +1,7 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLContext.h
  * @author LinhengXilan
- * @version build29
+ * @version build30
  * @date 2025-11-12
  * 
  * @brief OpenGL图形上下文头文件
@@ -20,7 +20,7 @@ namespace SandTable
 	class OpenGLContext : public GraphicsContext
 	{
 	public:
-		OpenGLContext(ObjectRef<GLFWwindow> window);
+		OpenGLContext(GLFWwindow* window);
 		~OpenGLContext() = default;
 
 	public:
@@ -28,7 +28,7 @@ namespace SandTable
 		void SwapBuffers() override;
 
 	private:
-		ObjectRef<GLFWwindow> m_WindowHandle;
+		GLFWwindow* m_WindowHandle;
 	};
 }
 

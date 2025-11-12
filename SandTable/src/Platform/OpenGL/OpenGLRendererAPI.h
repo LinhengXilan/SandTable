@@ -1,7 +1,7 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.h
  * @author LinhengXilan
- * @version build29
+ * @version build30
  * @date 2025-11-12
  * 
  * @brief OpenGL渲染器API头文件
@@ -21,6 +21,7 @@ namespace SandTable
 		~OpenGLRendererAPI() = default;
 
 	public:
+		void Init() override;
 		void SetClearColor(const glm::vec4& color) override;
 		void Clear() override;
 		void DrawIndexed(const ObjectRef<VertexArray>& vertexArray) override;
