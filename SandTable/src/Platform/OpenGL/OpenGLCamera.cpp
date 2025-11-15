@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief OpenGL相机实现
  */
@@ -20,6 +20,36 @@ namespace SandTable
 	{
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
+
+	const CameraType OpenGLOrthographicCamera::GetCameraType() const
+	{
+		return CameraType::Orthographic;
+	};
+
+	const glm::vec3& OpenGLOrthographicCamera::GetPosition() const
+	{
+		return m_Position;
+	};
+
+	const float OpenGLOrthographicCamera::GetRotation() const
+	{
+		return m_Rotation;
+	};
+
+	const glm::mat4& OpenGLOrthographicCamera::GetViewMatrix() const
+	{
+		return m_ViewMatrix;
+	};
+
+	const glm::mat4& OpenGLOrthographicCamera::GetProjectionMatrix() const
+	{
+		return m_ProjectionMatrix;
+	};
+
+	const glm::mat4& OpenGLOrthographicCamera::GetViewProjectionMatrix() const
+	{
+		return m_ViewProjectionMatrix;
+	};
 
 	void OpenGLOrthographicCamera::SetPosition(const glm::vec3& position)
 	{

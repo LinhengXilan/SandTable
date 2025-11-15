@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 照相机头文件
  */
@@ -39,12 +39,12 @@ namespace SandTable
 		virtual ~Camera() = default;
 
 	public:
-		inline virtual const CameraType GetCameraType() const = 0;
-		inline virtual const glm::vec3& GetPosition() const = 0;
-		inline virtual const float GetRotation() const = 0;
-		inline virtual const glm::mat4& GetViewMatrix() const = 0;
-		inline virtual const glm::mat4& GetProjectionMatrix() const = 0;
-		inline virtual const glm::mat4& GetViewProjectionMatrix() const = 0;
+		virtual const CameraType GetCameraType() const = 0;
+		virtual const glm::vec3& GetPosition() const = 0;
+		virtual const float GetRotation() const = 0;
+		virtual const glm::mat4& GetViewMatrix() const = 0;
+		virtual const glm::mat4& GetProjectionMatrix() const = 0;
+		virtual const glm::mat4& GetViewProjectionMatrix() const = 0;
 
 		virtual void SetPosition(const glm::vec3& position) = 0;
 		virtual void SetRotation(const float rotation) = 0;

@@ -1,7 +1,7 @@
 ﻿/**
  * @file SandTable/Core/File.h
  * @author LinhengXilan
- * @version build31
+ * @version build32
  * @date 2025-11-15
  * 
  * @brief 文件操作
@@ -19,6 +19,7 @@ namespace SandTable
 		~File() = default;
 
 		static std::string ReadFile(const std::string& path);
+		static std::string ReadFile(const std::string& path, const std::string& postfix);
 	};
 }
 

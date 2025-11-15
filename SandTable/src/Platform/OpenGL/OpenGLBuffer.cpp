@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLBuffer.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief OpenGL图形缓冲实现
  */
@@ -41,6 +41,11 @@ namespace SandTable
 		m_Layout = layout;
 	};
 
+	const BufferLayout& OpenGLVertexBuffer::GetLayout() const
+	{
+		return m_Layout;
+	};
+
 
 	// IndexBuffer
 	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* indices, unsigned int count)
@@ -64,5 +69,10 @@ namespace SandTable
 	void OpenGLIndexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+	}
+
+	const uint32_t OpenGLIndexBuffer::GetCount() const
+	{
+		return m_Count;
 	}
 }

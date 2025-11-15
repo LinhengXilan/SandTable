@@ -1,0 +1,9 @@
+build18
+2025-10-26
+
+1. 添加着色器类 SandTable/Renderer/Shader.h|cpp ，实现了Opengl着色器的加载。
+
+2. 在 SandTable/Application.h 中的 class Application 中 添加着色器成员。
+
+3. 在 SandTable/Application.cpp 中内嵌简易顶点着色器和片段着色器。
+	- 效果为为三角形绘制渐变色

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief Imgui层
  */
@@ -24,8 +24,8 @@ namespace SandTable
 		~ImguiLayer();
 
 	public:
-		void Begin();
-		void End();
+		void Begin() override;
+		void End() override;
 		void Attach() override;
 		void Detach() override;
 		void ImguiRender() override;

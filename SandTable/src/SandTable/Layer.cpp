@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 图层实现
  */
@@ -19,6 +19,16 @@ namespace SandTable
 
 	}
 
+	void Layer::Begin()
+	{
+
+	}
+
+	void Layer::End()
+	{
+
+	}
+
 	void Layer::Attach()
 	{
 
@@ -27,6 +37,11 @@ namespace SandTable
 	void Layer::Detach()
 	{
 
+	}
+
+	const std::string& Layer::GetName() const
+	{
+		return m_DebugName;
 	}
 
 	void Layer::OnUpdate(TimeStep timeStep)

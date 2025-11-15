@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsInput.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  */
 
 #include <pch.h>
@@ -18,21 +18,21 @@ namespace SandTable
 
 	const bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
-		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
+		auto window = static_cast<GLFWwindow*>(Application::GetInstance()->GetWindow()->GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	const bool WindowsInput::IsMousePressedImpl(int button)
 	{
-		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
+		auto window = static_cast<GLFWwindow*>(Application::GetInstance()->GetWindow()->GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
 	}
 
 	const std::pair<float, float> WindowsInput::GetMousePosImpl()
 	{
-		auto window = static_cast<GLFWwindow*>(Application::GetInstance().GetWindow().GetNativeWindow());
+		auto window = static_cast<GLFWwindow*>(Application::GetInstance()->GetWindow()->GetNativeWindow());
 		double posX, posY;
 		glfwGetCursorPos(window, &posX, &posY);
 		return {(float)posX, (float)posY};

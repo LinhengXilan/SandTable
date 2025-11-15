@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief OpenGL纹理
  */
@@ -21,8 +21,8 @@ namespace SandTable
 		~OpenGLTexture2D();
 
 	public:
-		inline const uint32_t GetWidth() const override { return m_Width; }
-		inline const uint32_t GetHeight() const override { return m_Height; }
+		const uint32_t GetWidth() const override;
+		const uint32_t GetHeight() const override;
 
 		void Bind(uint32_t slot = 0) const override;
 

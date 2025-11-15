@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 图层头文件
  */
@@ -23,8 +23,10 @@ namespace SandTable
 		virtual ~Layer() = default;
 
 	public:
-		inline const std::string& GetName() const { return m_DebugName; }
+		const std::string& GetName() const;
 
+		virtual void Begin();
+		virtual void End();
 		virtual void Attach();
 		virtual void Detach();
 		virtual void ImguiRender();

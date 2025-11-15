@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.cpp
  * @author LinhengXilan
- * @date 2025-10-26
- * @version build19
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 图层栈实现
  */
@@ -13,33 +13,20 @@
 
 namespace SandTable
 {
-	LayerStack::LayerStack()
+	void LayerStack::PushLayer(ObjectRef<Layer>& layer)
 	{
-
-	}
-
-	LayerStack::~LayerStack()
-	{
-		for (Layer* layer : m_Layers)
-		{
-			delete layer;
-		}
-	}
-
-	void LayerStack::PushLayer(Layer* layer)
-	{
-		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_Layers.push_back(layer);
 		m_LayerInsertIndex++;
 		layer->Attach();
 	}
 
-	void LayerStack::PushOverlay(Layer* overlay)
+	void LayerStack::PushOverlay(ObjectRef<Layer>& overlay)
 	{
-		m_Layers.emplace_back(overlay);
+		m_Layers.push_back(overlay);
 		overlay->Attach();
 	}
 
-	void LayerStack::PopLayer(Layer* layer)
+	void LayerStack::PopLayer(ObjectRef<Layer>& layer)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
 		if (it != m_Layers.end())
@@ -50,7 +37,7 @@ namespace SandTable
 		}
 	}
 
-	void LayerStack::PopOverlay(Layer* overlay)
+	void LayerStack::PopOverlay(ObjectRef<Layer>& overlay)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())

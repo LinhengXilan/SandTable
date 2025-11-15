@@ -1,9 +1,0 @@
-build27
-2025-11-9
-
-1. 实现部分Shader接口，原Shader内容移至 Platform/OpenGL/OpenGLShader.h|cpp 。
-	-（暂时）通过dynamic_cast实现其他成员函数的调用。
-
-2. 为 OpenGLShader::SetUniform(std::string& name, Type value) 重载更多的类型支持
-
-3. 添加一个ImGui窗口实现运行时的着色器颜色上传。

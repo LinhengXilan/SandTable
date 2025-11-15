@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.h
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 渲染器头文件
  */
@@ -23,7 +23,7 @@ namespace SandTable
 		~Renderer() = default;
 
 	public:
-		inline static const RendererAPI::API GetRendererAPI() { return RendererAPI::GetAPI(); }
+		static const RendererAPI::API GetRendererAPI();
 
 		static void Init();
 		static void BeginScene(const ObjectRef<OrthographicCamera>& camera);

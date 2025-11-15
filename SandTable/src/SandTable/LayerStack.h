@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 图层栈头文件
  */
@@ -18,20 +18,20 @@ namespace SandTable
 	class SANDTABLE_DLL LayerStack
 	{
 	public:
-		LayerStack();
-		~LayerStack();
+		LayerStack() = default;
+		~LayerStack() = default;
 
 	public:
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* overlay);
-		void PopLayer(Layer* layer);
-		void PopOverlay(Layer* overlay);
+		void PushLayer(ObjectRef<Layer>& layer);
+		void PushOverlay(ObjectRef<Layer>& overlay);
+		void PopLayer(ObjectRef<Layer>& layer);
+		void PopOverlay(ObjectRef<Layer>& overlay);
 
-		std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }
-		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
+		std::vector<ObjectRef<Layer>>::iterator begin() { return m_Layers.begin(); }
+		std::vector<ObjectRef<Layer>>::iterator end() { return m_Layers.end(); }
 
 	private:
-		std::vector<Layer*> m_Layers;
+		std::vector<ObjectRef<Layer>> m_Layers;
 		unsigned int m_LayerInsertIndex = 0;
 	};
 }

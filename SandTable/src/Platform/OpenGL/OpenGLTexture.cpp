@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief OpenGL纹理
  */
@@ -41,5 +41,15 @@ namespace SandTable
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
 		glBindTextureUnit(slot, m_RendererID);
+	}
+
+	const uint32_t OpenGLTexture2D::GetWidth() const
+	{
+		return m_Width;
+	}
+
+	const uint32_t OpenGLTexture2D::GetHeight() const
+	{
+		return m_Height;
 	}
 }

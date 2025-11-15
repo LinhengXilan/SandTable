@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLBuffer.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief OpenGL图形缓冲头文件
  */
@@ -24,7 +24,7 @@ namespace SandTable
 		void Bind() const override;
 		void Unbind() const override;
 
-		inline const BufferLayout& GetLayout() const override { return m_Layout; };
+		const BufferLayout& GetLayout() const override;
 		void SetLayout(const BufferLayout& layout) override;
 
 	private:
@@ -41,7 +41,7 @@ namespace SandTable
 	public:
 		void Bind() const override;
 		void Unbind() const override;
-		inline const uint32_t GetCount() const override { return m_Count; }
+		const uint32_t GetCount() const override;
 
 	private:
 		uint32_t m_RendererID;

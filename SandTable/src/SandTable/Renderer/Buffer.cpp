@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 渲染缓冲实现
  */
@@ -20,12 +20,11 @@ namespace SandTable
 		switch (Renderer::GetRendererAPI())
 		{
 		case RendererAPI::API::None:
-			SANDTABLE_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
+		case RendererAPI::API::OpenGL3:
 			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		default:
-			SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 			return nullptr;
 		}
 	}
@@ -43,6 +42,37 @@ namespace SandTable
 			return nullptr;
 		}
 	}
+
+	const std::vector<BufferElement>& BufferLayout::GetElements() const
+	{
+		return m_Elements;
+	}
+
+	uint8_t BufferLayout::GetStride() const
+	{
+		return m_Stride;
+	}
+
+	std::vector<BufferElement>::iterator BufferLayout::begin()
+	{
+		return m_Elements.begin();
+	}
+
+	std::vector<BufferElement>::iterator BufferLayout::end()
+	{
+		return m_Elements.end();
+	}
+
+	std::vector<BufferElement>::const_iterator BufferLayout::cbegin() const
+	{
+		return m_Elements.cbegin();
+	}
+
+	std::vector<BufferElement>::const_iterator BufferLayout::cend() const
+	{
+		return m_Elements.cend();
+	}
+
 	void BufferLayout::CalculateOffsetAndStride()
 	{
 		unsigned int offset = 0;

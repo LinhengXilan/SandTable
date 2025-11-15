@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 渲染缓冲头文件
  */
@@ -108,13 +108,13 @@ namespace SandTable
 		~BufferLayout() = default;
 
 	public:
-		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
-		inline uint8_t GetStride() const { return m_Stride; }
+		const std::vector<BufferElement>& GetElements() const;
+		uint8_t GetStride() const;
 
-		std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
-		std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
-		std::vector<BufferElement>::const_iterator begin() const { return m_Elements.cbegin(); }
-		std::vector<BufferElement>::const_iterator end() const { return m_Elements.cend(); }
+		std::vector<BufferElement>::iterator begin();
+		std::vector<BufferElement>::iterator end();
+		std::vector<BufferElement>::const_iterator cbegin() const;
+		std::vector<BufferElement>::const_iterator cend() const;
 
 	private:
 		void CalculateOffsetAndStride();
@@ -150,7 +150,7 @@ namespace SandTable
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		
-		virtual inline const uint32_t GetCount() const = 0;
+		virtual const uint32_t GetCount() const = 0;
 
 		static ObjectRef<IndexBuffer> Create(unsigned int* indices, unsigned int count);
 	};

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Keyboard.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  */
 
 #ifndef SANDTABLE_EVENTS_KEYBOARD_H
@@ -15,14 +15,10 @@ namespace SandTable
 	class SANDTABLE_DLL Keyboard : public Event
 	{
 	public:
-		inline const int GetKeyCode() const { return m_KeyCode; }
+		const int GetKeyCode() const;
 
 	protected:
-		Keyboard(int keycode)
-			: m_KeyCode(keycode)
-		{
-			
-		}
+		Keyboard(int keycode);
 		virtual ~Keyboard() = default;
 		int m_KeyCode;
 	};
@@ -30,27 +26,18 @@ namespace SandTable
 	class SANDTABLE_DLL KeyPressed : public Keyboard
 	{
 	public:
-		KeyPressed(int keycode, int repeatcount)
-		  : Keyboard(keycode), m_RepeatCount(repeatcount)
-		{
-		  
-		}
+		KeyPressed(int keycode, int repeatcount);
 		~KeyPressed() = default;
 
 	public:
-		inline const int GetRepeatCount() const { return m_RepeatCount; }
+		const int GetRepeatCount() const;
 
-		std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyPressed: " << m_KeyCode << "(" << m_RepeatCount << " repeats)";
-			return ss.str();
-		}
+		std::string ToString() const override;
 
-		inline static const EventType GetStaticType() { return EventType::KeyPressed; }
-		inline const EventType GetEventType() const override { return GetStaticType(); }
-		inline const std::string GetName() const override { return "KeyPressed"; }
-        inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		static const EventType GetStaticType();
+		const EventType GetEventType() const override;
+		const std::string GetName() const override;
+		const uint8_t GetCategoryFlags() const override;
 
 	private:
 		int m_RepeatCount;
@@ -59,49 +46,31 @@ namespace SandTable
 	class SANDTABLE_DLL KeyReleased : public Keyboard
 	{
 	public:
-		KeyReleased(int keycode)
-			: Keyboard(keycode)
-		{
-
-		}
+		KeyReleased(int keycode);
 		~KeyReleased() = default;
 
 	public:
-		std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyReleased: " << m_KeyCode;
-			return ss.str();
-		}
+		std::string ToString() const override;
 
-		inline static const EventType GetStaticType() { return EventType::KeyReleased; }
-		inline const EventType GetEventType() const override { return GetStaticType(); }
-		inline const std::string GetName() const override { return "KeyReleased"; }
-		inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		static const EventType GetStaticType();
+		const EventType GetEventType() const override;
+		const std::string GetName() const override;
+		const uint8_t GetCategoryFlags() const override;
 	};
 
 	class SANDTABLE_DLL KeyTyped : public Keyboard
 	{
 	public:
-		KeyTyped(int keycode)
-			: Keyboard(keycode)
-		{
-
-		}
+		KeyTyped(int keycode);
 		~KeyTyped() = default;
 
 	public:
-		std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyTyped: " << m_KeyCode;
-			return ss.str();
-		}
+		std::string ToString() const override;
 
-		inline static const EventType GetStaticType() { return EventType::KeyTyped; }
-		inline const EventType GetEventType() const override { return GetStaticType(); }
-		inline const std::string GetName() const override { return "KeyTyped"; }
-		inline const uint8_t GetCategoryFlags() const override { return EventCategory::E_Keyboard | EventCategory::E_Input; }
+		static const EventType GetStaticType();
+		const EventType GetEventType() const override;
+		const std::string GetName() const override;
+		const uint8_t GetCategoryFlags() const override;
 	};
 }
 

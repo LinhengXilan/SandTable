@@ -1,7 +1,7 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.cpp
  * @author LinhengXilan
- * @version build31
+ * @version build32
  * @date 2025-11-15
  * 
  * @brief OpenGL着色器
@@ -30,19 +30,29 @@ namespace SandTable
 		return NULL;
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> shaderSource;
 		shaderSource[GL_VERTEX_SHADER] = vertexSource;
 		shaderSource[GL_FRAGMENT_SHADER] = fragmentSource;
 		Compile(shaderSource);
+		
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& path)
 	{
-		std::string source = File::ReadFile(path);
-		auto shaderSource = Preprocess(source);
-		Compile(shaderSource);
+		std::string source = File::ReadFile(path, "glsl");
+		if (!source.empty()) [[likely]]
+		{
+			auto shaderSource = Preprocess(source);
+			Compile(shaderSource);
+
+			auto lastSlash = path.find_last_of("/\\");
+			lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+			auto lastDot = path.find_last_of(".");
+			m_Name = path.substr(lastSlash, lastDot - lastSlash);
+		}
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -80,7 +90,9 @@ namespace SandTable
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLuint> shaders(shaderSources.size());
+		SANDTABLE_CORE_ASSERT(shaderSources.size() <= 16, "Too much shaders!");
+		std::array<GLuint, 6> shaders;
+		int shaderIndex = 0;
 		for (auto& data : shaderSources)
 		{
 			GLenum type = data.first;
@@ -105,7 +117,7 @@ namespace SandTable
 			}
 #endif
 			glAttachShader(program, shader);
-			shaders.push_back(shader);
+			shaders[shaderIndex++] = shader;
 		}
 
 		glLinkProgram(program);
@@ -143,6 +155,11 @@ namespace SandTable
 	void OpenGLShader::Unbind() const
 	{
 		glUseProgram(0);
+	}
+
+	const std::string& OpenGLShader::GetName() const
+	{
+		return m_Name;
 	}
 
 	/* vvv  SetUniform  vvv */

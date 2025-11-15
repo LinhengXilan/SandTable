@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Input.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  */
 
 #ifndef SANDTABLE_INPUT_H
@@ -19,18 +19,18 @@ namespace SandTable
 		virtual ~Input() = default;
 
 	public:
-		inline static float GetMousePosX() { return s_Instance->GetMousePosXImpl(); }
-		inline static float GetMousePosY() { return s_Instance->GetMousePosYImpl(); }
-		inline static std::pair<float, float> GetMousePos() { return s_Instance->GetMousePosImpl(); }
-		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
-		inline static bool IsMousePressed(int button) { return s_Instance->IsMousePressedImpl(button); }
+		static float GetMousePosX() { return s_Instance->GetMousePosXImpl(); }
+		static float GetMousePosY() { return s_Instance->GetMousePosYImpl(); }
+		static std::pair<float, float> GetMousePos() { return s_Instance->GetMousePosImpl(); }
+		static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
+		static bool IsMousePressed(int button) { return s_Instance->IsMousePressedImpl(button); }
 
 	protected:
-		virtual inline const float GetMousePosXImpl() = 0;
-		virtual inline const float GetMousePosYImpl() = 0;
-		virtual inline const std::pair<float, float> GetMousePosImpl() = 0;
-		virtual inline const bool IsKeyPressedImpl(int keycode) = 0;
-		virtual inline const bool IsMousePressedImpl(int button) = 0;
+		virtual const float GetMousePosXImpl() = 0;
+		virtual const float GetMousePosYImpl() = 0;
+		virtual const std::pair<float, float> GetMousePosImpl() = 0;
+		virtual const bool IsKeyPressedImpl(int keycode) = 0;
+		virtual const bool IsMousePressedImpl(int button) = 0;
 
 	private:
 		static Input* s_Instance;

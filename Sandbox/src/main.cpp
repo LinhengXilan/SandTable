@@ -1,13 +1,13 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build31
+ * @version build32
  * @date 2025-11-15
  * 
  * @brief Sandbox示例程序
  */
 
-#define SANDTABLE_PLATFORM_WINDOWS
+#define SANDTABLE_PLATFORM_WINDOWS 
 
 #include <SandTable.h>
 #include <imgui/imgui.h>
@@ -22,8 +22,8 @@ public:
 		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f), m_SquareColor(1.0f, 0.83f, 0.66f)
 	{
 		// Camera
-		float width = SandTable::Application::GetInstance().GetWindow().GetWidth();
-		float height = SandTable::Application::GetInstance().GetWindow().GetHeight();
+		float width = SandTable::Application::GetInstance()->GetWindow()->GetWidth();
+		float height = SandTable::Application::GetInstance()->GetWindow()->GetHeight();
 		m_Camera = SandTable::OrthographicCamera::Create(-1.0f * width / height, 1.0f * width / height, -1.0f, 1.0f);
 		m_Camera->SetMoveSpeed(1.0f);
 		m_Camera->SetRotateSpeed(100.0f);
@@ -54,37 +54,6 @@ public:
 		indexBuffer = SandTable::IndexBuffer::Create(indices, 3);
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		// 着色器
-		std::string vertex = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_position;
-			layout(location = 1) in vec4 a_color;
-
-			uniform mat4 u_ViewProjection;
-
-			out vec4 v_Position;
-
-			void main()
-			{
-				v_Position = a_color;
-				gl_Position = u_ViewProjection * vec4(a_position, 1.0f);
-			}
-		)";
-		std::string fragment = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec4 v_Position;
-
-			void main()
-			{
-				color = v_Position;
-			}
-		)";
-		m_Shader = SandTable::Shader::Create(vertex, fragment);
-
 		// for square
 		m_SquareVertexArray = SandTable::VertexArray::Create();
 		float squareVertices[] = {
@@ -109,45 +78,18 @@ public:
 		indexBuffer = SandTable::IndexBuffer::Create(squareIndices, 6);
 		m_SquareVertexArray->SetIndexBuffer(indexBuffer);
 
-		std::string squareVertex = R"(
-			#version 330 core
-		
-			layout(location = 0) in vec3 a_Position;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_ModelTransform;
-		
-			void main()
-			{
-				gl_Position = u_ViewProjection * u_ModelTransform * vec4(a_Position, 1.0f);
-			}
-		)";
-		std::string squareFragment = R"(
-			#version 330 core
-		
-			uniform vec3 u_Color;
-
-			layout(location = 0) out vec4 color;
-
-			void main()
-			{
-				color = vec4(u_Color, 1.0f);
-				//color = vec4(0.8f, 0.87f, 0.74f, 1.0f);
-			}
-		)";
-		m_SquareShader = SandTable::Shader::Create(squareVertex, squareFragment);
-
-		m_TextureShader = SandTable::Shader::Create("assets/shaders/Texture.glsl");
+		auto squareShader = m_ShaderLibrary.Load("assets/shaders/Square.glsl");
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 		m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
 		m_IconTexture = SandTable::Texture2D::Create("assets/icons/icon.png");
 
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_TextureShader)->SetUniform("u_Texture", 0);
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(textureShader)->SetUniform("u_Texture", 0);
 	}
 
 	void OnUpdate(SandTable::TimeStep timeStep) override
 	{
-		SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
+		//SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
 
 		if (SandTable::Input::IsKeyPressed(KEY_W))
 		{
@@ -183,20 +125,20 @@ public:
 
 		if (SandTable::Input::IsKeyPressed(KEY_UP))
 		{
-			m_SquarePosition.y += m_SquareSpeed * timeStep;
+			m_SquarePosition.y += m_SquareSpeed * timeStep.duration;
 		}
 		else if(SandTable::Input::IsKeyPressed(KEY_DOWN))
 		{
-			m_SquarePosition.y -= m_SquareSpeed* timeStep;
+			m_SquarePosition.y -= m_SquareSpeed * timeStep.duration;
 		}
 
 		if(SandTable::Input::IsKeyPressed(KEY_LEFT))
 		{
-			m_SquarePosition.x -= m_SquareSpeed* timeStep;
+			m_SquarePosition.x -= m_SquareSpeed * timeStep.duration;
 		}
 		else if (SandTable::Input::IsKeyPressed(KEY_RIGHT))
 		{
-			m_SquarePosition.x += m_SquareSpeed* timeStep;
+			m_SquarePosition.x += m_SquareSpeed * timeStep.duration;
 		}
 
 		glm::mat4 scale = glm::scale(glm::mat4{1.0f}, glm::vec3{0.1f});
@@ -209,8 +151,8 @@ public:
 		//glm::vec4 orange{1.0f, 0.66f, 0.83f, 1.0f};
 		//m_SquareColor = { 1.0f, 0.83f, 0.66f };
 
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->Bind();
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", m_SquareColor);
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->Bind();
+		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->SetUniform("u_Color", m_SquareColor);
 
 
 		for (int i = 0; i < 10; i++)
@@ -227,13 +169,14 @@ public:
 				//{
 				//	std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", orange);
 				//}
-				SandTable::Renderer::Submit(m_SquareVertexArray, m_SquareShader, transform);
+				SandTable::Renderer::Submit(m_SquareVertexArray, m_ShaderLibrary.GetShader("Square"), transform);
 			}
 		}
 		m_Texture->Bind();
-		SandTable::Renderer::Submit(m_SquareVertexArray, m_TextureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
+		auto textureShader = m_ShaderLibrary.GetShader("Texture");
+		SandTable::Renderer::Submit(m_SquareVertexArray, textureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
 		m_IconTexture->Bind();
-		SandTable::Renderer::Submit(m_SquareVertexArray, m_TextureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
+		SandTable::Renderer::Submit(m_SquareVertexArray, textureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
 		// SandTable::Renderer::Submit(m_VertexArray, m_Shader);
 		SandTable::Renderer::EndScene();
 	}
@@ -254,13 +197,11 @@ public:
 
 private:
 	SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
-	SandTable::ObjectRef<SandTable::Shader> m_Shader;
 	SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
-	SandTable::ObjectRef<SandTable::Shader> m_SquareShader;
-	SandTable::ObjectRef<SandTable::Shader> m_TextureShader;
 	SandTable::ObjectRef<SandTable::OrthographicCamera> m_Camera;
 	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
 	SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
+	SandTable::ShaderLibrary m_ShaderLibrary;
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareSpeed;
@@ -272,9 +213,13 @@ class Sandbox : public SandTable::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		layer = std::make_shared<ExampleLayer>();
+		PushLayer(layer);
 	}
 	~Sandbox() override = default;
+
+private:
+	SandTable::ObjectRef<SandTable::Layer> layer;
 };
 
 SandTable::Object<SandTable::Application> SandTable::CreateApplication()

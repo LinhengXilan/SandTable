@@ -1,7 +1,7 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.h
  * @author LinhengXilan
- * @version build31
+ * @version build32
  * @date 2025-11-15
  * 
  * @brief OpenGL着色器
@@ -21,13 +21,15 @@ namespace SandTable
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource);
+		OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
 		OpenGLShader(const std::string& path);
 		~OpenGLShader();
 
 	public:
 		void Bind() const override;
 		void Unbind() const override;
+
+		const std::string& GetName() const override;
 
 		void SetUniform(const std::string& name, const int32_t value);
 		void SetUniform(const std::string& name, const uint32_t value);
@@ -44,6 +46,7 @@ namespace SandTable
 
 	private:
 		uint32_t m_RendererID;
+		std::string m_Name;
 	};
 }
 

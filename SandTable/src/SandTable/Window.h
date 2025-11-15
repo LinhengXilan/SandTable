@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Windows.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  */
 
 #ifndef SANDTABLE_WINDOW_H
@@ -38,10 +38,10 @@ namespace SandTable
 		virtual ~Window() = default;
 
 	public:
-		virtual inline const uint16_t GetWidth() const = 0;
-		virtual inline const uint16_t GetHeight() const = 0;
-		virtual inline void* GetNativeWindow() const = 0;
-		virtual inline const bool IsSync() const = 0;
+		virtual const uint16_t GetWidth() const = 0;
+		virtual const uint16_t GetHeight() const = 0;
+		virtual void* GetNativeWindow() const = 0;
+		virtual const bool IsSync() const = 0;
 
 		virtual void SetEventCallbackFunc(const EventCallbackFunc& callback) = 0;
 		virtual void SetSync(bool enabled) = 0;

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @date 2025-10-25
- * @version build17
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief Imgui层实现
  */
@@ -41,9 +41,9 @@ namespace SandTable
 	void ImguiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::GetInstance();
-		WindowsWindow& window = (WindowsWindow&)app.GetWindow();
-		io.DisplaySize = ImVec2((float)window.GetWidth(), (float)window.GetHeight());
+		auto app = Application::GetInstance();
+		auto window = app->GetWindow();
+		io.DisplaySize = ImVec2((float)window->GetWidth(), (float)window->GetHeight());
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -85,8 +85,8 @@ namespace SandTable
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
-		Application& app = Application::GetInstance();
-		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+		auto app = Application::GetInstance();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app->GetWindow()->GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 430");
 	}

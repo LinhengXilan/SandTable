@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 渲染器实现
  */
@@ -28,6 +28,11 @@ namespace SandTable
 	void Renderer::EndScene()
 	{
 
+	}
+
+	const RendererAPI::API Renderer::GetRendererAPI()
+	{
+		return RendererAPI::GetAPI();
 	}
 
 	void Renderer::Submit(const ObjectRef<VertexArray>& vertexArray, const ObjectRef<Shader>& shader, const glm::mat4& transform)

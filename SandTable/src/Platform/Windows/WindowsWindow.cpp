@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief Windows平台窗口实现
  */
@@ -24,11 +24,6 @@ namespace SandTable
 		SANDTABLE_CORE_ERROR("GLFW Error {0}: {1}", error, description);
 	}
 
-	Object<Window> Window::Create(const WindowProperty& property)
-	{
-		return std::make_unique<WindowsWindow>(property);
-	}
-
 	WindowsWindow::WindowsWindow(const WindowProperty& property)
 	{
 		Init(property);
@@ -37,6 +32,31 @@ namespace SandTable
 	WindowsWindow::~WindowsWindow()
 	{
 		Shutdown();
+	}
+
+	Object<Window> Window::Create(const WindowProperty& property)
+	{
+		return std::make_unique<WindowsWindow>(property);
+	}
+
+	const uint16_t WindowsWindow::GetWidth() const
+	{
+		return m_WindowData.Width;
+	}
+
+	const uint16_t WindowsWindow::GetHeight() const
+	{
+		return m_WindowData.Height;
+	}
+
+	void* WindowsWindow::GetNativeWindow() const
+	{
+		return m_Window;
+	}
+
+	const bool WindowsWindow::IsSync() const
+	{
+		return m_WindowData.Sync;
 	}
 
 	void WindowsWindow::Init(const WindowProperty& property)
@@ -180,5 +200,10 @@ namespace SandTable
 			glfwSwapInterval(0);
 		}
 		m_WindowData.Sync = enabled;
+	}
+
+	void WindowsWindow::SetEventCallbackFunc(const EventCallbackFunc& callback)
+	{
+		m_WindowData.EventCallback = callback;
 	}
 }

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/Clock.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  * 
  * @brief 计时器头文件
  */
@@ -19,8 +19,7 @@ namespace SandTable
 	 */
 	struct TimeStep
 	{
-		double duration;
-		operator float() { return duration; }
+		float duration = 0.0f;
 	};
 
 	/**
@@ -28,18 +27,14 @@ namespace SandTable
 	 */
 	struct Time
 	{
-		double CurrentTime;
-		double LastTime;
+		float CurrentTime = 0.0f;
+		float LastTime = 0.0f;
 		TimeStep Timestep;
 
-		Time()
-			: CurrentTime(0.0), LastTime(0.0), Timestep(0.0)
-		{ 
+		Time() = default;
 
-		}
-
-		Time(double currentTime)
-			: CurrentTime(currentTime), LastTime(currentTime), Timestep(0.0)
+		Time(float currentTime)
+			: CurrentTime(currentTime), LastTime(currentTime)
 		{
 
 		}
@@ -55,18 +50,18 @@ namespace SandTable
 		~Clock() = default;
 
 	public:
-		inline const double GetCurrentTime() const { return m_Time.CurrentTime; }
-		inline const double GetLastTime() const { return m_Time.LastTime; }
-		inline const TimeStep GetTimeStep() const { return m_Time.Timestep; }
-		inline const uint64_t GetFrameCount() const { return m_FrameCount; }
-		inline const uint16_t GetFPS() const { return m_FPS; }
+		const float GetCurrentTime() const;
+		const float GetLastTime() const;
+		const TimeStep GetTimeStep() const;
+		const uint64_t GetFrameCount() const;
+		const uint16_t GetFPS() const;
 
 		void Tick();
 
 	private:
-		Time m_Time;
-		uint64_t m_FrameCount;
-		uint16_t m_FPS;
+		Time m_Time = 0;
+		uint64_t m_FrameCount = 0;
+		uint16_t m_FPS = 0;
 	};
 }
 

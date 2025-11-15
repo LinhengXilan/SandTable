@@ -1,14 +1,12 @@
 ﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build32
+ * @date 2025-11-15
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
 #define SANDTABLE_EVENTS_EVENT_H
-
-#include <pch.h>
 
 #include <SandTable/Core.h>
 
@@ -40,11 +38,11 @@ namespace SandTable
 		Event() = default;
 		virtual ~Event() = default;
 	public:
-		virtual inline const EventType GetEventType() const = 0;
-		virtual inline const std::string GetName() const = 0;
-		virtual inline const uint8_t GetCategoryFlags() const = 0;
-		inline const bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-		virtual inline std::string ToString() const { return GetName(); }
+		virtual const EventType GetEventType() const = 0;
+		virtual const std::string GetName() const = 0;
+		virtual const uint8_t GetCategoryFlags() const = 0;
+		const bool IsInCategory(EventCategory category);
+		virtual std::string ToString() const;
 
 	public:
 		bool m_Handled = false;
@@ -56,11 +54,7 @@ namespace SandTable
 		using EventFunc = std::function<bool(T&)>;
 
 	public:
-		EventDispatcher(Event& event)
-			: m_Event(event)
-		{
-
-		}
+		EventDispatcher(Event& event);
 
 		template<typename T>
 		bool Dispatch(EventFunc<T> func)
@@ -77,10 +71,7 @@ namespace SandTable
 		Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& event)
-	{
-		return os << event.ToString();
-	}
+	std::ostream& operator<<(std::ostream& os, const Event& event);
 }
 
 #endif
