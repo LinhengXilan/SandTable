@@ -10,6 +10,8 @@
 #ifndef SANDTABLE_CORE_CLOCK_H
 #define SANDTABLE_CORE_CLOCK_H
 
+#pragma warning(disable:4244)
+
 namespace SandTable
 {
 	/**

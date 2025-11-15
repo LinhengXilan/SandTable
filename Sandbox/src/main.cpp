@@ -1,11 +1,13 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief Sandbox示例程序
  */
+
+#define SANDTABLE_PLATFORM_WINDOWS
 
 #include <SandTable.h>
 #include <imgui/imgui.h>
@@ -135,39 +137,7 @@ public:
 		)";
 		m_SquareShader = SandTable::Shader::Create(squareVertex, squareFragment);
 
-		std::string textureVertex = R"(
-			#version 330 core
-		
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_ModelTransform;
-
-			out vec2 v_TexCoord;
-		
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection *  u_ModelTransform * vec4(a_Position, 1.0f);
-
-			}
-		)";
-		std::string textureFragment = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-		m_TextureShader = SandTable::Shader::Create(textureVertex, textureFragment);
+		m_TextureShader = SandTable::Shader::Create("assets/shaders/Texture.glsl");
 		m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
 		m_IconTexture = SandTable::Texture2D::Create("assets/icons/icon.png");
 

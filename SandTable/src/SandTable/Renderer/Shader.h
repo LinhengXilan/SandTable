@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief 着色器类
  */
@@ -26,6 +26,7 @@ namespace SandTable
 		virtual void Unbind() const = 0;
 
 		static ObjectRef<Shader> Create(const std::string& vertexSource, std::string& fragmentSource);
+		static ObjectRef<Shader> Create(const std::string& path);
 	};
 }
 

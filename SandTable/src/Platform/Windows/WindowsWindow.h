@@ -40,9 +40,9 @@ namespace SandTable
 		struct WindowData
 		{
 			std::string Title;
-			uint16_t Width;
-			uint16_t Height;
-			bool Sync;
+			uint16_t Width = 0;
+			uint16_t Height = 0;
+			bool Sync = false;
 			EventCallbackFunc EventCallback;
 		} m_WindowData;
 		Object<GraphicsContext> m_Context;

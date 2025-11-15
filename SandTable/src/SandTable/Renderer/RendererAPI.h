@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.h
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief 渲染器API头文件
  */
@@ -22,7 +22,7 @@ namespace SandTable
 		{
 			None = 0,
 			OpenGL = 0x10, OpenGL3 = 0x11,
-			DirectX = 0x20
+			DirectX = 0x20,
 		};
 
 	public:
@@ -30,6 +30,7 @@ namespace SandTable
 		virtual ~RendererAPI() = default;
 
 	public:
+		static void SetAPI(API api);
 		static API GetAPI();
 
 		virtual void Init() = 0;
@@ -39,7 +40,6 @@ namespace SandTable
 
 	private:
 		static API s_API;
-		static bool s_IsAPIInitialized;
 	};
 }
 

@@ -1,95 +1,138 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief OpenGL着色器
  */
 
 #include <pch.h>
 #include <Platform/OpenGL/OpenGLShader.h>
-#include <glad/gl.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <SandTable/Log.h>
+#include <SandTable/Core/File.h>
+#include <glad/gl.h>
+
 
 namespace SandTable
 {
+	static GLenum GetShaderTypeFromString(const std::string& str)
+	{
+		if (str == "vertex")
+		{
+			return GL_VERTEX_SHADER;
+		}
+		if (str == "fragment" || str == "pixel")
+		{
+			return GL_FRAGMENT_SHADER;
+		}
+		return NULL;
+	}
+
 	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
 	{
-		// vertex shader
-		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		const char* source = vertexSource.c_str();
-		glShaderSource(vertexShader, 1, &source, nullptr);
-		glCompileShader(vertexShader);
-#ifdef SANDTABLE_DEBUG
-		int isCompiled = 0;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
-			std::string infoLog(maxLength, ' ');
-			glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
-			glDeleteShader(vertexShader);
-			SANDTABLE_CORE_ERROR("Vertex shader compilation failure!");
-			SANDTABLE_CORE_ERROR("{0}", infoLog);
-			return;
-		}
-#endif
-		m_RendererID = glCreateProgram();
-		glAttachShader(m_RendererID, vertexShader);
+		std::unordered_map<GLenum, std::string> shaderSource;
+		shaderSource[GL_VERTEX_SHADER] = vertexSource;
+		shaderSource[GL_FRAGMENT_SHADER] = fragmentSource;
+		Compile(shaderSource);
+	}
 
-		// fragment shader
-		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		source = fragmentSource.c_str();
-		glShaderSource(fragmentShader, 1, &source, nullptr);
-		glCompileShader(fragmentShader);
-
-#ifdef SANDTABLE_DEBUG
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-			std::string infoLog(maxLength, ' ');
-			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-			glDeleteShader(fragmentShader);
-			glDeleteShader(vertexShader);
-			SANDTABLE_CORE_ERROR("Fragment shader compilation failure!");
-			SANDTABLE_CORE_ERROR("{0}", infoLog);
-			return;
-		}
-#endif
-
-		glAttachShader(m_RendererID, fragmentShader);
-		glLinkProgram(m_RendererID);
-
-#ifdef SANDTABLE_DEBUG
-		int isLinked = 0;
-		glGetProgramiv(m_RendererID, GL_LINK_STATUS, &isLinked);
-		if (isLinked == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-			std::string infoLog(maxLength, ' ');
-			glGetProgramInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-			glDeleteProgram(m_RendererID);
-			glDeleteShader(fragmentShader);
-			glDeleteShader(vertexShader);
-			SANDTABLE_CORE_ERROR("shader link failure!");
-			SANDTABLE_CORE_ERROR("{0}", infoLog);
-			return;
-		}
-#endif
-
-		glDetachShader(m_RendererID, vertexShader);
-		glDetachShader(m_RendererID, fragmentShader);
+	OpenGLShader::OpenGLShader(const std::string& path)
+	{
+		std::string source = File::ReadFile(path);
+		auto shaderSource = Preprocess(source);
+		Compile(shaderSource);
 	}
 
 	OpenGLShader::~OpenGLShader()
 	{
 		glDeleteProgram(m_RendererID);
+	}
+
+	std::unordered_map<GLenum, std::string> OpenGLShader::Preprocess(const std::string& source)
+	{
+		std::unordered_map<GLenum, std::string> shaderSource;
+
+		const std::string typeToken = "#type";
+		size_t typeTokenLength = typeToken.size();
+
+		size_t pos = source.find(typeToken, 0);
+		while (pos != std::string::npos)
+		{
+			size_t eol = source.find_first_of("\r\n", pos);// 找到#type行结尾
+			SANDTABLE_CORE_ASSERT(eol != std::string::npos, "Shader source syntax error");// 若 #type 行后无后续内容，则报错
+			// 继续读取
+			size_t begin = pos + typeTokenLength + 1; // #type后
+			std::string typeStr = source.substr(begin, eol - begin);
+
+			GLenum type = GetShaderTypeFromString(typeStr);
+			SANDTABLE_CORE_ASSERT(type, "Invalid shader type!");
+
+			size_t nextLinePos = source.find_first_not_of("\r\n", eol); // #type下一行
+
+			pos = source.find(typeToken, nextLinePos); // 下一个#type
+			shaderSource[type] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+		}
+		return shaderSource;
+	}
+
+	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
+	{
+		GLuint program = glCreateProgram();
+		std::vector<GLuint> shaders(shaderSources.size());
+		for (auto& data : shaderSources)
+		{
+			GLenum type = data.first;
+			const std::string& sourceStr = data.second;
+			GLuint shader = glCreateShader(type);
+			const GLchar* source = sourceStr.c_str();
+			glShaderSource(shader, 1, &source, nullptr);
+			glCompileShader(shader);
+#ifdef SANDTABLE_DEBUG
+			int isCompiled = 0;
+			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+			if (isCompiled == GL_FALSE)
+			{
+				int maxLength = 0;
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+				std::string infoLog(maxLength, ' ');
+				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+				glDeleteShader(shader);
+				SANDTABLE_CORE_ERROR("Shader compilation failure!");
+				SANDTABLE_CORE_ERROR("{0}", infoLog);
+				return;
+			}
+#endif
+			glAttachShader(program, shader);
+			shaders.push_back(shader);
+		}
+
+		glLinkProgram(program);
+#ifdef SANDTABLE_DEBUG
+		int isLinked = 0;
+		glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
+		if (isLinked == GL_FALSE)
+		{
+			int maxLength = 0;
+			glGetShaderiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+			std::string infoLog(maxLength, ' ');
+			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+			glDeleteProgram(program);
+			for (auto shader : shaders)
+			{
+				glDeleteShader(shader);
+			}
+			SANDTABLE_CORE_ERROR("shader link failure!");
+			SANDTABLE_CORE_ERROR("{0}", infoLog);
+			return;
+		}
+#endif
+		for (auto shader : shaders)
+		{
+			glDetachShader(program, shader);
+		}
+		m_RendererID = program;
 	}
 
 	void OpenGLShader::Bind() const

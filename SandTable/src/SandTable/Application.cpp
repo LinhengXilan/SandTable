@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief 应用程序实现
  */
@@ -25,6 +25,7 @@ namespace SandTable
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 		m_Window->SetSync(false);
 
+		RendererAPI::SetAPI(RendererAPI::API::OpenGL); 
 		Renderer::Init();
 
 		m_ImguiLayer = std::make_unique<ImguiLayer>();

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build31
+ * @date 2025-11-15
  * 
  * @brief SandTable核心头文件
  */
@@ -16,18 +16,13 @@
 	#else
 		#define SANDTABLE_DLL //__declspec(dllimport)
 	#endif
-#else	
+#else
+	#define SANDTABLE_DLL
 	#error SandTable only supports Windows
 #endif
 
-#ifdef SANDTABLE_DEBUG
-	#define SANDTABLE_ENABLE_ASSERTS
-#endif
-
-
 #define BIT(x) (1 << x)
 #define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
-
 
 namespace SandTable
 {

@@ -1,10 +1,10 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.cpp
  * @author LinhengXilan
- * @date 2025-11-5
- * @version build24
+ * @version build31
+ * @date 2025-11-15
  * 
- * @brief
+ * @brief 
  */
 
 #include <pch.h>
@@ -13,44 +13,32 @@
 
 namespace SandTable
 {
-	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
-	bool RendererAPI::s_IsAPIInitialized = false;
+	RendererAPI::API RendererAPI::s_API = RendererAPI::API::None;
+
+	void RendererAPI::SetAPI(API api)
+	{
+		switch (api)
+		{
+		case API::None:
+			SANDTABLE_CORE_ASSERT(false, "RendererAPI is not selected!");
+			break;
+		case API::OpenGL:
+		case API::OpenGL3:
+			SANDTABLE_CORE_INFO("Current RendererAPI: OpenGL");
+			break;
+		case API::DirectX:
+			SANDTABLE_CORE_INFO("Current RendererAPI: DirectX");
+			break;
+		default:
+			SANDTABLE_CORE_ASSERT(false, "RendererAPI is currently not supported!");
+			break;
+		}
+		s_API = api;
+	}
+
 
 	RendererAPI::API RendererAPI::GetAPI()
 	{
-		switch (s_API)
-		{
-		case API::None:
-			if (s_IsAPIInitialized == false)
-			{
-				SANDTABLE_CORE_ASSERT(false, "RendererAPI is currently not supported!");
-				s_IsAPIInitialized = true;
-			}
-			return s_API;
-		case API::OpenGL:
-			[[unlikely]]
-			if (s_IsAPIInitialized == false)
-			{
-				SANDTABLE_CORE_INFO("Current RendererAPI: OpenGL");
-				s_IsAPIInitialized = true;
-			}
-			return s_API;
-			case API::DirectX:
-			[[unlikely]]
-			if (s_IsAPIInitialized == false)
-			{
-				SANDTABLE_CORE_INFO("Current RendererAPI: DirectX");
-				s_IsAPIInitialized = true;
-			}
-			return s_API;
-		default:
-			[[unlikely]]
-			if (s_IsAPIInitialized == false)
-			{
-				SANDTABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
-				s_IsAPIInitialized = true;
-			}
-			return s_API;
-		}
+		return s_API;
 	}
 }

@@ -1,8 +1,8 @@
 ﻿/**
  * @file pch.h
  * @author LinhengXilan
- * @date 2025-10-23
- * @version build15
+ * @version build31
+ * @date 2025-11-15
  * 
  * @breif 预编译头文件
  */
@@ -19,6 +19,8 @@
 #include <utility>
 #include <stdio.h>
 #include <stdint.h>
+#include <fstream>
+#include <unordered_map>
 
 #ifdef SANDTABLE_PLATFORM_WINDOWS
 	#include <windows.h>

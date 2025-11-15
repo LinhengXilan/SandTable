@@ -1,12 +1,10 @@
-build30
-2025-11-12
+build31
+2025-11-15
 
-1. 取消对 GLFWwindow 的智能指针使用。
-    - glfw.h里居然没有GLFWwindow的定义。
+1. 添加独立的着色器文件，在文件内以 #type 标签区分着色器类型。
+    - 位于“Sandbox/assets/shaders/”
 
-2. 添加对渲染器的初始化函数。
-    - 设置opengl的混合方式。
+2. 添加文件处理类 class File 。
+    - 位于 SandTable/Core/File.h 。
 
-3. 渲染一个背景透明的“ST”字样。
-
-4. 上传二进制文件（.exe）
+3. 实现从文件读取着色器并编译。
