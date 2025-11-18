@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief Windows平台窗口实现
  */
@@ -12,7 +12,7 @@
 #include <SandTable/Log.h>
 #include <SandTable/Events/ApplicationEvent.h>
 #include <SandTable/Events/Keyboard.h>
-#include <SandTable/Events/Mouse.h>
+#include <SandTable/Events/MouseEvent.h>
 #include <Platform/OpenGL/OpenGLContext.h>
 
 namespace SandTable

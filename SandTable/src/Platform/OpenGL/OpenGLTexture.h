@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL纹理
  */
@@ -18,7 +18,7 @@ namespace SandTable
 	{
 	public:
 		OpenGLTexture2D(const std::string& path);
-		~OpenGLTexture2D();
+		~OpenGLTexture2D() override;
 
 	public:
 		const uint32_t GetWidth() const override;

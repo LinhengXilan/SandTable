@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Keyboard.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  */
 
 #ifndef SANDTABLE_EVENTS_KEYBOARD_H
@@ -19,7 +19,7 @@ namespace SandTable
 
 	protected:
 		Keyboard(int keycode);
-		virtual ~Keyboard() = default;
+		virtual ~Keyboard() override = default;
 		int m_KeyCode;
 	};
 
@@ -27,7 +27,7 @@ namespace SandTable
 	{
 	public:
 		KeyPressed(int keycode, int repeatcount);
-		~KeyPressed() = default;
+		~KeyPressed() override = default;
 
 	public:
 		const int GetRepeatCount() const;
@@ -47,7 +47,7 @@ namespace SandTable
 	{
 	public:
 		KeyReleased(int keycode);
-		~KeyReleased() = default;
+		~KeyReleased() override = default;
 
 	public:
 		std::string ToString() const override;
@@ -62,7 +62,7 @@ namespace SandTable
 	{
 	public:
 		KeyTyped(int keycode);
-		~KeyTyped() = default;
+		~KeyTyped() override = default;
 
 	public:
 		std::string ToString() const override;

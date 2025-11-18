@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 渲染器实现
  */
@@ -42,5 +42,11 @@ namespace SandTable
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->SetUniform("u_ModelTransform", transform);
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
+	}
+
+	/* vvv 事件 vvv */
+	void Renderer::OnWindowResize(uint16_t width, uint16_t height)
+	{
+		RenderCommand::SetViewportSize(0, 0, width, height);
 	}
 }

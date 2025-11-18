@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 渲染器头文件
  */
@@ -29,6 +29,9 @@ namespace SandTable
 		static void BeginScene(const ObjectRef<OrthographicCamera>& camera);
 		static void EndScene();
 		static void Submit(const ObjectRef<VertexArray>& vertexArray, const ObjectRef<Shader>& shader, const glm::mat4& transform = glm::mat4{1.0f});
+
+	public: // 事件
+		static void OnWindowResize(uint16_t width, uint16_t height);
 
 	private:
 		struct SceneData

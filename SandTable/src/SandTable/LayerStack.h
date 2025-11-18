@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 图层栈头文件
  */
@@ -19,7 +19,7 @@ namespace SandTable
 	{
 	public:
 		LayerStack() = default;
-		~LayerStack() = default;
+		~LayerStack();
 
 	public:
 		void PushLayer(ObjectRef<Layer>& layer);

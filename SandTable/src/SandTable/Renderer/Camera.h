@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 照相机头文件
  */
@@ -27,40 +27,19 @@ namespace SandTable
 	class Camera
 	{
 	public:
-		enum class Direction : unsigned char
-		{
-			Up, Down,
-			Left, Right,
-			Forward, Backward,
-			clockwise, counterclockwise
-		};
-	public:
 		Camera() = default;
 		virtual ~Camera() = default;
 
 	public:
 		virtual const CameraType GetCameraType() const = 0;
-		virtual const glm::vec3& GetPosition() const = 0;
-		virtual const float GetRotation() const = 0;
 		virtual const glm::mat4& GetViewMatrix() const = 0;
 		virtual const glm::mat4& GetProjectionMatrix() const = 0;
 		virtual const glm::mat4& GetViewProjectionMatrix() const = 0;
 
-		virtual void SetPosition(const glm::vec3& position) = 0;
-		virtual void SetRotation(const float rotation) = 0;
-		virtual void SetMoveSpeed(const float speed) = 0;
-		virtual void SetRotateSpeed(const float speed) = 0;
+		virtual void SetProjectionMatrix(float left, float right, float bottom, float top) = 0;
+		virtual void SetProjectionMatrix(float aspectRatio, float zoomRatio) = 0;
 
-		virtual void RecalculateViewMatrix() = 0;
-
-		virtual void Move(Direction direction) = 0;
-		virtual void Move(Direction direction, TimeStep timeStep) = 0;
-		virtual void Move(Direction direction, float speed) = 0;
-		virtual void Move(Direction direction, float speed, TimeStep timeStep) = 0;
-		virtual void Rotate(Direction direction) = 0;
-		virtual void Rotate(Direction direction, TimeStep timeStep) = 0;
-		virtual void Rotate(Direction direction, float speed) = 0;
-		virtual void Rotate(Direction direction, float speed, TimeStep timeStep) = 0;
+		virtual void RecalculateViewMatrix(const glm::vec3& position, const float rotation) = 0;
 
 		static ObjectRef<Camera> Create();
 	};
@@ -72,7 +51,8 @@ namespace SandTable
 		virtual ~OrthographicCamera() = default;
 
 	public:
-		static ObjectRef<OrthographicCamera> Create(float left = 0, float right = 0, float bottom = 0, float top = 0);
+		static ObjectRef<OrthographicCamera> Create(float left, float right, float bottom, float top);
+		static ObjectRef<OrthographicCamera> Create(float aspectRatio, float zoomRatio);
 	};
 }
 

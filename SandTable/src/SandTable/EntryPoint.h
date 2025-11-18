@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/EntryPoint.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  */
 
 #ifndef SANDTABLE_ENTRYPOINT_H
@@ -12,8 +12,6 @@
 
 #include <SandTable.h>
 
-//extern Object<SandTable::Application> SandTable::CreateApplication();
-
 int main(int argc, char** argv)
 {
 	SandTable::Log::Init();
@@ -21,6 +19,7 @@ int main(int argc, char** argv)
 	SandTable::Object<SandTable::Application> app = SandTable::CreateApplication();
 	app->Run();
 	app.release();
+	return 0;
 }
 
 #endif

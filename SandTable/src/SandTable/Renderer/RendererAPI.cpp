@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RendererAPI.cpp
  * @author LinhengXilan
- * @version build31
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 
  */
@@ -35,7 +35,6 @@ namespace SandTable
 		}
 		s_API = api;
 	}
-
 
 	RendererAPI::API RendererAPI::GetAPI()
 	{

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @breif SandTable主头文件
  */
@@ -20,6 +20,7 @@
 #include <SandTable/KeyCode.h>
 #include <SandTable/MouseCode.h>
 #include <SandTable/Input.h>
+#include <SandTable/CameraController.h>
 
 // 图形渲染
 #include <SandTable/ImGui/ImguiLayer.h>
@@ -29,6 +30,7 @@
 #include <SandTable/Renderer/Shader.h>
 #include <SandTable/Renderer/Texture.h>
 
+// 程序入口点
 #include <SandTable/EntryPoint.h>
 
 #endif

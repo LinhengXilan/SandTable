@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/LayerStack.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 图层栈实现
  */
@@ -13,6 +13,11 @@
 
 namespace SandTable
 {
+	LayerStack::~LayerStack()
+	{
+		m_Layers.clear();
+	}
+
 	void LayerStack::PushLayer(ObjectRef<Layer>& layer)
 	{
 		m_Layers.push_back(layer);

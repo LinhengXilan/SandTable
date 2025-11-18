@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RenderCommand.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief
  */
@@ -31,5 +31,10 @@ namespace SandTable
 	void RenderCommand::DrawIndexed(const ObjectRef<VertexArray>& vertexArray)
 	{
 		s_RendererAPI->DrawIndexed(vertexArray);
+	}
+
+	void RenderCommand::SetViewportSize(uint16_t posX, uint16_t posY, uint16_t width, uint16_t height)
+	{
+		s_RendererAPI->SetViewportSize(posX, posY, width, height);
 	}
 }

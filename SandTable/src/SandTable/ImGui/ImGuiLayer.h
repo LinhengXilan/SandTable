@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief Imgui层
  */
@@ -12,7 +12,7 @@
 
 #include <SandTable/Layer.h>
 #include <SandTable/Events/Keyboard.h>
-#include <SandTable/Events/Mouse.h>
+#include <SandTable/Events/MouseEvent.h>
 #include <SandTable/Events/ApplicationEvent.h>
 
 namespace SandTable
@@ -21,7 +21,7 @@ namespace SandTable
 	{
 	public:
 		ImguiLayer();
-		~ImguiLayer();
+		~ImguiLayer() override = default;
 
 	public:
 		void Begin() override;

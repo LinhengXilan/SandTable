@@ -20,7 +20,7 @@ namespace SandTable
 	{
 	public:
 		WindowsWindow(const WindowProperty& property);
-		~WindowsWindow();
+		~WindowsWindow() override;
 
 		const uint16_t GetWidth() const override;
 		const uint16_t GetHeight() const override;

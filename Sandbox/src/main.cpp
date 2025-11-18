@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief Sandbox示例程序
  */
@@ -19,14 +19,11 @@ class ExampleLayer : public SandTable::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_SquarePosition(0.0f), m_SquareSpeed(0.1f), m_SquareColor(1.0f, 0.83f, 0.66f)
+		: Layer("Example"), m_SquareColor(1.0f, 0.83f, 0.66f), m_CameraController(1280.f / 720.f)
 	{
 		// Camera
-		float width = SandTable::Application::GetInstance()->GetWindow()->GetWidth();
-		float height = SandTable::Application::GetInstance()->GetWindow()->GetHeight();
-		m_Camera = SandTable::OrthographicCamera::Create(-1.0f * width / height, 1.0f * width / height, -1.0f, 1.0f);
-		m_Camera->SetMoveSpeed(1.0f);
-		m_Camera->SetRotateSpeed(100.0f);
+		m_CameraController.SetMoveSpeed(1.0f);
+		m_CameraController.SetRotationSpeed(100.0f);
 
 		// Griphics Render
 		SandTable::ObjectRef<SandTable::VertexBuffer> vertexBuffer;
@@ -90,85 +87,22 @@ public:
 	void OnUpdate(SandTable::TimeStep timeStep) override
 	{
 		//SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
-
-		if (SandTable::Input::IsKeyPressed(KEY_W))
-		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Up, timeStep);
-		}
-		else if (SandTable::Input::IsKeyPressed(KEY_S))
-		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Down, timeStep);
-		}
-		if (SandTable::Input::IsKeyPressed(KEY_A))
-		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Left, timeStep);
-		}
-		else if (SandTable::Input::IsKeyPressed(KEY_D))
-		{
-			m_Camera->Move(SandTable::OrthographicCamera::Direction::Right, timeStep);
-		}
-
-		if (SandTable::Input::IsKeyPressed(KEY_Q))
-		{
-			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::counterclockwise, timeStep);
-		}
-		else if (SandTable::Input::IsKeyPressed(KEY_E))
-		{
-			m_Camera->Rotate(SandTable::OrthographicCamera::Direction::clockwise, timeStep);
-		}
-
-		if (SandTable::Input::IsKeyPressed(KEY_R))
-		{
-			m_Camera->SetPosition({0.0f, 0.0f, 0.0f});
-			m_Camera->SetRotation(0.0f);
-		}
-
-		if (SandTable::Input::IsKeyPressed(KEY_UP))
-		{
-			m_SquarePosition.y += m_SquareSpeed * timeStep.duration;
-		}
-		else if(SandTable::Input::IsKeyPressed(KEY_DOWN))
-		{
-			m_SquarePosition.y -= m_SquareSpeed * timeStep.duration;
-		}
-
-		if(SandTable::Input::IsKeyPressed(KEY_LEFT))
-		{
-			m_SquarePosition.x -= m_SquareSpeed * timeStep.duration;
-		}
-		else if (SandTable::Input::IsKeyPressed(KEY_RIGHT))
-		{
-			m_SquarePosition.x += m_SquareSpeed * timeStep.duration;
-		}
-
+		m_CameraController.OnUpdate(timeStep);
 		glm::mat4 scale = glm::scale(glm::mat4{1.0f}, glm::vec3{0.1f});
 
 		SandTable::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
 		SandTable::RenderCommand::Clear();
-		SandTable::Renderer::BeginScene(m_Camera);
-
-		//glm::vec4 pink;
-		//glm::vec4 orange{1.0f, 0.66f, 0.83f, 1.0f};
-		//m_SquareColor = { 1.0f, 0.83f, 0.66f };
+		SandTable::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->Bind();
 		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->SetUniform("u_Color", m_SquareColor);
 
-
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			for (int j = 0; j < 10; j++)
+			for (int j = 0; j < 20; j++)
 			{
 				glm::vec3 pos{i * 0.11f, j * 0.11f, 0.0f};
 				glm::mat4 transform = glm::translate(glm::mat4{1.0f}, pos) * scale;
-				//if ((i + j) % 2 == 0)
-				//{
-				//	std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", pink);
-				//}
-				//else
-				//{
-				//	std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_SquareShader)->SetUniform("u_Color", orange);
-				//}
 				SandTable::Renderer::Submit(m_SquareVertexArray, m_ShaderLibrary.GetShader("Square"), transform);
 			}
 		}
@@ -177,13 +111,12 @@ public:
 		SandTable::Renderer::Submit(m_SquareVertexArray, textureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
 		m_IconTexture->Bind();
 		SandTable::Renderer::Submit(m_SquareVertexArray, textureShader, glm::scale(glm::mat4{1.0f}, glm::vec3{1.0f}));
-		// SandTable::Renderer::Submit(m_VertexArray, m_Shader);
 		SandTable::Renderer::EndScene();
 	}
 
 	void OnEvent(SandTable::Event& event) override
 	{
-		
+		m_CameraController.OnEvent(event);
 	}
 
 	void ImguiRender() override
@@ -198,13 +131,10 @@ public:
 private:
 	SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
 	SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
-	SandTable::ObjectRef<SandTable::OrthographicCamera> m_Camera;
 	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
 	SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
+	SandTable::OrthoGraphicCameraController m_CameraController;
 	SandTable::ShaderLibrary m_ShaderLibrary;
-
-	glm::vec3 m_SquarePosition;
-	float m_SquareSpeed;
 	glm::vec3 m_SquareColor;
 };
 
@@ -216,6 +146,7 @@ public:
 		layer = std::make_shared<ExampleLayer>();
 		PushLayer(layer);
 	}
+
 	~Sandbox() override = default;
 
 private:

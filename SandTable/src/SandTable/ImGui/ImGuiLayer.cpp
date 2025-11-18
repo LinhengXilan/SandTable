@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief Imgui层实现
  */
@@ -22,11 +22,6 @@ namespace SandTable
 {
 	ImguiLayer::ImguiLayer()
 		: Layer("ImguiLayer")
-	{
-
-	}
-
-	ImguiLayer::~ImguiLayer()
 	{
 
 	}

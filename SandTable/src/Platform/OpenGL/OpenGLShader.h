@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL着色器
  */
@@ -23,7 +23,7 @@ namespace SandTable
 	public:
 		OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
 		OpenGLShader(const std::string& path);
-		~OpenGLShader();
+		~OpenGLShader() override;
 
 	public:
 		void Bind() const override;

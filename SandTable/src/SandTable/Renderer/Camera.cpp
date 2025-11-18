@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 照相机头文件
  */
@@ -35,6 +35,19 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return std::make_shared<OpenGLOrthographicCamera>(left, right, bottom, top);
+		default:
+			return nullptr;
+		}
+	}
+
+	ObjectRef<OrthographicCamera> OrthographicCamera::Create(float aspectRatio, float zoomRatio)
+	{
+		switch (Renderer::GetRendererAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return std::make_shared<OpenGLOrthographicCamera>(aspectRatio, zoomRatio);
 		default:
 			return nullptr;
 		}

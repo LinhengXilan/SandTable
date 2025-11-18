@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.cpp
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL渲染器API实现
  */
@@ -33,5 +33,10 @@ namespace SandTable
 	{
 		vertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+	}
+
+	void OpenGLRendererAPI::SetViewportSize(uint16_t posX, uint16_t posY, uint16_t width, uint16_t height)
+	{
+		glViewport(posX, posY, width, height);
 	}
 }

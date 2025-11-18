@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -55,6 +55,7 @@ namespace SandTable
 
 	public:
 		EventDispatcher(Event& event);
+		~EventDispatcher() = default;
 
 		template<typename T>
 		bool Dispatch(EventFunc<T> func)

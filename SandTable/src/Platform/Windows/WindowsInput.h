@@ -17,7 +17,7 @@ namespace SandTable
 	{
 	public:
 		WindowsInput() = default;
-		~WindowsInput() = default;
+		~WindowsInput() override = default;
 
 	protected:
 		const bool IsKeyPressedImpl(int keycode) override;

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief 应用程序实现
  */
@@ -20,10 +20,9 @@ namespace SandTable
 	{
 		SANDTABLE_CORE_ASSERT(!s_Instance.get(), "Application already has an instance!");
 		s_Instance.reset(this);
-
 		m_Window = Window::Create();
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
-		m_Window->SetSync(false);
+		m_Window->SetSync(true);
 
 		RendererAPI::SetAPI(RendererAPI::API::OpenGL); 
 		Renderer::Init();
@@ -37,7 +36,8 @@ namespace SandTable
 	void Application::OnEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowClose>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowClose>(SANDTABLE_BIND_EVENT_FUNC(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResize>(SANDTABLE_BIND_EVENT_FUNC(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
@@ -55,6 +55,12 @@ namespace SandTable
 		return true;
 	}
 
+	bool Application::OnWindowResize(WindowResize& event)
+	{
+		Renderer::OnWindowResize(event.GetWidth(), event.GetHeight());
+		return false;
+	}
+
 	void Application::PushLayer(ObjectRef<Layer>& layer)
 	{
 		m_LayerStack.PushLayer(layer);
@@ -70,7 +76,7 @@ namespace SandTable
 		while (m_Running)
 		{
 			m_Clock->Tick();
-			//SANDTABLE_CORE_TRACE("FPS {0} : {1}", m_Clock->GetFPS(), m_Clock->GetFrameCount());
+			SANDTABLE_CORE_TRACE("FPS {0} : {1}", m_Clock->GetFPS(), m_Clock->GetFrameCount());
 			// 层更新
 			for (auto& layer : m_LayerStack)
 			{

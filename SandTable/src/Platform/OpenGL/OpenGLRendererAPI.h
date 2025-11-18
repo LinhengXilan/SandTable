@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.h
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL渲染器API头文件
  */
@@ -18,13 +18,14 @@ namespace SandTable
 	{
 	public:
 		OpenGLRendererAPI() = default;
-		~OpenGLRendererAPI() = default;
+		~OpenGLRendererAPI() override = default;
 
 	public:
 		void Init() override;
 		void SetClearColor(const glm::vec4& color) override;
 		void Clear() override;
 		void DrawIndexed(const ObjectRef<VertexArray>& vertexArray) override;
+		void SetViewportSize(uint16_t posX, uint16_t posY, uint16_t width, uint16_t height) override;
 	};
 }
 

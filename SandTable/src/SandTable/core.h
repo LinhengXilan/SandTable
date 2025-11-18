@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @version build31
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief SandTable核心头文件
  */
@@ -21,8 +21,18 @@
 	#error SandTable only supports Windows
 #endif
 
+/* vvv 标志 vvv */
+
+#define PRIVATE	// 用于标记private成员函数
+
+/* ^^^ 标志 ^^^ */
+/* vvv 辅助宏函数 vvv */
+
 #define BIT(x) (1 << x)
 #define SANDTABLE_BIND_EVENT_FUNC(x) std::bind(&x, this, std::placeholders::_1)
+
+/* ^^^ 辅助宏函数 ^^^ */
+/* vvv 别名 vvv */
 
 namespace SandTable
 {
@@ -32,5 +42,7 @@ namespace SandTable
 	template<typename T>
 	using Object = std::unique_ptr<T>;
 }
+
+/* ^^^ 别名 ^^^ */
 
 #endif

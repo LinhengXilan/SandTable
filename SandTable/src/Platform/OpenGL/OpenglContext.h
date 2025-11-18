@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLContext.h
  * @author LinhengXilan
- * @version build30
- * @date 2025-11-12
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL图形上下文头文件
  */
@@ -21,7 +21,7 @@ namespace SandTable
 	{
 	public:
 		OpenGLContext(GLFWwindow* window);
-		~OpenGLContext() = default;
+		~OpenGLContext() override = default;
 
 	public:
 		void Init() override;

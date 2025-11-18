@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build33
+ * @date 2025-11-18
  * 
  * @brief OpenGL相机实现头文件
  */
@@ -19,39 +19,24 @@ namespace SandTable
 	public:
 		OpenGLOrthographicCamera() = default;
 		OpenGLOrthographicCamera(float left, float right, float bottom, float top);
-		~OpenGLOrthographicCamera() = default;
+		OpenGLOrthographicCamera(float aspectRatio, float zoomRatio);
+		~OpenGLOrthographicCamera() override = default;
 
 	public:
-		void SetPosition(const glm::vec3& position) override;
-		void SetRotation(const float rotation) override;
-		void SetMoveSpeed(const float speed) override;
-		void SetRotateSpeed(const float speed) override;
-
 		const CameraType GetCameraType() const override;
-		const glm::vec3& GetPosition() const override;
-		const float GetRotation() const override;
 		const glm::mat4& GetViewMatrix() const override;
 		const glm::mat4& GetProjectionMatrix() const override;
 		const glm::mat4& GetViewProjectionMatrix() const override;
 
-		void RecalculateViewMatrix() override;
-		void Move(Direction direction) override;
-		void Move(Direction direction, TimeStep timeStep) override;
-		void Move(Direction direction, float speed) override;
-		void Move(Direction direction, float speed, TimeStep timeStep) override;
-		void Rotate(Direction direction) override;
-		void Rotate(Direction direction, TimeStep timeStep) override;
-		void Rotate(Direction direction, float speed) override;
-		void Rotate(Direction direction, float speed, TimeStep timeStep) override;
+		void SetProjectionMatrix(float left, float right, float bottom, float top) override;
+		void SetProjectionMatrix(float aspectRatio, float zoomRatio) override;
+
+		void RecalculateViewMatrix(const glm::vec3& position, const float rotation) override;
 
 	private:
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewProjectionMatrix;
-		glm::vec3 m_Position;
-		float m_Rotation;
-		float m_MoveSpeed;
-		float m_RotateSpeed;
 	};
 }
 
