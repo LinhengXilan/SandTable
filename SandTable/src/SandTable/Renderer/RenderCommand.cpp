@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RenderCommand.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief
  */
@@ -13,7 +13,7 @@
 
 namespace SandTable
 {
-	Object<RendererAPI> RenderCommand::s_RendererAPI = std::make_unique<OpenGLRendererAPI>();
+	Object<RendererAPI> RenderCommand::s_RendererAPI = CreateObject<OpenGLRendererAPI>();
 
 	void RenderCommand::Init()
 	{

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/VertexArray.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 着色器类
  */
@@ -21,7 +21,7 @@ namespace SandTable
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLVertexArray>();
+			return CreateObjectRef<OpenGLVertexArray>();
 		default:
 			return nullptr;
 		}

@@ -1,8 +1,8 @@
 ﻿/**
  * @file pch.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @breif 预编译头文件
  */
@@ -24,8 +24,6 @@
 #include <array>
 #include <vector>
 
-#ifdef SANDTABLE_PLATFORM_WINDOWS
-	#include <windows.h>
-#endif
+#include <windows.h>
 
 #endif

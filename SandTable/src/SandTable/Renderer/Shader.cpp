@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 着色器类实现
  */
@@ -22,7 +22,7 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 		case RendererAPI::API::OpenGL3:
-			return std::make_shared<OpenGLShader>(name, vertexSource, fragmentSource);
+			return CreateObjectRef<OpenGLShader>(name, vertexSource, fragmentSource);
 		default:
 			return nullptr;
 		}
@@ -36,7 +36,7 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 		case RendererAPI::API::OpenGL3:
-			return std::make_shared<OpenGLShader>(path);
+			return CreateObjectRef<OpenGLShader>(path);
 		default:
 			return nullptr;
 		}

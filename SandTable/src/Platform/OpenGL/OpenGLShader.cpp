@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief OpenGL着色器
  */
@@ -10,7 +10,7 @@
 #include <pch.h>
 #include <Platform/OpenGL/OpenGLShader.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <SandTable/Log.h>
+#include <SandTable/Core/Log.h>
 #include <SandTable/Core/File.h>
 #include <glad/gl.h>
 
@@ -76,13 +76,12 @@ namespace SandTable
 			size_t begin = pos + typeTokenLength + 1; // #type后
 			std::string typeStr = source.substr(begin, eol - begin);
 
-			GLenum type = GetShaderTypeFromString(typeStr);
-			SANDTABLE_CORE_ASSERT(type, "Invalid shader type!");
+			SANDTABLE_CORE_ASSERT(!typeStr.empty(), "Invalid shader type!");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol); // #type下一行
-
+			SANDTABLE_CORE_ASSERT(nextLinePos != std::string::npos, "[Shader: Preprocess] Syntax error");
 			pos = source.find(typeToken, nextLinePos); // 下一个#type
-			shaderSource[type] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+			shaderSource[GetShaderTypeFromString(typeStr)] = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
 		}
 		return shaderSource;
 	}
@@ -143,6 +142,7 @@ namespace SandTable
 		for (auto shader : shaders)
 		{
 			glDetachShader(program, shader);
+			glDeleteShader(shader);
 		}
 		m_RendererID = program;
 	}

@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLVertexArray.cpp
  * @author LinhengXilan
- * @version build28
- * @date 2025-11-9
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 顶点数组类
  */
@@ -10,7 +10,7 @@
 #include <pch.h>
 #include <glad/gl.h>
 #include <Platform/OpenGL/OpenGLVertexArray.h>
-#include <SandTable/Log.h>
+#include <SandTable/Core/Log.h>
 
 namespace SandTable
 {
@@ -78,19 +78,19 @@ namespace SandTable
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
 
-		unsigned int index = 0;
 		BufferLayout layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
+			glEnableVertexAttribArray(m_VertexBufferIndex);
 			glVertexAttribPointer(
-				index,
+				m_VertexBufferIndex,
 				element.GetComponentCount(),
 				GetGLBaseTypeFromShaderDataType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)element.Offset);
-			index++;
+				(const void*)element.Offset
+			);
+			m_VertexBufferIndex++;
 		}
 		m_VertexBuffers.push_back(vertexBuffer);
 	}

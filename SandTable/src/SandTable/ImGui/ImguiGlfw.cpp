@@ -595,7 +595,7 @@ void ImGui_ImplGlfw_Shutdown()
 	IM_ASSERT(bd != nullptr && "No platform backend to shutdown, or already shutdown?");
 
 	ImGuiIO& io = ImGui::GetIO();
-	ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
+  	ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
 
 	ImGui_ImplGlfw_ShutdownMultiViewportSupport();
 	if (bd->InstalledCallbacks)

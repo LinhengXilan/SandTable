@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 照相机头文件
  */
@@ -10,7 +10,7 @@
 #ifndef SANDTABLE_RENDERER_CAMERA_H
 	#define SANDTABLE_RENDERER_CAMERA_H
 
-#include <SandTable/Core.h>
+#include <SandTable/Core/Core.h>
 #include <glm/glm.hpp>
 #include <SandTable/Core/Clock.h>
 

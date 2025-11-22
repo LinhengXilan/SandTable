@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief Imgui层实现
  */
@@ -16,7 +16,7 @@
 #include <SandTable/Imgui/ImguiOpengl.h>
 #include <SandTable/Imgui/ImguiGlfw.h>
 #include <Platform/Windows/WindowsWindow.h>
-#include <SandTable/Application.h>
+#include <SandTable/Core/Application.h>
 
 namespace SandTable
 {
@@ -52,8 +52,8 @@ namespace SandTable
 
 	void ImguiLayer::Detach()
 	{
-		ImGui_ImplGlfw_Shutdown();
 		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
 

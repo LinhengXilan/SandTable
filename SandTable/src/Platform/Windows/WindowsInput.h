@@ -1,15 +1,15 @@
 ﻿/**
  * @file Platform/Windows/WindowsInput.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  */
 
 #ifndef PLATFORM_WINDOWS_WINDOWSINPUT_H
 #define PLATFORM_WINDOWS_WINDOWSINPUT_H
 
 #include <pch.h>
-#include <SandTable/Input.h>
+#include <SandTable/Core/Input.h>
 
 namespace SandTable
 {

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 渲染缓冲实现
  */
@@ -10,12 +10,11 @@
 #include <pch.h>
 #include <SandTable/Renderer/Buffer.h>
 #include <SandTable/Renderer/Renderer.h>
-#include <SandTable/Log.h>
 #include <Platform/OpenGL/OpenGLBuffer.h>
 
 namespace SandTable
 {
-	ObjectRef<VertexBuffer> VertexBuffer::Create(float* vertices, unsigned int size)
+	ObjectRef<VertexBuffer> VertexBuffer::Create(float* vertices, int32_t size)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -23,13 +22,13 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 		case RendererAPI::API::OpenGL3:
-			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
+			return CreateObjectRef<OpenGLVertexBuffer>(vertices, size);
 		default:
 			return nullptr;
 		}
 	}
 
-	ObjectRef<IndexBuffer> IndexBuffer::Create(unsigned int* indices, unsigned int count)
+	ObjectRef<IndexBuffer> IndexBuffer::Create(uint32_t* indices, int32_t count)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -37,7 +36,7 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 		case RendererAPI::API::OpenGL3:
-			return std::make_shared<OpenGLIndexBuffer>(indices, count);
+			return CreateObjectRef<OpenGLIndexBuffer>(indices, count);
 		default:
 			return nullptr;
 		}

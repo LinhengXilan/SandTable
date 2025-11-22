@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 渲染缓冲头文件
  */
@@ -10,7 +10,7 @@
 #ifndef SANDTABLE_RENDERER_BUFFER_H
 	#define SANDTABLE_RENDERER_BUFFER_H
 
-#include <SandTable/Log.h>
+#include <SandTable/Core/Log.h>
 
 namespace SandTable
 {
@@ -137,7 +137,7 @@ namespace SandTable
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static ObjectRef<VertexBuffer> Create(float* vertices, unsigned int size);
+		static ObjectRef<VertexBuffer> Create(float* vertices, int32_t size);
 	};
 
 	class IndexBuffer
@@ -150,9 +150,9 @@ namespace SandTable
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		
-		virtual const uint32_t GetCount() const = 0;
+		virtual const int32_t GetCount() const = 0;
 
-		static ObjectRef<IndexBuffer> Create(unsigned int* indices, unsigned int count);
+		static ObjectRef<IndexBuffer> Create(uint32_t* indices, int32_t count);
 	};
 
 

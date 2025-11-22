@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLVertexArray.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief OpenGL顶点数组类
  */
@@ -32,8 +32,9 @@ namespace SandTable
 
 	private:
 		std::vector<ObjectRef<VertexBuffer>> m_VertexBuffers;
+		uint32_t m_VertexBufferIndex = 0;
 		ObjectRef<IndexBuffer> m_IndexBuffer;
-		unsigned int m_RendererID;
+		uint32_t m_RendererID;
 	};
 }
 

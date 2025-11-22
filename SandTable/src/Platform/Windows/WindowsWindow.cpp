@@ -1,15 +1,15 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief Windows平台窗口实现
  */
 
 #include <pch.h>
 #include <Platform/Windows/WindowsWindow.h>
-#include <SandTable/Log.h>
+#include <SandTable/Core/Log.h>
 #include <SandTable/Events/ApplicationEvent.h>
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/MouseEvent.h>
@@ -36,7 +36,7 @@ namespace SandTable
 
 	Object<Window> Window::Create(const WindowProperty& property)
 	{
-		return std::make_unique<WindowsWindow>(property);
+		return CreateObject<WindowsWindow>(property);
 	}
 
 	const uint16_t WindowsWindow::GetWidth() const
@@ -74,7 +74,7 @@ namespace SandTable
 		}
 		m_Window= glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
 
-		m_Context = std::make_unique<OpenGLContext>(m_Window);
+		m_Context = CreateObject<OpenGLContext>(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);

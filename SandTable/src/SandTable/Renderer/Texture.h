@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Texture.h
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 纹理
  */
@@ -10,7 +10,7 @@
 #ifndef SANDTABLE_RENDERER_TEXTURE_H
 #define SANDTABLE_RENDERER_TEXTURE_H
 
-#include <SandTable/Core.h>
+#include <SandTable/Core/Core.h>
 
 namespace SandTable
 {

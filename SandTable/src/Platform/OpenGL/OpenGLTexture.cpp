@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief OpenGL纹理
  */
@@ -12,7 +12,7 @@
 #include <glad/gl.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
-#include <SandTable/Log.h>
+#include <SandTable/Core/Log.h>
 
 namespace SandTable
 {

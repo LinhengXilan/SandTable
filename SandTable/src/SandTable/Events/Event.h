@@ -1,14 +1,14 @@
 ﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
 #define SANDTABLE_EVENTS_EVENT_H
 
-#include <SandTable/Core.h>
+#include <SandTable/Core/Core.h>
 
 namespace SandTable
 {

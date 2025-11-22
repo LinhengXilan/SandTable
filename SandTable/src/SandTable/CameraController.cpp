@@ -1,15 +1,15 @@
 ﻿/**
  * @file SandTable/CameraController.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 相机控制器
  */
 
 #include <pch.h>
 #include <SandTable/CameraController.h>
-#include <SandTable/Input.h>
+#include <SandTable/Core/Input.h>
 
 namespace SandTable
 {
@@ -111,16 +111,20 @@ namespace SandTable
 		switch (direction)
 		{
 		case Direction::Left:
-			m_CameraPosition.x += speed * timeStep.duration;
+			m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
+			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
 			break;
 		case Direction::Right:
-			m_CameraPosition.x -= speed * timeStep.duration;
+			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
+			m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
 			break;
 		case Direction::Up:
-			m_CameraPosition.y -= speed * timeStep.duration;
+			m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
+			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
 			break;
 		case Direction::Down:
-			m_CameraPosition.y += speed * timeStep.duration;
+			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
+			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraMoveSpeed * timeStep.duration;
 			break;
 		default:
 			break;
@@ -140,6 +144,15 @@ namespace SandTable
 			break;
 		default:
 			break;
+		}
+
+		if (m_CameraRotation > 180.0f)
+		{
+			m_CameraRotation -= 360.0f;
+		}
+		else if (m_CameraRotation <= -180.0f)
+		{
+			m_CameraRotation += 360.0f;
 		}
 		m_Camera->RecalculateViewMatrix(m_CameraPosition, m_CameraRotation);
 	}

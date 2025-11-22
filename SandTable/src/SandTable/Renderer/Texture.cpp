@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Texture.cpp
  * @author LinhengXilan
- * @version build29
- * @date 2025-11-12
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 纹理
  */
@@ -22,7 +22,7 @@ namespace SandTable
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 		case RendererAPI::API::OpenGL3:
-			return std::make_shared<OpenGLTexture2D>(path);
+			return CreateObjectRef<OpenGLTexture2D>(path);
 		default:
 			return nullptr;
 		}

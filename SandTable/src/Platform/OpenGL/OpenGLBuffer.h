@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLBuffer.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief OpenGL图形缓冲头文件
  */
@@ -17,7 +17,7 @@ namespace SandTable
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(float* vertices, unsigned int size);
+		OpenGLVertexBuffer(float* vertices, int32_t size);
 		~OpenGLVertexBuffer() override;
 
 	public:
@@ -35,17 +35,17 @@ namespace SandTable
 	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(unsigned int* indices, unsigned int count);
+		OpenGLIndexBuffer(uint32_t* indices, int32_t count);
 		~OpenGLIndexBuffer();
 
 	public:
 		void Bind() const override;
 		void Unbind() const override;
-		const uint32_t GetCount() const override;
+		const int32_t GetCount() const override;
 
 	private:
 		uint32_t m_RendererID;
-		uint32_t m_Count;
+		int32_t m_Count;
 	};
 }
 

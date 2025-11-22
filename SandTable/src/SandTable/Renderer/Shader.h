@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 着色器类
  */
@@ -10,7 +10,7 @@
 #ifndef SANDTABLE_RENDERER_SHADER_H
 #define SANDTABLE_RENDERER_SHADER_H
 
-#include <SandTable/Core.h>
+#include <SandTable/Core/Core.h>
 #include <glm/glm.hpp>
 
 namespace SandTable
@@ -45,8 +45,17 @@ namespace SandTable
 
 	public:
 		ObjectRef<Shader> GetShader(const std::string& name);
+		/**
+		 * @brief 添加现有着色器
+		 * @param shader 着色器对象
+		 */
 		void Add(const ObjectRef<Shader>& shader);
 		void Add(const std::string& name, const ObjectRef<Shader>& shader);
+		/**
+		 * @brief 从文件加载着色器
+		 * @param path 文件路径
+		 * @return 着色器对象
+		 */
 		ObjectRef<Shader> Load(const std::string& path);
 		ObjectRef<Shader> Load(const std::string& name, const std::string& path);
 

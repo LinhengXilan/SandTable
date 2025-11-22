@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief 渲染器头文件
  */
@@ -39,7 +39,7 @@ namespace SandTable
 			glm::mat4 ViewProjectionMatrix;
 		};
 
-		static SceneData* m_SceneData;
+		static Object<SceneData> s_SceneData;
 	};
 }
 

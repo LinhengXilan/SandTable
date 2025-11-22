@@ -1,25 +1,25 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief Sandbox示例程序
  */
 
-#define SANDTABLE_PLATFORM_WINDOWS 
-
 #include <SandTable.h>
+#include <SandTable/Core/EntryPoint.h>
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <Platform/OpenGL/OpenGLShader.h>
+#include <Sandbox2D.h>
 
 class ExampleLayer : public SandTable::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_SquareColor(1.0f, 0.83f, 0.66f), m_CameraController(1280.f / 720.f)
+		: Layer("Example"), m_CameraController(1280.f / 720.f)
 	{
 		// Camera
 		m_CameraController.SetMoveSpeed(1.0f);
@@ -135,7 +135,7 @@ private:
 	SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
 	SandTable::OrthoGraphicCameraController m_CameraController;
 	SandTable::ShaderLibrary m_ShaderLibrary;
-	glm::vec3 m_SquareColor;
+	glm::vec3 m_SquareColor = { 1.0f, 0.83f, 0.66f };
 };
 
 class Sandbox : public SandTable::Application
@@ -143,17 +143,17 @@ class Sandbox : public SandTable::Application
 public:
 	Sandbox()
 	{
-		layer = std::make_shared<ExampleLayer>();
+		//SandTable::ObjectRef<SandTable::Layer> layer = SandTable::CreateObjectRef<ExampleLayer>();
+		//PushLayer(layer);
+		SandTable::ObjectRef<SandTable::Layer> layer = SandTable::CreateObjectRef<Sandbox2D>();
 		PushLayer(layer);
 	}
 
 	~Sandbox() override = default;
-
-private:
-	SandTable::ObjectRef<SandTable::Layer> layer;
+	
 };
 
 SandTable::Object<SandTable::Application> SandTable::CreateApplication()
 {
-	return std::make_unique<Sandbox>();
+	return CreateObject<Sandbox>();
 }

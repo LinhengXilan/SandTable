@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsInput.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  */
 
 #include <pch.h>
@@ -10,11 +10,11 @@
 #include <glfw/glfw.h>
 
 #include <Platform/Windows/WindowsInput.h>
-#include <SandTable/Application.h>
+#include <SandTable/Core/Application.h>
 
 namespace SandTable
 {
-	Input* Input::s_Instance = new WindowsInput();
+	Object<Input> Input::s_Instance = CreateObject<WindowsInput>();
 
 	const bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

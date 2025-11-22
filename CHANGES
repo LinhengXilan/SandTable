@@ -1,13 +1,16 @@
-build33
-2025-11-18
+build34
+2025-11-22
 
-1. 将对相机的控制移至 class CameraController，并支持更多功能。
+1. 重新整理了文件。
 
-2. 正确支持OpenGL视口分辨率的调整。
+2. 封装了make_unique和make_shared。
 
-3. 添加标志 PRIVATE 来标记cpp文件中的私有成员函数。
-    - #define PRIVATE
+3. 在Sandbox中新建了Sandbox2D层。
 
-4. 为同类函数添加注释标识其功能
-    - 形如 /* vvv function description vvv */
-    - 形如 /* ^^^ function description ^^^ */
+4. 修正了CameraController中的Move函数，使其能正确地相对世界方位移动，而非相对自身移动。
+
+5. 在Core.h中添加了一系列宏来控制当前编译选项。
+
+6. 将静态成员变量存储为Object。
+
+*1* Debug模式，imgui无法正确结束。

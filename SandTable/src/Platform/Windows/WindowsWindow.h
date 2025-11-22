@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build34
+ * @date 2025-11-22
  * 
  * @brief Windows平台窗口头文件
  */
@@ -11,7 +11,7 @@
 #define PLATFORM_WINDOWS_WINDOWSWINDOW_H
 
 #include <SandTable/Renderer/GraphicsContext.h>
-#include <SandTable/Window.h>
+#include <SandTable/Core/Window.h>
 #include <glfw/glfw.h>
 
 namespace SandTable
@@ -37,6 +37,7 @@ namespace SandTable
 
 	private:
 		GLFWwindow* m_Window;
+		Object<GraphicsContext> m_Context;
 		struct WindowData
 		{
 			std::string Title;
@@ -45,7 +46,6 @@ namespace SandTable
 			bool Sync = false;
 			EventCallbackFunc EventCallback;
 		} m_WindowData;
-		Object<GraphicsContext> m_Context;
 	};
 }
 
