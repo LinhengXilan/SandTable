@@ -1,0 +1,18 @@
+build32
+2025-11-15
+
+1. 补上了 stb 和 glad 的许可证。
+
+2. 将所有着色器代码移至独立文件
+
+3. 将函数声明和定义彻底分离。
+    - 去除所有inline标志。
+    - 除了模板（就这么放头文件里也太丑了）
+
+4. 创建 class ShaderLibrary 来管理一组着色器。
+
+5. 重载 static std::string File::ReadFile(const std::string& path, const std::string& postfix) 。
+    - 读取对应后缀的文件，Debug模式下后缀错误时返回空字符串。
+
+6. 添加 static void RendererAPI::SetAPI(API api); 函数。
+    - 用于设置API

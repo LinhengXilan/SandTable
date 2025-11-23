@@ -42,6 +42,65 @@ namespace SandTable
 		}
 	}
 
+	/**
+	 * @param type 着色器数据类型
+	 * @return unsigned int 着色器数据类型大小（字节）
+	 * @brief 获取着色器数据类型大小
+	 */
+	static unsigned int GetShaderDataTypeSize(ShaderDataType type)
+	{
+		switch (type)
+		{
+		case ShaderDataType::Float:		return 4;
+		case ShaderDataType::Float2:	return 4 * 2;
+		case ShaderDataType::Float3:	return 4 * 3;
+		case ShaderDataType::Float4:	return 4 * 4;
+		case ShaderDataType::Matrix3:	return 4 * 3 * 3;
+		case ShaderDataType::Matrix4:	return 4 * 4 * 4;
+		case ShaderDataType::Int:		return 4;
+		case ShaderDataType::Int2:		return 4 * 2;
+		case ShaderDataType::Int3:		return 4 * 3;
+		case ShaderDataType::Int4:		return 4 * 4;
+		case ShaderDataType::Bool:		return 1;
+		default:
+			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+			return 0;
+		}
+	}
+
+	BufferElement::BufferElement(ShaderDataType type, const std::string& name, bool normalized)
+		: Type(type), Name(name), Size(GetShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
+	{
+
+	}
+
+	uint8_t BufferElement::GetComponentCount() const
+	{
+		switch (Type)
+		{
+		case ShaderDataType::Float:		return 1;
+		case ShaderDataType::Float2:	return 2;
+		case ShaderDataType::Float3:	return 3;
+		case ShaderDataType::Float4:	return 4;
+		case ShaderDataType::Matrix3:	return 3 * 3;
+		case ShaderDataType::Matrix4:	return 4 * 4;
+		case ShaderDataType::Int:		return 1;
+		case ShaderDataType::Int2:		return 2;
+		case ShaderDataType::Int3:		return 3;
+		case ShaderDataType::Int4:		return 4;
+		case ShaderDataType::Bool:		return 1;
+		default:
+			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+			return 0;
+		}
+	}
+
+	BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements)
+		: m_Elements(elements)
+	{
+		CalculateOffsetAndStride();
+	}
+
 	const std::vector<BufferElement>& BufferLayout::GetElements() const
 	{
 		return m_Elements;
@@ -74,7 +133,7 @@ namespace SandTable
 
 	void BufferLayout::CalculateOffsetAndStride()
 	{
-		unsigned int offset = 0;
+		size_t offset = 0;
 		m_Stride = 0;
 		for (auto& element : m_Elements)
 		{

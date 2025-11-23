@@ -19,16 +19,6 @@ namespace SandTable
 
 	}
 
-	void Layer::Begin()
-	{
-
-	}
-
-	void Layer::End()
-	{
-
-	}
-
 	void Layer::Attach()
 	{
 

@@ -17,8 +17,10 @@ namespace SandTable
 	{
 		for (auto layer : m_Layers)
 		{
-			layer->Detach();
-			layer.reset();
+			if (layer->GetName() != "ImguiLayer")
+			{
+				layer->Detach();
+			}
 		}
 	}
 
@@ -51,8 +53,8 @@ namespace SandTable
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())
 		{
-			m_Layers.erase(it);
 			overlay->Detach();
+			m_Layers.erase(it);
 		}
 	}
 

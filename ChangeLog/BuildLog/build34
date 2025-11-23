@@ -1,0 +1,16 @@
+build34
+2025-11-22
+
+1. 重新整理了文件。
+
+2. 封装了make_unique和make_shared。
+
+3. 在Sandbox中新建了Sandbox2D层。
+
+4. 修正了CameraController中的Move函数，使其能正确地相对世界方位移动，而非相对自身移动。
+
+5. 在Core.h中添加了一系列宏来控制当前编译选项。
+
+6. 将静态成员变量存储为Object。
+
+*1* Debug模式，imgui无法正确结束。

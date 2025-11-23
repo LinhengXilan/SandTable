@@ -1,0 +1,13 @@
+build33
+2025-11-18
+
+1. 将对相机的控制移至 class CameraController，并支持更多功能。
+
+2. 正确支持OpenGL视口分辨率的调整。
+
+3. 添加标志 PRIVATE 来标记cpp文件中的私有成员函数。
+    - #define PRIVATE
+
+4. 为同类函数添加注释标识其功能
+    - 形如 /* vvv function description vvv */
+    - 形如 /* ^^^ function description ^^^ */

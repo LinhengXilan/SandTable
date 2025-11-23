@@ -10,6 +10,7 @@
 #include <pch.h>
 #include <SandTable/Renderer/Renderer.h>
 #include <Platform/OpenGL/OpenGLShader.h>
+#include <SandTable/Renderer/Renderer2D.h>
 
 namespace SandTable
 {
@@ -18,9 +19,10 @@ namespace SandTable
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
-	void Renderer::BeginScene(const ObjectRef<OrthographicCamera>& camera)
+	void Renderer::BeginScene(const ObjectRef<Camera>& camera)
 	{
 		s_SceneData->ViewProjectionMatrix = camera->GetViewProjectionMatrix();
 	}

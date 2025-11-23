@@ -13,6 +13,13 @@
 
 namespace SandTable
 {
+
+	Time::Time(float currentTime)
+		: CurrentTime(currentTime), LastTime(currentTime)
+	{
+
+	}
+
 	Clock::Clock()
 		: m_Time(glfwGetTime())
 	{

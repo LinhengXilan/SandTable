@@ -14,6 +14,11 @@
 
 namespace SandTable
 {
+	/**
+	 * @brief 读取文件
+	 * @param path 文件路径
+	 * @return 读取的字符串
+	 */
 	std::string File::ReadFile(const std::string& path)
 	{
 		std::ifstream ifs(path, std::ios::in | std::ios::binary);
@@ -31,6 +36,13 @@ namespace SandTable
 		return "";
 	}
 
+	/**
+	 * @brief 读取特定后缀的文件
+	 * @param path 文件路径
+	 * @param postfix 文件后缀
+	 * @return 读取的字符串
+	 * @note Debug模式下后缀不符时报错
+	 */
 	std::string File::ReadFile(const std::string& path, const std::string& postfix)
 	{
 #ifdef SANDTABLE_DEBUG
@@ -41,7 +53,6 @@ namespace SandTable
 			return "";
 		}
 #endif
-
 		std::ifstream ifs(path, std::ios::in | std::ios::binary);
 		if (ifs) [[likely]]
 		{

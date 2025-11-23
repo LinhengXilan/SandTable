@@ -16,7 +16,7 @@ namespace SandTable
 	{
 	public:
 		WindowResize(unsigned int width, unsigned int height);
-		~WindowResize() = default;
+		~WindowResize() override = default;
 
 	public:
 		const uint16_t GetWidth() const;
@@ -38,7 +38,7 @@ namespace SandTable
 	{
 	public:
 		WindowClose() = default;
-		~WindowClose() = default;
+		~WindowClose() override = default;
 
 		static const EventType GetStaticType();
 		const EventType GetEventType() const override;
@@ -50,7 +50,7 @@ namespace SandTable
 	{
 	public:
 		AppTick() = default;
-		~AppTick() = default;
+		~AppTick() override = default;
 
 	public:
 		static const EventType GetStaticType();
@@ -63,7 +63,7 @@ namespace SandTable
 	{
 	public:
 		AppUpdate() = default;
-		~AppUpdate() = default;
+		~AppUpdate() override = default;
 
 	public:
 		static const EventType GetStaticType();
@@ -76,7 +76,7 @@ namespace SandTable
 	{
 	public:
 		AppRender() = default;
-		~AppRender() = default;
+		~AppRender() override = default;
 
 	public:
 		static const EventType GetStaticType();

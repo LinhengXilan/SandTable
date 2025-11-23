@@ -48,7 +48,7 @@ namespace SandTable
 
 		virtual void OnUpdate() = 0;
 
-		static Object<Window> Create(const WindowProperty& property = WindowProperty());
+		static ObjectRef<Window> Create(const WindowProperty& property = WindowProperty());
 	};
 }
 

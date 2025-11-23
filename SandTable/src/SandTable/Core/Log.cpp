@@ -17,8 +17,10 @@ namespace SandTable
 	void Log::Init()
 	{
 		spdlog::set_pattern("%^[%T] %n %v%$");
+#ifdef SANDTABLE_CORE
 		CoreLogger = spdlog::stdout_color_mt("[SandTable]");
 		CoreLogger->set_level(spdlog::level::trace);
+#endif
 		ClientLogger = spdlog::stdout_color_mt("App");
 		ClientLogger->set_level(spdlog::level::trace);
 	}

@@ -26,6 +26,7 @@
 // 图形渲染
 #include <SandTable/ImGui/ImguiLayer.h>
 #include <SandTable/Renderer/Renderer.h>
+#include <SandTable/Renderer/Renderer2D.h>
 #include <SandTable/Renderer/RenderCommand.h>
 #include <SandTable/Renderer/Camera.h>
 #include <SandTable/Renderer/Shader.h>

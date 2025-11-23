@@ -21,23 +21,28 @@ namespace SandTable
 		~Log() = default;
 
 	public:
+	#ifdef SANDTABLE_CORE
 		static std::shared_ptr<spdlog::logger>& GetCoreLogger();
+	#endif
 		static std::shared_ptr<spdlog::logger>& GetClientLogger();
 
 		static void Init();
 
 	private:
+	#ifdef SANDTABLE_CORE
 		static std::shared_ptr<spdlog::logger> CoreLogger;
+	#endif
 		static std::shared_ptr<spdlog::logger> ClientLogger;
 	};
 }
 
-// 在引擎内部使用
-#define SANDTABLE_CORE_ERROR(...)		::SandTable::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define SANDTABLE_CORE_WARN(...)		::SandTable::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define SANDTABLE_CORE_INFO(...)		::SandTable::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define SANDTABLE_CORE_TRACE(...)		::SandTable::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define SANDTABLE_CORE_CRITICAL(...)	::SandTable::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#ifdef SANDTABLE_CORE
+	#define SANDTABLE_CORE_ERROR(...)		::SandTable::Log::GetCoreLogger()->error(__VA_ARGS__)
+	#define SANDTABLE_CORE_WARN(...)		::SandTable::Log::GetCoreLogger()->warn(__VA_ARGS__)
+	#define SANDTABLE_CORE_INFO(...)		::SandTable::Log::GetCoreLogger()->info(__VA_ARGS__)
+	#define SANDTABLE_CORE_TRACE(...)		::SandTable::Log::GetCoreLogger()->trace(__VA_ARGS__)
+	#define SANDTABLE_CORE_CRITICAL(...)	::SandTable::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#endif
 
 #ifdef SANDTABLE_ENABLE_ASSERTS
 	#define SANDTABLE_CORE_ASSERT(x, ...)	{ if (!(x)) { SANDTABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
@@ -47,11 +52,12 @@ namespace SandTable
 	#define SANDTABLE_ASSERT(x, ...)
 #endif
 
-// 在客户端使用
-#define SANDTABLE_ERROR(...)	::SandTable::Log::GetClientLogger()->error(__VA_ARGS__)
-#define SANDTABLE_WARN(...)		::SandTable::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define SANDTABLE_INFO(...)		::SandTable::Log::GetClientLogger()->info(__VA_ARGS__)
-#define SANDTABLE_TRACE(...)	::SandTable::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define SANDTABLE_CRITICAL(...) ::SandTable::Log::GetClientLogger()->critical(__VA_ARGS__)
+#ifndef SANDTABLE_CORE
+	#define SANDTABLE_ERROR(...)	::SandTable::Log::GetClientLogger()->error(__VA_ARGS__)
+	#define SANDTABLE_WARN(...)		::SandTable::Log::GetClientLogger()->warn(__VA_ARGS__)
+	#define SANDTABLE_INFO(...)		::SandTable::Log::GetClientLogger()->info(__VA_ARGS__)
+	#define SANDTABLE_TRACE(...)	::SandTable::Log::GetClientLogger()->trace(__VA_ARGS__)
+	#define SANDTABLE_CRITICAL(...) ::SandTable::Log::GetClientLogger()->critical(__VA_ARGS__)
+#endif
 
 #endif

@@ -38,12 +38,12 @@ namespace SandTable
 
 	private:
 		static ObjectRef<Application> s_Instance;
-		bool m_Running = true;
+		bool o_Running = true;
 
 	private:
-		ObjectRef<Window> m_Window;
 		LayerStack m_LayerStack;
 		ObjectRef<Layer> m_ImguiLayer;
+		ObjectRef<Window> m_Window;
 		Object<Clock> m_Clock;
 	};
 

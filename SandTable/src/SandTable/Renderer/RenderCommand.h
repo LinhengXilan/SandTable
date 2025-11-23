@@ -17,8 +17,8 @@ namespace SandTable
 	class RenderCommand
 	{
 	public:
-		RenderCommand() = default;
-		~RenderCommand() = default;
+		RenderCommand() = delete;
+		~RenderCommand() = delete;
 
 	public:
 		static void Init();

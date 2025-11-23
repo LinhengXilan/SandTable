@@ -15,7 +15,6 @@
 int main(int argc, char** argv)
 {
 	SandTable::Log::Init();
-	SANDTABLE_CORE_WARN("SandTable Engine");
 	SandTable::Object<SandTable::Application> app = SandTable::CreateApplication();
 	app->Run();
 	app.release();

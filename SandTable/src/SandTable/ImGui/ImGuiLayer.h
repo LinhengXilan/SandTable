@@ -24,8 +24,8 @@ namespace SandTable
 		~ImguiLayer() override = default;
 
 	public:
-		void Begin() override;
-		void End() override;
+		void Begin();
+		void End();
 		void Attach() override;
 		void Detach() override;
 		void ImguiRender() override;

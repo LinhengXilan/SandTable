@@ -32,12 +32,7 @@ namespace SandTable
 		TimeStep Timestep;
 
 		Time() = default;
-
-		Time(float currentTime)
-			: CurrentTime(currentTime), LastTime(currentTime)
-		{
-
-		}
+		Time(float currentTime);
 	};
 
 	/**

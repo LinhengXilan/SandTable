@@ -1,0 +1,9 @@
+build28
+2025-11-9
+
+1. 重命名指向SandTable命名空间中的类的智能指针
+	- template<typename T>
+	  using Object = std::unique_ptr<T>;
+
+    - template<typename T>
+	  using ObjectRef = std::shared_ptr<T>;

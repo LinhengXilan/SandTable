@@ -1,0 +1,7 @@
+build26
+2025-11-7
+
+1. class Renderer 中
+	static void Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader); 变为static void Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4& transform = glm::mat4{1.0f}); ，接受一个坐标变换矩阵。
+
+2. 在 Sandbox 示例程序中渲染100个不同坐标的矩形。

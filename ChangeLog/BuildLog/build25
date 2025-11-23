@@ -1,0 +1,37 @@
+build25
+2025-11-7
+
+/* SandTable/Core/Clock.h|cpp */
+
+	1. 提供存储时间的结构体 struct TimeStep, struct Time。
+
+	2. 在 class Clock 中提供时钟相关函数。
+
+
+/* SandTable/Layer.h|cpp */
+
+	3. 向更新函数 virtual void OnUpdate(TimeStep timeStep); 传入时间步长。
+
+
+/* SandTable/Renderer/Camera.h|cpp */
+
+	4. 提供时间相关的移动和旋转接口。
+		- virtual void Move(Direction direction, TimeStep timeStep) = 0;
+		- virtual void Move(Direction direction, float speed, TimeStep timeStep) = 0;
+		- virtual void Rotate(Direction direction, TimeStep timeStep) = 0;
+		- virtual void Rotate(Direction direction, float speed, TimeStep timeStep) = 0;
+		
+
+/* Platform/OpenGL/OpenGLCamera.h|cpp */
+
+	5. 实现时间相关的移动和旋转函数。
+	
+
+/* SandTable/Application.h */
+
+	6. 存储时钟对象 std::unique_ptr<Clock> m_Clock 。
+
+
+/* $(Project Sandbox)main.cpp */
+	
+	7. 按下R键现在会重置相机位置。

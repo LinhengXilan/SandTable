@@ -1,0 +1,35 @@
+build24
+2025-11-5
+
+/* $(Project Sandbox) */
+
+	1. 将渲染流程从 SandTable/Application.cpp 迁移到 Sandbox 项目中，成为 SandTable 的示例程序。
+
+
+/* $(Project SandTable) */
+
+	/* SandTable/Renderer/Camera.h */
+	/* Platform/OpenGL/OpenGLCamera.h|cpp */
+
+		2. 为相机类提供移动速度和旋转速度成员变量及方法。
+			- private float m_MoveSpeed { get; set; };
+			- private float m_RotateSpeed { get; set; };
+		
+		3. 为相机的移动和旋转提供方向的枚举
+			- enum class Direction;
+
+		4. 并提供了默认的移动和旋转函数
+			- void Move(Direction direction);
+			- void Move(Direction direction, float speed);
+			- void Rotate(Direction direction);
+			- void Rotate(Direction direction, float speed);
+			
+
+	/* SandTable/Renderer/RendererAPI.h|cpp */
+
+		5. 现在 RendererAPI 的提示只会显示一次。
+
+
+	/* SandTable/Application.h|cpp */
+
+		6. 移除图形渲染相关代码。

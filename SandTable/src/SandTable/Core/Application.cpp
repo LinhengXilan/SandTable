@@ -18,6 +18,7 @@ namespace SandTable
 
 	Application::Application()
 	{
+		SANDTABLE_CORE_WARN("SandTable Engine");
 		SANDTABLE_CORE_ASSERT(!s_Instance.get(), "Application already has an instance!");
 		s_Instance.reset(this);
 		m_Window = Window::Create();
@@ -51,7 +52,7 @@ namespace SandTable
 
 	bool Application::OnWindowClose(WindowClose& event)
 	{
-		m_Running = false;
+		o_Running = false;
 		return true;
 	}
 
@@ -73,7 +74,7 @@ namespace SandTable
 
 	void Application::Run() 
 	{
-		while (m_Running)
+		while (o_Running)
 		{
 			m_Clock->Tick();
 			SANDTABLE_CORE_TRACE("FPS {0} : {1}", m_Clock->GetFPS(), m_Clock->GetFrameCount());
@@ -84,12 +85,12 @@ namespace SandTable
 			}
 
 			// ImGui 渲染
-			m_ImguiLayer->Begin();
+			std::dynamic_pointer_cast<ImguiLayer>(m_ImguiLayer)->Begin();
 			for (auto& layer : m_LayerStack)
 			{
 				layer->ImguiRender();
 			}
-			m_ImguiLayer->End();
+			std::dynamic_pointer_cast<ImguiLayer>(m_ImguiLayer)->End();
 
 			m_Window->OnUpdate();
 		}

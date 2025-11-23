@@ -1,0 +1,25 @@
+build35
+2025-11-23
+
+1. 封装了一个2D渲染器，现已可渲染矩形。
+
+2. 使用动态指针转换的方式调用 ImguiLayer 中的 Begin() 和 End() 函数。
+
+3. 通过宏来控制Sandbox中无法使用CoreLogger。
+
+4. 添加一些注释。
+
+
+
+* 修复bugs *
+
+1. 销毁imgui窗口报错。
+    - 原因为Imgui多次销毁。
+        - Application中创建并保存
+        - LayerStack析构时析构函数中释放
+        - Application::m_Window析构时销毁所有窗口，包括Imgui窗口
+        - Application::m_ImguiLayer析构时销毁
+
+2. LayerStack 保存的智能指针无需手动释放。
+
+3. WindowsWindow 中 Create 函数应创建 ObjectRef 而不是 Object。

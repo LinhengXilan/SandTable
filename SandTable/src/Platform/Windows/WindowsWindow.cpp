@@ -34,9 +34,9 @@ namespace SandTable
 		Shutdown();
 	}
 
-	Object<Window> Window::Create(const WindowProperty& property)
+	ObjectRef<Window> Window::Create(const WindowProperty& property)
 	{
-		return CreateObject<WindowsWindow>(property);
+		return CreateObjectRef<WindowsWindow>(property);
 	}
 
 	const uint16_t WindowsWindow::GetWidth() const

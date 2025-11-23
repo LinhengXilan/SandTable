@@ -122,9 +122,7 @@ public:
 	void ImguiRender() override
 	{
 		ImGui::Begin("Settings");
-
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
-
 		ImGui::End();
 	}
 

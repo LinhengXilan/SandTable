@@ -25,8 +25,6 @@ namespace SandTable
 	public:
 		const std::string& GetName() const;
 
-		virtual void Begin();
-		virtual void End();
 		virtual void Attach();
 		virtual void Detach();
 		virtual void ImguiRender();

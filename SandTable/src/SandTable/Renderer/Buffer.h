@@ -31,26 +31,7 @@ namespace SandTable
 	 * @return unsigned int 着色器数据类型大小（字节）
 	 * @brief 获取着色器数据类型大小
 	 */
-	static unsigned int GetShaderDataTypeSize(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::Float:    return 4;
-		case ShaderDataType::Float2:   return 4 * 2;
-		case ShaderDataType::Float3:   return 4 * 3;
-		case ShaderDataType::Float4:   return 4 * 4;
-		case ShaderDataType::Matrix3:  return 4 * 3 * 3;
-		case ShaderDataType::Matrix4:  return 4 * 4 * 4;
-		case ShaderDataType::Int:      return 4;
-		case ShaderDataType::Int2:     return 4 * 2;
-		case ShaderDataType::Int3:     return 4 * 3;
-		case ShaderDataType::Int4:     return 4 * 4;
-		case ShaderDataType::Bool:     return 1;
-		default:
-			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		}
-		return 0;
-	}
+	static unsigned int GetShaderDataTypeSize(ShaderDataType type);
 	 
 	/**
 	 * @brief 缓冲元素结构体
@@ -59,52 +40,25 @@ namespace SandTable
 	{
 		ShaderDataType Type; /// 着色器数据类型
 		std::string Name;	 /// 元素名称
-		unsigned int Size;	 /// 元素大小
-		unsigned int Offset; /// 元素偏移
+		uint32_t Size;	 /// 元素大小
+		size_t Offset; /// 元素偏移
 		bool Normalized;	 /// 是否归一化
 
 		BufferElement() = default;
-		BufferElement(ShaderDataType type = ShaderDataType::None, const std::string& name = "", bool normalized = false)
-			: Type(type), Name(name), Size(GetShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
-		{
-
-		}
+		BufferElement(ShaderDataType type = ShaderDataType::None, const std::string& name = "", bool normalized = false);
 
 		/**
 		 * @brief 获取组件数量
 		 * @return unsigned int 组件数量
 		 */
-		unsigned int GetComponentCount() const
-		{
-			switch (Type)
-			{
-			case ShaderDataType::Float:    return 1;
-			case ShaderDataType::Float2:   return 2;
-			case ShaderDataType::Float3:   return 3;
-			case ShaderDataType::Float4:   return 4;
-			case ShaderDataType::Matrix3:  return 3 * 3;
-			case ShaderDataType::Matrix4:  return 4 * 4;
-			case ShaderDataType::Int:      return 1;
-			case ShaderDataType::Int2:     return 2;
-			case ShaderDataType::Int3:     return 3;
-			case ShaderDataType::Int4:     return 4;
-			case ShaderDataType::Bool:     return 1;
-			default:
-				SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
-			}
-			return 0;
-		}
+		uint8_t GetComponentCount() const;
 	};
 
 	class BufferLayout
 	{
 	public:
 		BufferLayout() = default;
-		BufferLayout(const std::initializer_list<BufferElement>& elements)
-			: m_Elements(elements)
-		{
-			CalculateOffsetAndStride();
-		}
+		BufferLayout(const std::initializer_list<BufferElement>& elements);
 		~BufferLayout() = default;
 
 	public:

@@ -26,7 +26,7 @@ namespace SandTable
 		static const RendererAPI::API GetRendererAPI();
 
 		static void Init();
-		static void BeginScene(const ObjectRef<OrthographicCamera>& camera);
+		static void BeginScene(const ObjectRef<Camera>& camera);
 		static void EndScene();
 		static void Submit(const ObjectRef<VertexArray>& vertexArray, const ObjectRef<Shader>& shader, const glm::mat4& transform = glm::mat4{1.0f});
 
