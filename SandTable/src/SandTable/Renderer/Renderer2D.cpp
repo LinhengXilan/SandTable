@@ -9,8 +9,8 @@
 
 #include <pch.h>
 #include <SandTable/Renderer/Renderer2D.h>
-#include <Platform/OpenGL/OpenGLShader.h>
 #include <SandTable/Renderer/RenderCommand.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace SandTable
 {
@@ -55,8 +55,8 @@ namespace SandTable
 
 	void Renderer2D::BeginScene(const ObjectRef<OrthographicCamera>& camera)
 	{
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->Shader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->Shader)->SetUniform("u_ViewProjection", camera->GetViewProjectionMatrix());
+		s_Data->Shader->Bind();
+		s_Data->Shader->SetData("u_ViewProjection", camera->GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
@@ -71,9 +71,10 @@ namespace SandTable
 
 	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(s_Data->Shader)->Bind();
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(s_Data->Shader)->SetUniform("u_Color", color);
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(s_Data->Shader)->SetUniform("u_ModelTransform", glm::mat4{1.0f});
+		s_Data->Shader->Bind();
+		s_Data->Shader->SetData("u_Color", color);
+		glm::mat4 transform = glm::translate(glm::mat4{1.0f}, position) * glm::scale(glm::mat4{1.0f}, {size.x, size.y, 0.0f});
+		s_Data->Shader->SetData("u_ModelTransform", transform);
 		s_Data->VertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->VertexArray);
 	}

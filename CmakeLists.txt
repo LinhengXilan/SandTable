@@ -35,6 +35,7 @@ target_include_directories(glad PRIVATE library/glad/glad/include/)
 # ImGui
 set(IMGUI_SOURCE_PATH library/imgui/imgui/)
 file(GLOB ImGuiSource ${IMGUI_SOURCE_PATH}*.cpp)
+
 add_library(ImGui STATIC ${ImGuiSource})
 target_include_directories(ImGui PRIVATE ${IMGUI_SOURCE_PATH})
 
@@ -46,8 +47,7 @@ file(GLOB_RECURSE SandTableSourceFlie ${SandTableSource}*.cpp)
 
 add_library(SandTable STATIC ${SandTableSourceFlie})
 target_precompile_headers(SandTable PRIVATE ${SandTableSource}pch.h)
-
-target_compile_definitions(SandTable PRIVATE SANDTABLE_BUILD_DLL)
+target_compile_definitions(SandTable PRIVATE SANDTABLE_CORE)
 target_include_directories(SandTable PRIVATE ${SandTableSource})
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}spdlog/include/)
 target_include_directories(SandTable PRIVATE ${SandTableLibrary}glfw/)

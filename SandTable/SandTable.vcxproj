@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="library\spdlog\include\spdlog\async.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\async_logger.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\cfg\argv.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\cfg\env.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\cfg\helpers.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\common-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\common.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\os.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\registry.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\udp_client-windows.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\udp_client.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\args.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\base.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\os.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\std.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\bundled\xchar.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\chrono.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\compile.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\ranges.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\std.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fmt\xchar.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\formatter.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\fwd.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\logger-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\logger.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\mdc.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\callback_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\hourly_file_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\kafka_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\mongo_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\qt_sinks.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\udp_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\spdlog.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\stopwatch.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\tweakme.h" />
+    <ClInclude Include="library\spdlog\include\spdlog\version.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLCamera.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\SandTable\CameraController.h" />
+    <ClInclude Include="src\SandTable\Core\Clock.h" />
+    <ClInclude Include="src\SandTable\Core\File.h" />
+    <ClInclude Include="src\SandTable\ImGui\ImguiGlfw.h" />
+    <ClInclude Include="src\SandTable\ImGui\ImguiOpengl.h" />
+    <ClInclude Include="src\SandTable\ImGui\ImguiOpenglLoader.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\SandTable.h" />
+    <ClInclude Include="src\SandTable\Core\Application.h" />
+    <ClInclude Include="src\SandTable\Core\Core.h" />
+    <ClInclude Include="src\SandTable\Core\EntryPoint.h" />
+    <ClInclude Include="src\SandTable\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\SandTable\Events\Event.h" />
+    <ClInclude Include="src\SandTable\Events\Keyboard.h" />
+    <ClInclude Include="src\SandTable\Events\MouseEvent.h" />
+    <ClInclude Include="src\SandTable\ImGui\ImguiLayer.h" />
+    <ClInclude Include="src\SandTable\Core\KeyCode.h" />
+    <ClInclude Include="src\SandTable\Core\Layer.h" />
+    <ClInclude Include="src\SandTable\Core\LayerStack.h" />
+    <ClInclude Include="src\SandTable\Core\Log.h" />
+    <ClInclude Include="src\SandTable\Core\MouseCode.h" />
+    <ClInclude Include="src\SandTable\Renderer\Buffer.h" />
+    <ClInclude Include="src\SandTable\Renderer\Camera.h" />
+    <ClInclude Include="src\SandTable\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\SandTable\Renderer\Renderer.h" />
+    <ClInclude Include="src\SandTable\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\SandTable\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\SandTable\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\SandTable\Renderer\Shader.h" />
+    <ClInclude Include="src\SandTable\Renderer\Texture.h" />
+    <ClInclude Include="src\SandTable\Renderer\VertexArray.h" />
+    <ClInclude Include="src\SandTable\Core\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLCamera.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\SandTable\CameraController.cpp" />
+    <ClCompile Include="src\SandTable\Core\Clock.cpp" />
+    <ClCompile Include="src\SandTable\Core\File.cpp" />
+    <ClCompile Include="src\SandTable\Events\ApplicationEvent.cpp" />
+    <ClCompile Include="src\SandTable\Events\Event.cpp" />
+    <ClCompile Include="src\SandTable\Events\Keyboard.cpp" />
+    <ClCompile Include="src\SandTable\Events\MouseEvent.cpp" />
+    <ClCompile Include="src\SandTable\ImGui\ImguiGlfw.cpp" />
+    <ClCompile Include="src\SandTable\ImGui\ImguiOpengl.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\SandTable\Core\Application.cpp" />
+    <ClCompile Include="src\SandTable\ImGui\ImguiLayer.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Camera.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Shader.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\Texture.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\VertexArray.cpp" />
+    <ClInclude Include="src\SandTable\Core\Input.h" />
+    <ClCompile Include="src\SandTable\Core\Layer.cpp" />
+    <ClCompile Include="src\SandTable\Core\LayerStack.cpp" />
+    <ClCompile Include="src\SandTable\Core\Log.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\CmakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\library\glad\glad.vcxproj">
+      <Project>{8858a423-7d05-47af-9da8-f552bdcf58ee}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\library\imgui\imgui.vcxproj">
+      <Project>{497ebbd6-ee09-49ed-8750-4906ca238ae9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8d684381-9149-4929-994c-0f1a3cd8cfa7}</ProjectGuid>
+    <RootNamespace>SandTable</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SandTable</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\$(ProjectName)\</IntDir>
+    <ExternalIncludePath>$(SolutionDir)SandTable\library\spdlog\include;$(SolutionDir)SandTable\library\imgui;$(SolutionDir)SandTable\library\glfw\include;$(SolutionDir)SandTable\library\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\$(ProjectName)\</IntDir>
+    <ExternalIncludePath>$(SolutionDir)SandTable\library\spdlog\include;$(SolutionDir)SandTable\library\imgui;$(SolutionDir)SandTable\library\glfw\include;$(SolutionDir)SandTable\library\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SANDTABLE_DEBUG;SANDTABLE_CORE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Home\code\C++\SandTable\library\glm;$(SolutionDir)library\glfw;$(SolutionDir)SandTable\src;$(SolutionDir)library\spdlog\include;$(SolutionDir)library\imgui;$(SolutionDir)library\glad\glad\include;$(SolutionDir)library\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ControlFlowGuard>false</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;gdi32.lib;user32.lib;glfw3.lib;imgui.lib;glad.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)library\glfw\$(Configuration)\;$(SolutionDir)bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SANDTABLE_RELEASE;SANDTABLE_CORE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Home\code\C++\SandTable\library\glm;$(SolutionDir)library\glfw;$(SolutionDir)SandTable\src;$(SolutionDir)library\spdlog\include;$(SolutionDir)library\imgui;$(SolutionDir)library\glad\glad\include;$(SolutionDir)library\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;gdi32.lib;user32.lib;glfw3.lib;imgui.lib;glad.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)library\glfw\$(Configuration)\;$(SolutionDir)bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

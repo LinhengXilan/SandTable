@@ -30,6 +30,16 @@ namespace SandTable
 
 		virtual const std::string& GetName() const = 0;
 
+		virtual void SetData(const std::string& name, const int32_t value) = 0;
+		virtual void SetData(const std::string& name, const uint32_t value) = 0;
+		virtual void SetData(const std::string& name, const float value) = 0;
+		virtual void SetData(const std::string& name, const double value) = 0;
+		virtual void SetData(const std::string& name, const glm::vec2& value) = 0;
+		virtual void SetData(const std::string& name, const glm::vec3& value) = 0;
+		virtual void SetData(const std::string& name, const glm::vec4& value) = 0;
+		virtual void SetData(const std::string& name, const glm::mat3& value) = 0;
+		virtual void SetData(const std::string& name, const glm::mat4& value) = 0;
+
 		static ObjectRef<Shader> Create(const std::string& name, const std::string& vertexSource, std::string& fragmentSource);
 		static ObjectRef<Shader> Create(const std::string& path);
 	};

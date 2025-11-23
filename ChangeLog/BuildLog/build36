@@ -1,0 +1,9 @@
+build36
+2025-11-23
+
+1. 完善2D渲染器绘制矩形的功能。
+
+2. 为Shader类添加SetData接口。
+    - OpenGL中为设置uniform。
+
+* 打开imgui子窗口（选项页）后关闭仍会报错。 *

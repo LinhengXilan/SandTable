@@ -12,7 +12,6 @@
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <Platform/OpenGL/OpenGLShader.h>
 #include <Sandbox2D.h>
 
 class ExampleLayer : public SandTable::Layer
@@ -80,8 +79,8 @@ public:
 		m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
 		m_IconTexture = SandTable::Texture2D::Create("assets/icons/icon.png");
 
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(textureShader)->SetUniform("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetData("u_Texture", 0);
 	}
 
 	void OnUpdate(SandTable::TimeStep timeStep) override
@@ -94,8 +93,8 @@ public:
 		SandTable::RenderCommand::Clear();
 		SandTable::Renderer::BeginScene(m_CameraController.GetCamera());
 
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->Bind();
-		std::dynamic_pointer_cast<SandTable::OpenGLShader>(m_ShaderLibrary.GetShader("Square"))->SetUniform("u_Color", m_SquareColor);
+		m_ShaderLibrary.GetShader("Square")->Bind();
+		m_ShaderLibrary.GetShader("Square")->SetData("u_Color", m_SquareColor);
 
 		for (int i = 0; i < 20; i++)
 		{

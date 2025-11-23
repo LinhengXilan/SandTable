@@ -23,7 +23,7 @@ namespace SandTable
 		s_Instance.reset(this);
 		m_Window = Window::Create();
 		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
-		m_Window->SetSync(true);
+		m_Window->SetSync(false);
 
 		RendererAPI::SetAPI(RendererAPI::API::OpenGL); 
 		Renderer::Init();

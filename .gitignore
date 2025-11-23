@@ -11,7 +11,7 @@ library/imgui/misc/
 
 # Files
 *.xlsx
-*.vcxproj
+*.vcxprojgit 
 *.vcxproj.user
 *.vcxproj.filters
 *.backup

@@ -162,24 +162,76 @@ namespace SandTable
 		return m_Name;
 	}
 
-	/* vvv  SetUniform  vvv */
+	/* vvvvv  SetUniform  vvvvv */
 
-	/* vvv  int  vvv */
+	/* vvv  接口  vvv */
+
+	void OpenGLShader::SetData(const std::string& name, const int32_t value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const uint32_t value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const float value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const double value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const glm::vec2& value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const glm::vec3& value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const glm::vec4& value)
+	{
+		SetUniform(name, value);	
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const glm::mat3& value)
+	{
+		SetUniform(name, value);
+	}
+
+	void OpenGLShader::SetData(const std::string& name, const glm::mat4& value)
+	{
+		SetUniform(name, value);
+	}
+
+	/* ^^^  接口  ^^^ */
+
+
 	void OpenGLShader::SetUniform(const std::string& name, const int32_t value)
 	{
 		glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
+
 	void OpenGLShader::SetUniform(const std::string& name, const uint32_t value)
 	{
 		glUniform1ui(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-
-	/* vvv  vector(float)  vvv */
-
 	void OpenGLShader::SetUniform(const std::string& name, const float value)
 	{
 		glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
+	}
+
+	void OpenGLShader::SetUniform(const std::string& name, const double value)
+	{
+		glUniform1d(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
 	void OpenGLShader::SetUniform(const std::string& name, const glm::vec2& value)
@@ -197,10 +249,6 @@ namespace SandTable
 		glUniform4f(glGetUniformLocation(m_RendererID, name.c_str()), value.x, value.y, value.z, value.w);
 	}
 
-	/* ^^^  vector(float)  ^^^ */
-
-	/* vvv  matrix  vvv */
-
 	void OpenGLShader::SetUniform(const std::string& name, const glm::mat3& value)
 	{
 		glUniformMatrix3fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
@@ -211,7 +259,5 @@ namespace SandTable
 		glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 	}
 
-	/* ^^^  matrix  ^^^ */
-
-	/* ^^^  SetUniform  ^^^ */
+	/* ^^^^^  SetUniform  ^^^^^ */
 }
