@@ -1,10 +1,10 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
- * @brief OpenGL相机实现
+ * @brief OpenGL相机
  */
 
 #include <pch.h>
@@ -25,7 +25,7 @@ namespace SandTable
 		
 	}
 
-	const CameraType OpenGLOrthographicCamera::GetCameraType() const
+	Camera::CameraType OpenGLOrthographicCamera::GetCameraType() const
 	{
 		return CameraType::Orthographic;
 	};
@@ -57,7 +57,7 @@ namespace SandTable
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void OpenGLOrthographicCamera::RecalculateViewMatrix(const glm::vec3& position, const float rotation)
+	void OpenGLOrthographicCamera::RecalculateViewMatrix(const glm::vec3& position, float rotation)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 							* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0, 0, 1));

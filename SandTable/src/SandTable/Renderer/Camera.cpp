@@ -1,10 +1,10 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
- * @brief 照相机头文件
+ * @brief 相机接口
  */
 
 #include <pch.h>
@@ -14,17 +14,25 @@
 
 namespace SandTable
 {
-	ObjectRef<Camera> Camera::Create()
+	ObjectRef<Camera> Camera::Create(CameraType type, float left, float right, float bottom, float top)
 	{
-		switch (Renderer::GetRendererAPI())
+		switch (type)
 		{
-		case RendererAPI::API::None:
-			return nullptr;
-		case RendererAPI::API::OpenGL:
-			return nullptr;
-		default:
-			return nullptr;
+		case CameraType::Normal:
+			switch (Renderer::GetRendererAPI())
+			{
+			case RendererAPI::API::None:
+				return nullptr;
+			case RendererAPI::API::OpenGL:
+				return nullptr;
+			default:
+				return nullptr;
+			}
+		case CameraType::Orthographic:
+			return OrthographicCamera::Create(left, right, bottom, top);
 		}
+		
+		
 	}
 
 	ObjectRef<OrthographicCamera> OrthographicCamera::Create(float left, float right, float bottom, float top)

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Event.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  */
 
 #include <pch.h>
@@ -10,7 +10,7 @@
 
 namespace SandTable
 {
-	const bool Event::IsInCategory(EventCategory category)
+	bool Event::IsInCategory(EventCategory category)
 	{
 		return GetCategoryFlags() & category;
 	}

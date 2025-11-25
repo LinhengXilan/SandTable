@@ -23,6 +23,7 @@ void Sandbox2D::Attach()
 	m_CameraController.SetMoveSpeed(2.0f);
 	m_CameraController.SetRotationSpeed(50.0f);
 	m_CameraController.AllowTranslatedSpeed(true);
+	m_Texture = SandTable::Texture2D::Create("assets/textures/grid.png");
 }
 
 void Sandbox2D::Detach()
@@ -39,7 +40,7 @@ void Sandbox2D::ImguiRender()
 	ImGui::End();
 }
 
-void Sandbox2D::OnUpdate(SandTable::TimeStep timeStep)
+void Sandbox2D::OnUpdate(const SandTable::TimeStep& timeStep)
 {
 	//SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
 	m_CameraController.OnUpdate(timeStep);
@@ -49,8 +50,7 @@ void Sandbox2D::OnUpdate(SandTable::TimeStep timeStep)
 
 	SandTable::Renderer2D::BeginScene(m_CameraController.GetCamera());
 	SandTable::Renderer2D::DrawRectangle({0.0f, 0.0f}, {1.0f, 1.0f}, {0.8f, 0.2f, 0.3f, 1.0f});
-	SandTable::Renderer2D::DrawRectangle({0.5f, 0.5f}, {1.2f, 1.2f}, {0.7f, 0.1f, 0.2f, 1.0f});
-	SandTable::Renderer2D::DrawRectangle({-0.3f, -0.5f}, {0.8f, 1.0f}, {0.6f, 0.0f, 0.1f, 1.0f});
+	SandTable::Renderer2D::DrawRectangle({0.0f, 0.0f, -0.5f}, {12.0f, 12.0f}, m_Texture);
 	SandTable::Renderer2D::EndScene();
 }
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Texture.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 纹理
  */
@@ -21,8 +21,8 @@ namespace SandTable
 		virtual ~Texture() = default;
 
 	public:
-		virtual const uint32_t GetWidth() const = 0;
-		virtual const uint32_t GetHeight() const = 0;
+		virtual int32_t GetWidth() const = 0;
+		virtual int32_t GetHeight() const = 0;
 
 		virtual void Bind(uint32_t slot = 0) const = 0;
 	};

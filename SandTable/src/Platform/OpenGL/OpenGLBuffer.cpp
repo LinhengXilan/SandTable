@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLBuffer.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief OpenGL图形缓冲实现
  */
@@ -14,7 +14,7 @@
 namespace SandTable
 {
 	// VertexBuffer
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, int32_t size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const float* vertices, int64_t size)
 	{
 		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -48,7 +48,7 @@ namespace SandTable
 
 
 	// IndexBuffer
-	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, int32_t count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(const uint32_t* indices, int32_t count)
 		: m_Count(count)
 	{
 		glCreateBuffers(1, &m_RendererID);
@@ -71,7 +71,7 @@ namespace SandTable
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
 	}
 
-	const int32_t OpenGLIndexBuffer::GetCount() const
+	int32_t OpenGLIndexBuffer::GetCount() const
 	{
 		return m_Count;
 	}

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 渲染器头文件
  */
@@ -23,7 +23,7 @@ namespace SandTable
 		~Renderer() = default;
 
 	public:
-		static const RendererAPI::API GetRendererAPI();
+		static RendererAPI::API GetRendererAPI();
 
 		static void Init();
 		static void BeginScene(const ObjectRef<Camera>& camera);
@@ -31,7 +31,7 @@ namespace SandTable
 		static void Submit(const ObjectRef<VertexArray>& vertexArray, const ObjectRef<Shader>& shader, const glm::mat4& transform = glm::mat4{1.0f});
 
 	public: // 事件
-		static void OnWindowResize(uint16_t width, uint16_t height);
+		static void OnWindowResize(int32_t width, int32_t height);
 
 	private:
 		struct SceneData

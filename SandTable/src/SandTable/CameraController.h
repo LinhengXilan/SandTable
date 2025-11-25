@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/CameraController.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 相机控制器
  */
@@ -47,31 +47,31 @@ namespace SandTable
 		// Getter
 		const ObjectRef<OrthographicCamera>& GetCamera() const;
 		const glm::vec3& GetPosition() const;
-		const float GetRotation() const;
-		const float GetAspectRatio() const;
-		const float GetZoomRatio() const;
-		const bool IsRotationAllowed() const;
-		const bool IsTranslatedSpeedAllowed() const;
+		float GetRotation() const;
+		float GetAspectRatio() const;
+		float GetZoomRatio() const;
+		bool IsRotationAllowed() const;
+		bool IsTranslatedSpeedAllowed() const;
 
 		// Setter
 		void SetPosition(const glm::vec3& position);
-		void SetRotation(const float rotation);
-		void SetMoveSpeed(const float speed);
-		void SetTranslatedSpeed(const float speed);
-		void SetRotationSpeed(const float speed);
-		void SetZoomRatio(const float zoomRatio);
+		void SetRotation(float rotation);
+		void SetMoveSpeed(float speed);
+		void SetTranslatedSpeed(float speed);
+		void SetRotationSpeed(float speed);
+		void SetZoomRatio(float zoomRatio);
 
 		// 选项控制
 		void AllowRotation(bool enabled);
 		void AllowTranslatedSpeed(bool enabled);
 
 		// 事件
-		void OnUpdate(TimeStep timeStep);
+		void OnUpdate(const TimeStep& timeStep);
 		void OnEvent(Event& event);
 
 	private:
-		void Move(Direction direction, float speed, TimeStep timeStep);
-		void Rotate(Direction direction, float speed, TimeStep timeStep);
+		void Move(Direction direction, float speed, const TimeStep& timeStep);
+		void Rotate(Direction direction, float speed, const TimeStep& timeStep);
 		bool OnMouseScrolled(MouseScrolled& event);
 		bool OnWindowResized(WindowResize& event);
 
@@ -87,7 +87,7 @@ namespace SandTable
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 		float m_CameraRotation = 0.0f;
 
-		float m_CameraMoveSpeed = 1.0f;	/// 在不同缩放下的移动速度，看起来应该一样快
+		float m_CameraMoveSpeed = 1.0f;
 		float m_CameraRotationSpeed = 1.0f;
 	};
 }

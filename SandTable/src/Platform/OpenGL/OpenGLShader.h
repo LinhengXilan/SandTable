@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief OpenGL着色器
  */
@@ -31,20 +31,20 @@ namespace SandTable
 
 		const std::string& GetName() const override;
 
-		void SetData(const std::string& name, const int32_t value) override;
-		void SetData(const std::string& name, const uint32_t value) override;
-		void SetData(const std::string& name, const float value) override;
-		void SetData(const std::string& name, const double value) override;
+		void SetData(const std::string& name, int32_t value) override;
+		void SetData(const std::string& name, uint32_t value) override;
+		void SetData(const std::string& name, float value) override;
+		void SetData(const std::string& name, double value) override;
 		void SetData(const std::string& name, const glm::vec2& value) override;
 		void SetData(const std::string& name, const glm::vec3& value) override;
 		void SetData(const std::string& name, const glm::vec4& value) override;
 		void SetData(const std::string& name, const glm::mat3& value) override;
 		void SetData(const std::string& name, const glm::mat4& value) override;
 
-		void SetUniform(const std::string& name, const int32_t value);
-		void SetUniform(const std::string& name, const uint32_t value);
-		void SetUniform(const std::string& name, const float value);
-		void SetUniform(const std::string& name, const double value);
+		void SetUniform(const std::string& name, int32_t value);
+		void SetUniform(const std::string& name, uint32_t value);
+		void SetUniform(const std::string& name, float value);
+		void SetUniform(const std::string& name, double value);
 		void SetUniform(const std::string& name, const glm::vec2& value);
 		void SetUniform(const std::string& name, const glm::vec3& value);
 		void SetUniform(const std::string& name, const glm::vec4& value);

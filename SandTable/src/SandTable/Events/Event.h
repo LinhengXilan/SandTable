@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Event.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  */
 
 #ifndef SANDTABLE_EVENTS_EVENT_H
@@ -38,10 +38,10 @@ namespace SandTable
 		Event() = default;
 		virtual ~Event() = default;
 	public:
-		virtual const EventType GetEventType() const = 0;
-		virtual const std::string GetName() const = 0;
-		virtual const uint8_t GetCategoryFlags() const = 0;
-		const bool IsInCategory(EventCategory category);
+		virtual EventType GetEventType() const = 0;
+		virtual std::string GetName() const = 0;
+		virtual uint8_t GetCategoryFlags() const = 0;
+		bool IsInCategory(EventCategory category);
 		virtual std::string ToString() const;
 
 	public:

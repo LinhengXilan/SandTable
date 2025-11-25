@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/File.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 文件操作
  */
@@ -15,8 +15,8 @@ namespace SandTable
 	class File
 	{
 	public:
-		File() = default;
-		~File() = default;
+		File() = delete;
+		~File() = delete;
 
 		static std::string ReadFile(const std::string& path);
 		static std::string ReadFile(const std::string& path, const std::string& postfix);

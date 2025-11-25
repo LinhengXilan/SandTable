@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 应用程序头文件
  */
@@ -24,8 +24,8 @@ namespace SandTable
 		virtual ~Application() = default;
 
 	public:
-		ObjectRef<Window> GetWindow() const;
-		static ObjectRef<Application> GetInstance();
+		const ObjectRef<Window>& GetWindow() const;
+		static const ObjectRef<Application>& GetInstance();
 
 		void Run();
 		void PushLayer(const ObjectRef<Layer>& layer);

@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsInput.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  */
 
 #ifndef PLATFORM_WINDOWS_WINDOWSINPUT_H
@@ -20,11 +20,11 @@ namespace SandTable
 		~WindowsInput() override = default;
 
 	protected:
-		const bool IsKeyPressedImpl(int keycode) override;
-		const bool IsMousePressedImpl(int button) override;
-		const std::pair<float, float> GetMousePosImpl() override;
-		const float GetMousePosXImpl() override;
-		const float GetMousePosYImpl() override;
+		bool IsKeyPressedImpl(int keycode) override;
+		bool IsMousePressedImpl(int button) override;
+		std::pair<float, float> GetMousePosImpl() override;
+		float GetMousePosXImpl() override;
+		float GetMousePosYImpl() override;
 	};
 }
 

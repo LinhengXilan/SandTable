@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Buffer.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 渲染缓冲实现
  */
@@ -14,7 +14,7 @@
 
 namespace SandTable
 {
-	ObjectRef<VertexBuffer> VertexBuffer::Create(float* vertices, int32_t size)
+	ObjectRef<VertexBuffer> VertexBuffer::Create(const float* vertices, int64_t size)
 	{
 		switch (Renderer::GetRendererAPI())
 		{
@@ -28,7 +28,7 @@ namespace SandTable
 		}
 	}
 
-	ObjectRef<IndexBuffer> IndexBuffer::Create(uint32_t* indices, int32_t count)
+	ObjectRef<IndexBuffer> IndexBuffer::Create(const uint32_t* indices, int32_t count)
 	{
 		switch (Renderer::GetRendererAPI())
 		{

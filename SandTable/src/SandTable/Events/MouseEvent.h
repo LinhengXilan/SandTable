@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Mouse.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  */
 
 #ifndef SANDTABLE_EVENTS_MOUSEEVENT_H
@@ -19,15 +19,15 @@ namespace SandTable
 		~MouseMoved() override = default;
 
 	public:
-		const float GetX() const;
-		const float GetY() const;
+		float GetX() const;
+		float GetY() const;
 
 		std::string ToString() const override;
 
-		static const EventType GetStaticType();
-		const EventType GetEventType() const;
-		const std::string GetName() const;
-		const uint8_t GetCategoryFlags() const;
+		static EventType GetStaticType();
+		EventType GetEventType() const;
+		std::string GetName() const;
+		uint8_t GetCategoryFlags() const;
 
 	private:
 		float m_MouseX;
@@ -40,15 +40,15 @@ namespace SandTable
 		MouseScrolled(float x, float y);
 		~MouseScrolled() override = default;
 
-		const float GetXOffset() const;
-		const float GetYOffset() const;
+		float GetXOffset() const;
+		float GetYOffset() const;
 
 		std::string ToString() const override;
 
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 
 	private:
 		float m_OffsetX;
@@ -58,14 +58,14 @@ namespace SandTable
 	class SANDTABLE_DLL MouseButton : public Event
 	{
 	public:
-		int GetMouseButton() const;
-		virtual const uint8_t GetCategoryFlags() const override;
+		uint32_t GetMouseButton() const;
+		virtual uint8_t GetCategoryFlags() const override;
 
 	protected:
 		MouseButton(int button);
 		virtual ~MouseButton() override = default;
 
-		int m_Button;
+		uint32_t m_Button;
 	};
 	
 	class SANDTABLE_DLL MousePressed : public MouseButton
@@ -76,9 +76,9 @@ namespace SandTable
 
 	public:
 		std::string ToString() const override;
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
 	};
 
 	class SANDTABLE_DLL MouseReleased : public MouseButton
@@ -89,9 +89,9 @@ namespace SandTable
 
 	public:
 		std::string ToString() const override;
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
 	};
 }
 

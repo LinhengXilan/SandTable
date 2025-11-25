@@ -21,12 +21,13 @@ public:
 	void Attach() override;
 	void Detach() override;
 	void ImguiRender() override;
-	void OnUpdate(SandTable::TimeStep timeStep) override;
+	void OnUpdate(const SandTable::TimeStep& timeStep) override;
 	void OnEvent(SandTable::Event& event) override;
 
 private:
 	SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
 	SandTable::ObjectRef<SandTable::Shader> m_Shader;
+	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
 	SandTable::OrthoGraphicCameraController m_CameraController;
 	glm::vec4 m_SquareColor = { 1.0f, 0.83f, 0.66f, 1.0f };
 };

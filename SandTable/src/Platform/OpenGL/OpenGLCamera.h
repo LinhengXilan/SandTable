@@ -1,10 +1,10 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLCamera.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
- * @brief OpenGL相机实现头文件
+ * @brief OpenGL相机
  */
 
 #ifndef PLATFORM_OPENGL_OPENGLCAMERA_H
@@ -23,7 +23,7 @@ namespace SandTable
 		~OpenGLOrthographicCamera() override = default;
 
 	public:
-		const CameraType GetCameraType() const override;
+		Camera::CameraType GetCameraType() const override;
 		const glm::mat4& GetViewMatrix() const override;
 		const glm::mat4& GetProjectionMatrix() const override;
 		const glm::mat4& GetViewProjectionMatrix() const override;
@@ -31,7 +31,7 @@ namespace SandTable
 		void SetProjectionMatrix(float left, float right, float bottom, float top) override;
 		void SetProjectionMatrix(float aspectRatio, float zoomRatio) override;
 
-		void RecalculateViewMatrix(const glm::vec3& position, const float rotation) override;
+		void RecalculateViewMatrix(const glm::vec3& position, float rotation) override;
 
 	private:
 		glm::mat4 m_ViewMatrix;

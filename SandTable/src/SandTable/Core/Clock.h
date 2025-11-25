@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/Clock.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 计时器头文件
  */
@@ -45,11 +45,11 @@ namespace SandTable
 		~Clock() = default;
 
 	public:
-		const float GetCurrentTime() const;
-		const float GetLastTime() const;
-		const TimeStep GetTimeStep() const;
-		const uint64_t GetFrameCount() const;
-		const uint16_t GetFPS() const;
+		float GetCurrentTime() const;
+		float GetLastTime() const;
+		const TimeStep& GetTimeStep() const;
+		uint64_t GetFrameCount() const;
+		uint16_t GetFPS() const;
 
 		void Tick();
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Input.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  */
 
 #ifndef SANDTABLE_INPUT_H
@@ -28,11 +28,11 @@ namespace SandTable
 		static bool IsMousePressed(int button) { return s_Instance->IsMousePressedImpl(button); }
 
 	protected:
-		virtual const float GetMousePosXImpl() = 0;
-		virtual const float GetMousePosYImpl() = 0;
-		virtual const std::pair<float, float> GetMousePosImpl() = 0;
-		virtual const bool IsKeyPressedImpl(int keycode) = 0;
-		virtual const bool IsMousePressedImpl(int button) = 0;
+		virtual float GetMousePosXImpl() = 0;
+		virtual float GetMousePosYImpl() = 0;
+		virtual std::pair<float, float> GetMousePosImpl() = 0;
+		virtual bool IsKeyPressedImpl(int keycode) = 0;
+		virtual bool IsMousePressedImpl(int button) = 0;
 
 	private:
 		static Object<Input> s_Instance;

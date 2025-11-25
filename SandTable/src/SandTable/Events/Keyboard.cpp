@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Keyboard.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  */
 
 #include <pch.h>
@@ -11,7 +11,7 @@
 namespace SandTable
 {
 
-	const int Keyboard::GetKeyCode() const
+	uint32_t Keyboard::GetKeyCode() const
 	{
 		return m_KeyCode;
 	}
@@ -28,7 +28,7 @@ namespace SandTable
 
 	}
 
-	const int KeyPressed::GetRepeatCount() const
+	uint32_t KeyPressed::GetRepeatCount() const
 	{
 		return m_RepeatCount;
 	}
@@ -40,22 +40,22 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType KeyPressed::GetStaticType()
+	EventType KeyPressed::GetStaticType()
 	{
 		return EventType::KeyPressed;
 	}
 
-	const EventType KeyPressed::GetEventType() const
+	EventType KeyPressed::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string KeyPressed::GetName() const
+	std::string KeyPressed::GetName() const
 	{
 		return "KeyPressed";
 	}
 
-	const uint8_t KeyPressed::GetCategoryFlags() const
+	uint8_t KeyPressed::GetCategoryFlags() const
 	{
 		return EventCategory::E_Keyboard | EventCategory::E_Input;
 	}
@@ -74,22 +74,22 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType KeyReleased::GetStaticType()
+	EventType KeyReleased::GetStaticType()
 	{
 		return EventType::KeyReleased;
 	}
 
-	const EventType KeyReleased::GetEventType() const
+	EventType KeyReleased::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string KeyReleased::GetName() const
+	std::string KeyReleased::GetName() const
 	{
 		return "KeyReleased";
 	}
 
-	const uint8_t KeyReleased::GetCategoryFlags() const
+	uint8_t KeyReleased::GetCategoryFlags() const
 	{
 		return EventCategory::E_Keyboard | EventCategory::E_Input;
 	}
@@ -108,22 +108,22 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType KeyTyped::GetStaticType()
+	EventType KeyTyped::GetStaticType()
 	{
 		return EventType::KeyTyped;
 	}
 
-	const EventType KeyTyped::GetEventType() const
+	EventType KeyTyped::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string KeyTyped::GetName() const
+	std::string KeyTyped::GetName() const
 	{
 		return "KeyTyped";
 	}
 
-	const uint8_t KeyTyped::GetCategoryFlags() const
+	uint8_t KeyTyped::GetCategoryFlags() const
 	{
 		return EventCategory::E_Keyboard | EventCategory::E_Input;
 	}

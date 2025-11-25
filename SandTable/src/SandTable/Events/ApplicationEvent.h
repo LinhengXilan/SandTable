@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Application.h
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  */
 
 #ifndef SANDTABLE_EVENTS_APPLICATIONEVENT_H
@@ -15,23 +15,23 @@ namespace SandTable
 	class SANDTABLE_DLL WindowResize : public Event
 	{
 	public:
-		WindowResize(unsigned int width, unsigned int height);
+		WindowResize(int32_t width, int32_t height);
 		~WindowResize() override = default;
 
 	public:
-		const uint16_t GetWidth() const;
-		const uint16_t GetHeight() const;
+		int32_t GetWidth() const;
+		int32_t GetHeight() const;
 
 		std::string ToString() const override;
 
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 
 	private:
-		uint16_t m_Width;
-		uint16_t m_Height;
+		int32_t m_Width;
+		int32_t m_Height;
 	};
 
 	class SANDTABLE_DLL WindowClose : public Event
@@ -40,10 +40,10 @@ namespace SandTable
 		WindowClose() = default;
 		~WindowClose() override = default;
 
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 	};
 
 	class SANDTABLE_DLL AppTick : public Event
@@ -53,10 +53,10 @@ namespace SandTable
 		~AppTick() override = default;
 
 	public:
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 	};
 
 	class SANDTABLE_DLL AppUpdate : public Event
@@ -66,10 +66,10 @@ namespace SandTable
 		~AppUpdate() override = default;
 
 	public:
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 	};
 
 	class SANDTABLE_DLL AppRender : public Event
@@ -79,10 +79,10 @@ namespace SandTable
 		~AppRender() override = default;
 
 	public:
-		static const EventType GetStaticType();
-		const EventType GetEventType() const override;
-		const std::string GetName() const override;
-		const uint8_t GetCategoryFlags() const override;
+		static EventType GetStaticType();
+		EventType GetEventType() const override;
+		std::string GetName() const override;
+		uint8_t GetCategoryFlags() const override;
 	};
 }
 

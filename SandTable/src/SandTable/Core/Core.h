@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief SandTable核心头文件
  */
@@ -66,14 +66,17 @@ namespace SandTable
 {
 	template<typename T>
 	using ObjectRef = std::shared_ptr<T>;
+
 	template<typename T, typename... Args>
 	constexpr ObjectRef<T> CreateObjectRef(Args&&... args)
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
+
 	template<typename T>
 	using Object = std::unique_ptr<T>;
+
 	template<typename T, typename... Args>
 	constexpr Object<T> CreateObject(Args&&... args)
 	{

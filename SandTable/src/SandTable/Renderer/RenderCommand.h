@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/RenderCommand.h
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief
  */
@@ -22,10 +22,10 @@ namespace SandTable
 
 	public:
 		static void Init();
-		static void SetClearColor(glm::vec4 color);
+		static void SetClearColor(const glm::vec4& color);
 		static void Clear();
 		static void DrawIndexed(const ObjectRef<VertexArray>& vertexArray);
-		static void SetViewportSize(uint16_t posX, uint16_t posY, uint16_t width, uint16_t height);
+		static void SetViewportSize(int32_t posX, int32_t posY, int32_t width, int32_t height);
 	
 	private:
 		static Object<RendererAPI> s_RendererAPI;

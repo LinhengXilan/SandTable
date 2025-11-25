@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/Clock.cpp
  * @author LinhengXilan
- * @version build32
- * @date 2025-11-15
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 计时器实现
  */
@@ -26,27 +26,27 @@ namespace SandTable
 
 	}
 
-	const float Clock::GetCurrentTime() const
+	float Clock::GetCurrentTime() const
 	{
 		return m_Time.CurrentTime;
 	}
 
-	const float Clock::GetLastTime() const
+	float Clock::GetLastTime() const
 	{
 		return m_Time.LastTime;
 	}
 
-	const TimeStep Clock::GetTimeStep() const
+	const TimeStep& Clock::GetTimeStep() const
 	{
 		return m_Time.Timestep;
 	}
 
-	const uint64_t Clock::GetFrameCount() const
+	uint64_t Clock::GetFrameCount() const
 	{
 		return m_FrameCount;
 	}
 
-	const uint16_t Clock::GetFPS() const
+	uint16_t Clock::GetFPS() const
 	{
 		return m_FPS;
 	}

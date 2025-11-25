@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief Windows平台窗口实现
  */
@@ -39,12 +39,12 @@ namespace SandTable
 		return CreateObjectRef<WindowsWindow>(property);
 	}
 
-	const uint16_t WindowsWindow::GetWidth() const
+	int32_t WindowsWindow::GetWidth() const
 	{
 		return m_WindowData.Width;
 	}
 
-	const uint16_t WindowsWindow::GetHeight() const
+	int32_t WindowsWindow::GetHeight() const
 	{
 		return m_WindowData.Height;
 	}
@@ -54,7 +54,7 @@ namespace SandTable
 		return m_Window;
 	}
 
-	const bool WindowsWindow::IsSync() const
+	bool WindowsWindow::IsSync() const
 	{
 		return m_WindowData.Sync;
 	}

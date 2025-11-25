@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Log.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  */
 
 #include <pch.h>
@@ -25,12 +25,12 @@ namespace SandTable
 		ClientLogger->set_level(spdlog::level::trace);
 	}
 
-	std::shared_ptr<spdlog::logger>& Log::GetCoreLogger()
+	const std::shared_ptr<spdlog::logger>& Log::GetCoreLogger()
 	{
 		return CoreLogger;
 	}
 
-	std::shared_ptr<spdlog::logger>& Log::GetClientLogger()
+	const std::shared_ptr<spdlog::logger>& Log::GetClientLogger()
 	{
 		return ClientLogger;
 	}

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/File.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 文件操作
  */
@@ -22,7 +22,7 @@ namespace SandTable
 	std::string File::ReadFile(const std::string& path)
 	{
 		std::ifstream ifs(path, std::ios::in | std::ios::binary);
-		if (ifs) [[likely]]
+		if (ifs.is_open()) [[likely]]
 		{
 			std::string str;
 			ifs.seekg(0, std::ios::end);
@@ -54,7 +54,7 @@ namespace SandTable
 		}
 #endif
 		std::ifstream ifs(path, std::ios::in | std::ios::binary);
-		if (ifs) [[likely]]
+		if (ifs.is_open()) [[likely]]
 		{
 			std::string str;
 			ifs.seekg(0, std::ios::end);

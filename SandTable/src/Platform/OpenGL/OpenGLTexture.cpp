@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief OpenGL纹理
  */
@@ -19,16 +19,16 @@ namespace SandTable
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		: m_Path(path)
 	{
-		int width, height, channels;
+		int channels;
 		stbi_set_flip_vertically_on_load(1);
-		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		stbi_uc* data = stbi_load(path.c_str(), &m_Width, &m_Height, &channels, 0);
 		SANDTABLE_CORE_ASSERT(data, "Failed to load texture!");
-		m_Width = width;
-		m_Height = height;
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, GL_RGBA8, m_Width, m_Height);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
@@ -43,12 +43,12 @@ namespace SandTable
 		glBindTextureUnit(slot, m_RendererID);
 	}
 
-	const uint32_t OpenGLTexture2D::GetWidth() const
+	int32_t OpenGLTexture2D::GetWidth() const
 	{
 		return m_Width;
 	}
 
-	const uint32_t OpenGLTexture2D::GetHeight() const
+	int32_t OpenGLTexture2D::GetHeight() const
 	{
 		return m_Height;
 	}

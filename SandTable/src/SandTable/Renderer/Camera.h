@@ -1,10 +1,10 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
- * @brief 照相机头文件
+ * @brief 相机接口
  */
 
 #ifndef SANDTABLE_RENDERER_CAMERA_H
@@ -16,22 +16,23 @@
 
 namespace SandTable
 {
-
-	enum class CameraType : unsigned char
-	{
-		Normal, Orthographic
-	};
 	/**
 	 * @brief 摄像机类
 	 */
 	class Camera
 	{
 	public:
+		enum class CameraType : uint8_t
+		{
+			Normal,
+			Orthographic
+		};
+	public:
 		Camera() = default;
 		virtual ~Camera() = default;
 
 	public:
-		virtual const CameraType GetCameraType() const = 0;
+		virtual CameraType GetCameraType() const = 0;
 		virtual const glm::mat4& GetViewMatrix() const = 0;
 		virtual const glm::mat4& GetProjectionMatrix() const = 0;
 		virtual const glm::mat4& GetViewProjectionMatrix() const = 0;
@@ -39,11 +40,14 @@ namespace SandTable
 		virtual void SetProjectionMatrix(float left, float right, float bottom, float top) = 0;
 		virtual void SetProjectionMatrix(float aspectRatio, float zoomRatio) = 0;
 
-		virtual void RecalculateViewMatrix(const glm::vec3& position, const float rotation) = 0;
+		virtual void RecalculateViewMatrix(const glm::vec3& position, float rotation) = 0;
 
-		static ObjectRef<Camera> Create();
+		static ObjectRef<Camera> Create(CameraType type, float left, float right, float bottom, float top);
 	};
 
+	/**
+	 * @brief 正交相机
+	 */
 	class OrthographicCamera : public Camera
 	{
 	public:

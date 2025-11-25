@@ -83,7 +83,7 @@ public:
 		textureShader->SetData("u_Texture", 0);
 	}
 
-	void OnUpdate(SandTable::TimeStep timeStep) override
+	void OnUpdate(const SandTable::TimeStep& timeStep) override
 	{
 		//SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
 		m_CameraController.OnUpdate(timeStep);

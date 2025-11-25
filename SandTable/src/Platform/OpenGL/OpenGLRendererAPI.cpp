@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLRendererAPI.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief OpenGL渲染器API实现
  */
@@ -16,6 +16,7 @@ namespace SandTable
 	void OpenGLRendererAPI::Init()
 	{
 		glEnable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
@@ -35,7 +36,7 @@ namespace SandTable
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 
-	void OpenGLRendererAPI::SetViewportSize(uint16_t posX, uint16_t posY, uint16_t width, uint16_t height)
+	void OpenGLRendererAPI::SetViewportSize(int32_t posX, int32_t posY, int32_t width, int32_t height)
 	{
 		glViewport(posX, posY, width, height);
 	}

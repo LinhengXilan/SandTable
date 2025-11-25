@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLShader.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief OpenGL着色器
  */
@@ -118,7 +118,6 @@ namespace SandTable
 			glAttachShader(program, shader);
 			shaders[shaderIndex++] = shader;
 		}
-
 		glLinkProgram(program);
 #ifdef SANDTABLE_DEBUG
 		int isLinked = 0;
@@ -163,25 +162,24 @@ namespace SandTable
 	}
 
 	/* vvvvv  SetUniform  vvvvv */
-
 	/* vvv  接口  vvv */
 
-	void OpenGLShader::SetData(const std::string& name, const int32_t value)
+	void OpenGLShader::SetData(const std::string& name, int32_t value)
 	{
 		SetUniform(name, value);
 	}
 
-	void OpenGLShader::SetData(const std::string& name, const uint32_t value)
+	void OpenGLShader::SetData(const std::string& name, uint32_t value)
 	{
 		SetUniform(name, value);
 	}
 
-	void OpenGLShader::SetData(const std::string& name, const float value)
+	void OpenGLShader::SetData(const std::string& name, float value)
 	{
 		SetUniform(name, value);
 	}
 
-	void OpenGLShader::SetData(const std::string& name, const double value)
+	void OpenGLShader::SetData(const std::string& name, double value)
 	{
 		SetUniform(name, value);
 	}
@@ -213,23 +211,22 @@ namespace SandTable
 
 	/* ^^^  接口  ^^^ */
 
-
-	void OpenGLShader::SetUniform(const std::string& name, const int32_t value)
+	void OpenGLShader::SetUniform(const std::string& name, int32_t value)
 	{
 		glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-	void OpenGLShader::SetUniform(const std::string& name, const uint32_t value)
+	void OpenGLShader::SetUniform(const std::string& name, uint32_t value)
 	{
 		glUniform1ui(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-	void OpenGLShader::SetUniform(const std::string& name, const float value)
+	void OpenGLShader::SetUniform(const std::string& name, float value)
 	{
 		glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}
 
-	void OpenGLShader::SetUniform(const std::string& name, const double value)
+	void OpenGLShader::SetUniform(const std::string& name, double value)
 	{
 		glUniform1d(glGetUniformLocation(m_RendererID, name.c_str()), value);
 	}

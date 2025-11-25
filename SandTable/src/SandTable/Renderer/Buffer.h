@@ -38,18 +38,18 @@ namespace SandTable
 	 */
 	struct BufferElement
 	{
-		ShaderDataType Type; /// 着色器数据类型
-		std::string Name;	 /// 元素名称
-		uint32_t Size;	 /// 元素大小
-		size_t Offset; /// 元素偏移
-		bool Normalized;	 /// 是否归一化
+		ShaderDataType Type;	/// 着色器数据类型
+		std::string Name;		/// 元素名称
+		uint32_t Size;			/// 元素大小
+		size_t Offset;			/// 元素偏移
+		bool Normalized;		/// 是否归一化
 
 		BufferElement() = default;
 		BufferElement(ShaderDataType type = ShaderDataType::None, const std::string& name = "", bool normalized = false);
 
 		/**
 		 * @brief 获取组件数量
-		 * @return unsigned int 组件数量
+		 * @return uint8_t 组件数量
 		 */
 		uint8_t GetComponentCount() const;
 	};
@@ -91,7 +91,7 @@ namespace SandTable
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static ObjectRef<VertexBuffer> Create(float* vertices, int32_t size);
+		static ObjectRef<VertexBuffer> Create(const float* vertices, int64_t size);
 	};
 
 	class IndexBuffer
@@ -104,9 +104,9 @@ namespace SandTable
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		
-		virtual const int32_t GetCount() const = 0;
+		virtual int32_t GetCount() const = 0;
 
-		static ObjectRef<IndexBuffer> Create(uint32_t* indices, int32_t count);
+		static ObjectRef<IndexBuffer> Create(const uint32_t* indices, int32_t count);
 	};
 
 

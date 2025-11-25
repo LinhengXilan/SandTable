@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 应用程序实现
  */
@@ -96,12 +96,12 @@ namespace SandTable
 		}
 	}
 
-	ObjectRef<Window> Application::GetWindow() const
+	const ObjectRef<Window>& Application::GetWindow() const
 	{
 		return m_Window;
 	}
 
-	ObjectRef<Application> Application::GetInstance()
+	const ObjectRef<Application>& Application::GetInstance()
 	{
 		return s_Instance;
 	}

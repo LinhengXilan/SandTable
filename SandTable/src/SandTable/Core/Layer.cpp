@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Layer.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 图层实现
  */
@@ -34,7 +34,7 @@ namespace SandTable
 		return m_DebugName;
 	}
 
-	void Layer::OnUpdate(TimeStep timeStep)
+	void Layer::OnUpdate(const TimeStep& timeStep)
 	{
 
 	}

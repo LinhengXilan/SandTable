@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/CameraController.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 相机控制器
  */
@@ -30,27 +30,27 @@ namespace SandTable
 		return m_CameraPosition;
 	};
 
-	const float OrthoGraphicCameraController::GetRotation() const
+	float OrthoGraphicCameraController::GetRotation() const
 	{
 		return m_CameraRotation;
 	};
 
-	const float OrthoGraphicCameraController::GetAspectRatio() const
+	float OrthoGraphicCameraController::GetAspectRatio() const
 	{
 		return m_AspectRatio;
 	}
 
-	const float OrthoGraphicCameraController::GetZoomRatio() const
+	float OrthoGraphicCameraController::GetZoomRatio() const
 	{
 		return m_ZoomRatio;
 	}
 
-	const bool OrthoGraphicCameraController::IsRotationAllowed() const
+	bool OrthoGraphicCameraController::IsRotationAllowed() const
 	{
 		return o_Rotation;
 	}
 
-	const bool OrthoGraphicCameraController::IsTranslatedSpeedAllowed() const
+	bool OrthoGraphicCameraController::IsTranslatedSpeedAllowed() const
 	{
 		return o_TranslatedSpeed;
 	}
@@ -64,28 +64,28 @@ namespace SandTable
 		m_Camera->RecalculateViewMatrix(m_CameraPosition, m_CameraRotation);
 	}
 
-	void OrthoGraphicCameraController::SetRotation(const float rotation)
+	void OrthoGraphicCameraController::SetRotation(float rotation)
 	{
 		m_CameraRotation = rotation;
 		m_Camera->RecalculateViewMatrix(m_CameraPosition, m_CameraRotation);
 	}
 
-	void OrthoGraphicCameraController::SetMoveSpeed(const float speed)
+	void OrthoGraphicCameraController::SetMoveSpeed(float speed)
 	{
 		m_CameraMoveSpeed = speed;
 	}
 
-	void OrthoGraphicCameraController::SetTranslatedSpeed(const float speed)
+	void OrthoGraphicCameraController::SetTranslatedSpeed(float speed)
 	{
 		m_CameraMoveSpeed = speed * m_ZoomRatio;
 	}
 
-	void OrthoGraphicCameraController::SetRotationSpeed(const float speed)
+	void OrthoGraphicCameraController::SetRotationSpeed(float speed)
 	{
 		m_CameraRotationSpeed = speed;
 	}
 
-	void OrthoGraphicCameraController::SetZoomRatio(const float zoomRatio)
+	void OrthoGraphicCameraController::SetZoomRatio(float zoomRatio)
 	{
 		m_ZoomRatio = zoomRatio;
 	}
@@ -106,7 +106,7 @@ namespace SandTable
 	/* ^^^ 选项控制 ^^^ */
 	/* vvv  vvv */
 
-	void OrthoGraphicCameraController::Move(Direction direction, float speed, TimeStep timeStep)
+	void OrthoGraphicCameraController::Move(Direction direction, float speed, const TimeStep& timeStep)
 	{
 		switch (direction)
 		{
@@ -132,7 +132,7 @@ namespace SandTable
 		m_Camera->RecalculateViewMatrix(m_CameraPosition, m_CameraRotation);
 	}
 
-	void OrthoGraphicCameraController::Rotate(Direction direction, float speed, TimeStep timeStep)
+	void OrthoGraphicCameraController::Rotate(Direction direction, float speed, const TimeStep& timeStep)
 	{
 		switch (direction)
 		{
@@ -160,7 +160,7 @@ namespace SandTable
 	/* ^^^  ^^^ */
 	/* vvv 事件 vvv */
 	
-	void OrthoGraphicCameraController::OnUpdate(TimeStep timeStep)
+	void OrthoGraphicCameraController::OnUpdate(const TimeStep& timeStep)
 	{
 		if (Input::IsKeyPressed(KEY_W))
 		{

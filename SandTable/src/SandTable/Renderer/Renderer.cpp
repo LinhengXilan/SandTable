@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build37
+ * @date 2025-11-25
  * 
  * @brief 渲染器实现
  */
@@ -32,7 +32,7 @@ namespace SandTable
 
 	}
 
-	const RendererAPI::API Renderer::GetRendererAPI()
+	RendererAPI::API Renderer::GetRendererAPI()
 	{
 		return RendererAPI::GetAPI();
 	}
@@ -47,7 +47,7 @@ namespace SandTable
 	}
 
 	/* vvv 事件 vvv */
-	void Renderer::OnWindowResize(uint16_t width, uint16_t height)
+	void Renderer::OnWindowResize(int32_t width, int32_t height)
 	{
 		RenderCommand::SetViewportSize(0, 0, width, height);
 	}

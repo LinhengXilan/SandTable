@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Events/Mouse.cpp
  * @author LinhengXilan
- * @version build33
- * @date 2025-11-18
+ * @version build37
+ * @date 2025-11-25
  */
 
 #include <pch.h>
@@ -16,12 +16,12 @@ namespace SandTable
 
 	}
 
-	const float MouseMoved::GetX() const
+	float MouseMoved::GetX() const
 	{
 		return m_MouseX;
 	}
 
-	const float MouseMoved::GetY() const
+	float MouseMoved::GetY() const
 	{
 		return m_MouseY;
 	}
@@ -33,22 +33,22 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType MouseMoved::GetStaticType()
+	EventType MouseMoved::GetStaticType()
 	{
 		return EventType::MouseMoved;
 	}
 
-	const EventType MouseMoved::GetEventType() const
+	EventType MouseMoved::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string MouseMoved::GetName() const
+	std::string MouseMoved::GetName() const
 	{
 		return "MouseMoved";
 	}
 
-	const uint8_t MouseMoved::GetCategoryFlags() const
+	uint8_t MouseMoved::GetCategoryFlags() const
 	{
 		return EventCategory::E_Mouse | EventCategory::E_Input;
 	}
@@ -59,12 +59,12 @@ namespace SandTable
 
 	}
 
-	const float MouseScrolled::GetXOffset() const
+	float MouseScrolled::GetXOffset() const
 	{
 		return m_OffsetX;
 	}
 
-	const float MouseScrolled::GetYOffset() const
+	float MouseScrolled::GetYOffset() const
 	{
 		return m_OffsetY;
 	}
@@ -76,32 +76,32 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType MouseScrolled::GetStaticType()
+	EventType MouseScrolled::GetStaticType()
 	{
 		return EventType::MouseScrolled;
 	}
 
-	const EventType MouseScrolled::GetEventType() const
+	EventType MouseScrolled::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string MouseScrolled::GetName() const
+	std::string MouseScrolled::GetName() const
 	{
 		return "MouseScrolled";
 	}
 
-	const uint8_t MouseScrolled::GetCategoryFlags() const
+	uint8_t MouseScrolled::GetCategoryFlags() const
 	{
 		return EventCategory::E_Mouse | EventCategory::E_Input;
 	}
 
-	int MouseButton::GetMouseButton() const
+	uint32_t MouseButton::GetMouseButton() const
 	{
 		return m_Button;
 	}
 
-	const uint8_t MouseButton::GetCategoryFlags() const
+	uint8_t MouseButton::GetCategoryFlags() const
 	{
 		return EventCategory::E_Mouse | EventCategory::E_Input | EventCategory::E_MouseButton;
 	}
@@ -125,17 +125,17 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType MousePressed::GetStaticType()
+	EventType MousePressed::GetStaticType()
 	{
 		return EventType::MousePressed;
 	}
 
-	const EventType MousePressed::GetEventType() const
+	EventType MousePressed::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string MousePressed::GetName() const
+	std::string MousePressed::GetName() const
 	{
 		return "MousePressed";
 	}
@@ -153,17 +153,17 @@ namespace SandTable
 		return ss.str();
 	}
 
-	const EventType MouseReleased::GetStaticType()
+	EventType MouseReleased::GetStaticType()
 	{
 		return EventType::MouseReleased;
 	}
 
-	const EventType MouseReleased::GetEventType() const
+	EventType MouseReleased::GetEventType() const
 	{
 		return GetStaticType();
 	}
 
-	const std::string MouseReleased::GetName() const
+	std::string MouseReleased::GetName() const
 	{
 		return "MouseReleased";
 	}
