@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLVertexArray.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 顶点数组类
  */
@@ -23,32 +23,21 @@ namespace SandTable
 	{
 		switch (type)
 		{
-		case ShaderDataType::Float:
-			return GL_FLOAT;
-		case ShaderDataType::Float2:
-			return GL_FLOAT;
-		case ShaderDataType::Float3:
-			return GL_FLOAT;
-		case ShaderDataType::Float4:
-			return GL_FLOAT;
-		case ShaderDataType::Matrix3:
-			return GL_FLOAT;
-		case ShaderDataType::Matrix4:
-			return GL_FLOAT;
-		case ShaderDataType::Int:
-			return GL_INT;
-		case ShaderDataType::Int2:
-			return GL_INT;
-		case ShaderDataType::Int3:
-			return GL_INT;
-		case ShaderDataType::Int4:
-			return GL_INT;
-		case ShaderDataType::Bool:
-			return GL_BOOL;
+		case ShaderDataType::Float:		return GL_FLOAT;
+		case ShaderDataType::Float2:	return GL_FLOAT;
+		case ShaderDataType::Float3:	return GL_FLOAT;
+		case ShaderDataType::Float4:	return GL_FLOAT;
+		case ShaderDataType::Matrix3:	return GL_FLOAT;
+		case ShaderDataType::Matrix4:	return GL_FLOAT;
+		case ShaderDataType::Int:		return GL_INT;
+		case ShaderDataType::Int2:		return GL_INT;
+		case ShaderDataType::Int3:		return GL_INT;
+		case ShaderDataType::Int4:		return GL_INT;
+		case ShaderDataType::Bool:		return GL_BOOL;
 		default:
 			SANDTABLE_CORE_ASSERT(false, "Unknown ShaderDataType!");
+			return 0;
 		}
-		return 0;
 	}
 
 	OpenGLVertexArray::OpenGLVertexArray()

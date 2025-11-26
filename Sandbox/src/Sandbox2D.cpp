@@ -1,8 +1,8 @@
 ﻿/**
  * @file Sandbox2D.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief Sandbox示例程序
  */
@@ -10,7 +10,6 @@
 #include <Sandbox2D.h>
 #include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <Platform/OpenGL/OpenGLShader.h>
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.f / 720.f)

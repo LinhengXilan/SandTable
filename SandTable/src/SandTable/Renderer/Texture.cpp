@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Texture.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 纹理
  */
@@ -14,6 +14,20 @@
 
 namespace SandTable
 {
+	ObjectRef<Texture2D> Texture2D::Create()
+	{
+		switch (RendererAPI::GetAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+		case RendererAPI::API::OpenGL3:
+			return CreateObjectRef<OpenGLTexture2D>();
+		default:
+			return nullptr;
+		}
+	}
+
 	ObjectRef<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (RendererAPI::GetAPI())
@@ -28,4 +42,17 @@ namespace SandTable
 		}
 	}
 
+	ObjectRef<Texture2D> Texture2D::Create(int32_t width, int32_t height)
+	{
+		switch (RendererAPI::GetAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+		case RendererAPI::API::OpenGL3:
+			return CreateObjectRef<OpenGLTexture2D>(width, height);
+		default:
+			return nullptr;
+		}
+	}
 }

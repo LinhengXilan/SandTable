@@ -191,6 +191,7 @@
     <ClCompile Include="src\SandTable\Renderer\Shader.cpp" />
     <ClCompile Include="src\SandTable\Renderer\Texture.cpp" />
     <ClCompile Include="src\SandTable\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\SandTable\Renderer\GraphicsContext.cpp" />
     <ClInclude Include="src\SandTable\Core\Input.h" />
     <ClCompile Include="src\SandTable\Core\Layer.cpp" />
     <ClCompile Include="src\SandTable\Core\LayerStack.cpp" />

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer2D.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 2D渲染器
  */
@@ -21,8 +21,7 @@ namespace SandTable
 	struct Renderer2DData
 	{
 		ObjectRef<VertexArray> VertexArray;
-		ObjectRef<Shader> ColorShader;
-		ObjectRef<Shader> TextureShader;
+		ObjectRef<Shader> Shader2D;
 	};
 
 	class Renderer2D
@@ -47,35 +46,44 @@ namespace SandTable
 		static void EndScene();
 
 		/**
-		 * @brief 绘制矩形（无深度）
-		 * @param position 坐标（x，y）
+		 * @brief 绘制矩形
+		 * @param position 坐标
 		 * @param size 尺寸
 		 * @param color 颜色
 		 * @note z坐标为0
 		 */
 		static void DrawRectangle(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		/**
-		 * @brief 绘制矩形（有深度）
-		 * @param position 坐标（x，y，z）
+		 * @brief 绘制矩形
+		 * @param position 坐标
 		 * @param size 尺寸
 		 * @param color 颜色
 		 */
 		static void DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
 		/**
-		 * @brief 绘制矩形（无深度）
-		 * @param position 坐标（x，y）
+		 * @brief 绘制矩形
+		 * @param position 坐标
 		 * @param size 尺寸
 		 * @param texture 纹理贴图
 		 * @note z坐标为0
 		 */
 		static void DrawRectangle(const glm::vec2& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture);
 		/**
-		 * @brief 绘制矩形（有深度）
-		 * @param position 坐标（x，y，z）
+		 * @brief 绘制矩形
+		 * @param position 坐标
 		 * @param size 尺寸
 		 * @param texture 纹理贴图
 		 */
 		static void DrawRectangle(const glm::vec3& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture);
+		/**
+		 * @brief 绘制矩形
+		 * @param position 坐标
+		 * @param size 尺寸
+		 * @param color 颜色
+		 * @param texture 纹理贴图
+		 * @note 颜色和纹理混合
+		 */
+		static void DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, const ObjectRef<Texture2D>& texture);
 	};
 }
 

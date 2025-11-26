@@ -1,14 +1,16 @@
 ﻿/**
  * @file SandTable/Core.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief SandTable核心头文件
  */
 
 #ifndef SANDTABLE_CORE_H
 #define SANDTABLE_CORE_H
+
+#include <memory>
 
 #ifdef SANDTABLE_BUILD_DLL
 	#define SANDTABLE_DLL //__declspec(dllexport)

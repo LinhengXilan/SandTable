@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/File.cpp
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 文件操作
  */
@@ -26,11 +26,15 @@ namespace SandTable
 		{
 			std::string str;
 			ifs.seekg(0, std::ios::end);
-			str.resize(ifs.tellg());
-			ifs.seekg(0, std::ios::beg);
-			ifs.read(&str[0], str.size());
-			ifs.close();
-			return str;
+			size_t size = ifs.tellg();
+			if (size != -1) [[likely]]
+			{
+				str.resize(size);
+				ifs.seekg(0, std::ios::beg);
+				ifs.read(&str[0], str.size());
+				ifs.close();
+				return str;
+			}
 		}
 		SANDTABLE_CORE_WARN("[Shader] Could not to open file \"{0}\"", path);
 		return "";
@@ -53,18 +57,6 @@ namespace SandTable
 			return "";
 		}
 #endif
-		std::ifstream ifs(path, std::ios::in | std::ios::binary);
-		if (ifs.is_open()) [[likely]]
-		{
-			std::string str;
-			ifs.seekg(0, std::ios::end);
-			str.resize(ifs.tellg());
-			ifs.seekg(0, std::ios::beg);
-			ifs.read(&str[0], str.size());
-			ifs.close();
-			return str;
-		}
-		SANDTABLE_CORE_WARN("[File] Could not open file: \"{0}\"", path);
-		return "";
+		return ReadFile(path);
 	}
 }

@@ -111,10 +111,9 @@
     <Text Include="src\CmakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\Renderer2D\Rectangle.glsl" />
     <None Include="assets\shaders\Shader.glsl" />
     <None Include="assets\shaders\Square.glsl" />
-    <None Include="assets\shaders\Renderer2D\Rectangle_Texture.glsl">
+    <None Include="assets\shaders\Renderer2D\Rectangle.glsl">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>

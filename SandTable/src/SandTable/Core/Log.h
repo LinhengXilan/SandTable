@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Log.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  */
 
 #ifndef SANDTABLE_LOG_H
@@ -21,18 +21,18 @@ namespace SandTable
 		~Log() = default;
 
 	public:
-	#ifdef SANDTABLE_CORE
-		static const std::shared_ptr<spdlog::logger>& GetCoreLogger();
-	#endif
-		static const std::shared_ptr<spdlog::logger>& GetClientLogger();
+#ifdef SANDTABLE_CORE
+		static const ObjectRef<spdlog::logger>& GetCoreLogger();
+#endif
+		static const ObjectRef<spdlog::logger>& GetClientLogger();
 
 		static void Init();
 
 	private:
-	#ifdef SANDTABLE_CORE
-		static std::shared_ptr<spdlog::logger> CoreLogger;
-	#endif
-		static std::shared_ptr<spdlog::logger> ClientLogger;
+#ifdef SANDTABLE_CORE
+		static ObjectRef<spdlog::logger> s_CoreLogger;
+#endif
+		static ObjectRef<spdlog::logger> s_ClientLogger;
 	};
 }
 

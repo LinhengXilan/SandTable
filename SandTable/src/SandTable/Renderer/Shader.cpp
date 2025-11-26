@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.cpp
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 着色器类实现
  */
@@ -42,7 +42,7 @@ namespace SandTable
 		}
 	}
 
-	ObjectRef<Shader> ShaderLibrary::GetShader(const std::string& name)
+	const ObjectRef<Shader>& ShaderLibrary::GetShader(const std::string& name)
 	{
 		SANDTABLE_CORE_ASSERT(m_Shaders.find(name) != m_Shaders.end(), "Shader not found!");
 		return m_Shaders[name];
@@ -50,9 +50,7 @@ namespace SandTable
 
 	void ShaderLibrary::Add(const ObjectRef<Shader>& shader)
 	{
-		auto& name = shader->GetName();
-		SANDTABLE_CORE_ASSERT(m_Shaders.find(name) == m_Shaders.end(), "Shader already exists!");
-		m_Shaders[name] = shader;
+		ShaderLibrary::Add(shader->GetName(), shader);
 	}
 
 	void ShaderLibrary::Add(const std::string& name, const ObjectRef<Shader>& shader)

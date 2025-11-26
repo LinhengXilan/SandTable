@@ -1,14 +1,16 @@
 ﻿/**
  * @file SandTable/Core/Clock.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 计时器头文件
  */
 
 #ifndef SANDTABLE_CORE_CLOCK_H
 #define SANDTABLE_CORE_CLOCK_H
+
+#include <SandTable/Core/Core.h>
 
 #pragma warning(disable:4244)
 

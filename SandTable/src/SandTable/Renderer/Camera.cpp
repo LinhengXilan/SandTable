@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 相机接口
  */
@@ -30,9 +30,9 @@ namespace SandTable
 			}
 		case CameraType::Orthographic:
 			return OrthographicCamera::Create(left, right, bottom, top);
+		default:
+			return nullptr;
 		}
-		
-		
 	}
 
 	ObjectRef<OrthographicCamera> OrthographicCamera::Create(float left, float right, float bottom, float top)

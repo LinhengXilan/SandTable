@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build38
+ * @date 2025-11-26
  * 
  * @breif SandTable主头文件
  */
@@ -11,6 +11,7 @@
 #define SANDTABLE_H
 
 // 程序基本系统
+#include <SandTable/Core/Core.h>
 #include <SandTable/Core/Application.h>
 #include <SandTable/Core/Layer.h>
 #include <SandTable/Core/Clock.h>

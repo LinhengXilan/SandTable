@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Log.cpp
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  */
 
 #include <pch.h>
@@ -11,27 +11,27 @@
 
 namespace SandTable
 {
-	std::shared_ptr<spdlog::logger> Log::CoreLogger;
-	std::shared_ptr<spdlog::logger> Log::ClientLogger;
+	ObjectRef<spdlog::logger> Log::s_CoreLogger;
+	ObjectRef<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::Init()
 	{
 		spdlog::set_pattern("%^[%T] %n %v%$");
 #ifdef SANDTABLE_CORE
-		CoreLogger = spdlog::stdout_color_mt("[SandTable]");
-		CoreLogger->set_level(spdlog::level::trace);
+		s_CoreLogger = spdlog::stdout_color_mt("[SandTable]");
+		s_CoreLogger->set_level(spdlog::level::trace);
 #endif
-		ClientLogger = spdlog::stdout_color_mt("App");
-		ClientLogger->set_level(spdlog::level::trace);
+		s_ClientLogger = spdlog::stdout_color_mt("App");
+		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 
-	const std::shared_ptr<spdlog::logger>& Log::GetCoreLogger()
+	const ObjectRef<spdlog::logger>& Log::GetCoreLogger()
 	{
-		return CoreLogger;
+		return s_CoreLogger;
 	}
 
-	const std::shared_ptr<spdlog::logger>& Log::GetClientLogger()
+	const ObjectRef<spdlog::logger>& Log::GetClientLogger()
 	{
-		return ClientLogger;
+		return s_ClientLogger;
 	}
 }

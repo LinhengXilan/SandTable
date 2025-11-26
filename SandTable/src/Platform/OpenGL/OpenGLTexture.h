@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/OpenGL/OpenGLTexture.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief OpenGL纹理
  */
@@ -17,7 +17,9 @@ namespace SandTable
 	class OpenGLTexture2D : public Texture2D
 	{
 	public:
+		OpenGLTexture2D();
 		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(int32_t width, int32_t height);
 		~OpenGLTexture2D() override;
 
 	public:
@@ -25,6 +27,7 @@ namespace SandTable
 		int32_t GetHeight() const override;
 
 		void Bind(uint32_t slot = 0) const override;
+		void Upload(const void* data, size_t size) const;
 
 	private:
 		std::string m_Path;

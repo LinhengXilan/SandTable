@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 应用程序头文件
  */
@@ -21,11 +21,12 @@ namespace SandTable
 	{
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 	public:
 		const ObjectRef<Window>& GetWindow() const;
 		static const ObjectRef<Application>& GetInstance();
+		static const ObjectRef<Clock>& GetClock();
 
 		void Run();
 		void PushLayer(const ObjectRef<Layer>& layer);
@@ -38,13 +39,13 @@ namespace SandTable
 
 	private:
 		static ObjectRef<Application> s_Instance;
+		static ObjectRef<Clock> s_Clock;
 		bool o_Running = true;
 
 	private:
 		LayerStack m_LayerStack;
 		ObjectRef<Layer> m_ImguiLayer;
 		ObjectRef<Window> m_Window;
-		Object<Clock> m_Clock;
 	};
 
 	Object<Application> CreateApplication();

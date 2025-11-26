@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Core/Clock.cpp
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 计时器实现
  */
@@ -13,7 +13,6 @@
 
 namespace SandTable
 {
-
 	Time::Time(float currentTime)
 		: CurrentTime(currentTime), LastTime(currentTime)
 	{

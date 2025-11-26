@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Shader.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 着色器类
  */
@@ -54,7 +54,7 @@ namespace SandTable
 		~ShaderLibrary() = default;
 
 	public:
-		ObjectRef<Shader> GetShader(const std::string& name);
+		const ObjectRef<Shader>& GetShader(const std::string& name);
 		/**
 		 * @brief 添加现有着色器
 		 * @param shader 着色器对象

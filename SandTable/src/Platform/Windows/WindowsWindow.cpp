@@ -1,8 +1,8 @@
 ﻿/**
  * @file Platform/Windows/WindowsWindow.cpp
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief Windows平台窗口实现
  */
@@ -17,7 +17,7 @@
 
 namespace SandTable
 {
-	static bool Is_GlfwInitialized = false;
+	static uint8_t s_GlfwWindowCount = 0;
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
@@ -65,16 +65,15 @@ namespace SandTable
 		m_WindowData.Width = property.Width;
 		m_WindowData.Height = property.Height;
 		SANDTABLE_CORE_INFO("Creating window {0} ({1}, {2})", property.Title, property.Width, property.Height);
-		if (!Is_GlfwInitialized)
+		if (s_GlfwWindowCount == 0)
 		{
 			int success = glfwInit();
 			SANDTABLE_CORE_ASSERT(success, "Failed to intialize glfw!");
 			glfwSetErrorCallback(GLFWErrorCallback);
-			Is_GlfwInitialized = true;
 		}
 		m_Window= glfwCreateWindow(property.Width, property.Height, m_WindowData.Title.c_str(), nullptr, nullptr);
-
-		m_Context = CreateObject<OpenGLContext>(m_Window);
+		s_GlfwWindowCount++;
+		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_WindowData);
@@ -181,6 +180,11 @@ namespace SandTable
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		s_GlfwWindowCount--;
+		if (s_GlfwWindowCount == 0)
+		{
+			glfwTerminate();
+		}
 	}
 
 	void WindowsWindow::OnUpdate()

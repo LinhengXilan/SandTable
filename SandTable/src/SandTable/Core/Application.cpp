@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Application.cpp
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build38
+ * @date 2025-11-26
  * 
  * @brief 应用程序实现
  */
@@ -15,24 +15,31 @@
 namespace SandTable
 {
 	ObjectRef<Application> Application::s_Instance;
+	ObjectRef<Clock> Application::s_Clock;
+
 
 	Application::Application()
 	{
-		SANDTABLE_CORE_WARN("SandTable Engine");
 		SANDTABLE_CORE_ASSERT(!s_Instance.get(), "Application already has an instance!");
 		s_Instance.reset(this);
-		m_Window = Window::Create();
-		m_Window->SetEventCallbackFunc(std::bind(&Application::OnEvent, this, std::placeholders::_1));
-		m_Window->SetSync(false);
 
 		RendererAPI::SetAPI(RendererAPI::API::OpenGL); 
+		m_Window = Window::Create();
+		m_Window->SetEventCallbackFunc(SANDTABLE_BIND_EVENT_FUNC(Application::OnEvent));
+		m_Window->SetSync(false);
 		Renderer::Init();
 
 		m_ImguiLayer = CreateObjectRef<ImguiLayer>();
 		PushOverlay(m_ImguiLayer);
 
-		m_Clock = CreateObject<Clock>();
+		s_Clock = CreateObjectRef<Clock>();
 	}
+
+	Application::~Application()
+	{
+		Renderer::Shutdown();
+	}
+
 
 	void Application::OnEvent(Event& event)
 	{
@@ -76,12 +83,11 @@ namespace SandTable
 	{
 		while (o_Running)
 		{
-			m_Clock->Tick();
-			SANDTABLE_CORE_TRACE("FPS {0} : {1}", m_Clock->GetFPS(), m_Clock->GetFrameCount());
+			s_Clock->Tick();
 			// 层更新
 			for (auto& layer : m_LayerStack)
 			{
-				layer->OnUpdate(m_Clock->GetTimeStep());
+				layer->OnUpdate(s_Clock->GetTimeStep());
 			}
 
 			// ImGui 渲染
@@ -99,6 +105,11 @@ namespace SandTable
 	const ObjectRef<Window>& Application::GetWindow() const
 	{
 		return m_Window;
+	}
+
+	const ObjectRef<Clock>& Application::GetClock()
+	{
+		return s_Clock;
 	}
 
 	const ObjectRef<Application>& Application::GetInstance()
