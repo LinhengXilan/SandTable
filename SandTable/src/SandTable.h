@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable.h
  * @author LinhengXilan
- * @version build38
- * @date 2025-11-26
+ * @version build39
+ * @date 2025-11-29
  * 
  * @breif SandTable主头文件
  */
@@ -14,8 +14,11 @@
 #include <SandTable/Core/Core.h>
 #include <SandTable/Core/Application.h>
 #include <SandTable/Core/Layer.h>
-#include <SandTable/Core/Clock.h>
 #include <SandTable/Core/Log.h>
+
+// 时钟
+#include <SandTable/Core/Timer/Clock.h>
+#include <SandTable/Core/Timer/Timer.h>
 
 // 输入输出
 #include <SandTable/Core/KeyCode.h>

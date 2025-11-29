@@ -1,8 +1,8 @@
 ﻿/**
  * @file Sandbox2D.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build39
+ * @date 2025-11-29
  * 
  * @brief Sandbox示例程序
  */
@@ -30,6 +30,8 @@ private:
 	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
 	SandTable::OrthoGraphicCameraController m_CameraController;
 	glm::vec4 m_SquareColor = { 1.0f, 0.83f, 0.66f, 1.0f };
+
+	SandTable::ObjectRef<SandTable::TimerGroup> m_TimerGroup;
 };
 
 #endif

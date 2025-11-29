@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/ImGui/ImguiLayer.cpp
  * @author LinhengXilan
- * @version build38
- * @date 2025-11-26
+ * @version build39
+ * @date 2025-11-29
  * 
  * @brief Imgui层实现
  */
@@ -71,6 +71,8 @@ namespace SandTable
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		io.ConfigViewportsNoAutoMerge = true;
+		
 		ImGui::StyleColorsDark();
 
 		ImGuiStyle& style = ImGui::GetStyle();

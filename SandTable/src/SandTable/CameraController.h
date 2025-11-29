@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/CameraController.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build39
+ * @date 2025-11-29
  * 
  * @brief 相机控制器
  */
@@ -11,7 +11,7 @@
 #define SANDTABLE_CAMERACONTROLLER_H
 
 #include <SandTable/Renderer/Camera.h>
-#include <SandTable/Core/Clock.h>
+#include <SandTable/Core/Timer/Clock.h>
 #include <SandTable/Events/ApplicationEvent.h>
 #include <SandTable/Events/MouseEvent.h>
 

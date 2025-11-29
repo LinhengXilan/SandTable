@@ -1,8 +1,8 @@
 ﻿/**
  * @file pch.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build39
+ * @date 2025-11-29
  * 
  * @breif 预编译头文件
  */
@@ -23,6 +23,7 @@
 #include <unordered_map>
 #include <array>
 #include <vector>
+#include <chrono>
 
 #include <windows.h>
 

@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Camera.h
  * @author LinhengXilan
- * @version build37
- * @date 2025-11-25
+ * @version build39
+ * @date 2025-11-29
  * 
  * @brief 相机接口
  */
@@ -12,7 +12,7 @@
 
 #include <SandTable/Core/Core.h>
 #include <glm/glm.hpp>
-#include <SandTable/Core/Clock.h>
+#include <SandTable/Core/Timer/Clock.h>
 
 namespace SandTable
 {

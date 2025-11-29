@@ -1,8 +1,8 @@
 ﻿/**
  * @file main.cpp
  * @author LinhengXilan
- * @version build38
- * @date 2025-11-26
+ * @version build39
+ * @date 2025-11-29
  * 
  * @brief Sandbox示例程序
  */
@@ -18,36 +18,37 @@ class ExampleLayer : public SandTable::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_CameraController(1280.f / 720.f)
+		: Layer("Example")// , m_CameraController(1280.f / 720.f)
 	{
 		
 	}
 
 	void OnUpdate(const SandTable::TimeStep& timeStep) override
 	{
-		SANDTABLE_TRACE("FPS {0} : {1}", SandTable::Application::GetClock()->GetFPS(), SandTable::Application::GetClock()->GetFrameCount());
+		//SANDTABLE_TRACE("FPS {0} : {1}", SandTable::Application::GetClock()->GetFPS(), SandTable::Application::GetClock()->GetFrameCount());
 	}
 
 	void OnEvent(SandTable::Event& event) override
 	{
-		m_CameraController.OnEvent(event);
+		//m_CameraController.OnEvent(event);
 	}
 
 	void ImguiRender() override
 	{
-		ImGui::Begin("Settings");
-		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
-		ImGui::End();
+		// ImGui::Begin("Settings");
+		// ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		// 
+		// ImGui::End();
 	}
 
 private:
-	SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
-	SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
-	SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
-	SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
-	SandTable::OrthoGraphicCameraController m_CameraController;
-	SandTable::ShaderLibrary m_ShaderLibrary;
-	glm::vec3 m_SquareColor = { 1.0f, 0.83f, 0.66f };
+	// SandTable::ObjectRef<SandTable::VertexArray> m_VertexArray;
+	// SandTable::ObjectRef<SandTable::VertexArray> m_SquareVertexArray;
+	// SandTable::ObjectRef<SandTable::Texture2D> m_Texture;
+	// SandTable::ObjectRef<SandTable::Texture2D> m_IconTexture;
+	// SandTable::OrthoGraphicCameraController m_CameraController;
+	// SandTable::ShaderLibrary m_ShaderLibrary;
+	// glm::vec3 m_SquareColor = { 1.0f, 0.83f, 0.66f };
 };
 
 class Sandbox : public SandTable::Application

@@ -124,8 +124,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\SandTable\CameraController.h" />
-    <ClInclude Include="src\SandTable\Core\Clock.h" />
+    <ClInclude Include="src\SandTable\Core\Timer\Clock.h" />
     <ClInclude Include="src\SandTable\Core\File.h" />
+    <ClInclude Include="src\SandTable\Core\Timer\Timer.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiGlfw.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiOpengl.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiOpenglLoader.h" />
@@ -170,8 +171,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\SandTable\CameraController.cpp" />
-    <ClCompile Include="src\SandTable\Core\Clock.cpp" />
+    <ClCompile Include="src\SandTable\Core\Timer\Clock.cpp" />
     <ClCompile Include="src\SandTable\Core\File.cpp" />
+    <ClCompile Include="src\SandTable\Core\Timer\Timer.cpp" />
     <ClCompile Include="src\SandTable\Events\ApplicationEvent.cpp" />
     <ClCompile Include="src\SandTable\Events\Event.cpp" />
     <ClCompile Include="src\SandTable\Events\Keyboard.cpp" />
