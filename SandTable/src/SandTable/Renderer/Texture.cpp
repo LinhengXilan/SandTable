@@ -11,11 +11,13 @@
 #include <SandTable/Renderer/Texture.h>
 #include <SandTable/Renderer/RendererAPI.h>
 #include <Platform/OpenGL/OpenGLTexture.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
 	ObjectRef<Texture2D> Texture2D::Create()
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		switch (RendererAPI::GetAPI())
 		{
 		case RendererAPI::API::None:
@@ -30,6 +32,7 @@ namespace SandTable
 
 	ObjectRef<Texture2D> Texture2D::Create(const std::string& path)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		switch (RendererAPI::GetAPI())
 		{
 		case RendererAPI::API::None:
@@ -44,6 +47,7 @@ namespace SandTable
 
 	ObjectRef<Texture2D> Texture2D::Create(int32_t width, int32_t height)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		switch (RendererAPI::GetAPI())
 		{
 		case RendererAPI::API::None:

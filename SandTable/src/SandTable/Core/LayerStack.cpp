@@ -28,13 +28,11 @@ namespace SandTable
 	{
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
-		layer->Attach();
 	}
 
 	void LayerStack::PushOverlay(const ObjectRef<Layer>& overlay)
 	{
 		m_Layers.emplace_back(overlay);
-		overlay->Attach();
 	}
 
 	void LayerStack::PopLayer(const ObjectRef<Layer>& layer)
@@ -66,5 +64,35 @@ namespace SandTable
 	std::vector<ObjectRef<Layer>>::iterator LayerStack::end()
 	{
 		return m_Layers.end();
+	}
+
+	std::vector<ObjectRef<Layer>>::const_iterator LayerStack::begin() const
+	{
+		return m_Layers.begin();
+	}
+
+	std::vector<ObjectRef<Layer>>::const_iterator LayerStack::end() const
+	{
+		return m_Layers.end();
+	}
+
+	std::vector<ObjectRef<Layer>>::reverse_iterator LayerStack::rbegin()
+	{
+		return m_Layers.rbegin();
+	}
+
+	std::vector<ObjectRef<Layer>>::reverse_iterator LayerStack::rend()
+	{
+		return m_Layers.rend();
+	}
+
+	std::vector<ObjectRef<Layer>>::const_reverse_iterator LayerStack::rbegin() const
+	{
+		return m_Layers.rbegin();
+	}
+
+	std::vector<ObjectRef<Layer>>::const_reverse_iterator LayerStack::rend() const
+	{
+		return m_Layers.rend();
 	}
 }

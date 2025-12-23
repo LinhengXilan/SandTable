@@ -13,6 +13,7 @@
 #include <glfw/glfw.h>
 #include <SandTable/Core/Core.h>
 #include <SandTable/Core/Log.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
@@ -45,6 +46,7 @@ namespace SandTable
 
 	void OpenGLContext::SwapBuffers()
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

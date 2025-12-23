@@ -29,6 +29,12 @@ namespace SandTable
 
 		std::vector<ObjectRef<Layer>>::iterator begin();
 		std::vector<ObjectRef<Layer>>::iterator end();
+		std::vector<ObjectRef<Layer>>::const_iterator begin() const;
+		std::vector<ObjectRef<Layer>>::const_iterator end() const;
+		std::vector<ObjectRef<Layer>>::reverse_iterator rbegin();
+		std::vector<ObjectRef<Layer>>::reverse_iterator rend();
+		std::vector<ObjectRef<Layer>>::const_reverse_iterator rbegin() const;
+		std::vector<ObjectRef<Layer>>::const_reverse_iterator rend() const;
 
 	private:
 		std::vector<ObjectRef<Layer>> m_Layers;

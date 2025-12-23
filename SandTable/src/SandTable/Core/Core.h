@@ -49,6 +49,7 @@
 
 #ifdef SANDTABLE_DEBUG
 	#define SANDTABLE_ENABLE_ASSERTS
+	#define SANDTABLE_PROFILE
 #endif
 
 /* vvv 标志 vvv */

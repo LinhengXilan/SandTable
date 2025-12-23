@@ -28,7 +28,6 @@ namespace SandTable
 		void End();
 		void Attach() override;
 		void Detach() override;
-		void ImguiRender() override;
 	};
 }
 

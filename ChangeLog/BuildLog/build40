@@ -1,0 +1,12 @@
+build40
+2025-12-23
+
+1. 添加 Instrumentor 类来监测性能，并将结果存储为json文件。
+
+2. 添加一些宏来使用监测性能，。
+    SANDTABLE_PROFILE_BEGIN_SESSION(name, filepath)
+    SANDTABLE_PROFILE_END_SESSION()
+    SANDTABLE_PROFILE_SCOPE(name)
+    SANDTABLE_PROFILE_FUNCTION()
+
+3. 在一些代码中插入上述宏来检测性能。

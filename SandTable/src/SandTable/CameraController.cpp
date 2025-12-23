@@ -10,6 +10,7 @@
 #include <pch.h>
 #include <SandTable/CameraController.h>
 #include <SandTable/Core/Input.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
@@ -108,6 +109,7 @@ namespace SandTable
 
 	void OrthoGraphicCameraController::Move(Direction direction, float speed, const TimeStep& timeStep)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		switch (direction)
 		{
 		case Direction::Left:
@@ -162,6 +164,7 @@ namespace SandTable
 	
 	void OrthoGraphicCameraController::OnUpdate(const TimeStep& timeStep)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		if (Input::IsKeyPressed(KEY_W))
 		{
 			Move(Direction::Up, m_CameraMoveSpeed, timeStep);

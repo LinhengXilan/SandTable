@@ -16,6 +16,9 @@
 #include <SandTable/Core/Layer.h>
 #include <SandTable/Core/Log.h>
 
+// Debug
+#include <SandTable/Debug/Instrumentor.h>
+
 // 时钟
 #include <SandTable/Core/Timer/Clock.h>
 #include <SandTable/Core/Timer/Timer.h>

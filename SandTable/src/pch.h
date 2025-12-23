@@ -24,6 +24,8 @@
 #include <array>
 #include <vector>
 #include <chrono>
+#include <thread>
+#include <algorithm>
 
 #include <windows.h>
 

@@ -127,6 +127,7 @@
     <ClInclude Include="src\SandTable\Core\Timer\Clock.h" />
     <ClInclude Include="src\SandTable\Core\File.h" />
     <ClInclude Include="src\SandTable\Core\Timer\Timer.h" />
+    <ClInclude Include="src\SandTable\Debug\Instrumentor.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiGlfw.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiOpengl.h" />
     <ClInclude Include="src\SandTable\ImGui\ImguiOpenglLoader.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="src\SandTable\Core\Timer\Clock.cpp" />
     <ClCompile Include="src\SandTable\Core\File.cpp" />
     <ClCompile Include="src\SandTable\Core\Timer\Timer.cpp" />
+    <ClCompile Include="src\SandTable\Debug\Instrumentor.cpp" />
     <ClCompile Include="src\SandTable\Events\ApplicationEvent.cpp" />
     <ClCompile Include="src\SandTable\Events\Event.cpp" />
     <ClCompile Include="src\SandTable\Events\Keyboard.cpp" />
@@ -222,13 +224,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

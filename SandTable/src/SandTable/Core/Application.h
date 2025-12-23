@@ -41,6 +41,7 @@ namespace SandTable
 		static ObjectRef<Application> s_Instance;
 		static ObjectRef<Clock> s_Clock;
 		bool o_Running = true;
+		bool o_Minimized = false;
 
 	private:
 		LayerStack m_LayerStack;

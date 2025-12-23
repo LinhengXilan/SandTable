@@ -56,12 +56,6 @@ namespace SandTable
 		ImGui::DestroyContext();
 	}
 
-	void ImguiLayer::ImguiRender()
-	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-	}
-
 	void ImguiLayer::Attach()
 	{
 		IMGUI_CHECKVERSION();

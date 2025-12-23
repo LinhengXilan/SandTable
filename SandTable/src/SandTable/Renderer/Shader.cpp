@@ -11,11 +11,13 @@
 #include <SandTable/Renderer/Shader.h>
 #include <SandTable/Renderer/RendererAPI.h>
 #include <Platform/OpenGL/OpenGLShader.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
 	ObjectRef<Shader> Shader::Create(const std::string& name, const std::string& vertexSource, std::string& fragmentSource)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		switch (RendererAPI::GetAPI())
 		{
 		case RendererAPI::API::None:

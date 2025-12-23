@@ -10,6 +10,7 @@
 #include <pch.h>
 #include <Platform/OpenGL/OpenGLCamera.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
@@ -59,6 +60,7 @@ namespace SandTable
 
 	void OpenGLOrthographicCamera::RecalculateViewMatrix(const glm::vec3& position, float rotation)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 							* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0, 0, 1));
 		m_ViewMatrix = glm::inverse(transform);

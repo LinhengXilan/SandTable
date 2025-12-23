@@ -1,5 +1,5 @@
 ﻿/**
- * @file SandTable/Core/Clock.cpp
+ * @file SandTable/Core/Timer/Clock.cpp
  * @author LinhengXilan
  * @version build39
  * @date 2025-11-29
@@ -54,7 +54,7 @@ namespace SandTable
 		m_Time.LastTime = m_Time.CurrentTime;
 		m_Time.CurrentTime = std::chrono::high_resolution_clock::now();
 		m_Time.Timestep.duration = static_cast<float>(std::chrono::time_point_cast<std::chrono::microseconds>(m_Time.CurrentTime).time_since_epoch().count() - std::chrono::time_point_cast<std::chrono::microseconds>(m_Time.LastTime).time_since_epoch().count()) / 1000000.0f;
-		m_FPS = static_cast<unsigned short>(1000000.0f / m_Time.Timestep.duration);
-		m_FrameCount++;
+		m_FPS = static_cast<unsigned short>(1.0f / m_Time.Timestep.duration);
+		m_FrameCount += m_FPS;
 	}
 }

@@ -21,3 +21,4 @@ bin/Debug/*.lib
 bin/Release/*.idb
 bin/Release/*.pdb
 bin/Release/*.lib
+*.json

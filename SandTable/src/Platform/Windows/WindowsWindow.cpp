@@ -14,6 +14,7 @@
 #include <SandTable/Events/Keyboard.h>
 #include <SandTable/Events/MouseEvent.h>
 #include <Platform/OpenGL/OpenGLContext.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
@@ -61,6 +62,7 @@ namespace SandTable
 
 	void WindowsWindow::Init(const WindowProperty& property)
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		m_WindowData.Title = property.Title;
 		m_WindowData.Width = property.Width;
 		m_WindowData.Height = property.Height;
@@ -179,6 +181,7 @@ namespace SandTable
 
 	void WindowsWindow::Shutdown()
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 		s_GlfwWindowCount--;
 		if (s_GlfwWindowCount == 0)
@@ -189,6 +192,7 @@ namespace SandTable
 
 	void WindowsWindow::OnUpdate()
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		glfwPollEvents();
 		m_Context->SwapBuffers(); 
 	}

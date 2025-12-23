@@ -3,7 +3,7 @@
 ## 编译
 请使用msvc进行编译  
 编译方式：  
-1. 使用Visual Studio 2022直接打开SandTable.sln编译
+1. 使用Visual Studio 2026直接打开SandTable.sln编译
 
 2. mkdir build  
     cd build  

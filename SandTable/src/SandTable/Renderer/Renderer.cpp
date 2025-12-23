@@ -11,6 +11,7 @@
 #include <SandTable/Renderer/Renderer.h>
 #include <Platform/OpenGL/OpenGLShader.h>
 #include <SandTable/Renderer/Renderer2D.h>
+#include <SandTable/Debug/Instrumentor.h>
 
 namespace SandTable
 {
@@ -18,6 +19,7 @@ namespace SandTable
 
 	void Renderer::Init()
 	{
+		SANDTABLE_PROFILE_FUNCTION();
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

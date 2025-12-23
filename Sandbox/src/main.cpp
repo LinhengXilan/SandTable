@@ -7,6 +7,8 @@
  * @brief Sandbox示例程序
  */
 
+#define SANDTABLE_DEBUG
+
 #include <SandTable.h>
 #include <SandTable/Core/EntryPoint.h>
 #include <imgui/imgui.h>

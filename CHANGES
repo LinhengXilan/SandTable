@@ -1,13 +1,12 @@
-build39
-2025-11-29
+build40
+2025-12-23
 
-/* 新增 */
+1. 添加 Instrumentor 类来监测性能，并将结果存储为json文件。
 
-1. 计时器，作用范围外销毁后将记录保存在 TimerGroup 中。
+2. 添加一些宏来使用监测性能，。
+    SANDTABLE_PROFILE_BEGIN_SESSION(name, filepath)
+    SANDTABLE_PROFILE_END_SESSION()
+    SANDTABLE_PROFILE_SCOPE(name)
+    SANDTABLE_PROFILE_FUNCTION()
 
-2. 使用计时器测试 Sandbox2D::OnUpdate 中各部分时间，并打印至ImGui窗口。
-
-
-/* 修改 */
-
-1. Clock 现在通过 chrono 标准库获取时间。
+3. 在一些代码中插入上述宏来检测性能。

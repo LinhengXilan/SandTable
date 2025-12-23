@@ -1,11 +1,12 @@
 ﻿/**
- * @file SandTable/Core/Clock.h
+ * @file SandTable/Core/Timer/Timer.h
  * @author LinhengXilan
  * @version build39
  * @date 2025-11-29
  * 
  * @brief 计时器
  */
+
 #ifndef SANDTABLE_CORE_TIMER_TIMER_H
 	#define SANDTABLE_CORE_TIMER_TIMER_H
 
