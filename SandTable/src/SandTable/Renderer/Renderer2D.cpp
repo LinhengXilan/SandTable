@@ -1,8 +1,8 @@
 ﻿/**
  * @file SandTable/Renderer/Renderer2D.cpp
  * @author LinhengXilan
- * @version build38
- * @date 2025-11-26
+ * @version build41
+ * @date 2025-12-25
  * 
  * @brief 2D渲染器
  */
@@ -68,23 +68,57 @@ namespace SandTable
 
 	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		DrawRectangle(glm::vec3(position.x, position.y, 0.0f), size, color, Texture2D::Create());		
+		DrawRectangle(position, size, color, Texture2D::Create());		
 	}
 
-	void Renderer2D::DrawRectangle(const glm::vec2& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture)
+	void Renderer2D::DrawRectangle(const glm::vec2& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
-		DrawRectangle(glm::vec3(position.x, position.y, 0.0f), size, glm::vec4(1.0f), texture);
+		DrawRectangle(glm::vec3(position.x, position.y, 0.0f), size, tintColor, texture, tilingFactor);
 	}
 
-	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture)
+	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const ObjectRef<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
-		DrawRectangle(glm::vec3(position.x, position.y, 0.0f), size, glm::vec4(1.0f), texture);
+		DrawRectangle(position, size, tintColor, texture, tilingFactor);
 	}
 
-	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, const ObjectRef<Texture2D>& texture)
+	void Renderer2D::DrawRectangle(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, const ObjectRef<Texture2D>& texture, float tilingFactor)
 	{
 		s_Data->Shader2D->SetData("u_Color", color);
+		s_Data->Shader2D->SetData("u_TilingFactor", tilingFactor);
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 0.0f});
+		s_Data->Shader2D->SetData("u_ModelTransform", transform);
+		texture->Bind(0);
+		s_Data->VertexArray->Bind();
+		RenderCommand::DrawIndexed(s_Data->VertexArray);
+	}
+
+	void Renderer2D::DrawRotatedRectangle(const glm::vec2& position, float rotation, const glm::vec2& size, const glm::vec4& color)
+	{
+		DrawRotatedRectangle(glm::vec3(position.x, position.y, 0.0f), rotation, size, color, Texture2D::Create());
+	}
+
+	void Renderer2D::DrawRotatedRectangle(const glm::vec3& position, float rotation, const glm::vec2& size, const glm::vec4& color)
+	{
+		DrawRotatedRectangle(position, rotation, size, color, Texture2D::Create());
+	}
+
+	void Renderer2D::DrawRotatedRectangle(const glm::vec2& position, float rotation, const glm::vec2& size, const ObjectRef<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
+	{
+		DrawRotatedRectangle(glm::vec3(position.x, position.y, 0.0f), rotation, size, tintColor, texture, tilingFactor);
+	}
+
+	void Renderer2D::DrawRotatedRectangle(const glm::vec3& position, float rotation, const glm::vec2& size, const ObjectRef<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
+	{
+		DrawRotatedRectangle(position, rotation, size, tintColor, texture, tilingFactor);
+	}
+
+	void Renderer2D::DrawRotatedRectangle(const glm::vec3& position, float rotation, const glm::vec2& size, const glm::vec4& color, const ObjectRef<Texture2D>& texture, float tilingFactor)
+	{
+		s_Data->Shader2D->SetData("u_Color", color);
+		s_Data->Shader2D->SetData("u_TilingFactor", tilingFactor);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+							* glm::rotate(glm::mat4(1.0f), rotation, {0.0f, 0.0f, 1.0f})
+							* glm::scale(glm::mat4(1.0f), {size.x, size.y, 0.0f});
 		s_Data->Shader2D->SetData("u_ModelTransform", transform);
 		texture->Bind(0);
 		s_Data->VertexArray->Bind();

@@ -1,14 +1,14 @@
 ﻿/**
- * @file SandTable/LayerStack.h
+ * @file SandTable/Core/LayerStack.h
  * @author LinhengXilan
- * @version build34
- * @date 2025-11-22
+ * @version build41
+ * @date 2025-12-25
  * 
  * @brief 图层栈头文件
  */
 
-#ifndef SANDTABLE_LAYERSTACK_H
-#define SANDTABLE_LAYERSTACK_H
+#ifndef SANDTABLE_CORE_LAYERSTACK_H
+#define SANDTABLE_CORE_LAYERSTACK_H
 
 #include <SandTable/Core/Core.h>
 #include <SandTable/Core/Layer.h>
@@ -22,23 +22,23 @@ namespace SandTable
 		~LayerStack();
 
 	public:
-		void PushLayer(const ObjectRef<Layer>& layer);
-		void PushOverlay(const ObjectRef<Layer>& overlay);
-		void PopLayer(const ObjectRef<Layer>& layer);
-		void PopOverlay(const ObjectRef<Layer>& overlay);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
+		void PopLayer(Layer* layer);
+		void PopOverlay(Layer* overlay);
 
-		std::vector<ObjectRef<Layer>>::iterator begin();
-		std::vector<ObjectRef<Layer>>::iterator end();
-		std::vector<ObjectRef<Layer>>::const_iterator begin() const;
-		std::vector<ObjectRef<Layer>>::const_iterator end() const;
-		std::vector<ObjectRef<Layer>>::reverse_iterator rbegin();
-		std::vector<ObjectRef<Layer>>::reverse_iterator rend();
-		std::vector<ObjectRef<Layer>>::const_reverse_iterator rbegin() const;
-		std::vector<ObjectRef<Layer>>::const_reverse_iterator rend() const;
+		std::vector<Layer*>::iterator begin();
+		std::vector<Layer*>::iterator end();
+		std::vector<Layer*>::const_iterator begin() const;
+		std::vector<Layer*>::const_iterator end() const;
+		std::vector<Layer*>::reverse_iterator rbegin();
+		std::vector<Layer*>::reverse_iterator rend();
+		std::vector<Layer*>::const_reverse_iterator rbegin() const;
+		std::vector<Layer*>::const_reverse_iterator rend() const;
 
 	private:
-		std::vector<ObjectRef<Layer>> m_Layers;
-		unsigned int m_LayerInsertIndex = 0;
+		std::vector<Layer*> m_Layers;
+		uint32_t m_LayerInsertIndex = 0;
 	};
 }
 

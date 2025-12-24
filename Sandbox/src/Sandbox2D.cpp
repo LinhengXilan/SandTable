@@ -1,8 +1,8 @@
 ﻿/**
  * @file Sandbox2D.cpp
  * @author LinhengXilan
- * @version build39
- * @date 2025-11-29
+ * @version build41
+ * @date 2025-12-25
  * 
  * @brief Sandbox示例程序
  */
@@ -10,7 +10,6 @@
 #include <Sandbox2D.h>
 #include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <SandTable/Core/Timer/Timer.h>
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.f / 720.f)
@@ -40,7 +39,7 @@ void Sandbox2D::ImguiRender()
 
 void Sandbox2D::OnUpdate(const SandTable::TimeStep& timeStep)
 {
-	//SANDTABLE_TRACE("ExampleLayer::OnUpdate: {0} s ({1} ms)", timeStep.duration, timeStep.duration * 1000.0);
+	SANDTABLE_TRACE(std::format("ExampleLayer::OnUpdate: {:.3f} s ({:.3f} ms)", timeStep.duration, timeStep.duration * 1000.0));
 	SANDTABLE_PROFILE_FUNCTION();
 
 	m_CameraController.OnUpdate(timeStep);
@@ -52,7 +51,7 @@ void Sandbox2D::OnUpdate(const SandTable::TimeStep& timeStep)
 	{
 		SANDTABLE_PROFILE_SCOPE("Draw");
 		SandTable::Renderer2D::DrawRectangle({0.0f, 0.0f}, {1.0f, 1.0f}, {0.8f, 0.2f, 0.3f, 1.0f});
-		SandTable::Renderer2D::DrawRectangle({0.0f, 0.0f, -0.5f}, {12.0f, 12.0f}, m_Texture);
+		SandTable::Renderer2D::DrawRotatedRectangle({0.0f, 0.0f, -0.5f}, glm::radians(45.0f), {12.0f, 12.0f}, m_Texture, 1.0f, {1.0f, 0.8f, 0.8f, 1.0f});
 	}
 	SandTable::Renderer2D::EndScene();
 }

@@ -12,8 +12,6 @@
 
 #include <SandTable/Core/Layer.h>
 #include <SandTable/Events/Keyboard.h>
-#include <SandTable/Events/MouseEvent.h>
-#include <SandTable/Events/ApplicationEvent.h>
 
 namespace SandTable
 {

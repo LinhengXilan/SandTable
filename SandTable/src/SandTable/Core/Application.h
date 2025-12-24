@@ -1,19 +1,20 @@
 ﻿/**
- * @file SandTable/Application.h
+ * @file SandTable/Core/Application.h
  * @author LinhengXilan
- * @version build39
- * @date 2025-11-29
+ * @version build41
+ * @date 2025-12-25
  * 
  * @brief 应用程序头文件
  */
 
-#ifndef SANDTABLE_APPLICATION_H
-#define SANDTABLE_APPLICATION_H
+#ifndef SANDTABLE_CORE_APPLICATION_H
+#define SANDTABLE_CORE_APPLICATION_H
 
 #include <Platform/Windows/WindowsWindow.h>
 #include <SandTable/Core/LayerStack.h>
-#include <SandTable/ImGui/ImguiLayer.h>
 #include <SandTable/Core/Timer/Clock.h>
+#include <SandTable/Events/ApplicationEvent.h>
+#include <SandTable/ImGui/ImguiLayer.h>
 
 namespace SandTable
 {
@@ -29,8 +30,8 @@ namespace SandTable
 		static const ObjectRef<Clock>& GetClock();
 
 		void Run();
-		void PushLayer(const ObjectRef<Layer>& layer);
-		void PushOverlay(const ObjectRef<Layer>& overlay);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 		void OnEvent(Event& event);
 
 	private:
@@ -45,7 +46,7 @@ namespace SandTable
 
 	private:
 		LayerStack m_LayerStack;
-		ObjectRef<Layer> m_ImguiLayer;
+		ImguiLayer* m_ImguiLayer;
 		ObjectRef<Window> m_Window;
 	};
 

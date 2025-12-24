@@ -1,8 +1,8 @@
 ﻿/**
- * @file SandTable/Application.cpp
+ * @file SandTable/Core/Application.cpp
  * @author LinhengXilan
- * @version build38
- * @date 2025-11-26
+ * @version build41
+ * @date 2025-12-25
  * 
  * @brief 应用程序实现
  */
@@ -12,6 +12,7 @@
 #include <SandTable/Core/Log.h>
 #include <SandTable/Renderer/Renderer.h>
 #include <SandTable/Debug/Instrumentor.h>
+#include <SandTable/ImGui/ImguiLayer.h>
 
 namespace SandTable
 {
@@ -29,7 +30,7 @@ namespace SandTable
 		m_Window->SetSync(false);
 		Renderer::Init();
 
-		m_ImguiLayer = CreateObjectRef<ImguiLayer>();
+		m_ImguiLayer = new ImguiLayer();
 		PushOverlay(m_ImguiLayer);
 
 		s_Clock = CreateObjectRef<Clock>();
@@ -46,7 +47,7 @@ namespace SandTable
 		dispatcher.Dispatch<WindowClose>(SANDTABLE_BIND_EVENT_FUNC(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResize>(SANDTABLE_BIND_EVENT_FUNC(Application::OnWindowResize));
 
-		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
 			(*it)->OnEvent(event);
 			if (event.m_Handled)
@@ -74,13 +75,13 @@ namespace SandTable
 		return false;
 	}
 
-	void Application::PushLayer(const ObjectRef<Layer>& layer)
+	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
 		layer->Attach();
 	}
 
-	void Application::PushOverlay(const ObjectRef<Layer>& overlay)
+	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
 		overlay->Attach();
@@ -97,7 +98,7 @@ namespace SandTable
 				// 层更新
 				{
 					SANDTABLE_PROFILE_SCOPE("LayerStack OnUpdate");
-					for (auto& layer : m_LayerStack)
+					for (auto layer : m_LayerStack)
 					{
 						layer->OnUpdate(s_Clock->GetTimeStep());
 					}
@@ -105,16 +106,14 @@ namespace SandTable
 				// ImGui 渲染
 				{
 					SANDTABLE_PROFILE_SCOPE("LayerStack ImguiRender");
-					std::dynamic_pointer_cast<ImguiLayer>(m_ImguiLayer)->Begin();
-					for (auto& layer : m_LayerStack)
+					m_ImguiLayer->Begin();
+					for (auto layer : m_LayerStack)
 					{
 						layer->ImguiRender();
 					}
-					std::dynamic_pointer_cast<ImguiLayer>(m_ImguiLayer)->End();
+					m_ImguiLayer->End();
 				}
 			}
-			
-			
 
 			m_Window->OnUpdate();
 		}
