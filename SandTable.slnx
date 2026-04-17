@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="Editor/Editor.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="Engine/Engine.vcxproj" />
+</Solution>
