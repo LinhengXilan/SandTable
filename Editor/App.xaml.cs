@@ -1,12 +1,12 @@
-﻿using System.Configuration;
-using System.Data;
+/// <file> App.xaml.cs </file>
+/// <author> LinhengXilan </author>
+/// <version> 0.0.0.2 </version>
+/// <date> 2026-4-17 </date>
+
 using System.Windows;
 
 namespace Editor {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application {
-    }
 
+    }
 }

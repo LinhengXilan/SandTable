@@ -1,8 +1,15 @@
-﻿<Application x:Class="Editor.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Editor"
-             StartupUri="MainWindow.xaml">
+<!-- 
+    @file App.xaml
+    @author LinhengXilan
+    @version 0.0.0.2
+    @date 2026-4-17
+-->
+
+<Application x:Class="Editor.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Editor"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>
