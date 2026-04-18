@@ -19,10 +19,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <ToggleButton Content="打开项目" x:Name="openProjectButton" FontSize="20"/>
-            <ToggleButton Content="新建项目" x:Name="newProjectButton" FontSize="20" Margin="10, 0, 0, 0"/>
+            <ToggleButton Content="打开项目" x:Name="openProjectButton" FontSize="20"
+                          Click="OnToggleButtonClick"/>
+            <ToggleButton Content="新建项目" x:Name="createProjectButton" FontSize="20" Margin="10, 0, 0, 0"
+                          Click="OnToggleButtonClick"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" x:Name="browserContent">
             <Border Width="800" Background="#1F1F1F">
                 <TextBlock FontSize="30" Text="打开项目" Foreground="#DDDDDD"/>
             </Border>

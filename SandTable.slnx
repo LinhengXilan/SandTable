@@ -5,5 +5,5 @@
   <Project Path="Editor/Editor.csproj">
     <Platform Project="x64" />
   </Project>
-  <Project Path="Engine/Engine.vcxproj" />
+  <Project Path="Engine/Engine.vcxproj" Id="6a71a5c9-05a6-4ebb-bc14-09854f45ef28" />
 </Solution>
