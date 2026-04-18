@@ -1,7 +1,7 @@
 /// <file> GameProject/ProjectBrowserDialog.xaml.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.2 </version>
-/// <date> 2026-4-17 </date>
+/// <version> 0.0.0.4 </version>
+/// <date> 2026-4-18 </date>
 
 using System.Windows;
 
