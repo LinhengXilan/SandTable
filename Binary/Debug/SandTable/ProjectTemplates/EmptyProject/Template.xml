@@ -1,0 +1,11 @@
+<ProjectTemplate xmlns="http://schemas.datacontract.org/2004/07/Editor.GameProject"
+                 xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <Description>不提供任何模板代码的项目</Description>
+    <Folders xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+		<a:string>.st</a:string>
+		<a:string>Content</a:string>
+		<a:string>Source</a:string>
+	</Folders>
+	<ProjectFile>Project.stproj</ProjectFile>
+	<ProjectType>空项目</ProjectType>
+</ProjectTemplate>

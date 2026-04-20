@@ -1,15 +1,12 @@
 /// <file> MainWindow.xaml.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.2 </version>
-/// <date> 2026-4-17 </date>
+/// <version> 0.0.0.5 </version>
+/// <date> 2026-4-20 </date>
 
 using System.Windows;
 using Editor.GameProject;
 
 namespace Editor {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();

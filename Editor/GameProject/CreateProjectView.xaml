@@ -1,8 +1,8 @@
 <!-- 
     @file GameProject/CreateProjectView.xaml
     @author LinhengXilan
-    @version 0.0.0.4
-    @date 2026-4-18
+    @version 0.0.0.5
+    @date 2026-4-20
 -->
 	
 <UserControl x:Class="Editor.GameProject.CreateProjectView"
@@ -12,19 +12,32 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:Editor.GameProject"
 			 mc:Ignorable="d" Width="800"
-			 d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Background="#1F1F1F">
+			 d:DesignHeight="450" d:DesignWidth="800"
+			 d:DataContext="{d:DesignInstance Type=local:CreateProject, IsDesignTimeCreatable=True}">
+	<UserControl.DataContext>
+		<local:CreateProject/>
+	</UserControl.DataContext>
+	<StackPanel Background="#1F1F1F">
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<ListBox Width="195" Height="250"/>
-			<Border Width="400" Height="250" Margin="5, 0, 0, 0"/>
+			<ListBox Width="600" Height="250" ItemsSource="{Binding ProjectTemplates}"
+			         SelectedIndex="0">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="{Binding ProjectType}"/>
+							<TextBlock Text="{Binding Description}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
 			<TextBlock Text="项目名称" Width="50"/>
-			<TextBox Width="550"/>
+			<TextBox Width="550" Text="{Binding Name}"/>
 		</StackPanel>
 	    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
 		    <TextBlock Text="位置" Width="50"/>
-		    <TextBox Width="500"/>
+		    <TextBox Width="500" Text="{Binding Path}"/>
 			<Button Content="浏览" Width="45" Margin="5, 0, 0, 0"/>
 	    </StackPanel>
 	    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">

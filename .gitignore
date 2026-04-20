@@ -1,4 +1,10 @@
 .vs
 .vscode
-Binary
+Binary/*
+!Binary/Debug
+!Binary/Release
+Binary/Debug/SandTable/*
+Binary/Release/SandTable/*
+!Binary/Debug/SandTable/ProjectTemplates/
+!Binary/Release/SandTable/ProjectTemplates/
 Intermediate
