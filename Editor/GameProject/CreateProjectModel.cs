@@ -1,7 +1,7 @@
-/// <file> GameProject/CreateProject.cs </file>
+/// <file> GameProject/CreateProjectModel.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.6 </version>
-/// <date> 2026-4-21 </date>
+/// <version> 0.0.0.7 </version>
+/// <date> 2026-4-23 </date>
 
 using Editor.Core;
 using Editor.Utilities;
@@ -9,9 +9,11 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Windows;
 
 namespace Editor.GameProject {
+	/// <summary>
+	/// 项目模板的内容
+	/// </summary>
 	[DataContract]
 	class ProjectTemplate {
 		[DataMember]
@@ -19,16 +21,27 @@ namespace Editor.GameProject {
 			get;
 			set;
 		}
-		[DataMember]
-		public string ProjectFile {
+		public string TemplatePath {
 			get;
 			set;
 		}
-		[DataMember]
+		/// <summary>
+		/// 需要生成的文件夹
+		/// </summary>
 		public List<string> Folders {
 			get;
 			set;
-		}	
+		} = ["Content", "Plugin"];
+		//[DataMember]
+		//public string ProjectPath {
+		//	get;
+		//	set;
+		//}
+		//[DataMember]
+		//public string IconPath {
+		//	get;
+		//	set;
+		//}
 		[DataMember]
 		public string Description {
 			get;
@@ -36,7 +49,7 @@ namespace Editor.GameProject {
 		}
 	}
 
-	class CreateProject : ViewModelBase {
+	class CreateProjectModel : ViewModelBase {
 		private readonly string _TemplatePath = "ProjectTemplates";
 
 		public string ProjectName {
@@ -59,7 +72,7 @@ namespace Editor.GameProject {
 					OnPropertyChanged(nameof(ProjectPath));
 				}
 			}
-		} = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\SandTable\Project\";
+		} = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\SandTable\Projects\";
 
 		public bool IsValid {
 			get;
@@ -71,7 +84,7 @@ namespace Editor.GameProject {
 			}
 		} = false;
 
-		public string ErrorMessage {
+		public string? ErrorMessage {
 			get;
 			set {
 				if (field != value) {
@@ -81,7 +94,7 @@ namespace Editor.GameProject {
 			}
 		}
 
-		private ObservableCollection<ProjectTemplate> _ProjectTemplates = new ObservableCollection<ProjectTemplate>();
+		private ObservableCollection<ProjectTemplate> _ProjectTemplates = new();
 		public ReadOnlyObservableCollection<ProjectTemplate> ProjectTemplates {
 			get;
 		}
@@ -89,7 +102,7 @@ namespace Editor.GameProject {
 		private void ValidateProjectPath() {
 			var path = ProjectPath;
 			if (!Path.EndsInDirectorySeparator(path)) {
-				path += $@"\";
+				path += Path.DirectorySeparatorChar;
 			}
 			path += $@"{ProjectName}\";
 			IsValid = false;
@@ -101,9 +114,7 @@ namespace Editor.GameProject {
 				ErrorMessage = "项目名不能包含特殊字符";
 			} else if (string.IsNullOrEmpty(ProjectPath.Trim())) {
 				ErrorMessage = "项目路径不能为空";
-			} else if (string.IsNullOrWhiteSpace(ProjectPath.Trim())) {
-				ErrorMessage = "项目路径不能含有空格";
-			} else if (ProjectPath.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) {
+			} else if (ProjectPath.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
 				ErrorMessage = "项目路径不能包含特殊字符";
 			} else if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any()) {
 				ErrorMessage = "项目路径已存在且不为空";
@@ -113,17 +124,53 @@ namespace Editor.GameProject {
 			}
 		}
 
-		public CreateProject() {
+
+		// 未来可以直接复制现成模板
+		public string CreateProject(ProjectTemplate template) {
+			ValidateProjectPath();
+			if (!IsValid) {
+				return string.Empty;
+			}
+			if (!Path.EndsInDirectorySeparator(ProjectPath)) {
+				ProjectPath += Path.DirectorySeparatorChar;
+			}
+			var path = $@"{ProjectPath}{ProjectName}\";
+			try {
+				if (!Directory.Exists(path)) {
+					Directory.CreateDirectory(path);
+				}
+				// 创建所有必要文件夹
+				foreach (var folder in template.Folders) {
+					Directory.CreateDirectory(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), folder)));
+				}
+
+				//var dirInfo = new DirectoryInfo(path + @".SandTable\");
+				//dirInfo.Attributes |= FileAttributes.Hidden;
+				var project = new Project(ProjectName);
+				
+			} catch (Exception e) {
+				Debug.WriteLine(e.Message);
+				return string.Empty;
+			}
+
+			return string.Empty;
+		}
+
+		public CreateProjectModel() {
 			ProjectTemplates = new ReadOnlyObservableCollection<ProjectTemplate>(_ProjectTemplates);
 			try {
 				var templateFiles = Directory.GetFiles(_TemplatePath, "Template.xml", SearchOption.AllDirectories);
 				Debug.Assert(templateFiles.Any());
 				foreach (var file in templateFiles) {
 					var template = Serializer.FromFile<ProjectTemplate>(file);
+					template.TemplatePath = Path.GetFullPath(Path.GetDirectoryName(file));
+					template.Folders = ["Content", "Plugin"];
 					_ProjectTemplates.Add(template);
 				}
+				ValidateProjectPath();
 			}
 			catch(Exception e) {
+
 				Debug.WriteLine(e.Message);
 			}
 		}
