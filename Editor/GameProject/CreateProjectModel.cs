@@ -1,27 +1,20 @@
 /// <file> GameProject/CreateProjectModel.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.7 </version>
-/// <date> 2026-4-23 </date>
+/// <version> 0.0.0.8 </version>
+/// <date> 2026-4-25 </date>
 
 using Editor.Core;
 using Editor.Utilities;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization;
 
 namespace Editor.GameProject {
 	/// <summary>
 	/// 项目模板的内容
 	/// </summary>
-	[DataContract]
-	class ProjectTemplate {
-		[DataMember]
+	public class ProjectTemplate {
 		public string ProjectType {
-			get;
-			set;
-		}
-		public string TemplatePath {
 			get;
 			set;
 		}
@@ -32,17 +25,6 @@ namespace Editor.GameProject {
 			get;
 			set;
 		} = ["Content", "Plugin"];
-		//[DataMember]
-		//public string ProjectPath {
-		//	get;
-		//	set;
-		//}
-		//[DataMember]
-		//public string IconPath {
-		//	get;
-		//	set;
-		//}
-		[DataMember]
 		public string Description {
 			get;
 			set;
@@ -143,11 +125,8 @@ namespace Editor.GameProject {
 				foreach (var folder in template.Folders) {
 					Directory.CreateDirectory(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), folder)));
 				}
-
-				//var dirInfo = new DirectoryInfo(path + @".SandTable\");
-				//dirInfo.Attributes |= FileAttributes.Hidden;
+				File.Create(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), $"{ProjectName}.stproj")));
 				var project = new Project(ProjectName);
-				
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 				return string.Empty;
@@ -162,12 +141,16 @@ namespace Editor.GameProject {
 				var templateFiles = Directory.GetFiles(_TemplatePath, "Template.xml", SearchOption.AllDirectories);
 				Debug.Assert(templateFiles.Any());
 				foreach (var file in templateFiles) {
-					var template = Serializer.FromFile<ProjectTemplate>(file);
-					template.TemplatePath = Path.GetFullPath(Path.GetDirectoryName(file));
-					template.Folders = ["Content", "Plugin"];
+					var template = Serializer.XmlFromFile<ProjectTemplate>(file);
 					_ProjectTemplates.Add(template);
 				}
 				ValidateProjectPath();
+
+				// 生成项目模板
+				// var template = new ProjectTemplate();
+				// template.ProjectType = "Empty Project";
+				// template.Description = "Project which has no code generated";
+				// Serializer.XmlToFile(template, "project.xml");
 			}
 			catch(Exception e) {
 

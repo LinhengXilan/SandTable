@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	<OutputType>WinExe</OutputType>
 	<TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
@@ -13,6 +12,7 @@
 	<OutputPath>$(SolutionDir)Binary\$(Configuration)\SandTable\</OutputPath>
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
 	<IntermediateOutputPath>$(SolutionDir)\Intermediate\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+	<SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 	<DebugType>none</DebugType>
@@ -20,4 +20,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
  <DebugType>full</DebugType>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.vcxproj" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="xcopy ..\ProjectTemplates ..\Binary\$(Configuration)\SandTable\ProjectTemplates\ /E /Y" />
+  </Target>
 </Project>

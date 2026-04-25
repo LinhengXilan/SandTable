@@ -3,6 +3,7 @@
     <Platform Name="x64" />
   </Configurations>
   <Project Path="Editor/Editor.csproj">
+    <BuildDependency Project="Engine/Engine.vcxproj" />
     <Platform Project="x64" />
   </Project>
   <Project Path="Engine/Engine.vcxproj" Id="6a71a5c9-05a6-4ebb-bc14-09854f45ef28" />
