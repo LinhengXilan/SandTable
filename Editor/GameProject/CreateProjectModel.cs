@@ -1,7 +1,7 @@
 /// <file> GameProject/CreateProjectModel.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.8 </version>
-/// <date> 2026-4-25 </date>
+/// <version> 0.0.0.9 </version>
+/// <date> 2026-4-26 </date>
 
 using Editor.Core;
 using Editor.Utilities;
@@ -17,7 +17,7 @@ namespace Editor.GameProject {
 		public string ProjectType {
 			get;
 			set;
-		}
+		} = string.Empty;
 		/// <summary>
 		/// 需要生成的文件夹
 		/// </summary>
@@ -28,12 +28,11 @@ namespace Editor.GameProject {
 		public string Description {
 			get;
 			set;
-		}
+		} = string.Empty;
 	}
-
 	class CreateProjectModel : ViewModelBase {
 		private readonly string _TemplatePath = "ProjectTemplates";
-
+		
 		public string ProjectName {
 			get;
 			set {
@@ -43,8 +42,11 @@ namespace Editor.GameProject {
 					OnPropertyChanged(nameof(ProjectName));
 				}
 			}
+#if DEBUG
+		} = "TestProject";
+#else
 		} = "NewProject";
-
+#endif
 		public string ProjectPath {
 			get;
 			set {
@@ -54,8 +56,11 @@ namespace Editor.GameProject {
 					OnPropertyChanged(nameof(ProjectPath));
 				}
 			}
+#if DEBUG
+		} = @"C:\Home\Code\Project\SandTable\Temp\Projects";
+#else
 		} = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\SandTable\Projects\";
-
+#endif
 		public bool IsValid {
 			get;
 			set {
@@ -65,7 +70,6 @@ namespace Editor.GameProject {
 				}
 			}
 		} = false;
-
 		public string? ErrorMessage {
 			get;
 			set {
@@ -106,27 +110,28 @@ namespace Editor.GameProject {
 			}
 		}
 
-
 		// 未来可以直接复制现成模板
 		public string CreateProject(ProjectTemplate template) {
 			ValidateProjectPath();
 			if (!IsValid) {
 				return string.Empty;
 			}
-			if (!Path.EndsInDirectorySeparator(ProjectPath)) {
-				ProjectPath += Path.DirectorySeparatorChar;
-			}
-			var path = $@"{ProjectPath}{ProjectName}\";
+			ProjectPath = Path.Combine(ProjectPath, ProjectName);
 			try {
-				if (!Directory.Exists(path)) {
-					Directory.CreateDirectory(path);
+				if (!Directory.Exists(ProjectPath)) {
+					Directory.CreateDirectory(ProjectPath);
 				}
 				// 创建所有必要文件夹
 				foreach (var folder in template.Folders) {
-					Directory.CreateDirectory(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), folder)));
+					Directory.CreateDirectory(Path.Combine(ProjectPath, folder));
 				}
-				File.Create(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), $"{ProjectName}.stproj")));
-				var project = new Project(ProjectName);
+				// 生成项目文件
+				var projectFilePath = Path.Combine(ProjectPath, $"{ProjectName}.stproject");
+				//File.Create(projectFilePath);
+				var projectFileData = new Project(ProjectName) {
+					IconPath = Path.GetFullPath(Path.Combine(Path.Combine($"{_TemplatePath}", "Default"), "Icon.ico"))
+				};
+				Serializer.XmlToFile(projectFileData, projectFilePath);
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 				return string.Empty;

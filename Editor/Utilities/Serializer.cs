@@ -1,7 +1,7 @@
 /// <file> Utilities/Serializer.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.8 </version>
-/// <date> 2026-4-25 </date>
+/// <version> 0.0.0.9 </version>
+/// <date> 2026-4-26 </date>
 
 using System.Diagnostics;
 using System.IO;
@@ -13,18 +13,24 @@ namespace Editor.Utilities {
 	public static class Serializer {
 		public static void XmlToFile<T>(T instance, string path) {
 			try {
-				var fs = new FileStream(path, FileMode.Open);
+				FileStream fs;
+				if (File.Exists(path)) {
+					fs = new FileStream(path, FileMode.Open);
+				} else {
+					fs = new FileStream(path, FileMode.Create);
+				}
 				var serializer = new XmlSerializer(typeof(T));
-				var setting = new XmlWriterSettings();
-				setting.Encoding = Encoding.UTF8;
-				setting.Indent = true;
-				setting.IndentChars = "\t";
-
+				var setting = new XmlWriterSettings {
+					Encoding = Encoding.UTF8,
+					Indent = true,
+					IndentChars = "\t"
+				};
+				
 				var writer = XmlWriter.Create(fs, setting);
 				var namespaces = new XmlSerializerNamespaces();
 				namespaces.Add(string.Empty, string.Empty);
 				serializer.Serialize(writer, instance, namespaces);
-				writer.Close();
+				fs.Close();
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 			}
