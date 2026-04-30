@@ -1,7 +1,7 @@
 /// <file> GameProject/CreateProjectModel.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.9 </version>
-/// <date> 2026-4-26 </date>
+/// <version> 0.0.0.10 </version>
+/// <date> 2026-5-1 </date>
 
 using Editor.Core;
 using Editor.Utilities;
@@ -126,18 +126,17 @@ namespace Editor.GameProject {
 					Directory.CreateDirectory(Path.Combine(ProjectPath, folder));
 				}
 				// 生成项目文件
-				var projectFilePath = Path.Combine(ProjectPath, $"{ProjectName}.stproject");
+				var projectFilePath = Path.Combine(ProjectPath, $"{ProjectName}.stproj");
 				//File.Create(projectFilePath);
 				var projectFileData = new Project(ProjectName) {
 					IconPath = Path.GetFullPath(Path.Combine(Path.Combine($"{_TemplatePath}", "Default"), "Icon.ico"))
 				};
-				Serializer.XmlToFile(projectFileData, projectFilePath);
+				Serializer.XmlToFile(projectFileData, projectFilePath, "stproj", "https://SandTable.com/Developer/Project");
+				return ProjectPath;
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 				return string.Empty;
 			}
-
-			return string.Empty;
 		}
 
 		public CreateProjectModel() {
