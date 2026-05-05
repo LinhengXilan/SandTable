@@ -1,8 +1,8 @@
 <!-- 
     @file GameProject/ProjectBrowserDialog.xaml
     @author LinhengXilan
-    @version 0.0.0.4
-    @date 2026-4-18
+    @version 0.0.0.11
+    @date 2026-5-5
 -->
     
 <Window x:Class="Editor.GameProject.ProjectBrowserDialog"
@@ -12,19 +12,33 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Editor.GameProject"
 		mc:Ignorable="d" ResizeMode="NoResize"
-		Title="ProjectBrowser" Height="500" Width="800">
-    <Grid>
+		Title="ProjectBrowser" Height="500" Width="800"
+		WindowStyle="None"
+		AllowsTransparency="True"
+		Background="#1F1F1F">
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="30" ResizeBorderThickness="5"/>
+	</WindowChrome.WindowChrome>
+	<Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+		<Grid Width="800" Background="#2F2F2F">
+			<DockPanel LastChildFill="False" HorizontalAlignment="Right" Margin="0, 2, 0 ,2">
+				<Button Width="40"/>
+				<Button Width="40"/>
+				<Button Width="40"/>
+			</DockPanel>
+		</Grid>
+		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <ToggleButton Content="打开项目" x:Name="openProjectButton" FontSize="20"
                           Click="OnToggleButtonClick" IsChecked="True"/>
             <ToggleButton Content="新建项目" x:Name="createProjectButton" FontSize="20" Margin="10, 0, 0, 0"
                           Click="OnToggleButtonClick" IsChecked="False"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" x:Name="browserContent" Background="#1F1F1F">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" x:Name="browserContent" Background="#1F1F1F">
             <local:OpenProjectView />
 			<local:CreateProjectView/>
         </StackPanel>
