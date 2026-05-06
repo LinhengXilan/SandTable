@@ -1,8 +1,8 @@
 <!-- 
 	@file GameProject/OpenProjectView.xaml
 	@author LinhengXilan
-	@version 0.0.0.11
-	@date 2026-5-5
+	@version 0.0.0.12
+	@date 2026-5-6
 -->
 	
 <UserControl x:Class="Editor.GameProject.OpenProjectView"
@@ -21,11 +21,11 @@
 		         SelectedIndex="0">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<Image Source="{Binding ProjectIcon}" Width="16" Height="16"/>
-						<StackPanel Orientation="Vertical">
-							<TextBlock Text="{Binding ProjectName}"/>
-							<TextBlock Text="{Binding ProjectPath}"/>
+					<StackPanel Orientation="Horizontal" Height="35">
+						<Image Source="{Binding ProjectIconPath}" Width="32" Height="32" Margin="0,0,4,0"/>
+						<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+							<TextBlock Height="15" Text="{Binding ProjectName}"/>
+							<TextBlock Height="15" Text="{Binding ProjectPath}"/>
 						</StackPanel>
 					</StackPanel>
 				</DataTemplate>

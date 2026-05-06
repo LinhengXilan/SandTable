@@ -1,7 +1,7 @@
 /// <file> GameProject/CreateProjectModel.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.10 </version>
-/// <date> 2026-5-1 </date>
+/// <version> 0.0.0.12 </version>
+/// <date> 2026-5-6 </date>
 
 using Editor.Core;
 using Editor.Utilities;
@@ -20,6 +20,7 @@ namespace Editor.GameProject {
 		} = string.Empty;
 		/// <summary>
 		/// 需要生成的文件夹
+		/// 初始化的是需要创建的空文件夹
 		/// </summary>
 		public List<string> Folders {
 			get;
@@ -78,7 +79,7 @@ namespace Editor.GameProject {
 					OnPropertyChanged(nameof(ErrorMessage));
 				}
 			}
-		}
+		} = string.Empty;
 
 		private ObservableCollection<ProjectTemplate> _ProjectTemplates = new();
 		public ReadOnlyObservableCollection<ProjectTemplate> ProjectTemplates {
@@ -111,28 +112,28 @@ namespace Editor.GameProject {
 		}
 
 		// 未来可以直接复制现成模板
-		public string CreateProject(ProjectTemplate template) {
+		public string CreateProject(ProjectTemplate? template) {
 			ValidateProjectPath();
 			if (!IsValid) {
 				return string.Empty;
 			}
-			ProjectPath = Path.Combine(ProjectPath, ProjectName);
+			var currentProjectPath = Path.Combine(ProjectPath, ProjectName);
 			try {
-				if (!Directory.Exists(ProjectPath)) {
-					Directory.CreateDirectory(ProjectPath);
+				if (!Directory.Exists(currentProjectPath)) {
+					Directory.CreateDirectory(currentProjectPath);
 				}
 				// 创建所有必要文件夹
 				foreach (var folder in template.Folders) {
-					Directory.CreateDirectory(Path.Combine(ProjectPath, folder));
+					Directory.CreateDirectory(Path.Combine(currentProjectPath, folder));
 				}
 				// 生成项目文件
-				var projectFilePath = Path.Combine(ProjectPath, $"{ProjectName}.stproj");
+				var projectFilePath = Path.Combine(currentProjectPath, $"{ProjectName}.stproj");
 				//File.Create(projectFilePath);
 				var projectFileData = new Project(ProjectName) {
 					IconPath = Path.GetFullPath(Path.Combine(Path.Combine($"{_TemplatePath}", "Default"), "Icon.ico"))
 				};
-				Serializer.XmlToFile(projectFileData, projectFilePath, "stproj", "https://SandTable.com/Developer/Project");
-				return ProjectPath;
+				Serializer.ToXmlFile(projectFileData, projectFilePath, "stproj", "https://SandTable.com/Developer/Project");
+				return currentProjectPath;
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 				return string.Empty;
@@ -143,21 +144,15 @@ namespace Editor.GameProject {
 			ProjectTemplates = new ReadOnlyObservableCollection<ProjectTemplate>(_ProjectTemplates);
 			try {
 				var templateFiles = Directory.GetFiles(_TemplatePath, "Template.xml", SearchOption.AllDirectories);
-				Debug.Assert(templateFiles.Any());
 				foreach (var file in templateFiles) {
-					var template = Serializer.XmlFromFile<ProjectTemplate>(file);
-					_ProjectTemplates.Add(template);
+					var template = Serializer.FromXmlFile<ProjectTemplate>(file);
+					if (template != null) {
+						_ProjectTemplates.Add(template);
+					}
 				}
 				ValidateProjectPath();
-
-				// 生成项目模板
-				// var template = new ProjectTemplate();
-				// template.ProjectType = "Empty Project";
-				// template.Description = "Project which has no code generated";
-				// Serializer.XmlToFile(template, "project.xml");
 			}
 			catch(Exception e) {
-
 				Debug.WriteLine(e.Message);
 			}
 		}

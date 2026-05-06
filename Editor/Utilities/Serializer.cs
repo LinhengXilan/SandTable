@@ -1,7 +1,7 @@
 /// <file> Utilities/Serializer.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.10 </version>
-/// <date> 2026-5-1 </date>
+/// <version> 0.0.0.12 </version>
+/// <date> 2026-5-6 </date>
 
 using System.Diagnostics;
 using System.IO;
@@ -11,10 +11,9 @@ using System.Xml.Serialization;
 
 namespace Editor.Utilities {
 	public static class Serializer {
-		public static void XmlToFile<T>(T instance, string path) {
+		public static void ToXmlFile<T>(T instance, string path) {
 			try {
-				FileStream fs;
-				fs = File.Exists(path) ? new FileStream(path, FileMode.Open) : new FileStream(path, FileMode.Create);
+				var fs = File.Exists(path) ? new FileStream(path, FileMode.Open) : new FileStream(path, FileMode.Create);
 				var serializer = new XmlSerializer(typeof(T));
 				var setting = new XmlWriterSettings {
 					Encoding = Encoding.UTF8,
@@ -31,10 +30,9 @@ namespace Editor.Utilities {
 				Debug.WriteLine(e.Message);
 			}
 		}
-		public static void XmlToFile<T>(T instance, string path, string nameSpacePrefix, string nameSpace) {
+		public static void ToXmlFile<T>(T instance, string path, string nameSpacePrefix, string nameSpace) {
 			try {
-				FileStream fs;
-				fs = File.Exists(path) ? new FileStream(path, FileMode.Open) : new FileStream(path, FileMode.Create);
+				using var fs = File.Exists(path) ? new FileStream(path, FileMode.Open) : new FileStream(path, FileMode.Create);
 				var serializer = new XmlSerializer(typeof(T));
 				var setting = new XmlWriterSettings {
 					Encoding = Encoding.UTF8,
@@ -46,16 +44,15 @@ namespace Editor.Utilities {
 				var namespaces = new XmlSerializerNamespaces();
 				namespaces.Add(nameSpacePrefix, nameSpace);
 				serializer.Serialize(writer, instance, namespaces);
-				fs.Close();
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 			}
 		}
-		public static T XmlFromFile<T>(string path) {
+		public static T? FromXmlFile<T>(string path) {
 			try {
-				var fs = new FileStream(path, FileMode.Open);
+				using var fs = new FileStream(path, FileMode.Open);
 				var serializer = new XmlSerializer(typeof(T));
-				return (T)serializer.Deserialize(fs);
+				return (T?)serializer.Deserialize(fs);
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 				return default;

@@ -1,8 +1,9 @@
 /// <file> GameProject/CreateProjectView.xaml.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.7 </version>
-/// <date> 2026-4-23 </date>
+/// <version> 0.0.0.12 </version>
+/// <date> 2026-5-6 </date>
 
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,14 +15,17 @@ namespace Editor.GameProject {
 		
 		private void CreateButtonClicked(object sender, RoutedEventArgs args) {
 			var projectModel = DataContext as CreateProjectModel;
-			var projectPath = projectModel.CreateProject(projectTemplateListBox.SelectedItem as ProjectTemplate);
-			bool result = false;
-			var window = Window.GetWindow(this);
+			var projectPath = projectModel?.CreateProject(projectTemplateListBox.SelectedItem as ProjectTemplate);
+			var result = false;
 			if (!string.IsNullOrEmpty(projectPath)) {
 				result = true;
+				OpenProjectModel.OpenProject(Path.Combine(projectModel.ProjectPath, $@"{projectModel.ProjectName}\{projectModel.ProjectName}.stproj"));
 			}
-			window.DialogResult = result;
-			window.Close();
+			var window = Window.GetWindow(this);
+			if (window != null) {
+				window.DialogResult = result;
+				window.Close();
+			}
 		}
 	}
 }

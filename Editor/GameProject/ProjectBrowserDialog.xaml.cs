@@ -1,7 +1,7 @@
 /// <file> GameProject/ProjectBrowserDialog.xaml.cs </file>
 /// <author> LinhengXilan </author>
-/// <version> 0.0.0.4 </version>
-/// <date> 2026-4-18 </date>
+/// <version> 0.0.0.12 </version>
+/// <date> 2026-5-6 </date>
 
 using System.Windows;
 
@@ -12,7 +12,7 @@ namespace Editor.GameProject {
 		}
 
 		private void OnToggleButtonClick(object sender, RoutedEventArgs e) {
-			if (sender == openProjectButton) {
+			if (Equals(sender, openProjectButton)) {
 				if (createProjectButton.IsChecked == true) {
 					createProjectButton.IsChecked = false;
                     browserContent.Margin = new Thickness(0);

@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ProjectTemplate>
 	<ProjectType>Empty</ProjectType>
-	<Folders>
-		<string>Content</string>
-		<string>Plugin</string>
-	</Folders>
 	<Description>Start with no codes</Description>
 </ProjectTemplate>
