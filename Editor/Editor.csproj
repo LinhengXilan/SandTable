@@ -20,4 +20,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 	  <DebugType>none</DebugType>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove=".gitignore" />
+	</ItemGroup>
 </Project>
