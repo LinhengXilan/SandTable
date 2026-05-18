@@ -11,7 +11,7 @@
 		<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
 		<IntermediateOutputPath>$(SolutionDir)\Intermediate\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
 		<Platforms>x64</Platforms>
-		<SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
 		<SelfContained>false</SelfContained>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

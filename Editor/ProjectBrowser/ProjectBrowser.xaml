@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowser.xaml
-    @author LinhengXilan
-    @version 0.0.0.2
-	@data 2025-5-16
+	@author LinhengXilan
+	@version 0.0.0.3
+	@data 2025-5-18
 -->
 
 <Window x:Class="Editor.ProjectBrowser.ProjectBrowser"
@@ -15,18 +15,35 @@
 		Title="ProjectBrowser"
 		WindowStyle="None"
 		AllowsTransparency="True">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0"/>
-    </WindowChrome.WindowChrome>
-    <Grid>
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="30"/>
+	</WindowChrome.WindowChrome>
+	<Grid>
 		<Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition />
+		</Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
-            <Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
-            <Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
-            <Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
-        </DockPanel>
+		<DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
+			<Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
+			<Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
+		</DockPanel>
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Margin="20" Orientation="Vertical">
+				<Button Content="新建项目" Height="30"/>
+				<Button Content="打开项目" Height="30" Margin="0, 5, 0, 0"/>
+			</StackPanel>
+
+			<ListBox Grid.Column="1" Margin="0, 10, 10, 10">
+                
+			</ListBox>
+		</Grid>
 	</Grid>
 </Window>
