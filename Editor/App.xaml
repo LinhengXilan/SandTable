@@ -1,15 +1,15 @@
 ﻿<!--
 	@file App.xaml
 	@author LinhengXilan
-	@version 0.0.0.2
-	@date 2025-5-16
+	@version 0.0.0.5
+	@date 2025-5-19
 -->
 
 <Application x:Class="Editor.App"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:local="clr-namespace:Editor"
-			 StartupUri="ProjectBrowser/ProjectBrowser.xaml">
+			 StartupUri="ProjectBrowser/ProjectBrowserWindow.xaml">
 	<Application.Resources>
 		 
 	</Application.Resources>

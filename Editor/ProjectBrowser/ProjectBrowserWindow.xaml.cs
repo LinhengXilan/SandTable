@@ -1,17 +1,17 @@
-﻿/// @file ProjectBrowser/ProjectBrowser.xaml.cs
+﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
 /// author LinhengXilan
-/// @version 0.0.0.2
-/// @date 2025-5-16
+/// @version 0.0.0.5
+/// @date 2025-5-19
 
-using Editor.Core;
+using Editor.Utility;
 using System.Windows;
 
 namespace Editor.ProjectBrowser
 {
-	public partial class ProjectBrowser : Window {
+	public partial class ProjectBrowserWindow : Window {
 		public WindowOperator WindowOperator = new();
 
-		public ProjectBrowser() {
+		public ProjectBrowserWindow() {
 			InitializeComponent();
 		}
 		

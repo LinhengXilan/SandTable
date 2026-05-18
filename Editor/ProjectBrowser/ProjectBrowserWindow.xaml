@@ -1,0 +1,35 @@
+﻿<!--
+	@file ProjectBrowser/ProjectBrowserWindow.xaml
+	@author LinhengXilan
+	@version 0.0.0.5
+	@data 2025-5-19
+-->
+
+<Window x:Class="Editor.ProjectBrowser.ProjectBrowserWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Editor.ProjectBrowser"
+		mc:Ignorable="d"
+		Title="ProjectBrowser"
+		WindowStyle="None" AllowsTransparency="True"
+        MinWidth="640" MinHeight="480">
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="30"/>
+	</WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
+            <Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
+            <Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
+            <Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
+        </DockPanel>
+
+        <Frame Grid.Row="1" Source="LoadProjectPage.xaml" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

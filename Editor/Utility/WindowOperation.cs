@@ -1,11 +1,11 @@
-﻿/// @file Core/WindowOperation.cs
+﻿/// @file Utility/WindowOperation.cs
 /// author LinhengXilan
-/// @version 0.0.0.4
-/// @date 2025-5-18
+/// @version 0.0.0.5
+/// @date 2025-5-19
 
 using System.Windows;
 
-namespace Editor.Core {
+namespace Editor.Utility {
 	public class WindowOperator {
 		public Rect WindowSize;
 		public bool IsMaximized;
