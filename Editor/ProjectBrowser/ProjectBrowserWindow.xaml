@@ -1,7 +1,7 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowserWindow.xaml
 	@author LinhengXilan
-	@version 0.0.0.5
+	@version 0.0.0.6
 	@data 2025-5-19
 -->
 
@@ -14,22 +14,22 @@
 		mc:Ignorable="d"
 		Title="ProjectBrowser"
 		WindowStyle="None" AllowsTransparency="True"
-        MinWidth="640" MinHeight="480">
+		MinWidth="640" MinHeight="480">
 	<WindowChrome.WindowChrome>
 		<WindowChrome CaptionHeight="30"/>
 	</WindowChrome.WindowChrome>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition />
+		</Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
-            <Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
-            <Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
-            <Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
-        </DockPanel>
+		<DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
+			<Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
+			<Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
+			<Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
+		</DockPanel>
 
-        <Frame Grid.Row="1" Source="LoadProjectPage.xaml" NavigationUIVisibility="Hidden"/>
-    </Grid>
+		<Frame Grid.Row="1" Source="LoadProjectPage.xaml" NavigationUIVisibility="Hidden"/>
+	</Grid>
 </Window>

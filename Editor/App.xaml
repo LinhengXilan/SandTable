@@ -1,7 +1,7 @@
 ﻿<!--
 	@file App.xaml
 	@author LinhengXilan
-	@version 0.0.0.5
+	@version 0.0.0.6
 	@date 2025-5-19
 -->
 
@@ -11,6 +11,9 @@
 			 xmlns:local="clr-namespace:Editor"
 			 StartupUri="ProjectBrowser/ProjectBrowserWindow.xaml">
 	<Application.Resources>
-		 
-	</Application.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Application.Resources>
 </Application>

@@ -1,6 +1,6 @@
 ﻿/// @file Core/EngineVersion.cs
 /// author LinhengXilan
-/// @version 0.0.0.5
+/// @version 0.0.0.6
 /// @date 2025-5-19
 
 namespace Editor.Core {
@@ -8,6 +8,6 @@ namespace Editor.Core {
 		public static readonly int MajorVersion = 0;
 		public static readonly int MinorVersion = 0;
 		public static readonly int PatchVersion = 0;
-		public static readonly int BuildVersion = 5;
+		public static readonly int BuildVersion = 6;
 	}
 }
