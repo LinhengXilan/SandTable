@@ -23,4 +23,7 @@
 	<ItemGroup>
 	  <None Remove=".gitignore" />
 	</ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy ..\ProjectTemplates ..\Binary\$(Configuration)\SandTable\ProjectTemplates\ /E /Y" />
+	</Target>
 </Project>

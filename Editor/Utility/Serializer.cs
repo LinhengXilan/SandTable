@@ -1,7 +1,7 @@
 ﻿/// @file Utility/Serializer.cs
 /// author LinhengXilan
-/// @version 0.0.0.4
-/// @date 2025-5-18
+/// @version 0.0.0.7
+/// @date 2025-5-20
 
 using System.Diagnostics;
 using System.IO;
@@ -33,7 +33,7 @@ namespace Editor.Utility
 			}
 		}
 		
-		public static void ToXmlFile<T>(string file, T instance, string nameSpacePrefix, string nameSpace) {
+		public static void XmlToFile<T>(string file, T instance, string nameSpacePrefix, string nameSpace) {
 			try {
 				using FileStream fs = File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
 				XmlSerializer serializer = new (typeof(T));

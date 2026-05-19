@@ -1,13 +1,10 @@
 ﻿/// @file ProjectBrowser/Project.cs
 /// author LinhengXilan
-/// @version 0.0.0.3
-/// @date 2025-5-18
+/// @version 0.0.0.7
+/// @date 2025-5-20
 
 namespace Editor.ProjectBrowser.Project
 {
-	public class ProjectTemplate {
-
-	}
 	/// <summary>
 	/// 创建项目需要的信息
 	/// </summary>
@@ -21,7 +18,7 @@ namespace Editor.ProjectBrowser.Project
 		
 		public void LoadProject(string path) {
 
-		} 
+		}
 	}
 
 	public class ProjectInfo {
