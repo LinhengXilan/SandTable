@@ -1,9 +1,10 @@
 ﻿/// @file ProjectBrowser/ProjectTemplate.cs
 /// author LinhengXilan
-/// @version 0.0.0.7
-/// @date 2025-5-20
+/// @version 0.0.0.8
+/// @date 2025-5-22
 
 using Editor.Core;
+using System.Xml.Serialization;
 
 namespace Editor.ProjectBrowser.Project {
 	public class ProjectTemplate : ViewModelBase {
@@ -26,5 +27,8 @@ namespace Editor.ProjectBrowser.Project {
 				}
 			}
 		} = string.Empty;
+
+		[XmlIgnore]
+		public List<string> Folders = ["Source", "Binary", "Intermediate", "Content"];
 	}
 }

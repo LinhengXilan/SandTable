@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/NewProjectPage.xaml
 	@author LinhengXilan
-	@version 0.0.0.7
-	@data 2025-5-20
+	@version 0.0.0.8
+	@data 2025-5-22
 -->
 	
 <Page x:Class="Editor.ProjectBrowser.NewProjectPage"
@@ -40,7 +40,7 @@
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Margin="5"
+				<TextBlock Grid.Column="0" Margin="0, 0, 5, 0"
 					Text="项目名称"/>
 				<TextBox Grid.Column="1" Height="20" Margin="10, 0, 0, 0"
                          Text="{Binding ProjectName}"/>
@@ -48,19 +48,29 @@
 			<Grid Margin="10, 5, 10, 0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Margin="5"
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="0, 0, 5, 0"
 						   Text="项目路径"/>
 				<TextBox Grid.Column="1" Height="20" Margin="10, 0, 0, 0"
                          Text="{Binding ProjectPath}"/>
+                <Button Grid.Column="2" Height="20" Margin="5, 0, 0, 0"
+                        Content="..." Click="DirectoryBrowserButtonClicked"/>
 			</Grid>
 		</StackPanel>
-		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10, 10, 10">
-			<Button Content="返回" Width="80" Height="30" Margin="10, 0, 0, 0"
-					Click="ReturnButtonClicked"/>
-			<Button Content="创建" Width="80" Height="30" Margin="10, 0, 0, 0"
+		<Grid Grid.Row="2" Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Foreground="#000000"
+                       Text="{Binding ErrorMessage}"/>
+            <Button Grid.Column="1" Content="返回" Height="30" Margin="10, 0, 0, 0"
+                    Click="ReturnButtonClicked"/>
+            <Button Grid.Column="2" Content="创建" Height="30" Margin="10, 0, 0, 0"
 					Click="CreateButtonClicked"/>
-		</StackPanel>
+		</Grid>
 	</Grid>
 </Page>

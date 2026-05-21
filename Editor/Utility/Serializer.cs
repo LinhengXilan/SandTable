@@ -1,7 +1,7 @@
 ﻿/// @file Utility/Serializer.cs
 /// author LinhengXilan
-/// @version 0.0.0.7
-/// @date 2025-5-20
+/// @version 0.0.0.8
+/// @date 2025-5-22
 
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +15,7 @@ namespace Editor.Utility
 	{
 		public static void XmlToFile<T>(string file, T instance) {
 			try {
-				FileStream fs = File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
+				FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
 				XmlSerializer serializer = new (typeof(T));
 				XmlWriterSettings setting = new() {
 					Encoding = Encoding.UTF8,
@@ -35,7 +35,7 @@ namespace Editor.Utility
 		
 		public static void XmlToFile<T>(string file, T instance, string nameSpacePrefix, string nameSpace) {
 			try {
-				using FileStream fs = File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
+				using FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
 				XmlSerializer serializer = new (typeof(T));
 				XmlWriterSettings setting = new() {
 					Encoding = Encoding.UTF8,

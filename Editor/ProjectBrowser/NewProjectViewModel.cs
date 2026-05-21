@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// author LinhengXilan
-/// @version 0.0.0.7
-/// @date 2025-5-20
+/// @version 0.0.0.8
+/// @date 2025-5-22
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
@@ -35,19 +35,11 @@ namespace Editor.ProjectBrowser {
 		
 		private const string _TemplatePath = "ProjectTemplates";
 		private ObservableCollection<ProjectTemplate> _ProjectTemplates = new();
-		public ReadOnlyObservableCollection<ProjectTemplate>? ProjectTemplates {
+		public ReadOnlyObservableCollection<ProjectTemplate> ProjectTemplates {
 			get;
 		}
 		
-		public bool IsValid {
-			get;
-			set {
-				if (field != value) {
-					field = value;
-					OnPropertyChanged(nameof(IsValid));
-				}
-			}
-		} = false;
+		public bool IsValid = false;
 		public string ErrorMessage {
 			get;
 			set {
@@ -97,6 +89,14 @@ namespace Editor.ProjectBrowser {
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
 			}
+		}
+		
+		public void CreateProject(ProjectTemplate template) {
+			if (!IsValid) {
+				return;
+			}
+
+			Project.Project.Create(_TemplatePath, template, ProjectName, ProjectPath);
 		}
 	}
 }
