@@ -1,26 +1,24 @@
 ﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
-/// author LinhengXilan
-/// @version 0.0.0.5
-/// @date 2025-5-19
+/// @author LinhengXilan
+/// @version 0.0.0.9
+/// @date 2025-5-23
 
 using Editor.Utility;
 using System.Windows;
 
-namespace Editor.ProjectBrowser
-{
+namespace Editor.ProjectBrowser {
+	
 	public partial class ProjectBrowserWindow : Window {
-		public WindowOperator WindowOperator = new();
-
 		public ProjectBrowserWindow() {
 			InitializeComponent();
+			WindowUtils.Enable(this);
 		}
-		
 		public void MinimizationButtonClicked(object sender, RoutedEventArgs args) {
-			WindowOperator.Minimize(this);
+			WindowState = WindowState.Minimized;
 		}
 		
 		public void MaximizationButtonClicked(object sender, RoutedEventArgs args) {
-			WindowOperator.Maximize(this);
+			WindowUtils.Maximize(this);
 		}
 		
 		public void CloseButtonClicked(object sender, RoutedEventArgs args) {

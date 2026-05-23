@@ -5,7 +5,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
-  <Project Path="Editor/Editor.csproj">
+  <Project Path="Editor/Editor.csproj" Id="9d802db5-c9d8-4aef-a546-1ec698f9b602">
     <Platform Project="x64" />
   </Project>
 </Solution>

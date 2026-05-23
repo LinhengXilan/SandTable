@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowserWindow.xaml
 	@author LinhengXilan
-	@version 0.0.0.6
-	@data 2025-5-19
+	@version 0.0.0.9
+	@data 2025-5-23
 -->
 
 <Window x:Class="Editor.ProjectBrowser.ProjectBrowserWindow"
@@ -12,12 +12,18 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Editor.ProjectBrowser"
 		mc:Ignorable="d"
-		Title="ProjectBrowser"
+		Title="ProjectBrowserWindow"
 		WindowStyle="None" AllowsTransparency="True"
 		MinWidth="640" MinHeight="480">
+
 	<WindowChrome.WindowChrome>
 		<WindowChrome CaptionHeight="30"/>
 	</WindowChrome.WindowChrome>
+
+	<Window.DataContext>
+		<local:ProjectBrowserViewModel/>
+	</Window.DataContext>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
@@ -30,6 +36,15 @@
 			<Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
 		</DockPanel>
 
-		<Frame Grid.Row="1" Source="LoadProjectPage.xaml" NavigationUIVisibility="Hidden"/>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type local:LoadProjectViewModel}">
+                    <local:LoadProjectPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:NewProjectViewModel}">
+                    <local:NewProjectPage/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
 	</Grid>
 </Window>

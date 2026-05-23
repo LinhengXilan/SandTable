@@ -1,17 +1,17 @@
-﻿/// @file Utility/File.cs
+﻿/// @file Utility/FileUtils.cs
 /// @auther LinhengXilan
-/// @version 0.0.0.8
-/// @date 2025-5-22
+/// @version 0.0.0.9
+/// @date 2025-5-23
 
 using System.IO;
 
 namespace Editor.Utility {
-	public class File {
+	public class FileUtils {
 		public static void CopyFolder(string sourceFolder, string destFolder) {
 			if (!Directory.Exists(sourceFolder)) {
 				return;
 			}
-
+			
 			if (!Directory.Exists(destFolder)) {
 				Directory.CreateDirectory(destFolder);
 			}

@@ -1,15 +1,13 @@
 ﻿/// @file ProjectBrowser/Project.cs
 /// author LinhengXilan
-/// @version 0.0.0.8
-/// @date 2025-5-22
+/// @version 0.0.0.9
+/// @date 2025-5-23
 
 using Editor.Utility;
 using System.Diagnostics;
 using System.IO;
-using File = Editor.Utility.File;
 
-namespace Editor.ProjectBrowser.Project
-{
+namespace Editor.ProjectBrowser.Project {
 	/// <summary>
 	/// 创建项目需要的信息
 	/// </summary>
@@ -18,7 +16,7 @@ namespace Editor.ProjectBrowser.Project
 		public string Path = string.Empty;
 		public uint EngineVersion = Core.EngineVersion.BuildVersion;
 		
-		public static void Create(string projectTemplatePath, ProjectTemplate template, string name, string path) {
+		public static string? Create(string projectTemplatePath, ProjectTemplate template, string name, string path) {
 			var projectPath = System.IO.Path.Combine(path, name);
 			try {
 				if (!Directory.Exists(projectPath)) {
@@ -32,29 +30,26 @@ namespace Editor.ProjectBrowser.Project
 					var templateFolder = System.IO.Path.Combine(System.IO.Path.Combine(projectTemplatePath, template.Type), folder);
 					
 					Directory.CreateDirectory(projectFolder);
-					File.CopyFolder(templateFolder, projectFolder);
+					FileUtils.CopyFolder(templateFolder, projectFolder);
 				}
 				
 				// 生成项目文件
 				var projectFilePath = System.IO.Path.Combine(projectPath, $"{name}.stproj");
 				var project = new Project() {
 					Name = name,
-					Path = path
+					Path = projectPath
 				};
 				
 				Serializer.XmlToFile(projectFilePath, project, "stproj", "https://SandTable.com/Developer/Project");
-				Load(projectFilePath);
+				return projectFilePath;
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
+				return null;
 			}
 		}
 		
-		public static void Load(string path) {
-
+		public void Load() {
+			
 		}
-	}
-
-	public class ProjectInfo {
-
 	}
 }

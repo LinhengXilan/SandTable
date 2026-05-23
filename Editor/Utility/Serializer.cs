@@ -1,7 +1,7 @@
 ﻿/// @file Utility/Serializer.cs
 /// author LinhengXilan
-/// @version 0.0.0.8
-/// @date 2025-5-22
+/// @version 0.0.0.9
+/// @date 2025-5-23
 
 using System.Diagnostics;
 using System.IO;
@@ -9,22 +9,20 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Editor.Utility
-{
-	public class Serializer
-	{
+namespace Editor.Utility {
+	public class Serializer {
 		public static void XmlToFile<T>(string file, T instance) {
 			try {
-				FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
-				XmlSerializer serializer = new (typeof(T));
+				FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.OpenOrCreate) : new FileStream(file, FileMode.Create);
+				XmlSerializer serializer = new(typeof(T));
 				XmlWriterSettings setting = new() {
 					Encoding = Encoding.UTF8,
 					Indent = true,
 					IndentChars = "\t"
 				};
-				
+
 				XmlWriter writer = XmlWriter.Create(fs, setting);
-				XmlSerializerNamespaces namespaces = new ();
+				XmlSerializerNamespaces namespaces = new();
 				namespaces.Add(string.Empty, string.Empty);
 				serializer.Serialize(writer, instance, namespaces);
 				fs.Close();
@@ -32,17 +30,17 @@ namespace Editor.Utility
 				Debug.WriteLine(e.Message);
 			}
 		}
-		
+
 		public static void XmlToFile<T>(string file, T instance, string nameSpacePrefix, string nameSpace) {
 			try {
-				using FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.Open) : new FileStream(file, FileMode.Create);
-				XmlSerializer serializer = new (typeof(T));
+				using FileStream fs = System.IO.File.Exists(file) ? new FileStream(file, FileMode.OpenOrCreate) : new FileStream(file, FileMode.Create);
+				XmlSerializer serializer = new(typeof(T));
 				XmlWriterSettings setting = new() {
 					Encoding = Encoding.UTF8,
 					Indent = true,
 					IndentChars = "\t"
 				};
-				
+
 				XmlWriter writer = XmlWriter.Create(fs, setting);
 				XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
 				namespaces.Add(nameSpacePrefix, nameSpace);
@@ -54,8 +52,8 @@ namespace Editor.Utility
 
 		public static T? XmlFromFile<T>(string file) {
 			try {
-				using FileStream fs = new (file, FileMode.Open);
-				XmlSerializer serializer = new (typeof(T));
+				using FileStream fs = new(file, FileMode.Open);
+				XmlSerializer serializer = new(typeof(T));
 				return (T?)serializer.Deserialize(fs);
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
