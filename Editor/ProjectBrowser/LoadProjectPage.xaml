@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/LoadProjectPage.xaml
 	@author LinhengXilan
-	@version 0.0.0.9
-	@data 2025-5-23
+	@version 0.0.0.10
+	@data 2025-5-24
 -->
     
 <UserControl x:Class="Editor.ProjectBrowser.LoadProjectPage"
@@ -30,6 +30,11 @@
         <ListBox Grid.Column="1"
                  ItemsSource="{Binding ProjectInfos}"
                  Margin="0, 10, 10, 10">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

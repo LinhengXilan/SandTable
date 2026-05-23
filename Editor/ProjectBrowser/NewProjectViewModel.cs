@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
+/// @version 0.0.0.10
+/// @date 2025-5-24
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
@@ -28,7 +28,7 @@ namespace Editor.ProjectBrowser {
 					OnPropertyChanged(nameof(ProjectTemplateListBoxSelectedItem));
 				}
 			}
-		}
+		} = new();
 
 		public string ProjectName {
 			get;
@@ -41,21 +41,20 @@ namespace Editor.ProjectBrowser {
 			}
 		} = "Untitled";
 		
-		public string ProjectPath {
+		public string ProjectSavePath {
 			get;
 			set {
 				if (field != value) {
 					field = value;
 					ValidateProjectString();
-					OnPropertyChanged(nameof(ProjectPath));
+					OnPropertyChanged(nameof(ProjectSavePath));
 				}
 			}
 		} = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\SandTable\Projects\";
 		
-		private const string _TemplatePath = "ProjectTemplates";
+		private const string _ProjectTemplatePath = "ProjectTemplates";
 		
-		private ObservableCollection<ProjectTemplate> _ProjectTemplates = new();
-		
+		private readonly ObservableCollection<ProjectTemplate> _ProjectTemplates = [];
 		public ReadOnlyObservableCollection<ProjectTemplate> ProjectTemplates {
 			get;
 		}
@@ -73,7 +72,7 @@ namespace Editor.ProjectBrowser {
 		} = string.Empty;
 		
 		private void ValidateProjectString() {
-			string path = ProjectPath;
+			string path = ProjectSavePath;
 			
 			if (!Path.EndsInDirectorySeparator(path)) {
 				path += Path.DirectorySeparatorChar;
@@ -87,9 +86,9 @@ namespace Editor.ProjectBrowser {
 				ErrorMessage = "项目名不能含有空格";
 			} else if (ProjectName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) {
 				ErrorMessage = "项目名不能包含特殊字符";
-			} else if (string.IsNullOrEmpty(ProjectPath.Trim())) {
+			} else if (string.IsNullOrEmpty(ProjectSavePath.Trim())) {
 				ErrorMessage = "项目路径不能为空";
-			} else if (ProjectPath.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
+			} else if (ProjectSavePath.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
 				ErrorMessage = "项目路径不能包含特殊字符";
 			} else if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any()) {
 				ErrorMessage = "项目路径已存在且不为空";
@@ -114,7 +113,7 @@ namespace Editor.ProjectBrowser {
 #endregion
 
 			try {
-				var templateFiles = Directory.GetFiles(_TemplatePath, "Template.xml", SearchOption.AllDirectories);
+				var templateFiles = Directory.GetFiles(_ProjectTemplatePath, "Template.xml", SearchOption.AllDirectories);
 				foreach (string file in templateFiles) {
 					var template = Serializer.XmlFromFile<ProjectTemplate>(file);
 					if (template != null) {
@@ -127,16 +126,36 @@ namespace Editor.ProjectBrowser {
 		}
 		
 		public void CreateProject(ProjectTemplate template) {
-			if (!IsStringValid) {
-				return;
-			}
-			
-			var projectFilePath = Project.Project.Create(_TemplatePath, template, ProjectName, ProjectPath);
-			if (projectFilePath == null) {
-				return;
-			}
+			try {
+				if (!Directory.Exists(ProjectSavePath)) {
+					Directory.CreateDirectory(ProjectSavePath);
+				}
+				
+				var projectPath = Path.Combine(ProjectSavePath, ProjectName);
 
-			LoadProjectViewModel.LoadProject(projectFilePath);
+				// 创建所有必要文件夹
+				foreach (var folder in template.Folders) {
+					// 创建项目中文件夹
+					var projectFolder = Path.Combine(projectPath, folder);
+					var templateFolder = Path.Combine(Path.Combine(_ProjectTemplatePath, template.Type), folder);
+					
+					Directory.CreateDirectory(projectFolder);
+					FileUtils.CopyFolder(templateFolder, projectFolder);
+				}
+				
+				// 生成项目文件
+				var projectFilePath = Path.Combine(projectPath, $"{ProjectName}.stproj");
+				var project = new Project.Project() {
+					Name = ProjectName,
+					Path = projectPath
+				};
+				
+				Serializer.XmlToFile(projectFilePath, project, "stproj", "https://SandTable.com/Developer/Project");
+
+				LoadProjectViewModel.LoadProject(projectFilePath);
+			} catch(Exception e) {
+				Debug.WriteLine(e.Message);
+			}
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/LoadProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
+/// @version 0.0.0.10
+/// @date 2025-5-24
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
@@ -81,8 +81,6 @@ namespace Editor.ProjectBrowser {
 			}
 			
 			Serializer.XmlToFile(_ProjectInfoFile, _ProjectInfos);
-			
-			project.Load();
 		}
 	}
 }
