@@ -1,11 +1,12 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.10
+/// @version 0.0.0.12
 /// @date 2025-5-24
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
 using Editor.Utility;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -17,6 +18,10 @@ namespace Editor.ProjectBrowser {
 		}
 		
 		public RelayCommand CreateButtonClickedCommand {
+			get;
+		}
+		
+		public RelayCommand SelectFolderButtonClickedCommand {
 			get;
 		}
 		
@@ -46,6 +51,9 @@ namespace Editor.ProjectBrowser {
 			set {
 				if (field != value) {
 					field = value;
+					if (!Path.EndsInDirectorySeparator(field)) {
+						field += Path.DirectorySeparatorChar;
+					}
 					ValidateProjectString();
 					OnPropertyChanged(nameof(ProjectSavePath));
 				}
@@ -59,7 +67,7 @@ namespace Editor.ProjectBrowser {
 			get;
 		}
 		
-		public static bool IsStringValid = false;
+		private static bool _IsStringValid = false;
 		
 		public string ErrorMessage {
 			get;
@@ -72,41 +80,48 @@ namespace Editor.ProjectBrowser {
 		} = string.Empty;
 		
 		private void ValidateProjectString() {
-			string path = ProjectSavePath;
-			
-			if (!Path.EndsInDirectorySeparator(path)) {
-				path += Path.DirectorySeparatorChar;
-			}
-			
-			path += $@"{ProjectName}\";
-			IsStringValid = false;
+			string path = ProjectSavePath + $@"{ProjectName}\";
+			_IsStringValid = false;
 			if (string.IsNullOrEmpty(ProjectName.Trim())) {
 				ErrorMessage = "项目名不能为空";
 			} else if (string.IsNullOrWhiteSpace(ProjectName.Trim())) {
 				ErrorMessage = "项目名不能含有空格";
 			} else if (ProjectName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) {
 				ErrorMessage = "项目名不能包含特殊字符";
-			} else if (string.IsNullOrEmpty(ProjectSavePath.Trim())) {
+			} else if (string.IsNullOrEmpty(path.Trim())) {
 				ErrorMessage = "项目路径不能为空";
-			} else if (ProjectSavePath.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
+			} else if (path.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
 				ErrorMessage = "项目路径不能包含特殊字符";
 			} else if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any()) {
-				ErrorMessage = "项目路径已存在且不为空";
+				ErrorMessage = "目标项目文件夹已存在且不为空";
 			} else {
 				ErrorMessage = string.Empty;
-				IsStringValid = true;
+				_IsStringValid = true;
 			}
 		}
 
 		public NewProjectViewModel(ProjectBrowserViewModel projectBrowserViewModel) {
 #region 初始化
-			ReturnButtonClickedCommand = new RelayCommand(() => {
+			ReturnButtonClickedCommand = new(() => {
 				projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.LoadProjectViewModel;
 			});
 			
-			CreateButtonClickedCommand = new RelayCommand(() => {
-				CreateProject(ProjectTemplateListBoxSelectedItem!);
+			CreateButtonClickedCommand = new(() => {
+				if (!_IsStringValid) {
+					return;
+				}
+				CreateProject(ProjectTemplateListBoxSelectedItem);
 				projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.LoadProjectViewModel;
+			});
+			
+			SelectFolderButtonClickedCommand = new(() => {
+				OpenFolderDialog dialog = new() {
+					Title = "项目位置",
+					Multiselect = false,
+				};
+				if (dialog.ShowDialog() == true) {
+					ProjectSavePath = dialog.FolderName;
+				}
 			});
 
 			ProjectTemplates = new(_ProjectTemplates);
@@ -125,7 +140,7 @@ namespace Editor.ProjectBrowser {
 			}
 		}
 		
-		public void CreateProject(ProjectTemplate template) {
+		private void CreateProject(ProjectTemplate template) {
 			try {
 				if (!Directory.Exists(ProjectSavePath)) {
 					Directory.CreateDirectory(ProjectSavePath);
