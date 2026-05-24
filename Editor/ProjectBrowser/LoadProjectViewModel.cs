@@ -1,6 +1,6 @@
 ﻿/// @file ProjectBrowser/LoadProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.10
+/// @version 0.0.0.13
 /// @date 2025-5-24
 
 using Editor.Core;
@@ -53,7 +53,7 @@ namespace Editor.ProjectBrowser {
 		/// 更新项目列表并打开项目
 		/// </summary>
 		/// <param name="path">项目文件的路径</param>
-		public static void LoadProject(string path) {
+		public static void UpdateProjectInfoList(string path) {
 			if (!File.Exists(path)) {
 				return;
 			}

@@ -1,8 +1,9 @@
 ﻿/// @file ProjectBrowser/LoadProjectPage.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.11
+/// @version 0.0.0.13
 /// @date 2025-5-24
 
+using Editor.Core.WindowMessage;
 using Editor.ProjectBrowser.Project;
 using Microsoft.Win32;
 using System.Windows;
@@ -33,7 +34,8 @@ namespace Editor.ProjectBrowser {
 		}
 		
 		private void LoadProject(string projectFilePath) {
-			LoadProjectViewModel.LoadProject(projectFilePath);
+			LoadProjectViewModel.UpdateProjectInfoList(projectFilePath);
+			Messenger.Send(new CloseAndOpenNewWindowMessage(typeof(EditorWindow)));
 		}
 	}
 }

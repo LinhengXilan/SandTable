@@ -1,6 +1,6 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.12
+/// @version 0.0.0.13
 /// @date 2025-5-24
 
 using Editor.Core;
@@ -167,7 +167,7 @@ namespace Editor.ProjectBrowser {
 				
 				Serializer.XmlToFile(projectFilePath, project, "stproj", "https://SandTable.com/Developer/Project");
 
-				LoadProjectViewModel.LoadProject(projectFilePath);
+				LoadProjectViewModel.UpdateProjectInfoList(projectFilePath);
 			} catch(Exception e) {
 				Debug.WriteLine(e.Message);
 			}
