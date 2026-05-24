@@ -1,8 +1,10 @@
 ﻿/// @file ProjectBrowser/LoadProjectPage.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
+/// @version 0.0.0.11
+/// @date 2025-5-24
 
+using Editor.ProjectBrowser.Project;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,12 +14,26 @@ namespace Editor.ProjectBrowser {
 			InitializeComponent();
 		}
 		
-		public void NewProjectButtonClicked(object sender, RoutedEventArgs args) {
-
+		public void OpenProjectButtonClicked(object sender, RoutedEventArgs args) {
+			OpenFileDialog dialog = new() {
+				Multiselect = false,
+				Title = "打开项目",
+				Filter = "SandTable项目文件|*.stproj"
+			};
+			if (dialog.ShowDialog() == true) {
+				LoadProject(dialog.FileName);
+			}
 		}
 		
-		public void OpenProjectButtonClicked(object sender, RoutedEventArgs args) {
-
+		public void ProjectInfoDoubleClicked(object sender, RoutedEventArgs args) {
+			if (ProjectInfoListBox.SelectedItem is not ProjectInfo projectInfo) {
+				return;
+			}
+			LoadProject(projectInfo.Path);
+		}
+		
+		private void LoadProject(string projectFilePath) {
+			LoadProjectViewModel.LoadProject(projectFilePath);
 		}
 	}
 }

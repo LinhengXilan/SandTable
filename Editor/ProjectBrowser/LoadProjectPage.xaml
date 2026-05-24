@@ -1,7 +1,7 @@
 ﻿<!--
 	@file ProjectBrowser/LoadProjectPage.xaml
 	@author LinhengXilan
-	@version 0.0.0.10
+	@version 0.0.0.11
 	@data 2025-5-24
 -->
     
@@ -27,12 +27,13 @@
                     Click="OpenProjectButtonClicked"/>
         </StackPanel>
 
-        <ListBox Grid.Column="1"
+        <ListBox Grid.Column="1" x:Name="ProjectInfoListBox"
                  ItemsSource="{Binding ProjectInfos}"
                  Margin="0, 10, 10, 10">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="2"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="ProjectInfoDoubleClicked"/>
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
