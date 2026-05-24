@@ -1,12 +1,12 @@
 ﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.13
-/// @date 2025-5-24
+/// @version 0.0.0.14
+/// @date 2025-5-25
 
 using Editor.Core.WindowMessage;
 using Editor.Utility;
 using System.Windows;
-using Windows.Devices.PointOfService;
+using System.Windows.Media;
 
 namespace Editor.ProjectBrowser {
 	
@@ -15,7 +15,17 @@ namespace Editor.ProjectBrowser {
 			InitializeComponent();
 			WindowUtils.Enable(this);
 			Messenger.MessageReceived += OnMessage;
+			Loaded += OnLoaded;
 		}
+		
+		private void OnLoaded(object sender, RoutedEventArgs args) {
+			var rectangleGeometry = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight), 6, 6);
+			Clip = rectangleGeometry;
+			this.SizeChanged += (sender, args) => {
+				rectangleGeometry.Rect = new Rect(0, 0, ActualWidth, ActualHeight);
+			};
+		}
+
 		public void MinimizationButtonClicked(object sender, RoutedEventArgs args) {
 			WindowState = WindowState.Minimized;
 		}

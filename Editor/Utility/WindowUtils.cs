@@ -1,16 +1,18 @@
 ﻿/// @file Utility/WindowUtils.cs
 /// @author LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
+/// @version 0.0.0.14
+/// @date 2025-5-25
 
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace Editor.Utility {
 	public static class WindowUtils {
 		private class WindowSize {
 			public double Left, Top, Width, Height;
+			public const int CornerRadius = 6;
 		}
 
 		private static readonly ConditionalWeakTable<Window, WindowSize> _NormalStateMap = new();
@@ -63,13 +65,17 @@ namespace Editor.Utility {
 			bool hasNormalState = _NormalStateMap.TryGetValue(window, out var normalState);
 
 			if (!hasNormalState) {
-				var state = new WindowSize {
-					Left = window.Left,
-					Top = window.Top,
-					Width = window.Width,
-					Height = window.Height
-				};
-				_NormalStateMap.AddOrUpdate(window, state);
+				//var windowChrome = WindowChrome.GetWindowChrome(window);
+
+				_NormalStateMap.AddOrUpdate(
+					window,
+					new WindowSize {
+						Left = window.Left,
+						Top = window.Top,
+						Width = window.Width,
+						Height = window.Height,
+					}
+				);
 
 				var workArea = SystemParameters.WorkArea;
 
@@ -78,12 +84,14 @@ namespace Editor.Utility {
 				window.Top = workArea.Top;
 				window.Width = workArea.Width;
 				window.Height = workArea.Height;
+				window.Clip = null;
 			} else {
 				if (normalState != null) {
 					window.Left = normalState.Left;
 					window.Top = normalState.Top;
 					window.Width = normalState.Width;
 					window.Height = normalState.Height;
+					window.Clip = new RectangleGeometry(new Rect(0, 0, normalState.Width, normalState.Height), WindowSize.CornerRadius, WindowSize.CornerRadius);
 				}
 				
 				_NormalStateMap.Remove(window);

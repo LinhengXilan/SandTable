@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowserWindow.xaml
 	@author LinhengXilan
-	@version 0.0.0.9
-	@data 2025-5-23
+    @version 0.0.0.14
+    @date 2025-5-25
 -->
 
 <Window x:Class="Editor.ProjectBrowser.ProjectBrowserWindow"
@@ -17,24 +17,26 @@
 		MinWidth="640" MinHeight="480">
 
 	<WindowChrome.WindowChrome>
-		<WindowChrome CaptionHeight="30"/>
-	</WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"/>
+    </WindowChrome.WindowChrome>
 
 	<Window.DataContext>
 		<local:ProjectBrowserViewModel/>
 	</Window.DataContext>
 
-	<Grid>
+	<Grid >
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
-		<DockPanel Grid.Row="0" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
+		<StackPanel Grid.Row="0"
+                    Orientation="Horizontal" HorizontalAlignment="Right"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
 			<Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
 			<Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
 			<Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
-		</DockPanel>
+		</StackPanel>
 
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>

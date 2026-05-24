@@ -1,19 +1,64 @@
 ﻿<!--
 	@file EditorWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.13
-    @date 2025-5-24
+    @version 0.0.0.14
+    @date 2025-5-25
 -->
-    
+	
 <Window x:Class="Editor.EditorWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Editor"
-        mc:Ignorable="d"
-        Title="EditorWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Editor"
+		mc:Ignorable="d"
+		Title="EditorWindow"
+        WindowStyle="None" AllowsTransparency="True" 
+		MinWidth="640" MinHeight="480">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"/>
+    </WindowChrome.WindowChrome>
+      
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0"
+              WindowChrome.IsHitTestVisibleInChrome="True">
+			<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+            <Menu Grid.Column="1"
+                  Height="30" Margin="1"
+                  VerticalAlignment="Center">
+                <Menu.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Height" Value="30"/>
+                    </Style>
+                </Menu.ItemContainerStyle>
+                <MenuItem Header="文件"/>
+				<MenuItem Header="编辑"/>
+				<MenuItem Header="项目"/>
+				<MenuItem Header="工具"/>
+				<MenuItem Header="构建"/>
+				<MenuItem Header="插件"/>
+				<MenuItem Header="帮助"/>
+			</Menu>
+
+			<StackPanel Grid.Column="2"
+						Orientation="Horizontal" HorizontalAlignment="Right">
+				<Button Width="40" Background="#00FF00"
+						Click="MinimizationButtonClicked"/>
+				<Button Width="40" Background="#FFFF88"
+						Click="MaximizationButtonClicked"/>
+				<Button Width="40" Background="#FF0000"
+						Click="CloseButtonClicked"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
 </Window>
