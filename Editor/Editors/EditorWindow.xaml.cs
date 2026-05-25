@@ -1,7 +1,7 @@
 ﻿/// @file EditorWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.15
-/// @date 2025-5-25
+/// @version 0.0.0.17
+/// @date 2025-5-26
 
 using Editor.Utility;
 using System.Windows;
@@ -16,12 +16,16 @@ namespace Editor.Editors {
 		}
 		
 		private void OnLoaded(object sender, RoutedEventArgs args) {
-			var rectangleGeometry = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight), 6, 6);
+			var rectangleGeometry = new RectangleGeometry(new(0, 0, ActualWidth, ActualHeight), 6, 6);
 			Clip = rectangleGeometry;
-			SizeChanged += (sender, args) =>
-			{
-				rectangleGeometry.Rect = new Rect(0, 0, ActualWidth, ActualHeight);
+			SizeChanged += (sender, args) => {
+				rectangleGeometry.Rect = new(0, 0, ActualWidth, ActualHeight);
 			};
+			if (DataContext is not string projectFilePath) {
+				return;
+			}
+			Project.Project.Load(projectFilePath);
+			
 		}
 		
 		public void MinimizationButtonClicked(object sender, RoutedEventArgs args) {

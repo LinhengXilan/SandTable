@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/LoadProjectView.xaml
 	@author LinhengXilan
-    @version 0.0.0.15
-    @date 2025-5-25
+    @version 0.0.0.17
+    @date 2025-5-26
 -->
     
 <UserControl x:Class="Editor.ProjectBrowser.LoadProjectView"
@@ -40,7 +40,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Width="32" Height="32"
-                               Source="{Binding IconPath}"/>
+                               Source="{Binding Icon}"/>
                         <Grid Margin="5, 0, 0, 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20"/>

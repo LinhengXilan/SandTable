@@ -1,23 +1,25 @@
 ﻿/// @file ProjectBrowser/LoadProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.13
-/// @date 2025-5-24
+/// @version 0.0.0.17
+/// @date 2025-5-26
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
 using Editor.Utility;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Editor.ProjectBrowser {
 	public class LoadProjectViewModel : ViewModelBase {
-		public RelayCommand NewProjectButtonCommand {
+		public ICommand NewProjectButtonCommand {
 			get;
 		}
 		
 		private const string _ProjectInfoFile = "Data/ProjectInfos.xml";
 
-		private static readonly ObservableCollection<ProjectInfo> _ProjectInfos = new();
+		private static readonly ObservableCollection<ProjectInfo> _ProjectInfos = [];
 		
 		public ReadOnlyObservableCollection<ProjectInfo> ProjectInfos {
 			get;
@@ -25,7 +27,7 @@ namespace Editor.ProjectBrowser {
 
 		public LoadProjectViewModel(ProjectBrowserViewModel projectBrowserViewModel) {
 #region 初始化
-			NewProjectButtonCommand = new RelayCommand(() => {
+			NewProjectButtonCommand = new RelayCommand<object>(x => {
 					projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.NewProjectViewModel;
 				}
 			);
@@ -45,42 +47,50 @@ namespace Editor.ProjectBrowser {
 			}
 			
 			foreach (var projectInfo in projectInfos) {
+				projectInfo.Icon = ImageUtils.LoadIcon(Path.Combine(Path.GetDirectoryName(projectInfo.Path)!, @"Content\icon.ico"), 32);
 				_ProjectInfos.Add(projectInfo);
 			}
 		}
 		
 		/// <summary>
-		/// 更新项目列表并打开项目
+		/// 更新项目列表
 		/// </summary>
 		/// <param name="path">项目文件的路径</param>
-		public static void UpdateProjectInfoList(string path) {
-			if (!File.Exists(path)) {
-				return;
-			}
-			
-			var project = Serializer.XmlFromFile<Project.Project>(path);
-			if (project == null) {
-				return;
-			}
-			
-			var projectPath = Path.GetDirectoryName(path)!;
+		public static bool UpdateProjectInfoList(string projectFilePath) {
+			var projectInfo = _ProjectInfos.FirstOrDefault(x => x.Path == projectFilePath);
 
-			var projectInfo = _ProjectInfos.FirstOrDefault(x => x.Path == path);
+			if (!File.Exists(projectFilePath)) {
+				var result = MessageBox.Show("项目文件不存在，是否从最近项目列表中删除此项目。", string.Empty, MessageBoxButton.YesNo);
+				if (result == MessageBoxResult.Yes && projectInfo != null) {
+					_ProjectInfos.Remove(projectInfo);
+					Serializer.XmlToFile(_ProjectInfoFile, _ProjectInfos);
+					return false;
+				}
+			}
+			
+			var project = Serializer.XmlFromFile<Project.Project>(projectFilePath);
+			if (project == null) {
+				return false;
+			}
+			
+			var projectPath = Path.GetDirectoryName(projectFilePath)!;
+
 			if (projectInfo == null) {
 				_ProjectInfos.Add(
-					new ProjectInfo() {
+					new() {
 						Name = project.Name,
-						Path = path,
-						IconPath = $@"{projectPath}\Content\icon.ico"
+						Path = projectFilePath,
+						Icon = ImageUtils.LoadIcon($@"{projectPath}\Content\icon.ico", 32)
 					}
 				);
 			} else {
 				projectInfo.Name = project.Name;
-				projectInfo.Path = path;
-				projectInfo.IconPath = $@"{projectPath}\Content\icon.ico";
+				projectInfo.Path = projectFilePath;
+				projectInfo.Icon = ImageUtils.LoadIcon($@"{projectPath}\Content\icon.ico", 32);
 			}
 			
 			Serializer.XmlToFile(_ProjectInfoFile, _ProjectInfos);
+			return true;
 		}
 	}
 }

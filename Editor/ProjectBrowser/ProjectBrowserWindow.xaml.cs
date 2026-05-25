@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.14
-/// @date 2025-5-25
+/// @version 0.0.0.17
+/// @date 2025-5-26
 
 using Editor.Core.WindowMessage;
 using Editor.Utility;
@@ -21,7 +21,7 @@ namespace Editor.ProjectBrowser {
 		private void OnLoaded(object sender, RoutedEventArgs args) {
 			var rectangleGeometry = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight), 6, 6);
 			Clip = rectangleGeometry;
-			this.SizeChanged += (sender, args) => {
+			SizeChanged += (sender, args) => {
 				rectangleGeometry.Rect = new Rect(0, 0, ActualWidth, ActualHeight);
 			};
 		}
@@ -37,13 +37,14 @@ namespace Editor.ProjectBrowser {
 		public void CloseButtonClicked(object sender, RoutedEventArgs args) {
 			Close();
 		}
-		
-		private void OnMessage(Message message) {
-			if (message is CloseAndOpenNewWindowMessage closeAndOpenNewWindowMessage) {
-				if (Activator.CreateInstance(closeAndOpenNewWindowMessage.NewWindow) is Window newWindow) {
-					newWindow.Show();
+
+		private void OnMessage(IMessage message) {
+			if (message is OpenNewWindowMessage openNewWindowMessage) {
+				if (Activator.CreateInstance(openNewWindowMessage.NewWindow) is Window editor) {
+					editor.DataContext = openNewWindowMessage.Param;
+					editor.Show();
 					if (Application.Current.MainWindow == this) {
-						Application.Current.MainWindow = newWindow;
+						Application.Current.MainWindow = editor;
 					}
 					Close();
 				}

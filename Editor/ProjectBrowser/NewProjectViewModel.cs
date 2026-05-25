@@ -1,27 +1,30 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.13
-/// @date 2025-5-24
+/// @version 0.0.0.17
+/// @date 2025-5-26
 
 using Editor.Core;
+using Editor.Core.WindowMessage;
+using Editor.Editors;
 using Editor.ProjectBrowser.Project;
 using Editor.Utility;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Input;
 
 namespace Editor.ProjectBrowser {
 	public class NewProjectViewModel : ViewModelBase {
-		public RelayCommand ReturnButtonClickedCommand {
+		public ICommand ReturnButtonClickedCommand {
 			get;
 		}
 		
-		public RelayCommand CreateButtonClickedCommand {
+		public ICommand CreateButtonClickedCommand {
 			get;
 		}
 		
-		public RelayCommand SelectFolderButtonClickedCommand {
+		public ICommand SelectFolderButtonClickedCommand {
 			get;
 		}
 		
@@ -78,43 +81,23 @@ namespace Editor.ProjectBrowser {
 				}
 			}
 		} = string.Empty;
-		
-		private void ValidateProjectString() {
-			string path = ProjectSavePath + $@"{ProjectName}\";
-			_IsStringValid = false;
-			if (string.IsNullOrEmpty(ProjectName.Trim())) {
-				ErrorMessage = "项目名不能为空";
-			} else if (string.IsNullOrWhiteSpace(ProjectName.Trim())) {
-				ErrorMessage = "项目名不能含有空格";
-			} else if (ProjectName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) {
-				ErrorMessage = "项目名不能包含特殊字符";
-			} else if (string.IsNullOrEmpty(path.Trim())) {
-				ErrorMessage = "项目路径不能为空";
-			} else if (path.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
-				ErrorMessage = "项目路径不能包含特殊字符";
-			} else if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any()) {
-				ErrorMessage = "目标项目文件夹已存在且不为空";
-			} else {
-				ErrorMessage = string.Empty;
-				_IsStringValid = true;
-			}
-		}
+
+		/* 方法 */
 
 		public NewProjectViewModel(ProjectBrowserViewModel projectBrowserViewModel) {
 #region 初始化
-			ReturnButtonClickedCommand = new(() => {
+			ReturnButtonClickedCommand = new RelayCommand<object>(x => {
 				projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.LoadProjectViewModel;
 			});
 			
-			CreateButtonClickedCommand = new(() => {
+			CreateButtonClickedCommand = new RelayCommand<object>(x => {
 				if (!_IsStringValid) {
 					return;
 				}
 				CreateProject(ProjectTemplateListBoxSelectedItem);
-				projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.LoadProjectViewModel;
 			});
 			
-			SelectFolderButtonClickedCommand = new(() => {
+			SelectFolderButtonClickedCommand = new RelayCommand<object>(x => {
 				OpenFolderDialog dialog = new() {
 					Title = "项目位置",
 					Multiselect = false,
@@ -137,6 +120,27 @@ namespace Editor.ProjectBrowser {
 				}
 			} catch (Exception e) {
 				Debug.WriteLine(e.Message);
+			}
+		}
+		
+		private void ValidateProjectString() {
+			string path = ProjectSavePath + $@"{ProjectName}\";
+			_IsStringValid = false;
+			if (string.IsNullOrEmpty(ProjectName.Trim())) {
+				ErrorMessage = "项目名不能为空";
+			} else if (string.IsNullOrWhiteSpace(ProjectName.Trim())) {
+				ErrorMessage = "项目名不能含有空格";
+			} else if (ProjectName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1) {
+				ErrorMessage = "项目名不能包含特殊字符";
+			} else if (string.IsNullOrEmpty(path.Trim())) {
+				ErrorMessage = "项目路径不能为空";
+			} else if (path.IndexOfAny(Path.GetInvalidPathChars()) != -1) {
+				ErrorMessage = "项目路径不能包含特殊字符";
+			} else if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any()) {
+				ErrorMessage = "目标项目文件夹已存在且不为空";
+			} else {
+				ErrorMessage = string.Empty;
+				_IsStringValid = true;
 			}
 		}
 		
@@ -168,6 +172,7 @@ namespace Editor.ProjectBrowser {
 				Serializer.XmlToFile(projectFilePath, project, "stproj", "https://SandTable.com/Developer/Project");
 
 				LoadProjectViewModel.UpdateProjectInfoList(projectFilePath);
+				Messenger.Send(new OpenNewWindowMessage(typeof(EditorWindow), projectFilePath));
 			} catch(Exception e) {
 				Debug.WriteLine(e.Message);
 			}
