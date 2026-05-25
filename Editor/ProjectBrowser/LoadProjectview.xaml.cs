@@ -1,17 +1,18 @@
-﻿/// @file ProjectBrowser/LoadProjectPage.xaml.cs
+﻿/// @file ProjectBrowser/LoadProjectView.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.13
-/// @date 2025-5-24
+/// @version 0.0.0.15
+/// @date 2025-5-25
 
 using Editor.Core.WindowMessage;
+using Editor.Editors;
 using Editor.ProjectBrowser.Project;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Editor.ProjectBrowser {
-	public partial class LoadProjectPage : UserControl {
-		public LoadProjectPage() {
+	public partial class LoadProjectView : UserControl {
+		public LoadProjectView() {
 			InitializeComponent();
 		}
 		

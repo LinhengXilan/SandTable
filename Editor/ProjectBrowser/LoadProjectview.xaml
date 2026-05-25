@@ -1,11 +1,11 @@
 ﻿<!--
-	@file ProjectBrowser/LoadProjectPage.xaml
+	@file ProjectBrowser/LoadProjectView.xaml
 	@author LinhengXilan
-	@version 0.0.0.11
-	@data 2025-5-24
+    @version 0.0.0.15
+    @date 2025-5-25
 -->
     
-<UserControl x:Class="Editor.ProjectBrowser.LoadProjectPage"
+<UserControl x:Class="Editor.ProjectBrowser.LoadProjectView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

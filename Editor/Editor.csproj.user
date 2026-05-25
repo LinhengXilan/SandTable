@@ -2,13 +2,16 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="EditorWindow.xaml.cs">
+    <Compile Update="Editors\WorldEditor\WorldEditorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ProjectBrowser\LoadProjectPage.xaml.cs">
+    <Compile Update="Editors\EditorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ProjectBrowser\NewProjectPage.xaml.cs">
+    <Compile Update="ProjectBrowser\LoadProjectview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ProjectBrowser\NewProjectview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ProjectBrowser\ProjectBrowserWindow.xaml.cs">

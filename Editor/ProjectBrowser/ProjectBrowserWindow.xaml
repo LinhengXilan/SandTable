@@ -1,7 +1,7 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowserWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.14
+    @version 0.0.0.15
     @date 2025-5-25
 -->
 
@@ -41,10 +41,10 @@
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type local:LoadProjectViewModel}">
-                    <local:LoadProjectPage/>
+                    <local:LoadProjectView/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type local:NewProjectViewModel}">
-                    <local:NewProjectPage/>
+                    <local:NewProjectView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

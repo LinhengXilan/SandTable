@@ -1,13 +1,13 @@
 ﻿/// @file EditorWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.14
+/// @version 0.0.0.15
 /// @date 2025-5-25
 
 using Editor.Utility;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Editor {
+namespace Editor.Editors {
 	public partial class EditorWindow : Window {
 		public EditorWindow() {
 			InitializeComponent();
@@ -18,7 +18,7 @@ namespace Editor {
 		private void OnLoaded(object sender, RoutedEventArgs args) {
 			var rectangleGeometry = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight), 6, 6);
 			Clip = rectangleGeometry;
-			this.SizeChanged += (sender, args) =>
+			SizeChanged += (sender, args) =>
 			{
 				rectangleGeometry.Rect = new Rect(0, 0, ActualWidth, ActualHeight);
 			};
