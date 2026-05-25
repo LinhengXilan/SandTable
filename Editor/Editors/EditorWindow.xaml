@@ -1,8 +1,8 @@
 ﻿<!--
 	@file EditorWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.15
-    @date 2025-5-25
+	@version 0.0.0.16
+	@date 2025-5-25
 -->
 	
 <Window x:Class="Editor.Editors.EditorWindow"
@@ -13,35 +13,36 @@
 		xmlns:local="clr-namespace:Editor.Editors"
 		mc:Ignorable="d"
 		Title="EditorWindow"
-        WindowStyle="None" AllowsTransparency="True" 
+		WindowStyle="None" AllowsTransparency="True" 
 		MinWidth="640" MinHeight="480">
 
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"/>
-    </WindowChrome.WindowChrome>
-      
+	<WindowChrome.WindowChrome>
+		<WindowChrome CaptionHeight="30"/>
+	</WindowChrome.WindowChrome>
+	  
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 		<Grid Grid.Row="0"
-              WindowChrome.IsHitTestVisibleInChrome="True">
+			  WindowChrome.IsHitTestVisibleInChrome="True">
 			<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+				<ColumnDefinition Width="16"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-            <Image Grid.Column="0"/>
-            <Menu Grid.Column="1"
-                  Height="30" Margin="1"
-                  VerticalAlignment="Center">
-                <Menu.ItemContainerStyle>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Height" Value="30"/>
-                    </Style>
-                </Menu.ItemContainerStyle>
-                <MenuItem Header="文件"/>
+			<Image Grid.Column="0"/>
+			<Menu Grid.Column="1"
+				  Height="30" Margin="1"
+				  VerticalAlignment="Center">
+				<Menu.ItemContainerStyle>
+					<Style TargetType="MenuItem">
+						<Setter Property="Height" Value="30"/>
+					</Style>
+				</Menu.ItemContainerStyle>
+				<MenuItem Header="文件"/>
 				<MenuItem Header="编辑"/>
 				<MenuItem Header="项目"/>
 				<MenuItem Header="工具"/>
@@ -59,6 +60,69 @@
 				<Button Width="40" Background="#FF0000"
 						Click="CloseButtonClicked"/>
 			</StackPanel>
+		</Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal" HorizontalAlignment="Left">
+
+            </StackPanel>
+            <ListBox Grid.Column="1"
+                     >
+
+            </ListBox>
+        </Grid>
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition MinWidth="100" Width="200"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition MinHeight="100" Height="250"/>
+				</Grid.RowDefinitions>
+
+				<Grid Grid.Row="0">
+
+				</Grid>
+
+				<GridSplitter Grid.Row="1"
+							  HorizontalAlignment="Stretch" VerticalAlignment="Top"
+							  Height="2"/>
+
+				<Grid Grid.Row="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition MinWidth="100" Width="250"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Grid Grid.Column="0">
+
+					</Grid>
+
+					<GridSplitter Grid.Column="1"
+								  HorizontalAlignment="Left" VerticalAlignment="Stretch"
+								  Width="2"/>
+					<Grid Grid.Column="1">
+
+					</Grid>
+				</Grid>
+
+			</Grid>
+
+			<GridSplitter Grid.Column="1"
+						  HorizontalAlignment="Left" VerticalAlignment="Stretch"
+						  Width="2"/>
+
+			<Grid Grid.Column="1">
+
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>
