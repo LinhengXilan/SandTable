@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.17
-/// @date 2025-5-26
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
 using Editor.Core.WindowMessage;
 using Editor.Utility;
@@ -13,7 +13,7 @@ namespace Editor.ProjectBrowser {
 	public partial class ProjectBrowserWindow : Window {
 		public ProjectBrowserWindow() {
 			InitializeComponent();
-			WindowUtils.Enable(this);
+			WindowUtils.Enable(this, WindowUtils.Option.Clip);
 			Messenger.MessageReceived += OnMessage;
 			Loaded += OnLoaded;
 		}
@@ -41,7 +41,6 @@ namespace Editor.ProjectBrowser {
 		private void OnMessage(IMessage message) {
 			if (message is OpenNewWindowMessage openNewWindowMessage) {
 				if (Activator.CreateInstance(openNewWindowMessage.NewWindow) is Window editor) {
-					editor.DataContext = openNewWindowMessage.Param;
 					editor.Show();
 					if (Application.Current.MainWindow == this) {
 						Application.Current.MainWindow = editor;

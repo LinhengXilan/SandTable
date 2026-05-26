@@ -1,31 +1,17 @@
 ﻿/// @file EditorWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.17
-/// @date 2025-5-26
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
+using Editor.Editors.ProjectClass;
 using Editor.Utility;
 using System.Windows;
-using System.Windows.Media;
 
 namespace Editor.Editors {
 	public partial class EditorWindow : Window {
 		public EditorWindow() {
 			InitializeComponent();
-			WindowUtils.Enable(this);
-			Loaded += OnLoaded;
-		}
-		
-		private void OnLoaded(object sender, RoutedEventArgs args) {
-			var rectangleGeometry = new RectangleGeometry(new(0, 0, ActualWidth, ActualHeight), 6, 6);
-			Clip = rectangleGeometry;
-			SizeChanged += (sender, args) => {
-				rectangleGeometry.Rect = new(0, 0, ActualWidth, ActualHeight);
-			};
-			if (DataContext is not string projectFilePath) {
-				return;
-			}
-			Project.Project.Load(projectFilePath);
-			
+			WindowUtils.Enable(this, WindowUtils.Option.Clip);
 		}
 		
 		public void MinimizationButtonClicked(object sender, RoutedEventArgs args) {

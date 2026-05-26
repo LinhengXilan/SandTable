@@ -1,7 +1,7 @@
 ﻿/// @file Utility/Serializer.cs
-/// author LinhengXilan
-/// @version 0.0.0.17
-/// @date 2025-5-26
+/// @author LinhengXilan
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
 using System.Diagnostics;
 using System.IO;

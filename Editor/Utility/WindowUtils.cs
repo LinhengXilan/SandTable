@@ -1,7 +1,7 @@
 ﻿/// @file Utility/WindowUtils.cs
 /// @author LinhengXilan
-/// @version 0.0.0.14
-/// @date 2025-5-25
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -15,10 +15,17 @@ namespace Editor.Utility {
 			public const int CornerRadius = 6;
 		}
 
+		[Flags]
+		public enum Option {
+			None = 0,
+			Clip = 1 << 1
+		}
+
 		private static readonly ConditionalWeakTable<Window, WindowSize> _NormalStateMap = new();
 		private static readonly ConditionalWeakTable<Window, object?> _HookAttached = new();
-
-		public static void Enable(Window window) {
+		private static Option _Option = Option.None;
+		
+		public static void Enable(Window window, Option option) {
 			if (_HookAttached.TryGetValue(window, out _)) {
 				return;
 			}
@@ -30,13 +37,23 @@ namespace Editor.Utility {
 				window.Loaded += (sender, args) => AttachHook(window);
 			}
 			_HookAttached.Add(window, null);
+			
+			if (option.HasFlag(Option.Clip)) {
+				_Option |= Option.Clip;
+				var rectangleGeometry = new RectangleGeometry(new(0, 0, window.ActualWidth, window.ActualHeight), 6, 6);
+				window.Clip = rectangleGeometry;
+				window.SizeChanged += (sender, args) => {
+					rectangleGeometry.Rect = new(0, 0, window.ActualWidth, window.ActualHeight);
+				};
+			}
+
 		}
 		
 		// 外部使用
 		public static void Maximize(Window window) {
 			_Maximize(window);
 		}
-
+		
 		// 处理消息
 		private static void AttachHook(Window window) {
 			if (PresentationSource.FromVisual(window) is HwndSource source) {
@@ -65,8 +82,6 @@ namespace Editor.Utility {
 			bool hasNormalState = _NormalStateMap.TryGetValue(window, out var normalState);
 
 			if (!hasNormalState) {
-				//var windowChrome = WindowChrome.GetWindowChrome(window);
-
 				_NormalStateMap.AddOrUpdate(
 					window,
 					new WindowSize {
@@ -78,20 +93,24 @@ namespace Editor.Utility {
 				);
 
 				var workArea = SystemParameters.WorkArea;
-
 				window.WindowState = WindowState.Normal;
 				window.Left = workArea.Left;
 				window.Top = workArea.Top;
 				window.Width = workArea.Width;
 				window.Height = workArea.Height;
-				window.Clip = null;
+				if (_Option.HasFlag(Option.Clip)) {
+					window.Clip = null;
+				}
 			} else {
 				if (normalState != null) {
 					window.Left = normalState.Left;
 					window.Top = normalState.Top;
 					window.Width = normalState.Width;
 					window.Height = normalState.Height;
-					window.Clip = new RectangleGeometry(new Rect(0, 0, normalState.Width, normalState.Height), WindowSize.CornerRadius, WindowSize.CornerRadius);
+					if(_Option.HasFlag(Option.Clip)) {
+						window.Clip = new RectangleGeometry(new Rect(0, 0, normalState.Width, normalState.Height),
+							WindowSize.CornerRadius, WindowSize.CornerRadius);
+					}
 				}
 				
 				_NormalStateMap.Remove(window);

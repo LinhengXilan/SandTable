@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.17
-/// @date 2025-5-26
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
 using Editor.Core;
 using Editor.Core.WindowMessage;
@@ -164,7 +164,7 @@ namespace Editor.ProjectBrowser {
 				
 				// 生成项目文件
 				var projectFilePath = Path.Combine(projectPath, $"{ProjectName}.stproj");
-				var project = new Project.Project() {
+				var project = new NewProject() {
 					Name = ProjectName,
 					Path = projectPath
 				};

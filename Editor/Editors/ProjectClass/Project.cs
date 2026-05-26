@@ -1,7 +1,7 @@
-﻿/// @file Editors/Project/Project.cs
-/// author LinhengXilan
-/// @version 0.0.0.17
-/// @date 2025-5-26
+﻿/// @file Editors/ProjectClass/Project.cs
+/// @author LinhengXilan
+/// @version 0.0.0.18
+/// @date 2025-5-27
 
 using Editor.Core;
 using Editor.Utility;
@@ -9,33 +9,40 @@ using System.Diagnostics;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
-namespace Editor.Editors.Project {
-	/// <summary>
-	/// 仅用于存储数据，不作为ViewModel。
-	/// </summary>
-	public class Project {
-		public string Name = string.Empty;
+namespace Editor.Editors.ProjectClass {
+	public class Project :ViewModelBase {
+		public string Name {
+			get;
+			set {
+				if (field != value) {
+					field = value;
+					OnPropertyChanged(nameof(Name));
+				}
+			}
+		} = string.Empty;
+
 		public string Path = string.Empty;
 		public EngineVersion EngineVersion = new();
 
 		[XmlIgnore]
-		public string ProjectFilePath = string.Empty;
+		public static string ProjectFilePath = string.Empty;
+
 		[XmlIgnore]
 		public StepRecorder StepRecorder {
 			get;
 		} = new();
+
 		[XmlIgnore]
 		public ICommand AddLevel {
 			get;
 			private set;
 		}
+
 		[XmlIgnore]
 		public ICommand RemoveLevel {
 			get;
 			private set;
 		}
-		[XmlIgnore]
-		public static Project? CurrentProject;
 		
 		public List<Level> Levels = [];
 		
@@ -66,20 +73,17 @@ namespace Editor.Editors.Project {
 			});
 		}
 		
-		public static void Load(string projectFilePath) {
-			CurrentProject = Serializer.XmlFromFile<Project>(projectFilePath);
-			if (CurrentProject == null) {
-				return;
-			}
-			CurrentProject.ProjectFilePath = projectFilePath;
+		public static Project? Load(string projectFilePath) {
+			var project = Serializer.XmlFromFile<Project>(projectFilePath);
+			return project;
 		}
 		
-		public static void UnLoad() {
-			if (CurrentProject == null) {
-				return;
-			}
-			Serializer.XmlToFile(CurrentProject.ProjectFilePath, CurrentProject);
-			CurrentProject = null;
+		public void Save() {
+			Serializer.XmlToFile(ProjectFilePath, this);
+		}
+		
+		public void UnLoad() {
+			Serializer.XmlToFile(ProjectFilePath, this);
 		}
 
 		private void _AddLevel(string name) {

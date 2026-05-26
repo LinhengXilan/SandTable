@@ -1,11 +1,9 @@
-﻿
+﻿/// @file Utility/StringUtils.cs
+/// @author LinhengXilan
+/// @version 0.0.0.18
+/// @date 2025-5-27
+
 using System.IO;
-
-
-/// @file Utility/StringUtils.cs
-/// author LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
 
 namespace Editor.Utility {
 	public class StringUtils {
