@@ -1,9 +1,8 @@
 ﻿/// @file EditorWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.19
+/// @date 2025-5-28
 
-using Editor.Editors.ProjectClass;
 using Editor.Utility;
 using System.Windows;
 

@@ -1,9 +1,8 @@
 ﻿/// @file ProjectBrowser/ProjectBrowserWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.19
+/// @date 2025-5-28
 
-using Editor.Core.WindowMessage;
 using Editor.Utility;
 using System.Windows;
 using System.Windows.Media;
@@ -14,7 +13,6 @@ namespace Editor.ProjectBrowser {
 		public ProjectBrowserWindow() {
 			InitializeComponent();
 			WindowUtils.Enable(this, WindowUtils.Option.Clip);
-			Messenger.MessageReceived += OnMessage;
 			Loaded += OnLoaded;
 		}
 		
@@ -36,18 +34,6 @@ namespace Editor.ProjectBrowser {
 		
 		public void CloseButtonClicked(object sender, RoutedEventArgs args) {
 			Close();
-		}
-
-		private void OnMessage(IMessage message) {
-			if (message is OpenNewWindowMessage openNewWindowMessage) {
-				if (Activator.CreateInstance(openNewWindowMessage.NewWindow) is Window editor) {
-					editor.Show();
-					if (Application.Current.MainWindow == this) {
-						Application.Current.MainWindow = editor;
-					}
-					Close();
-				}
-			}
 		}
 	}
 }

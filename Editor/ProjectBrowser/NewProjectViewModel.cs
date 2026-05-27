@@ -1,10 +1,9 @@
 ﻿/// @file ProjectBrowser/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.19
+/// @date 2025-5-28
 
 using Editor.Core;
-using Editor.Core.WindowMessage;
 using Editor.Editors;
 using Editor.ProjectBrowser.Project;
 using Editor.Utility;
@@ -12,6 +11,7 @@ using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Editor.ProjectBrowser {
@@ -94,7 +94,8 @@ namespace Editor.ProjectBrowser {
 				if (!_IsStringValid) {
 					return;
 				}
-				CreateProject(ProjectTemplateListBoxSelectedItem);
+				Editors.ProjectClass.Project.ProjectFilePath = CreateProject(ProjectTemplateListBoxSelectedItem);
+				OpenEditor();
 			});
 			
 			SelectFolderButtonClickedCommand = new RelayCommand<object>(x => {
@@ -144,7 +145,7 @@ namespace Editor.ProjectBrowser {
 			}
 		}
 		
-		private void CreateProject(ProjectTemplate template) {
+		private string CreateProject(ProjectTemplate template) {
 			try {
 				if (!Directory.Exists(ProjectSavePath)) {
 					Directory.CreateDirectory(ProjectSavePath);
@@ -172,9 +173,21 @@ namespace Editor.ProjectBrowser {
 				Serializer.XmlToFile(projectFilePath, project, "stproj", "https://SandTable.com/Developer/Project");
 
 				LoadProjectViewModel.UpdateProjectInfoList(projectFilePath);
-				Messenger.Send(new OpenNewWindowMessage(typeof(EditorWindow), projectFilePath));
+				return projectFilePath;
 			} catch(Exception e) {
 				Debug.WriteLine(e.Message);
+				return string.Empty;
+			}
+		}
+		
+		private void OpenEditor() {
+			if (Activator.CreateInstance(typeof(EditorWindow)) is EditorWindow editor) {
+				var currentWindow = Application.Current.MainWindow;
+				if (Application.Current.MainWindow is ProjectBrowserWindow) {
+					Application.Current.MainWindow = editor;
+					currentWindow.Close();
+					editor.Show();
+				}
 			}
 		}
 	}

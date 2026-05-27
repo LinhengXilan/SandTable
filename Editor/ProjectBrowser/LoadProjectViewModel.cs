@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/LoadProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.19
+/// @date 2025-5-28
 
 using Editor.Core;
 using Editor.ProjectBrowser.Project;
@@ -16,7 +16,7 @@ namespace Editor.ProjectBrowser {
 		public ICommand NewProjectButtonCommand {
 			get;
 		}
-		
+
 		private const string _ProjectInfoFile = "Data/ProjectInfos.xml";
 
 		private static readonly ObservableCollection<ProjectInfo> _ProjectInfos = [];
@@ -31,7 +31,7 @@ namespace Editor.ProjectBrowser {
 					projectBrowserViewModel.CurrentViewModel = projectBrowserViewModel.NewProjectViewModel;
 				}
 			);
-			
+
 			ProjectInfos = new(_ProjectInfos);
 #endregion
 			

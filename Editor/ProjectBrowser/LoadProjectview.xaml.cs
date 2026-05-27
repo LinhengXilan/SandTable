@@ -1,9 +1,8 @@
 ﻿/// @file ProjectBrowser/LoadProjectView.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.19
+/// @date 2025-5-28
 
-using Editor.Core.WindowMessage;
 using Editor.Editors;
 using Editor.ProjectBrowser.Project;
 using Microsoft.Win32;
@@ -23,21 +22,32 @@ namespace Editor.ProjectBrowser {
 				Filter = "SandTable项目文件|*.stproj"
 			};
 			if (dialog.ShowDialog() == true) {
-				LoadProject(dialog.FileName);
+				if (LoadProjectViewModel.UpdateProjectInfoList(dialog.FileName)) {
+					Editors.ProjectClass.Project.ProjectFilePath = dialog.FileName;
+					OpenEditor();
+				}
 			}
 		}
-		
+
 		public void ProjectInfoDoubleClicked(object sender, RoutedEventArgs args) {
 			if (ProjectInfoListBox.SelectedItem is not ProjectInfo projectInfo) {
 				return;
 			}
-			LoadProject(projectInfo.Path);
+			if (LoadProjectViewModel.UpdateProjectInfoList(projectInfo.Path)) {
+				Editors.ProjectClass.Project.ProjectFilePath = projectInfo.Path;
+				OpenEditor();
+			}
 		}
 		
-		private void LoadProject(string projectFilePath) {
-			if (LoadProjectViewModel.UpdateProjectInfoList(projectFilePath)) {
-				Editors.ProjectClass.Project.ProjectFilePath = projectFilePath;
-				Messenger.Send(new OpenNewWindowMessage(typeof(EditorWindow)));
+		private static void OpenEditor() {
+			if (Activator.CreateInstance<EditorWindow>() is not EditorWindow editor) {
+				return;
+			}
+			var currentWindow = Application.Current.MainWindow;
+			if (Application.Current.MainWindow is ProjectBrowserWindow) {
+				Application.Current.MainWindow = editor;
+				currentWindow.Close();
+				editor.Show();
 			}
 		}
 	}
