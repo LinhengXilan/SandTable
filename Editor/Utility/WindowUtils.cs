@@ -1,10 +1,11 @@
 ﻿/// @file Utility/WindowUtils.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.20
+/// @date 2025-5-28
 
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
@@ -18,14 +19,14 @@ namespace Editor.Utility {
 		[Flags]
 		public enum Option {
 			None = 0,
-			Clip = 1 << 1
+			Clip = 1 << 0
 		}
 
 		private static readonly ConditionalWeakTable<Window, WindowSize> _NormalStateMap = new();
 		private static readonly ConditionalWeakTable<Window, object?> _HookAttached = new();
 		private static Option _Option = Option.None;
 		
-		public static void Enable(Window window, Option option) {
+		public static void Enable(Window window, Option option = Option.None) {
 			if (_HookAttached.TryGetValue(window, out _)) {
 				return;
 			}
@@ -54,6 +55,16 @@ namespace Editor.Utility {
 			_Maximize(window);
 		}
 		
+		public static void MaximizeByMouseDrag(Window window, Point point) {
+			var windowPosition = Mouse.GetPosition(null);
+
+			_Maximize(window, new(windowPosition.X - point.X, windowPosition.Y - point.Y));
+		}
+
+		public static bool IsMaximized(Window window) {
+			return _NormalStateMap.TryGetValue(window, out var normalState);
+		}
+		
 		// 处理消息
 		private static void AttachHook(Window window) {
 			if (PresentationSource.FromVisual(window) is HwndSource source) {
@@ -78,13 +89,13 @@ namespace Editor.Utility {
 		}
 
 		// 内部实现
-		private static void _Maximize(Window window) {
+		private static void _Maximize(Window window, Point? point = null) {
 			bool hasNormalState = _NormalStateMap.TryGetValue(window, out var normalState);
 
 			if (!hasNormalState) {
 				_NormalStateMap.AddOrUpdate(
 					window,
-					new WindowSize {
+					new() {
 						Left = window.Left,
 						Top = window.Top,
 						Width = window.Width,
@@ -103,8 +114,13 @@ namespace Editor.Utility {
 				}
 			} else {
 				if (normalState != null) {
-					window.Left = normalState.Left;
-					window.Top = normalState.Top;
+					if(point == null) {
+						window.Left = normalState.Left;
+						window.Top = normalState.Top;
+					} else {
+						window.Left = point.Value.X;
+						window.Top = point.Value.Y;
+					}
 					window.Width = normalState.Width;
 					window.Height = normalState.Height;
 					if(_Option.HasFlag(Option.Clip)) {

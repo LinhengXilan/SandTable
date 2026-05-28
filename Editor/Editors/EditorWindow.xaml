@@ -64,11 +64,13 @@
 				<MenuItem Header="帮助"/>
 			</Menu>
 
-            <Label Grid.Column="2"
+            <Label Grid.Column="2" x:Name="TitleLabel"
+                   WindowChrome.IsHitTestVisibleInChrome="True"
                    Margin="5, 1, 1, 1"
                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                    Background="#999999"
-                   Content="{Binding CurrentProject.Name}"/>
+                   Content="{Binding CurrentProject.Name}"
+                   MouseLeftButtonDown="MouseDrag" MouseDoubleClick="MaximizationButtonClicked"/>
 
 			<StackPanel Grid.Column="3"
 						Orientation="Horizontal" HorizontalAlignment="Right">

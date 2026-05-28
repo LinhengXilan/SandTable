@@ -1,8 +1,8 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-	@version 0.0.0.18
-	@date 2025-5-27
+    @version 0.0.0.20
+    @date 2025-5-28
 -->
 
 <Window x:Class="Editor.Console.ConsoleWindow"
@@ -13,12 +13,16 @@
 		xmlns:local="clr-namespace:Editor.Console"
 		mc:Ignorable="d"
 		Title="ConsoleWindow"
-		WindowStyle="None"
+		WindowStyle="None" AllowsTransparency="True"
         MinWidth="640" MinHeight="480">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="30"/>
     </WindowChrome.WindowChrome>
+
+    <Window.DataContext>
+        <local:ConsoleWindowViewModel/>
+    </Window.DataContext>
 
     <Grid>
 		<Grid.RowDefinitions>
@@ -26,8 +30,26 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <TextBlock Text="控制台"/>
+        <Grid Grid.Row="0"
+              WindowChrome.IsHitTestVisibleInChrome="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       WindowChrome.IsHitTestVisibleInChrome="True"
+                       Text="控制台"
+                       VerticalAlignment="Center" Margin="5, 0 , 0, 0"
+                       MouseLeftButtonDown="MouseDrag"/>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="40" Background="#00FF00"
+                        Click="MinimizationButtonClicked"/>
+                <Button Width="40" Background="#FFFF88"
+                        Click="MaximizationButtonClicked"/>
+                <Button Width="40" Background="#FF0000"
+                        Click="CloseButtonClicked"/>
+            </StackPanel>
         </Grid>
 
         <TextBlock Grid.Row="1"/>
