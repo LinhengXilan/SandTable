@@ -1,7 +1,7 @@
 ﻿<!--
 	@file ProjectBrowser/LoadProjectView.xaml
 	@author LinhengXilan
-    @version 0.0.0.17
+    @version 0.0.0.21
     @date 2025-5-26
 -->
     
@@ -16,7 +16,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
@@ -29,6 +29,7 @@
 
         <ListBox Grid.Column="1" x:Name="ProjectInfoListBox"
                  ItemsSource="{Binding ProjectInfos}"
+                 HorizontalContentAlignment="Stretch"
                  Margin="0, 10, 10, 10">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -38,23 +39,37 @@
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="32" Height="32"
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="32" Height="32"
                                Source="{Binding Icon}"/>
-                        <Grid Margin="5, 0, 0, 0">
+                        <Grid Grid.Column="1" Margin="5, 0, 0, 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0"
-                                       Height="20"
-                                       Text="{Binding Name}"/>
+                            
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Left"
+                                           Text="{Binding Name}"/>
+                                <TextBlock Grid.Column="1"
+                                           HorizontalAlignment="Right"
+                                           Text="{Binding LastModifyTime, StringFormat=yyyy-MM-dd HH:mm:ss}"/>
+                            </Grid>
+                            
                             <TextBlock Grid.Row="1"
                                        Height="20"
                                        Text="{Binding Path}"/>
                         </Grid>
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

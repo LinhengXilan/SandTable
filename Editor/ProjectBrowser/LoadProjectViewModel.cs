@@ -1,6 +1,6 @@
 ﻿/// @file ProjectBrowser/LoadProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.19
+/// @version 0.0.0.21
 /// @date 2025-5-28
 
 using Editor.Core;
@@ -80,13 +80,15 @@ namespace Editor.ProjectBrowser {
 					new() {
 						Name = project.Name,
 						Path = projectFilePath,
-						Icon = ImageUtils.LoadIcon($@"{projectPath}\Content\icon.ico", 32)
+						Icon = ImageUtils.LoadIcon($@"{projectPath}\Content\icon.ico", 32),
+						LastModifyTime = DateTime.Now
 					}
 				);
 			} else {
 				projectInfo.Name = project.Name;
 				projectInfo.Path = projectFilePath;
 				projectInfo.Icon = ImageUtils.LoadIcon($@"{projectPath}\Content\icon.ico", 32);
+				projectInfo.LastModifyTime = DateTime.Now;
 			}
 			
 			Serializer.XmlToFile(_ProjectInfoFile, _ProjectInfos);
