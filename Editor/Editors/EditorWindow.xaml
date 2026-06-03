@@ -1,8 +1,8 @@
 ﻿<!--
 	@file EditorWindow.xaml
 	@author LinhengXilan
-	@version 0.0.0.19
-	@date 2025-5-28
+    @version 0.0.0.22
+    @date 2025-6-3
 -->
 	
 <Window x:Class="Editor.Editors.EditorWindow"
@@ -24,13 +24,47 @@
         <local:EditorWindowViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="GridSplitter">
+            <Setter Property="Background" Value="#2C2C2C"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#2C2C2C"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+    </Window.Resources>
+
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Z"
                     Command="{Binding Undo}"/>
         <KeyBinding Modifiers="Control" Key="Y"/>
     </Window.InputBindings>
 	  
-	<Grid>
+	<Grid Background="#1C1C1C">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -52,7 +86,6 @@
 				<Menu.ItemContainerStyle>
 					<Style TargetType="MenuItem">
 						<Setter Property="Height" Value="30"/>
-                        <Setter Property="Background" Value="#FFFFFF"/>
 					</Style>
 				</Menu.ItemContainerStyle>
 				<MenuItem Header="文件"/>
@@ -68,7 +101,6 @@
                    WindowChrome.IsHitTestVisibleInChrome="True"
                    Margin="5, 1, 1, 1"
                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                   Background="#999999"
                    Content="{Binding CurrentProject.Name}"
                    MouseLeftButtonDown="MouseDrag" MouseDoubleClick="MaximizationButtonClicked"/>
 

@@ -1,8 +1,8 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.20
-    @date 2025-5-28
+    @version 0.0.0.22
+    @date 2025-6-3
 -->
 
 <Window x:Class="Editor.Console.ConsoleWindow"
@@ -23,6 +23,40 @@
     <Window.DataContext>
         <local:ConsoleWindowViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="GridSplitter">
+            <Setter Property="Background" Value="#2C2C2C"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#2C2C2C"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
 		<Grid.RowDefinitions>

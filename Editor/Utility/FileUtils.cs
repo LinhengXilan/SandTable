@@ -1,7 +1,7 @@
 ﻿/// @file Utility/FileUtils.cs
 /// @auther LinhengXilan
-/// @version 0.0.0.9
-/// @date 2025-5-23
+/// @version 0.0.0.22
+/// @date 2025-6-3
 
 using System.IO;
 
@@ -20,7 +20,7 @@ namespace Editor.Utility {
 			foreach (var file in files) {
 				var fileInfo = new FileInfo(file);
 				var newPath = Path.Combine(destFolder, fileInfo.Name);
-				System.IO.File.Copy(file, newPath);
+				File.Copy(file, newPath);
 			}
 			
 			var directories = Directory.GetDirectories(sourceFolder);
@@ -29,6 +29,10 @@ namespace Editor.Utility {
 				var newDirPath = Path.Combine(destFolder, dirName);
 				CopyFolder(directory, newDirPath);
 			}
+		}
+		
+		public static void AppendToFile(string filePath, string content) {
+
 		}
 	}
 }

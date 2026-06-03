@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/LoadProjectView.xaml
 	@author LinhengXilan
-    @version 0.0.0.21
-    @date 2025-5-26
+    @version 0.0.0.22
+    @date 2025-6-3
 -->
     
 <UserControl x:Class="Editor.ProjectBrowser.LoadProjectView"
@@ -13,7 +13,7 @@
       xmlns:local="clr-namespace:Editor.ProjectBrowser"
       mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="#2C2C2C">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>

@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/ProjectBrowserWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.15
-    @date 2025-5-25
+    @version 0.0.0.22
+    @date 2025-6-3
 -->
 
 <Window x:Class="Editor.ProjectBrowser.ProjectBrowserWindow"
@@ -24,7 +24,26 @@
 		<local:ProjectBrowserViewModel/>
 	</Window.DataContext>
 
-	<Grid >
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#1C1C1C"/>
+        </Style>
+    </Window.Resources>
+
+	<Grid Background="#2C2C2C">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
 			<RowDefinition />
@@ -33,7 +52,7 @@
 		<StackPanel Grid.Row="0"
                     Orientation="Horizontal" HorizontalAlignment="Right"
                     WindowChrome.IsHitTestVisibleInChrome="True">
-			<Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked"/>
+			<Button Width="40" Background="#00FF00" Click="MinimizationButtonClicked" />
 			<Button Width="40" Background="#FFFF88" Click="MaximizationButtonClicked"/>
 			<Button Width="40" Background="#FF0000" Click="CloseButtonClicked"/>
 		</StackPanel>
