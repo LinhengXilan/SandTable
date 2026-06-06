@@ -1,7 +1,7 @@
 ﻿/// @file Editors/EditorWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.19
-/// @date 2025-5-28
+/// @version 0.0.0.23
+/// @date 2025-6-7
 
 using Editor.Console;
 using Editor.Core;
@@ -16,6 +16,10 @@ namespace Editor.Editors {
 		}
 		
 		public Window? ConsoleWindow;
+		
+		public ICommand NewLevelButtonCommand {
+			get;
+		}
 
 		public ICommand Undo {
 			get;
@@ -34,6 +38,7 @@ namespace Editor.Editors {
 			Undo = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Undo());
 			Redo = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Redo());
 			ConsoleButtonClicked = new RelayCommand<object>(x => OpenConsole());
+			NewLevelButtonCommand = CurrentProject.AddLevel;
 		}
 		
 		private void OpenConsole() {

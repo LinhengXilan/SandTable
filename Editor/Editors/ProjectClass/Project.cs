@@ -1,8 +1,9 @@
 ﻿/// @file Editors/ProjectClass/Project.cs
 /// @author LinhengXilan
-/// @version 0.0.0.18
-/// @date 2025-5-27
+/// @version 0.0.0.23
+/// @date 2025-6-7
 
+using Editor.Console;
 using Editor.Core;
 using Editor.Utility;
 using System.Diagnostics;
@@ -48,28 +49,32 @@ namespace Editor.Editors.ProjectClass {
 		
 		public Project() {
 			AddLevel = new RelayCommand<object>(x => {
-				_AddLevel("New Level");
+				_AddLevel("NewLevel");
 				var level = Levels.Last();
 				var index = Levels.Count - 1;
+				var stepName = $"Project | Add Level \"{level.Name}\"";
 				StepRecorder.Add(
 					new Step(
-					$"[Project] Add Level \"{level.Name}\"",
+						stepName,
 						() => _RemoveLevel(level),
 						() => Levels.Insert(index, level)
 					)
 				);
+				Logger.AddLog(stepName);
 			});
 			
 			RemoveLevel = new RelayCommand<Level>(x => {
 				var index = Levels.IndexOf(x);
 				_RemoveLevel(x);
+				var stepName = $"Project | Remove Level \"{x.Name}\"";
 				StepRecorder.Add(
 					new Step(
-						$"[Project] Remove Level \"{x.Name}\"",
+						stepName,
 						() => Levels.Insert(index, x),
 						() => _RemoveLevel(x)
 					)
 				);
+				Logger.AddLog(stepName);
 			});
 		}
 		
@@ -87,7 +92,7 @@ namespace Editor.Editors.ProjectClass {
 		}
 
 		private void _AddLevel(string name) {
-			Debug.Assert(!StringUtils.IsStringValid(name));
+			Debug.Assert(StringUtils.IsStringValid(name));
 			Levels.Add(new(name));
 		}
 		

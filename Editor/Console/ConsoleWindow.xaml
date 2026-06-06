@@ -1,8 +1,8 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.22
-    @date 2025-6-3
+    @version 0.0.0.23
+    @date 2025-6-7
 -->
 
 <Window x:Class="Editor.Console.ConsoleWindow"
@@ -26,7 +26,7 @@
 
     <Window.Resources>
         <Style TargetType="Menu">
-            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Background" Value="#2C2C2C"/>
             <Setter Property="Foreground" Value="#FFFFFF"/>
         </Style>
         <Style TargetType="ListBox">
@@ -64,9 +64,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              WindowChrome.IsHitTestVisibleInChrome="True">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -75,7 +75,12 @@
                        Text="控制台"
                        VerticalAlignment="Center" Margin="5, 0 , 0, 0"
                        MouseLeftButtonDown="MouseDrag"/>
-            <StackPanel Grid.Column="1"
+            <Grid Grid.Column="1"
+                  WindowChrome.IsHitTestVisibleInChrome="True">
+
+            </Grid>
+            <StackPanel Grid.Column="2"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
                         Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="40" Background="#00FF00"
                         Click="MinimizationButtonClicked"/>
@@ -86,6 +91,15 @@
             </StackPanel>
         </Grid>
 
-        <TextBlock Grid.Row="1"/>
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding LogContent}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"
+                               FontFamily="Consolas"
+                               Foreground="#FFFFFF"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 	</Grid>
 </Window>

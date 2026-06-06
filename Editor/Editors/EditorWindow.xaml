@@ -1,8 +1,8 @@
 ﻿<!--
 	@file EditorWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.22
-    @date 2025-6-3
+    @version 0.0.0.23
+    @date 2025-6-7
 -->
 	
 <Window x:Class="Editor.Editors.EditorWindow"
@@ -29,12 +29,19 @@
             <Setter Property="Background" Value="#1C1C1C"/>
             <Setter Property="Foreground" Value="#FFFFFF"/>
         </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="#2C2C2C"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
         <Style TargetType="ListBox">
             <Setter Property="Foreground" Value="#FFFFFF"/>
             <Setter Property="Background" Value="#1C1C1C"/>
         </Style>
         <Style TargetType="GridSplitter">
-            <Setter Property="Background" Value="#2C2C2C"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -61,35 +68,35 @@
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Z"
                     Command="{Binding Undo}"/>
-        <KeyBinding Modifiers="Control" Key="Y"/>
+        <KeyBinding Modifiers="Control" Key="Y"
+                    Command="{Binding Redo}"/>
     </Window.InputBindings>
 	  
 	<Grid Background="#1C1C1C">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="30"/>
+			<RowDefinition Height="32"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-		<Grid Grid.Row="0"
-			  WindowChrome.IsHitTestVisibleInChrome="True">
+		<Grid Grid.Row="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Image Grid.Column="0"/>
 			<Menu Grid.Column="1"
-				  Margin="1"
-				  VerticalAlignment="Center">
-				<Menu.ItemContainerStyle>
-					<Style TargetType="MenuItem">
-						<Setter Property="Height" Value="30"/>
-					</Style>
-				</Menu.ItemContainerStyle>
-				<MenuItem Header="文件"/>
-				<MenuItem Header="编辑"/>
+				  Height="30" Margin="1"
+				  VerticalAlignment="Center"
+                  WindowChrome.IsHitTestVisibleInChrome="True">
+                <MenuItem Header="文件">
+                    <MenuItem Header="添加层级" Command="{Binding NewLevelButtonCommand}"
+                              />
+                </MenuItem>
+                <MenuItem Header="编辑"/>
 				<MenuItem Header="项目"/>
 				<MenuItem Header="工具"/>
 				<MenuItem Header="构建"/>
@@ -103,9 +110,13 @@
                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                    Content="{Binding CurrentProject.Name}"
                    MouseLeftButtonDown="MouseDrag" MouseDoubleClick="MaximizationButtonClicked"/>
+            <Grid Grid.Column="3"
+                  WindowChrome.IsHitTestVisibleInChrome="True">
 
-			<StackPanel Grid.Column="3"
-						Orientation="Horizontal" HorizontalAlignment="Right">
+            </Grid>
+			<StackPanel Grid.Column="4"
+						Orientation="Horizontal" HorizontalAlignment="Right"
+                        WindowChrome.IsHitTestVisibleInChrome="True">
 				<Button Width="40" Background="#00FF00"
 						Click="MinimizationButtonClicked"/>
 				<Button Width="40" Background="#FFFF88"
@@ -132,14 +143,16 @@
         </Grid>
 		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition MinWidth="100" Width="300"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="100" Width="300"/>
 			</Grid.ColumnDefinitions>
 
 			<Grid Grid.Column="0">
 				<Grid.RowDefinitions>
-					<RowDefinition/>
-					<RowDefinition MinHeight="100" Height="250"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MinHeight="100" Height="250"/>
 				</Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
@@ -152,14 +165,15 @@
 				
 
 				<GridSplitter Grid.Row="1"
-							  HorizontalAlignment="Stretch" VerticalAlignment="Top"
+							  HorizontalAlignment="Stretch"
 							  Height="2"/>
 
-				<Grid Grid.Row="1">
+				<Grid Grid.Row="2">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition MinWidth="100" Width="200"/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
 					<Grid Grid.Column="0">
 
@@ -168,7 +182,7 @@
 					<GridSplitter Grid.Column="1"
 								  HorizontalAlignment="Left" VerticalAlignment="Stretch"
 								  Width="2"/>
-					<Grid Grid.Column="1">
+					<Grid Grid.Column="2">
 
 					</Grid>
 				</Grid>
@@ -179,7 +193,7 @@
 						  HorizontalAlignment="Left" VerticalAlignment="Stretch"
 						  Width="2"/>
 
-			<Grid Grid.Column="1"
+			<Grid Grid.Column="2"
                   Margin="0, 2, 2, 2">
 
 			</Grid>
