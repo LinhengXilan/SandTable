@@ -1,7 +1,7 @@
 ﻿/// @file Editors/EditorWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.23
-/// @date 2025-6-7
+/// @version 0.0.0.24
+/// @date 2025-6-9
 
 using Editor.Console;
 using Editor.Core;
@@ -21,11 +21,15 @@ namespace Editor.Editors {
 			get;
 		}
 
-		public ICommand Undo {
+		public ICommand UndoCommand {
 			get;
 		}
 		
-		public ICommand Redo {
+		public ICommand RedoCommand {
+			get;
+		}
+		
+		public ICommand SaveCommand {
 			get;
 		}
 		
@@ -35,8 +39,9 @@ namespace Editor.Editors {
 
 		public EditorWindowViewModel() {
 			CurrentProject = Project.Load(Project.ProjectFilePath);
-			Undo = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Undo());
-			Redo = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Redo());
+			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Undo());
+			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Redo());
+			SaveCommand = new RelayCommand<object>(x => CurrentProject?.Save());
 			ConsoleButtonClicked = new RelayCommand<object>(x => OpenConsole());
 			NewLevelButtonCommand = CurrentProject.AddLevel;
 		}

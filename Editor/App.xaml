@@ -1,15 +1,16 @@
 ﻿<!--
 	@file App.xaml
 	@author LinhengXilan
-    @version 0.0.0.18
-    @date 2025-5-27
+    @version 0.0.0.24
+    @date 2025-6-9
 -->
 
 <Application x:Class="Editor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Editor"
-             StartupUri="ProjectBrowser/ProjectBrowserWindow.xaml">
+             StartupUri="ProjectBrowser/ProjectBrowserWindow.xaml"
+             ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>

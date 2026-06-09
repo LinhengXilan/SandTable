@@ -1,7 +1,7 @@
 ﻿/// @file Editors/ProjectClass/Project.cs
 /// @author LinhengXilan
-/// @version 0.0.0.23
-/// @date 2025-6-7
+/// @version 0.0.0.24
+/// @date 2025-6-9
 
 using Editor.Console;
 using Editor.Core;
@@ -52,7 +52,7 @@ namespace Editor.Editors.ProjectClass {
 				_AddLevel("NewLevel");
 				var level = Levels.Last();
 				var index = Levels.Count - 1;
-				var stepName = $"Project | Add Level \"{level.Name}\"";
+				var stepName = $"Project | Add Level \"{level.Name}\".";
 				StepRecorder.Add(
 					new Step(
 						stepName,
@@ -66,7 +66,7 @@ namespace Editor.Editors.ProjectClass {
 			RemoveLevel = new RelayCommand<Level>(x => {
 				var index = Levels.IndexOf(x);
 				_RemoveLevel(x);
-				var stepName = $"Project | Remove Level \"{x.Name}\"";
+				var stepName = $"Project | Remove Level \"{x.Name}\".";
 				StepRecorder.Add(
 					new Step(
 						stepName,
@@ -85,6 +85,7 @@ namespace Editor.Editors.ProjectClass {
 		
 		public void Save() {
 			Serializer.XmlToFile(ProjectFilePath, this);
+			Logger.AddLog("Project | Save.");
 		}
 		
 		public void UnLoad() {

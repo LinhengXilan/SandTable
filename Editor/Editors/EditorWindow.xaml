@@ -1,8 +1,8 @@
 ﻿<!--
 	@file EditorWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.23
-    @date 2025-6-7
+    @version 0.0.0.24
+    @date 2025-6-9
 -->
 	
 <Window x:Class="Editor.Editors.EditorWindow"
@@ -67,9 +67,11 @@
 
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Z"
-                    Command="{Binding Undo}"/>
+                    Command="{Binding UndoCommand}"/>
         <KeyBinding Modifiers="Control" Key="Y"
-                    Command="{Binding Redo}"/>
+                    Command="{Binding RedoCommand}"/>
+        <KeyBinding Modifiers="Control" Key="S"
+                    Command="{Binding SaveCommand}"/>
     </Window.InputBindings>
 	  
 	<Grid Background="#1C1C1C">
