@@ -1,8 +1,8 @@
 ﻿<!--
 	@file ProjectBrowser/NewProjectView.xaml
 	@author LinhengXilan
-    @version 0.0.0.22
-    @date 2025-6-3
+    @version 0.0.0.25
+    @date 2025-6-10
 -->
     
 <UserControl x:Class="Editor.ProjectBrowser.NewProjectView"
@@ -11,7 +11,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Editor.ProjectBrowser"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=local:NewProjectViewModel, IsDesignTimeCreatable=False}">
     <Grid Background="#2C2C2C">
         <Grid.RowDefinitions>
             <RowDefinition/>
