@@ -1,10 +1,11 @@
-﻿/// @file ProjectBrowser/NewProjectViewModel.cs
+﻿/// @file ProjectBrowser/NewProject/NewProjectViewModel.cs
 /// @author LinhengXilan
 /// @version 0.0.0.19
 /// @date 2025-5-28
 
 using Editor.Core;
-using Editor.Editors;
+using Editor.Editors.MainEditor;
+using Editor.ProjectBrowser.LoadProject;
 using Editor.ProjectBrowser.Project;
 using Editor.Utility;
 using Microsoft.Win32;
@@ -14,20 +15,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Editor.ProjectBrowser {
+namespace Editor.ProjectBrowser.NewProject {
 	public class NewProjectViewModel : ViewModelBase {
-		public ICommand ReturnButtonClickedCommand {
-			get;
-		}
-		
-		public ICommand CreateButtonClickedCommand {
-			get;
-		}
-		
-		public ICommand SelectFolderButtonClickedCommand {
-			get;
-		}
-		
 		public ProjectTemplate ProjectTemplateListBoxSelectedItem {
 			get;
 			set {
@@ -82,7 +71,19 @@ namespace Editor.ProjectBrowser {
 			}
 		} = string.Empty;
 
-		/* 方法 */
+		public ICommand ReturnButtonClickedCommand {
+			get;
+		}
+		
+		public ICommand CreateButtonClickedCommand {
+			get;
+		}
+		
+		public ICommand SelectFolderButtonClickedCommand {
+			get;
+		}
+
+
 
 		public NewProjectViewModel(ProjectBrowserViewModel projectBrowserViewModel) {
 #region 初始化
@@ -165,7 +166,7 @@ namespace Editor.ProjectBrowser {
 				
 				// 生成项目文件
 				var projectFilePath = Path.Combine(projectPath, $"{ProjectName}.stproj");
-				var project = new NewProject() {
+				var project = new Project.NewProject() {
 					Name = ProjectName,
 					Path = projectPath
 				};
@@ -181,11 +182,11 @@ namespace Editor.ProjectBrowser {
 		}
 		
 		private void OpenEditor() {
-			if (Activator.CreateInstance(typeof(EditorWindow)) is EditorWindow editor) {
+			if (Activator.CreateInstance(typeof(MainEditorWindow)) is MainEditorWindow editor) {
 				var currentWindow = Application.Current.MainWindow;
 				if (Application.Current.MainWindow is ProjectBrowserWindow) {
 					Application.Current.MainWindow = editor;
-					currentWindow.Close();
+					currentWindow?.Close();
 					editor.Show();
 				}
 			}

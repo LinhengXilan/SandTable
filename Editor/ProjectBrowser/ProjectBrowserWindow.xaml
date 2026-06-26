@@ -11,6 +11,8 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Editor.ProjectBrowser"
+		xmlns:loadProject="clr-namespace:Editor.ProjectBrowser.LoadProject"
+		xmlns:newProject="clr-namespace:Editor.ProjectBrowser.NewProject"
 		mc:Ignorable="d"
 		Title="ProjectBrowserWindow"
 		WindowStyle="None" AllowsTransparency="True"
@@ -59,11 +61,11 @@
 
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type local:LoadProjectViewModel}">
-                    <local:LoadProjectView/>
+                <DataTemplate DataType="{x:Type loadProject:LoadProjectViewModel}">
+                    <loadProject:LoadProjectView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type local:NewProjectViewModel}">
-                    <local:NewProjectView/>
+                <DataTemplate DataType="{x:Type newProject:NewProjectViewModel}">
+                    <newProject:NewProjectView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

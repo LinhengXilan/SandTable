@@ -1,17 +1,20 @@
 ﻿/// @file Editors/ProjectClass/Project.cs
 /// @author LinhengXilan
-/// @version 0.0.0.24
-/// @date 2025-6-9
+/// @version 0.0.0.26
+/// @date 2025-6-26
 
 using Editor.Console;
 using Editor.Core;
 using Editor.Utility;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace Editor.Editors.ProjectClass {
 	public class Project :ViewModelBase {
+		public static Project? CurrentProject;
+
 		public string Name {
 			get;
 			set {
@@ -22,65 +25,87 @@ namespace Editor.Editors.ProjectClass {
 			}
 		} = string.Empty;
 
-		public string Path = string.Empty;
 		public EngineVersion EngineVersion = new();
 
 		[XmlIgnore]
 		public static string ProjectFilePath = string.Empty;
 
 		[XmlIgnore]
-		public StepRecorder StepRecorder {
+		public StepRecorder? StepRecorder {
 			get;
-		} = new();
+		} = null;
+
+		[XmlIgnore]
+		private ObservableCollection<Level> _Levels = [];
+
+		[XmlIgnore]
+		public ReadOnlyObservableCollection<Level> Levels {
+			get;
+		}
+
+		[XmlIgnore]
+		public Level? CurrentLevel {
+			get;
+			set {
+				if (field != value) {
+					field = value;
+					OnPropertyChanged(nameof(CurrentLevel));
+				}
+			}
+		} = null;
 
 		[XmlIgnore]
 		public ICommand AddLevel {
 			get;
-			private set;
 		}
 
 		[XmlIgnore]
 		public ICommand RemoveLevel {
 			get;
-			private set;
 		}
 		
-		public List<Level> Levels = [];
+		//[XmlIgnore]
+		//public ICommand AddEntity {
+		//	get;
+		//	private set;
+		//}
 		
 		public Project() {
 			AddLevel = new RelayCommand<object>(x => {
 				_AddLevel("NewLevel");
-				var level = Levels.Last();
-				var index = Levels.Count - 1;
+				var level = _Levels.Last();
+				var index = _Levels.Count - 1;
 				var stepName = $"Project | Add Level \"{level.Name}\".";
-				StepRecorder.Add(
+				StepRecorder?.Add(
 					new Step(
 						stepName,
 						() => _RemoveLevel(level),
-						() => Levels.Insert(index, level)
+						() => _Levels.Insert(index, level)
 					)
 				);
 				Logger.AddLog(stepName);
 			});
 			
 			RemoveLevel = new RelayCommand<Level>(x => {
-				var index = Levels.IndexOf(x);
+				var index = _Levels.IndexOf(x);
 				_RemoveLevel(x);
 				var stepName = $"Project | Remove Level \"{x.Name}\".";
-				StepRecorder.Add(
+				StepRecorder?.Add(
 					new Step(
 						stepName,
-						() => Levels.Insert(index, x),
+						() => _Levels.Insert(index, x),
 						() => _RemoveLevel(x)
 					)
 				);
 				Logger.AddLog(stepName);
 			});
+			
+			Levels = new(_Levels);
 		}
 		
 		public static Project? Load(string projectFilePath) {
-			var project = Serializer.XmlFromFile<Project>(projectFilePath);
-			return project;
+			CurrentProject = Serializer.XmlFromFile<Project>(projectFilePath);
+			return CurrentProject;
 		}
 		
 		public void Save() {
@@ -94,11 +119,15 @@ namespace Editor.Editors.ProjectClass {
 
 		private void _AddLevel(string name) {
 			Debug.Assert(StringUtils.IsStringValid(name));
-			Levels.Add(new(name));
+			Level level = new() {
+				Name = name,
+			};
+			_Levels.Add(level);
+			CurrentLevel = level;
 		}
 		
 		private void _RemoveLevel(Level level) {
-			Levels.Remove(level);
+			_Levels.Remove(level);
 		}
 	}
 }

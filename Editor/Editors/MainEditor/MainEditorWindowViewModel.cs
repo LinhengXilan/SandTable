@@ -1,7 +1,7 @@
-﻿/// @file Editors/EditorWindowViewModel.cs
+﻿/// @file Editors/MainEditor/MainEditorWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.24
-/// @date 2025-6-9
+/// @version 0.0.0.26
+/// @date 2025-6-26
 
 using Editor.Console;
 using Editor.Core;
@@ -9,13 +9,13 @@ using Editor.Editors.ProjectClass;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Editor.Editors {
-	public class EditorWindowViewModel : ViewModelBase {
+namespace Editor.Editors.MainEditor {
+	public class MainEditorWindowViewModel : ViewModelBase {
 		public Project? CurrentProject {
 			get;
-		}
-		
-		public Window? ConsoleWindow;
+		} = null;
+
+		private Window? _ConsoleWindow;
 		
 		public ICommand NewLevelButtonCommand {
 			get;
@@ -37,22 +37,25 @@ namespace Editor.Editors {
 			get;
 		}
 
-		public EditorWindowViewModel() {
+		public MainEditorWindowViewModel() {
 			CurrentProject = Project.Load(Project.ProjectFilePath);
-			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Undo());
-			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Redo());
+			if (CurrentProject != null) {
+				NewLevelButtonCommand = CurrentProject.AddLevel;
+			}
+
+			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Undo());
+			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Redo());
 			SaveCommand = new RelayCommand<object>(x => CurrentProject?.Save());
 			ConsoleButtonClicked = new RelayCommand<object>(x => OpenConsole());
-			NewLevelButtonCommand = CurrentProject.AddLevel;
 		}
 		
 		private void OpenConsole() {
-			if (ConsoleWindow == null) {
-				ConsoleWindow = new ConsoleWindow();
-				ConsoleWindow.Show();
+			if (_ConsoleWindow == null) {
+				_ConsoleWindow = new ConsoleWindow();
+				_ConsoleWindow.Show();
 			} else {
-				ConsoleWindow.Close();
-				ConsoleWindow = null;
+				_ConsoleWindow.Close();
+				_ConsoleWindow = null;
 			}
 		}
 	}

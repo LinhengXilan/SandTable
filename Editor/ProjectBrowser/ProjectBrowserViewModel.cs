@@ -4,6 +4,8 @@
 /// @date 2025-5-23
 
 using Editor.Core;
+using Editor.ProjectBrowser.LoadProject;
+using Editor.ProjectBrowser.NewProject;
 
 namespace Editor.ProjectBrowser {
 	public class ProjectBrowserViewModel : ViewModelBase {

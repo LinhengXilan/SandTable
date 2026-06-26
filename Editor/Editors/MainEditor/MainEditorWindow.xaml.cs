@@ -1,4 +1,4 @@
-﻿/// @file EditorWindow.xaml.cs
+﻿/// @file Editors/MainEditor/MainEditorWindow.xaml.cs
 /// @author LinhengXilan
 /// @version 0.0.0.19
 /// @date 2025-5-28
@@ -7,9 +7,9 @@ using Editor.Utility;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Editor.Editors {
-	public partial class EditorWindow : Window {
-		public EditorWindow() {
+namespace Editor.Editors.MainEditor {
+	public partial class MainEditorWindow : Window {
+		public MainEditorWindow() {
 			InitializeComponent();
 			WindowUtils.Enable(this, WindowUtils.Option.Clip);
 		}

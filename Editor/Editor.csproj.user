@@ -5,16 +5,16 @@
     <Compile Update="Console\ConsoleWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Editors\WorldEditor\WorldEditorView.xaml.cs">
+    <Compile Update="Editors\DetailPanel\DetailPanelView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Editors\EditorWindow.xaml.cs">
+    <Compile Update="Editors\MainEditor\MainEditorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ProjectBrowser\LoadProjectview.xaml.cs">
+    <Compile Update="ProjectBrowser\LoadProject\LoadProjectview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ProjectBrowser\NewProjectview.xaml.cs">
+    <Compile Update="ProjectBrowser\NewProject\NewProjectview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ProjectBrowser\ProjectBrowserWindow.xaml.cs">

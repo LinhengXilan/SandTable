@@ -1,17 +1,18 @@
 ﻿<!--
-	@file EditorWindow.xaml
+	@file Editors/MainEditor/MainEditorWindow.xaml
 	@author LinhengXilan
     @version 0.0.0.24
     @date 2025-6-9
 -->
 	
-<Window x:Class="Editor.Editors.EditorWindow"
+<Window x:Class="Editor.Editors.MainEditor.MainEditorWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:Editor.Editors"
-		mc:Ignorable="d"
+		xmlns:local="clr-namespace:Editor.Editors.MainEditor"
+		xmlns:detailPanel="clr-namespace:Editor.Editors.DetailPanel"
+        mc:Ignorable="d"
 		Title="EditorWindow"
 		WindowStyle="None" AllowsTransparency="True" 
 		MinWidth="640" MinHeight="480">
@@ -21,7 +22,7 @@
 	</WindowChrome.WindowChrome>
 
     <Window.DataContext>
-        <local:EditorWindowViewModel/>
+        <local:MainEditorWindowViewModel/>
     </Window.DataContext>
 
     <Window.Resources>
@@ -95,8 +96,8 @@
 				  VerticalAlignment="Center"
                   WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem Header="文件">
-                    <MenuItem Header="添加层级" Command="{Binding NewLevelButtonCommand}"
-                              />
+                    <MenuItem Header="添加层级" Command="{Binding NewLevelButtonCommand}"/>
+                    <MenuItem Header="添加实体" Command="{Binding }"/>
                 </MenuItem>
                 <MenuItem Header="编辑"/>
 				<MenuItem Header="项目"/>
@@ -110,7 +111,7 @@
                    WindowChrome.IsHitTestVisibleInChrome="True"
                    Margin="5, 1, 1, 1"
                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                   Content="{Binding CurrentProject.Name}"
+                   Content="{Binding CurrentProject.Name, FallbackValue=''}"
                    MouseLeftButtonDown="MouseDrag" MouseDoubleClick="MaximizationButtonClicked"/>
             <Grid Grid.Column="3"
                   WindowChrome.IsHitTestVisibleInChrome="True">
@@ -195,10 +196,7 @@
 						  HorizontalAlignment="Left" VerticalAlignment="Stretch"
 						  Width="2"/>
 
-			<Grid Grid.Column="2"
-                  Margin="0, 2, 2, 2">
-
-			</Grid>
+            <detailPanel:DetailPanelView Grid.Column="2"/>
 		</Grid>
 
         <Grid Grid.Row="3">

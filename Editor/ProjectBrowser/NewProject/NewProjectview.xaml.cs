@@ -1,11 +1,11 @@
-﻿/// @file ProjectBrowser/NewProjectView.xaml.cs
+﻿/// @file ProjectBrowser/NewProject/NewProjectView.xaml.cs
 /// @author LinhengXilan
 /// @version 0.0.0.15
 /// @date 2025-5-25
 
 using System.Windows.Controls;
 
-namespace Editor.ProjectBrowser {
+namespace Editor.ProjectBrowser.NewProject {
 	public partial class NewProjectView : UserControl {
 		public NewProjectView() {
 			InitializeComponent();
