@@ -1,7 +1,7 @@
 ﻿/// @file ProjectBrowser/NewProject/NewProjectViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.19
-/// @date 2025-5-28
+/// @version 0.0.0.27
+/// @date 2026-7-3
 
 using Editor.Core;
 using Editor.Editors.MainEditor;

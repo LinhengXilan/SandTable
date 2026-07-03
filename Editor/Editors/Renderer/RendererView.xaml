@@ -1,0 +1,26 @@
+﻿<!--
+	@file Editors/Renderer/RendererView.xaml
+	@author LinhengXilan
+    @version 0.0.0.27
+    @date 2026-7-3
+-->
+
+<UserControl x:Class="Editor.Editors.Renderer.RendererView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Editor.Editors.Renderer"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <local:RendererViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <TextBlock
+            Focusable="True" Background="#555555">
+
+        </TextBlock>
+    </Grid>
+</UserControl>

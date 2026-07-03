@@ -1,7 +1,7 @@
 ﻿/// @file Editors/MainEditor/MainEditorWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.26
-/// @date 2025-6-26
+/// @version 0.0.0.27
+/// @date 2026-7-3
 
 using Editor.Console;
 using Editor.Core;
@@ -13,35 +13,36 @@ namespace Editor.Editors.MainEditor {
 	public class MainEditorWindowViewModel : ViewModelBase {
 		public Project? CurrentProject {
 			get;
-		} = null;
-
+		}
+		
 		private Window? _ConsoleWindow;
 		
 		public ICommand NewLevelButtonCommand {
 			get;
-		}
-
+		} = new RelayCommand<object>(x =>  {});
+	
 		public ICommand UndoCommand {
 			get;
-		}
-		
+		} = new RelayCommand<object>(x => { });
+
 		public ICommand RedoCommand {
 			get;
-		}
-		
+		} = new RelayCommand<object>(x => { });
+
 		public ICommand SaveCommand {
 			get;
-		}
-		
+		} = new RelayCommand<object>(x => { });
+
 		public ICommand ConsoleButtonClicked {
 			get;
-		}
+		} = new RelayCommand<object>(x => { });
 
 		public MainEditorWindowViewModel() {
 			CurrentProject = Project.Load(Project.ProjectFilePath);
-			if (CurrentProject != null) {
-				NewLevelButtonCommand = CurrentProject.AddLevel;
+			if (CurrentProject == null) {
+				return;
 			}
+			NewLevelButtonCommand = CurrentProject.AddLevel;
 
 			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Undo());
 			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Redo());

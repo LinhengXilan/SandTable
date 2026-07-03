@@ -1,0 +1,12 @@
+﻿/// @file Editors/Renderer/RendererViewModel.cs
+/// @author LinhengXilan
+/// @version 0.0.0.27
+/// @date 2026-7-3
+
+using Editor.Core;
+
+namespace Editor.Editors.Renderer {
+	public class RendererViewModel : ViewModelBase {
+
+	}
+}
