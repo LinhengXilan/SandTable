@@ -1,9 +1,8 @@
 ﻿/// @file Utility/StepRecorder.cs
 /// @author LinhengXilan
-/// @version 0.0.0.23
-/// @date 2025-6-7
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
-using Editor.Console;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -70,7 +69,7 @@ namespace Editor.Utility {
 		public void Undo() {
 			if (_UndoSteps.Any()) {
 				var step = _UndoSteps.Last();
-				Logger.AddLog($"Undo | {step.Name}");
+				Logger.AddLog(LogMessageType.Info, $"Undo | {step.Name}");
 				_UndoSteps.RemoveAt(_UndoSteps.Count - 1);
 				step.Undo();
 				_RedoSteps.Add(step);
@@ -80,7 +79,7 @@ namespace Editor.Utility {
 		public void Redo() {
 			if (_RedoSteps.Any()) {
 				var step = _RedoSteps.Last();
-				Logger.AddLog($"Redo | {step.Name}");
+				Logger.AddLog(LogMessageType.Info, $"Redo | {step.Name}");
 				_RedoSteps.RemoveAt(_RedoSteps.Count - 1);
 				step.Redo();
 				_UndoSteps.Add(step);

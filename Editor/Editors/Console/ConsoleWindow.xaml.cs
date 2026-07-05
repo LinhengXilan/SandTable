@@ -1,13 +1,13 @@
 ﻿/// @file Console/ConsoleWindow.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.20
-/// @date 2025-5-28
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
 using Editor.Utility;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Editor.Console {
+namespace Editor.Editors.Console {
 	public partial class ConsoleWindow : Window {
 		public ConsoleWindow() {
 			InitializeComponent();

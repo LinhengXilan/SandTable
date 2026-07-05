@@ -1,16 +1,16 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.23
-    @date 2025-6-7
+    @version 0.0.0.28
+    @date 2026-7-5
 -->
 
-<Window x:Class="Editor.Console.ConsoleWindow"
+<Window x:Class="Editor.Editors.Console.ConsoleWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:Editor.Console"
+		xmlns:local="clr-namespace:Editor.Editors.Console"
 		mc:Ignorable="d"
 		Title="ConsoleWindow"
 		WindowStyle="None" AllowsTransparency="True"
@@ -92,10 +92,10 @@
         </Grid>
 
         <ListBox Grid.Row="1"
-                 ItemsSource="{Binding LogContent}">
+                 ItemsSource="{Binding LogMessage}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}"
+                    <TextBlock Text="{Binding Format}"
                                FontFamily="Consolas"
                                Foreground="#FFFFFF"/>
                 </DataTemplate>

@@ -1,9 +1,8 @@
 ﻿/// @file Editors/ProjectClass/Project.cs
 /// @author LinhengXilan
-/// @version 0.0.0.26
-/// @date 2025-6-26
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
-using Editor.Console;
 using Editor.Core;
 using Editor.Utility;
 using System.Collections.ObjectModel;
@@ -29,11 +28,11 @@ namespace Editor.Editors.ProjectClass {
 
 		[XmlIgnore]
 		public static string ProjectFilePath = string.Empty;
-
+		
 		[XmlIgnore]
-		public StepRecorder? StepRecorder {
+		public StepRecorder StepRecorder {
 			get;
-		} = null;
+		} = new();
 
 		[XmlIgnore]
 		private ObservableCollection<Level> _Levels = [];
@@ -83,7 +82,7 @@ namespace Editor.Editors.ProjectClass {
 						() => _Levels.Insert(index, level)
 					)
 				);
-				Logger.AddLog(stepName);
+				Logger.AddLog(LogMessageType.Info, stepName);
 			});
 			
 			RemoveLevel = new RelayCommand<Level>(x => {
@@ -97,7 +96,7 @@ namespace Editor.Editors.ProjectClass {
 						() => _RemoveLevel(x)
 					)
 				);
-				Logger.AddLog(stepName);
+				Logger.AddLog(LogMessageType.Info, stepName);
 			});
 			
 			Levels = new(_Levels);
@@ -110,7 +109,7 @@ namespace Editor.Editors.ProjectClass {
 		
 		public void Save() {
 			Serializer.XmlToFile(ProjectFilePath, this);
-			Logger.AddLog("Project | Save.");
+			Logger.AddLog(LogMessageType.Info, "Project | Save.");
 		}
 		
 		public void UnLoad() {

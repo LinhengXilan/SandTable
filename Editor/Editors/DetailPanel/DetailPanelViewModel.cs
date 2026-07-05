@@ -1,7 +1,7 @@
 ﻿/// @file Editors/DetailPanel/DetailPanelViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.26
-/// @date 2025-6-26
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
 using Editor.Components;
 using Editor.Core;
@@ -19,7 +19,7 @@ namespace Editor.Editors.DetailPanel {
 					OnPropertyChanged(nameof(Entities));
 				}
 			}
-		} = null;
+		} = Project.CurrentProject?.CurrentLevel?.Entities;
 		
 		public DetailPanelViewModel() {
 			Project.CurrentProject?.PropertyChanged += OnCurrentLevelChanged;

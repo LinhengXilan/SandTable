@@ -1,7 +1,7 @@
 ﻿/// @file Editors/Renderer/RendererView.xaml.cs
 /// @author LinhengXilan
-/// @version 0.0.0.26
-/// @date 2025-6-26
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
 using System.Windows.Controls;
 

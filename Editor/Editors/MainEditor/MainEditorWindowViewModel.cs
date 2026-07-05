@@ -1,9 +1,9 @@
 ﻿/// @file Editors/MainEditor/MainEditorWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.27
-/// @date 2026-7-3
+/// @version 0.0.0.28
+/// @date 2026-7-5
 
-using Editor.Console;
+using Editor.Editors.Console;
 using Editor.Core;
 using Editor.Editors.ProjectClass;
 using System.Windows;
@@ -44,8 +44,8 @@ namespace Editor.Editors.MainEditor {
 			}
 			NewLevelButtonCommand = CurrentProject.AddLevel;
 
-			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Undo());
-			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder?.Redo());
+			UndoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Undo());
+			RedoCommand = new RelayCommand<object>(x => CurrentProject?.StepRecorder.Redo());
 			SaveCommand = new RelayCommand<object>(x => CurrentProject?.Save());
 			ConsoleButtonClicked = new RelayCommand<object>(x => OpenConsole());
 		}

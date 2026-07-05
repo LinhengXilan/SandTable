@@ -2,10 +2,13 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Console\ConsoleWindow.xaml.cs">
+    <Compile Update="Editors\Console\ConsoleWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Editors\DetailPanel\DetailPanelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Editors\Dialog\RenameDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Editors\FileBrowser\FileBrowserView.xaml.cs">
