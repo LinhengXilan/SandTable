@@ -1,8 +1,8 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.28
-    @date 2026-7-5
+    @version 0.0.0.29
+    @date 2026-7-8
 -->
 
 <Window x:Class="Editor.Editors.Console.ConsoleWindow"
@@ -11,6 +11,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Editor.Editors.Console"
+        xmlns:utils="clr-namespace:Editor.Utility"
 		mc:Ignorable="d"
 		Title="ConsoleWindow"
 		WindowStyle="None" AllowsTransparency="True"
@@ -90,16 +91,20 @@
                         Click="CloseButtonClicked"/>
             </StackPanel>
         </Grid>
-
-        <ListBox Grid.Row="1"
-                 ItemsSource="{Binding LogMessage}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Format}"
-                               FontFamily="Consolas"
+        <ItemsControl Grid.Row="1"
+                      Margin="5"
+                      ItemsSource="{Binding Source={x:Static utils:Logger.FilteredMessages}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type utils:LogMessage}">
+                    <TextBlock Text="{Binding Message}"
                                Foreground="#FFFFFF"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-	</Grid>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Window>

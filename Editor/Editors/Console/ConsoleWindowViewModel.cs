@@ -1,18 +1,18 @@
 ﻿/// @file Console/ConsoleWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.28
-/// @date 2026-7-5
+/// @version 0.0.0.29
+/// @date 2026-7-8
 
 using Editor.Core;
 using Editor.Utility;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Editor.Editors.Console {
 	public class ConsoleWindowViewModel : ViewModelBase {
-		public ReadOnlyObservableCollection<LogMessage> LogMessage => Logger.Messages;
-
+		public static ICollectionView MessageView => Logger.FilteredMessages.View;
+		
 		public ConsoleWindowViewModel() {
-			
+
 		}
 	}
 }
