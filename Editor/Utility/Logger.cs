@@ -21,47 +21,38 @@ namespace Editor.Utility {
 		public LogMessageType Type {
 			get;
 		} = type;
-		
 		public DateTime Time {
 			get;
 		} = DateTime.Now;
-		
 		public string Caller {
 			get;
 		} = caller;
-		
 		public string Message {
 			get;
 		} = message;
-		
 		public int Line {
 			get;
 		} = line;
-		
 		public string File {
 			get;
 		} = file;
 		
+
 		public string Format => $"[{Time}] {File}:{Line} | {Message}";
 	}
 
 	public class Logger : ViewModelBase {
 		private static readonly ObservableCollection<LogMessage> _Messages = [];
 		public static readonly ReadOnlyObservableCollection<LogMessage> Messages = new(_Messages);
-		
 		private static LogMessageType _Filter = LogMessageType.Warning | LogMessageType.Error | LogMessageType.Info;
+
+
 		public static CollectionViewSource FilteredMessages {
 			get;
 		} = new() { Source = Messages };
 		
 		public static async void AddLog(LogMessageType type, string message, [CallerMemberName] string caller = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0) {
-			await Application.Current.Dispatcher.BeginInvoke(
-				new Action(
-					() => {
-						_Messages.Add(new(type, message, caller, file, line));
-					}
-				)
-			);
+			await Application.Current.Dispatcher.BeginInvoke(new Action(() => _Messages.Add(new(type, message, caller, file, line))));
 		}
 
 		public static async void Clear() {

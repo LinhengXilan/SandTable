@@ -5,14 +5,15 @@
 
 using Editor.Core;
 using Editor.Utility;
-using System.ComponentModel;
 
 namespace Editor.Editors.Console {
 	public class ConsoleWindowViewModel : ViewModelBase {
-		public static ICollectionView MessageView => Logger.FilteredMessages.View;
 		
-		public ConsoleWindowViewModel() {
 
+		public ConsoleWindowViewModel() {
+			Logger.AddLog(LogMessageType.Error, "LogMessageType.Error");
+			Logger.AddLog(LogMessageType.Warning, "LogMessageType.Warning");
+			Logger.AddLog(LogMessageType.Info, "LogMessageType.Info");
 		}
 	}
 }
