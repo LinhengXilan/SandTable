@@ -1,7 +1,7 @@
 ﻿/// @file Console/ConsoleWindowViewModel.cs
 /// @author LinhengXilan
-/// @version 0.0.0.29
-/// @date 2026-7-8
+/// @version 0.0.0.31
+/// @date 2026-7-9
 
 using Editor.Core;
 using Editor.Utility;

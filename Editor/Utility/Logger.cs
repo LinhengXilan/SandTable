@@ -1,7 +1,7 @@
 ﻿/// @file Console/Logger.cs
 /// @author LinhengXilan
-/// @version 0.0.0.29
-/// @date 2026-7-8
+/// @version 0.0.0.31
+/// @date 2026-7-9
 
 using Editor.Core;
 using System.Collections.ObjectModel;
@@ -12,6 +12,7 @@ using System.Windows.Data;
 namespace Editor.Utility {
 	[Flags]
 	public enum LogMessageType {
+		None = 0x0,
 		Info = 0x1,
 		Warning = 0x2,
 		Error = 0x4

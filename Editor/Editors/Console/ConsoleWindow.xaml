@@ -1,8 +1,8 @@
 ﻿<!--
 	@file Console/ConsoleWindow.xaml
 	@author LinhengXilan
-    @version 0.0.0.29
-    @date 2026-7-8
+    @version 0.0.0.31
+    @date 2026-7-9
 -->
 
 <Window x:Class="Editor.Editors.Console.ConsoleWindow"
@@ -36,6 +36,7 @@
         </Style>
         <Style TargetType="GridSplitter">
             <Setter Property="Background" Value="#2C2C2C"/>
+            <Setter Property="Foreground" Value="#555555"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -43,7 +44,6 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
             <Setter Property="Background" Value="#1C1C1C"/>
         </Style>
         <Style TargetType="TextBox">
@@ -62,7 +62,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -91,10 +92,34 @@
                         Click="CloseButtonClicked"/>
             </StackPanel>
         </Grid>
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Source={x:Static utils:Logger.FilteredMessages}}"
-                          Margin="5">
+
+        <Border Grid.Row="1"
+                Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Clear" ToolTip="Temp"
+                        Click="ClearButtonClicked"/>
+                <GridSplitter Margin="5, 0,5, 0"
+                              Width="4"/>
+                <ToggleButton x:Name="ErrorButton"
+                              Content="Error" IsChecked="True"
+                              Click="FilterButtonClicked"/>
+                <GridSplitter Margin="2, 0,2, 0"
+                              Width="2"/>
+                <ToggleButton  x:Name="WarningButton"
+                               Content="Warning" IsChecked="True"
+                               Click="FilterButtonClicked"/>
+                <GridSplitter Margin="2, 0,2, 0"
+                              Width="2"/>
+                <ToggleButton x:Name="InfoButton"
+                              Content="Info" IsChecked="True"
+                              Click="FilterButtonClicked"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      Margin="5">
+            <ItemsControl ItemsSource="{Binding Source={x:Static utils:Logger.FilteredMessages}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel/>
